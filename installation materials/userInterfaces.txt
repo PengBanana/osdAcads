@@ -18,6 +18,8 @@ add an athlete
 view an athlete's profile
 edit a athlete's info(pati status[dropdown status])
 view athlete's achievments
+view athlete's PEC
+view athlete's most recent term subjects
 search an athlete(BY id/name/lastname/firstname/middlename/team)
 
 view all achievments
