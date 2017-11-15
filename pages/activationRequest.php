@@ -199,10 +199,10 @@ session_start();
 				echo'<div class="alert alert-success">
 											'.$fullname.' account has been activated.</a>
 				</div>';
-				$query="UPDATE `acadsosd`.`studentmanager` SET `teamCode`='".$teamCode."', `managerStatus_managerCode`='1' WHERE `idnumber`='".$idnumber."';";
+				$query="UPDATE `acadsosd`.`studentmanager` SET `teamCode`='".$teamCode."', `managerCode`='1' WHERE `idnumber`='".$idnumber."';";
 				mysqli_query($dbc,$query);	
 				}
-				$query="SELECT CONCAT(user.lastName,', ', user.firstName,' ', user.middleName) AS fullname, user.idnumber, studentmanager.email FROM user JOIN studentmanager ON user.idnumber=studentmanager.idnumber WHERE studentmanager.managerStatus_managerCode='3';";
+				$query="SELECT CONCAT(user.lastName,', ', user.firstName,' ', user.middleName) AS fullname, user.idnumber, studentmanager.email FROM user JOIN studentmanager ON user.idnumber=studentmanager.idnumber WHERE studentmanager.managerCode='3';";
 				$result=mysqli_query($dbc, $query);
 				?>
             <!-- /.row -->
