@@ -11,7 +11,7 @@ if(isset($_POST['registerManager'])){
 	$password=substr(hash('sha512',rand()),0,6);;
 	$query="INSERT INTO `acadsosd`.`user` (`idnumber`, `usertypeID`, `firstName`, `lastName`, `middleName`, `password`) VALUES ('".$idNumber."', '3', '".$firstName."', '".$lastName."', '".$middleName."', '".$password."');";
 	mysqli_query($dbc,$query);
-	$query="INSERT INTO `acadsosd`.`studentmanager` (`idnumber`, `email`, `managerStatus_managerCode`) VALUES ('".$idNumber."', '".$email."', '3');";
+	$query="INSERT INTO `acadsosd`.`studentmanager` (`idnumber`, `email`, `managerCode`) VALUES ('".$idNumber."', '".$email."', '3');";
 	mysqli_query($dbc,$query);
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerForApproval.php");
 }

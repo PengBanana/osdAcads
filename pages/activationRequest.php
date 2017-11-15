@@ -201,6 +201,8 @@ session_start();
 				</div>';
 				$query="UPDATE `acadsosd`.`studentmanager` SET `teamCode`='".$teamCode."', `managerCode`='1' WHERE `idnumber`='".$idnumber."';";
 				mysqli_query($dbc,$query);	
+				//add email code here
+				
 				}
 				$query="SELECT CONCAT(user.lastName,', ', user.firstName,' ', user.middleName) AS fullname, user.idnumber, studentmanager.email FROM user JOIN studentmanager ON user.idnumber=studentmanager.idnumber WHERE studentmanager.managerCode='3';";
 				$result=mysqli_query($dbc, $query);
