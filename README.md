@@ -1,16 +1,27 @@
-Instruction to install:
-1. download the zip file of the system
-2. place in htdocs of XAMPP
-3. Fix the database
-	a.Create user "dlsu" with the password "delasalle"
-	b.For error free-ness grant unli access for the dlsu user like root
-	c.Create connection with any name with dlsu as the username. leave default schema blank for error free-ness
-	d.Open the connection.
-	e.Open the Create Database code located in the installation materials.
-	f.Copy Paste the code to mySQL and run it (should have no errors)
-	g. Open the Database populator and copy-paste and run the it in mysql(should also have no problem)
-4.edit your php.ini file(find at XAMPP control panel or xampp>php)
-	a. open and copy-paste phpini configuration.txt to the php.ini file
-5.edit your sendmail.ini file located in xampp>sendmail
-	a. open and copy-paste sendEmailini configuration.txt to the sendEmail.ini file
-6.run in browser
+# [Start Bootstrap](http://startbootstrap.com/) - [SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/)
+
+[SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/) is an open source, admin dashboard template for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/).
+
+## Getting Started
+
+To use this template, choose one of the following options to get started:
+* Download the latest release on Start Bootstrap
+* Fork this repository on GitHub
+* Install via bower using `bower install startbootstrap-sb-admin-2`
+
+## Bugs and Issues
+
+Have a bug or an issue with this template? [Open a new issue](https://github.com/IronSummitMedia/startbootstrap-sb-admin-2/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/sb-admin-2/).
+
+## Creator
+
+Start Bootstrap was created by and is maintained by **David Miller**, Managing Parter at [Iron Summit Media Strategies](http://www.ironsummitmedia.com/).
+
+* https://twitter.com/davidmillerskt
+* https://github.com/davidtmiller
+
+Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
+
+## Copyright and License
+
+Copyright 2013-2015 Iron Summit Media Strategies, LLC. Code released under the [Apache 2.0](https://github.com/IronSummitMedia/startbootstrap-sb-admin-2/blob/gh-pages/LICENSE) license.
