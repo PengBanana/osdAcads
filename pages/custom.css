@@ -12,6 +12,11 @@ html {
 body {
   margin: 0;
 }
+
+#backgroundImage{
+  background-image: url("Images/razon.png");
+  background-size: 100%;
+}
 article,
 aside,
 details,
@@ -5727,7 +5732,7 @@ button.list-group-item-danger.active:focus {
   background-color: #f5f5f5;
   border-color: #ddd;
   text-align: center;
-  
+
 }
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ddd;
