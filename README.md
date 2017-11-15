@@ -18,7 +18,7 @@ To use this system, follow the instructions step by step:
 12. edit your sendmail.ini file located in xampp>sendmail
 13. open and copy-paste sendEmailini configuration.txt to the sendEmail.ini file
 
-*You may now run it in your browser
+* You may now run it in your browser
 
 ## Bugs and Issues
 
