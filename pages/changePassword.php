@@ -1,14 +1,14 @@
 <?php
 session_start();
 require_once('../osd_connect.php');
-$idnumber=$_SESSION["idnumber"];
+//$idnumber=$_SESSION["idnumber"];
 $error=0;
-if(empty($idnumber)){
+if(0==1){
 	//insert redirect login here
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 }
 else{
-$name=$_SESSION["name"];
+//$name=$_SESSION["name"];
 if(empty($name)){
 	$name="no name";
 }

@@ -69,10 +69,7 @@ if(isset($_POST['login'])){
 		$_SESSION["idnumber"]=$idnumberin;
 		$usertype=$row['usertypeID'];
 
-		if(empty($password)){
-			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/newUser.php");
-		}
-		else{
+		
 			//checking
 			if($passwordin==$password){
 				//correct password
@@ -85,7 +82,18 @@ if(isset($_POST['login'])){
 				}
 				else if(usertype=='3'){
 					//studentManager
-					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerHome.php");
+					$query="SELECT * FROM acadsosd.studentmanager WHERE idnumber='".$idnumber."';";
+					$result2=mysqli_query($dbc, $query);
+					$managerStatus=$row['username'];
+					if(){
+						//if activated
+						
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerHome.php");
+					}
+					else{
+					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/activateAccountFirst.php");
+					}
+					//else activate your account first
 				}
 			}
 			else{
@@ -94,7 +102,6 @@ if(isset($_POST['login'])){
                         The password you entered incorrect.
 				</div>';
 			}
-		}
 	}
 	else{
 		//no such user found
