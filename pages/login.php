@@ -22,11 +22,11 @@
 
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
+
 	<!-- Custom CSS -->
 	<link href="custom.css" rel="stylesheet">
 
-	
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,7 +44,9 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Login</h3>
                     </div>
-
+                    <div class="form-group">
+                        <img src="Images/OSD.png" height="100px" width='auto' />
+                    </div>
                     <div class="panel-body">
                         <form action="login.php" method="post">
 						<?php
@@ -66,7 +68,7 @@ if(isset($_POST['login'])){
 		$_SESSION["name"]=$name;
 		$_SESSION["idnumber"]=$idnumberin;
 		$usertype=$row['usertypeID'];
-		
+
 		if(empty($password)){
 			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/newUser.php");
 		}
@@ -89,7 +91,7 @@ if(isset($_POST['login'])){
 			else{
 				//wrong password
 				echo '<div class="alert alert-danger">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        The password you entered incorrect.
 				</div>';
 			}
 		}
@@ -97,7 +99,7 @@ if(isset($_POST['login'])){
 	else{
 		//no such user found
 		echo '<div class="alert alert-danger">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        The username you entered is incorrect
         </div>';
 	}
 }
@@ -106,9 +108,7 @@ else{
 }
 ?>
                             <fieldset>
-                                <div class="form-group">
-                                    <img src="Images/OSD.png" height="100px" width='auto' />
-                                </div>
+
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Username" name="username" type="name" autofocus required>
                                 </div>
@@ -119,10 +119,10 @@ else{
                                 <!-- Change this to a button or input when using this as a form -->
                                <div class="row">
                                		<div class="col-md-6">
-                               			 <input type="submit" name="login"  value="Login "class="btn btn-success btn-block">
+                               			 <input type="submit" name="login"  value="Login "class="btn btn-success btn-block" id="loginBtn">
                                		</div>
                                		<div class="col-md-6">
-                               			<a href="registerStudentManager.php" class="btn btn-success btn-block">Register</a>
+                               			<a href="registerStudentManager.php" class="btn btn-success btn-block" id="registerBtn">Register</a>
                                		</div>
                                </div>
                             </fieldset>

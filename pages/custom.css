@@ -17,6 +17,16 @@ body {
   background-image: url("Images/razon.png");
   background-size: 100%;
 }
+#loginBtn{
+  color: #fff;
+  background-color: #006600;
+  border-color: #004d00;
+}
+#registerBtn{
+  color: #fff;
+  background-color: #006600;
+  border-color: #004d00;
+}
 article,
 aside,
 details,
