@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>HR</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Custom CSS -->	
+	<link href="custom.css" rel="stylesheet">
+	
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index.html">
+                <img src="Images/OSD-logo2.png" height="35px" width='auto' />
+                </a>
+            </div>
+            
+            <!-- /.navbar-header -->
+            
+            <!-- NAV BAR -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user" >
+                        <li><a href="user-profile.html"><i class="fa fa-user fa-fw"></i> My Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+ 
+            <div class="navbar-fixed sidebar"  role="navigation" >
+                <div class="sidebar-nav navbar-f" >
+                    <ul class="nav" id="side-menu" >
+                       
+                        <li >
+                            <a href="index.html"><i class="fa fa-dashboard fa-fw" style="color: white"></i> Dashboard</a>
+                        </li>
+                      
+                        <li>
+                            <a href="employees.html"><i class="fa fa-child fa-fw" style="color: white"></i> Student Athletes</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="Scholarships.html"><i class="glyphicon glyphicon-education" style="color: white"></i> Scholarships </a>
+                        </li>
+                        
+                        <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-list-alt" style="color: white"></i> Reports <i class="fa fa-fw fa-caret-down" style="color: white"></i></a>
+                        <ul id="demo" class="collapse" style="list-style: none;">
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> A.S.S.R. </a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-duplicate"  style="color: white" style></i> A.S.M.R.</a>
+                            </li>
+                            <li>
+                                <a href="MAR.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style></i> M.A.R.</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-duplicate"  style="color: white" style></i> A.P.F.R.</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="glyphicon glyphicon-duplicate"  style="color: white" style></i> A.A.P.F.R.</a>
+                            </li>
+                        </ul>
+                    </li>
+                                              
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Employee Data</h1>
+                </div>
+            </div> 
+
+			<div >	
+				<nav class="navbar navbar-default center">
+					<div class="container-fluid">					
+						<ul class="nav navbar-nav text-center">
+							<li><a href="personal-information.html">Personal Information</a></li>
+							<li><a href="evaluation-form.html">View Evaluation</a></li>
+							<li><a href="leave-summary.html">View Leave Summary</a></li> 
+							<li><a href="overtime-summary.html">View Overtime Summary</a></li> 
+							<li><a href="overtime-summary.html" data-toggle="modal" data-target="#terminate">Terminate Employee</a></li> 
+							
+							<div id="terminate" class="modal fade" role="dialog">
+								<div class="modal-dialog">
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Confirmation</h4>
+										</div>												
+										<div class="modal-body">
+											<p align="center">Are you sure you want to terminate this employee?</p>
+										</div>	
+					
+										<div class="modal-footer">
+											<div class="text-center">
+												<input onclick="location.href='#'" value="Yes" title="Yes" type="submit" id="yes" data-dismiss="modal"> 
+												<input onclick="location.href='#'" value="No" title="No" name="cancel" type="submit" id="no" data-dismiss="modal">
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</ul>
+					</div>
+				</nav>
+			</div>	
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							Employee Information
+						</div>
+				
+						<!-- /.panel-heading -->
+                        <div class="panel-body">							
+							<div class="col-md-3">
+								<div class="text-center">
+								  <img src="dp.png" class="avatar img-circle" alt="avatar">
+								  <h6>Upload a different photo...</h6>
+								  
+								  <input type="file" class="form-control">
+								</div>
+							</div>
+							  
+							<!-- edit form column -->
+							<div class="col-md-9 personal-info">
+								
+								<h3>Athlete's Profile</h3>
+								
+						<form class="form-inline">
+                            <div class="form-group">
+                                <label> Last Name </label>
+                                <input type="text" class="form-control qwe" id="lastname">
+                            </div>
+
+                            <div class="form-group">
+                                <label> First Name </label>
+                                <input type="text" class="form-control qwe" id="firstname">
+                            </div>
+
+                            <div class="form-group">
+                                <label> Middle Name </label>
+                                <input type="text" class="form-control qwe" id="middlename">
+                            </div>
+                        </form>
+								
+									
+									
+								
+								
+									
+															
+								
+									
+							
+													
+                        </div>
+						<!-- /.panel-body -->
+					</div>
+					<!-- /.panel -->
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>		                   
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#evaluation-form').DataTable({
+                responsive: true
+				"bPaginate": false,
+				"bFilter": false,
+				"bInfo": false
+        });
+    });
+    </script>
+
+</body>
+
+</html>

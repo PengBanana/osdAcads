@@ -1,0 +1,1 @@
+bootbox.alert("This is the default alert!");

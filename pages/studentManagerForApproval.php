@@ -1,0 +1,1 @@
+You will recieve an email once your account is activated.
