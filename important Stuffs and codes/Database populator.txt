@@ -1,0 +1,68 @@
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('BBM', 'Green Archers', 'Basketball Men');
+
+
+
+INSERT INTO `acadsosd`.`gradetype_reference` (`gradeTypeCode`, `gradeTypeName`) VALUES ('1', 'Standard');
+
+INSERT INTO `acadsosd`.`gradetype_reference` (`gradeTypeCode`, `gradeTypeName`) VALUES ('2', 'Other');
+
+
+INSERT INTO `acadsosd`.`college` (`collegeCode`, `collegeName`) VALUES ('CCS', 'College of Computer Studies');
+INSERT INTO `acadsosd`.`college` (`collegeCode`, `collegeName`) VALUES ('CED', 'College of Education');
+INSERT INTO `acadsosd`.`college` (`collegeCode`, `collegeName`) VALUES ('COB', 'College of Business');
+INSERT INTO `acadsosd`.`college` (`collegeCode`, `collegeName`) VALUES ('GCOE', 'College of Engineering');
+INSERT INTO `acadsosd`.`college` (`collegeCode`, `collegeName`) VALUES ('COS', 'College of Science');
+INSERT INTO `acadsosd`.`college` (`collegeCode`, `collegeName`) VALUES ('SOE', 'School of Economics');
+INSERT INTO `acadsosd`.`college` (`collegeCode`, `collegeName`) VALUES ('CLA', 'College of Liberal Arts');
+INSERT INTO `acadsosd`.`college` (`collegeCode`, `collegeName`) VALUES ('OTHERS', 'Others');
+
+
+INSERT INTO `acadsosd`.`usertype` (`usertypeID`, `usertypeName`) VALUES ('1', 'GodAccount');
+INSERT INTO `acadsosd`.`usertype` (`usertypeID`, `usertypeName`) VALUES ('2', 'Admin');
+INSERT INTO `acadsosd`.`usertype` (`usertypeID`, `usertypeName`) VALUES ('3', 'StudentManager');
+
+
+INSERT INTO `acadsosd`.`academicclassification` (`statusID`, `statusName`) VALUES ('1', 'SUPER CRITICAL');
+INSERT INTO `acadsosd`.`academicclassification` (`statusID`, `statusName`) VALUES ('2', 'CRITICAL');
+INSERT INTO `acadsosd`.`academicclassification` (`statusID`, `statusName`) VALUES ('3', 'NOT CRITICAL');
+INSERT INTO `acadsosd`.`academicclassification` (`statusID`, `statusName`) VALUES ('4', 'INACTIVE');
+
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('ACCTY', 'Accountancy', 'COB');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('BSD', 'Behavioural Science', 'CLA');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('BIO', 'Biology', 'COS');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('CHE', 'Chemical Engineering', 'GCOE');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('COMM', 'Communication', 'CLA');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('CEPD', 'Counselling and Educational Psychology', 'COS');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('DSI', 'Decision Sciences and Innovation', 'COB');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('ECON', 'Economics', 'SOE');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('ELMD', 'Educational Leadership and Management', 'CED');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('ECE', 'Electronics and Communications Engineering', 'GCOE');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('DEAL', 'English and Applied Linguistics', 'CED');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('FIL', 'Filipino', 'CLA');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('FMD', 'Financial Management', 'COB');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('HIST', 'History', 'CLA');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('IE', 'Industrial Engineering', 'GCOE');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('ISD', 'International Studies', 'CLA');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('LIT', 'Literature', 'CLA');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('MOD', 'Management and Organization', 'COB');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('MEM', 'Manufacturing Engineering Management', 'GCOE');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('MKTG', 'Markating Management', 'COB');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('MATH', 'Mathematics', 'COS');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('ME', 'Mechanical Engineering', 'GCOE');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('PHILO', 'Philiosophy', 'CLA');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('PED', 'Physical Education Department', 'CED');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('PHY', 'Physics', 'COS');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('POLSCI', 'Political Science', 'CLA');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('SED', 'Science Education', 'CED');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('TRED', 'Theology and Religious Education', 'CLA');
+
+INSERT INTO `acadsosd`.`managerstatus` (`managerCode`, `statusName`) VALUES ('1', 'Activated');
+INSERT INTO `acadsosd`.`managerstatus` (`managerCode`, `statusName`) VALUES ('2', 'Deactivated');
+INSERT INTO `acadsosd`.`managerstatus` (`managerCode`, `statusName`) VALUES ('3', 'For Activation');
+
+
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('XASDR', 'Animo Squad Drummers', 'Cheerdance');
+
+
+INSERT INTO `acadsosd`.`user` (`idnumber`, `usertypeID`, `firstName`, `lastName`) VALUES ('00000000', '2', 'Grace', 'Alhambra');

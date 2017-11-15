@@ -1,0 +1,27 @@
+Independent Tables:
+1. Team
+2. gradeType_reference
+3. college
+4. UserType
+5. professor
+6. academicClassification
+
+Level 1 Dependent Tables:
+7. department(college)
+8. user(userType)
+9. Subjects(gradeType)
+10. actionLog(username)
+11. teamAchievments (team)
+12. achievmentHistory (studentAthlete)
+13. studentAthlete(team, academicStatus)
+
+Level 2 Dependent Tables
+14. degreeTable (college>department)
+15. studentsInvolve(team>studentAthlete, accomplishmentID)
+16. studentManager (userType>user)
+
+level 3 dependent Tables
+17. PlannedEnrollmentChart(team>studentAthlete, college>department>degree)
+
+Level 4 dependent Tables
+18. subjectDetails (team>studentAthlete, college>department>degree>PEC, subjectType>subject)
