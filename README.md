@@ -7,7 +7,7 @@ To use this system, follow the instructions step by step:
 2. place in htdocs of XAMPP
 3. Fix the database
 4. Create user "dlsu" with the password "delasalle"
-*For error free-ness grant unli access for the dlsu user like root
+* For error free-ness grant unli access for the dlsu user like root
 5. Create connection with any name with dlsu as the username. leave default schema blank for error free-ness
 6. Open the connection.
 7. Open the Create Database code located in the installation materials.
