@@ -1,0 +1,425 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema AcadsOSD
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema AcadsOSD
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `AcadsOSD` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `AcadsOSD` ;
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`gradeType_reference`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`gradeType_reference` (
+  `gradeTypeCode` INT NOT NULL,
+  `gradeTypeName` VARCHAR(45) NULL,
+  PRIMARY KEY (`gradeTypeCode`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`Subjects`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`Subjects` (
+  `courseCode` VARCHAR(7) NOT NULL,
+  `courseName` VARCHAR(45) NOT NULL,
+  `courseUnit` VARCHAR(45) NOT NULL,
+  `courseType` VARCHAR(45) NOT NULL,
+  `courseGradingType` INT NOT NULL,
+  INDEX `fk_Subjects_gradeType_reference1_idx` (`courseGradingType` ASC),
+  PRIMARY KEY (`courseCode`),
+  CONSTRAINT `fk_Subjects_gradeType_reference1`
+    FOREIGN KEY (`courseGradingType`)
+    REFERENCES `AcadsOSD`.`gradeType_reference` (`gradeTypeCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`college`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`college` (
+  `collegeCode` VARCHAR(45) NOT NULL,
+  `collegeName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`collegeCode`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`department`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`department` (
+  `departmentCode` VARCHAR(45) NOT NULL,
+  `departmentName` VARCHAR(45) NOT NULL,
+  `college_collegeCode` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`departmentCode`),
+  INDEX `fk_department_college1_idx` (`college_collegeCode` ASC),
+  CONSTRAINT `fk_department_college1`
+    FOREIGN KEY (`college_collegeCode`)
+    REFERENCES `AcadsOSD`.`college` (`collegeCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`degree`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`degree` (
+  `degreeCode` VARCHAR(45) NOT NULL,
+  `degreeName` VARCHAR(400) NOT NULL,
+  `departmentCode` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`degreeCode`),
+  INDEX `fk_degreeTable_department1_idx` (`departmentCode` ASC),
+  CONSTRAINT `fk_degreeTable_department1`
+    FOREIGN KEY (`departmentCode`)
+    REFERENCES `AcadsOSD`.`department` (`departmentCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`team`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`team` (
+  `sportCode` VARCHAR(45) NOT NULL,
+  `teamName` VARCHAR(45) NOT NULL,
+  `sport` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`sportCode`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`academicClassification`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`academicClassification` (
+  `statusID` INT NOT NULL,
+  `statusName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`statusID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`reconsiderationReference`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`reconsiderationReference` (
+  `reconsiderationCode` VARCHAR(45) NOT NULL,
+  `reconsiderationLevel` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`reconsiderationCode`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`studentAthleteProfile`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`studentAthleteProfile` (
+  `studentIDNumber` VARCHAR(8) NOT NULL,
+  `studentLastName` VARCHAR(45) NOT NULL,
+  `studentFirstName` VARCHAR(45) NOT NULL,
+  `studentMiddleName` VARCHAR(45) NULL,
+  `studentAthleteProfilecol` VARCHAR(45) NULL,
+  `studentDateOfBirth` DATE NOT NULL,
+  `studentWeight` DECIMAL(7,2) NOT NULL,
+  `studentHeight` DECIMAL(7,2) NOT NULL,
+  `studentBloodType` VARCHAR(3) NOT NULL,
+  `studentNationality` VARCHAR(45) NOT NULL,
+  `studentReligion` VARCHAR(45) NULL,
+  `studentDlsuEmail` VARCHAR(45) NOT NULL,
+  `studentAlternateEmail` VARCHAR(45) NULL,
+  `studentAddressLine1` VARCHAR(160) NOT NULL,
+  `studentAddressLine2` VARCHAR(160) NULL,
+  `studentFatherFullName` VARCHAR(160) NULL,
+  `studentMotherFullName` VARCHAR(160) NULL,
+  `studentFatherOccupation` VARCHAR(45) NULL,
+  `studentMotherOccupation` VARCHAR(45) NULL,
+  `studentEmergencyContact` VARCHAR(160) NOT NULL,
+  `EmergencyContactNumber` VARCHAR(45) NOT NULL,
+  `EmergencyContactRelationship` VARCHAR(45) NOT NULL,
+  `teamCode` VARCHAR(45) NOT NULL,
+  `statusID` INT NOT NULL,
+  `reconsiderationReference_reconsiderationCode` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`studentIDNumber`),
+  INDEX `fk_studentAthlete_team1_idx` (`teamCode` ASC),
+  INDEX `fk_studentAthleteProfile_academicStatus1_idx` (`statusID` ASC),
+  INDEX `fk_studentAthleteProfile_reconsiderationReference1_idx` (`reconsiderationReference_reconsiderationCode` ASC),
+  CONSTRAINT `fk_studentAthlete_team1`
+    FOREIGN KEY (`teamCode`)
+    REFERENCES `AcadsOSD`.`team` (`sportCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentAthleteProfile_academicStatus1`
+    FOREIGN KEY (`statusID`)
+    REFERENCES `AcadsOSD`.`academicClassification` (`statusID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentAthleteProfile_reconsiderationReference1`
+    FOREIGN KEY (`reconsiderationReference_reconsiderationCode`)
+    REFERENCES `AcadsOSD`.`reconsiderationReference` (`reconsiderationCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`PlannedEnrollmentChart`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`PlannedEnrollmentChart` (
+  `pecID` INT NOT NULL,
+  `degreeTable_degreeCode` VARCHAR(45) NOT NULL,
+  `academicYearStarted` YEAR NULL,
+  `termStarted` VARCHAR(45) NULL,
+  `studentAthlete_studentIDNumber` VARCHAR(8) NOT NULL,
+  PRIMARY KEY (`pecID`),
+  INDEX `fk_PlannedEnrollmentChart_degreeTable_idx` (`degreeTable_degreeCode` ASC),
+  INDEX `fk_PlannedEnrollmentChart_studentAthlete1_idx` (`studentAthlete_studentIDNumber` ASC),
+  CONSTRAINT `fk_PlannedEnrollmentChart_degreeTable`
+    FOREIGN KEY (`degreeTable_degreeCode`)
+    REFERENCES `AcadsOSD`.`degree` (`degreeCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PlannedEnrollmentChart_studentAthlete1`
+    FOREIGN KEY (`studentAthlete_studentIDNumber`)
+    REFERENCES `AcadsOSD`.`studentAthleteProfile` (`studentIDNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`professor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`professor` (
+  `professorID` INT NOT NULL,
+  `professorName` VARCHAR(45) NULL,
+  PRIMARY KEY (`professorID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`subjectDetails`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`subjectDetails` (
+  `PlannedEnrollmentChart_pecID` INT NOT NULL,
+  `SubjectGrade` VARCHAR(45) NULL,
+  `professorID` INT NULL,
+  `department_departmentCode` VARCHAR(45) NOT NULL,
+  `midtermAcademicReport` LONGTEXT NULL,
+  `midtermGrade` VARCHAR(45) NULL,
+  `numberOfLates` INT NULL,
+  `numberOfAbsences` INT NULL,
+  `finalGrade` VARCHAR(45) NULL,
+  `finalReport` LONGTEXT NULL,
+  `termTaken` VARCHAR(45) NOT NULL,
+  `YearTaken` YEAR NOT NULL,
+  `courseCode` VARCHAR(7) NOT NULL,
+  PRIMARY KEY (`PlannedEnrollmentChart_pecID`, `courseCode`),
+  INDEX `fk_Subjects_has_PlannedEnrollmentChart_PlannedEnrollmentCha_idx` (`PlannedEnrollmentChart_pecID` ASC),
+  INDEX `fk_Subjects_has_PlannedEnrollmentChart_professor1_idx` (`professorID` ASC),
+  INDEX `fk_subjectDetails_department1_idx` (`department_departmentCode` ASC),
+  INDEX `fk_subjectDetails_Subjects1_idx` (`courseCode` ASC),
+  CONSTRAINT `fk_Subjects_has_PlannedEnrollmentChart_PlannedEnrollmentChart1`
+    FOREIGN KEY (`PlannedEnrollmentChart_pecID`)
+    REFERENCES `AcadsOSD`.`PlannedEnrollmentChart` (`pecID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Subjects_has_PlannedEnrollmentChart_professor1`
+    FOREIGN KEY (`professorID`)
+    REFERENCES `AcadsOSD`.`professor` (`professorID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_subjectDetails_department1`
+    FOREIGN KEY (`department_departmentCode`)
+    REFERENCES `AcadsOSD`.`department` (`departmentCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_subjectDetails_Subjects1`
+    FOREIGN KEY (`courseCode`)
+    REFERENCES `AcadsOSD`.`Subjects` (`courseCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`userType`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`userType` (
+  `usertypeID` INT NOT NULL,
+  `usertypeName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`usertypeID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`user` (
+  `idnumber` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NULL,
+  `usertypeID` INT NOT NULL,
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
+  `middleName` VARCHAR(45) NULL,
+  PRIMARY KEY (`idnumber`),
+  INDEX `fk_users_userType1_idx` (`usertypeID` ASC),
+  CONSTRAINT `fk_users_userType1`
+    FOREIGN KEY (`usertypeID`)
+    REFERENCES `AcadsOSD`.`userType` (`usertypeID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`managerStatus`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`managerStatus` (
+  `managerCode` INT NOT NULL AUTO_INCREMENT,
+  `statusName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`managerCode`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`studentManager`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`studentManager` (
+  `teamCode` VARCHAR(45) NULL,
+  `idnumber` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `managerStatus_managerCode` INT NOT NULL,
+  INDEX `fk_studentManager_team1_idx` (`teamCode` ASC),
+  INDEX `fk_studentManager_user1_idx` (`idnumber` ASC),
+  INDEX `fk_studentManager_managerStatus1_idx` (`managerStatus_managerCode` ASC),
+  CONSTRAINT `fk_studentManager_team1`
+    FOREIGN KEY (`teamCode`)
+    REFERENCES `AcadsOSD`.`team` (`sportCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentManager_user1`
+    FOREIGN KEY (`idnumber`)
+    REFERENCES `AcadsOSD`.`user` (`idnumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentManager_managerStatus1`
+    FOREIGN KEY (`managerStatus_managerCode`)
+    REFERENCES `AcadsOSD`.`managerStatus` (`managerCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`teamAccomplishment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`teamAccomplishment` (
+  `accomplishmentName` VARCHAR(160) NULL,
+  `accomplishmentDate` DATE NULL,
+  `accomplishmentVenue` VARCHAR(45) NULL,
+  `accomplishmentEvent` VARCHAR(45) NULL,
+  `accomplishmentStanding` VARCHAR(45) NULL,
+  `accomplishmentType` VARCHAR(45) NULL,
+  `accomplishmentID` INT NOT NULL,
+  `teamCode` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`accomplishmentID`),
+  INDEX `fk_teamAchievments_team1_idx` (`teamCode` ASC),
+  CONSTRAINT `fk_teamAchievments_team1`
+    FOREIGN KEY (`teamCode`)
+    REFERENCES `AcadsOSD`.`team` (`sportCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`studentInvolved`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`studentInvolved` (
+  `accomplishmentID` INT NOT NULL,
+  `studentIDNumber` VARCHAR(8) NOT NULL,
+  INDEX `fk_studentInvolved_teamAchievments1_idx` (`accomplishmentID` ASC),
+  INDEX `fk_studentInvolved_studentAthleteProfile1_idx` (`studentIDNumber` ASC),
+  CONSTRAINT `fk_studentInvolved_teamAchievments1`
+    FOREIGN KEY (`accomplishmentID`)
+    REFERENCES `AcadsOSD`.`teamAccomplishment` (`accomplishmentID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentInvolved_studentAthleteProfile1`
+    FOREIGN KEY (`studentIDNumber`)
+    REFERENCES `AcadsOSD`.`studentAthleteProfile` (`studentIDNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`achievmentHistory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`achievmentHistory` (
+  `accomplishmentName` VARCHAR(160) NULL,
+  `accomplishmentDate` DATE NULL,
+  `accomplishmentVenue` VARCHAR(45) NULL,
+  `accomplishmentEvent` VARCHAR(45) NULL,
+  `accomplishmentStanding` VARCHAR(45) NULL,
+  `accomplishmentType` VARCHAR(45) NULL,
+  `accomplishmentID` INT NOT NULL,
+  `studentAthleteProfile_studentIDNumber` VARCHAR(8) NOT NULL,
+  PRIMARY KEY (`accomplishmentID`),
+  INDEX `fk_achievmentHistory_studentAthleteProfile1_idx` (`studentAthleteProfile_studentIDNumber` ASC),
+  CONSTRAINT `fk_achievmentHistory_studentAthleteProfile1`
+    FOREIGN KEY (`studentAthleteProfile_studentIDNumber`)
+    REFERENCES `AcadsOSD`.`studentAthleteProfile` (`studentIDNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`actionLog`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`actionLog` (
+  `actionID` INT NOT NULL,
+  `actionDetails` VARCHAR(160) NULL,
+  `username` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`actionID`),
+  INDEX `fk_actionLog_user1_idx` (`username` ASC),
+  CONSTRAINT `fk_actionLog_user1`
+    FOREIGN KEY (`username`)
+    REFERENCES `AcadsOSD`.`user` (`idnumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `AcadsOSD`.`educationalBackground`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `AcadsOSD`.`educationalBackground` (
+  `Grade` VARCHAR(160) NOT NULL,
+  `SchoolName` VARCHAR(160) NOT NULL,
+  `yearStarted` YEAR NOT NULL,
+  `yearEnded` YEAR NOT NULL,
+  `schoolAddress` VARCHAR(300) NULL,
+  `studentIDNumber` VARCHAR(8) NOT NULL,
+  `degree` VARCHAR(45) NULL,
+  INDEX `fk_educationalBackground_studentAthleteProfile1_idx` (`studentIDNumber` ASC),
+  CONSTRAINT `fk_educationalBackground_studentAthleteProfile1`
+    FOREIGN KEY (`studentIDNumber`)
+    REFERENCES `AcadsOSD`.`studentAthleteProfile` (`studentIDNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
