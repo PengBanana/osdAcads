@@ -84,6 +84,7 @@ if(isset($_POST['login'])){
 					//studentManager
 					$query="SELECT * FROM acadsosd.studentmanager WHERE idnumber='".$idnumber."';";
 					$result2=mysqli_query($dbc, $query);
+					$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 					$managerStatus=$row['managerCode'];
 					if($managerStatus==1){
 						//if activated

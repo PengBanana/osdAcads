@@ -11,7 +11,6 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>HR</title>
 
     <!-- Bootstrap Core CSS -->
@@ -196,13 +195,26 @@ session_start();
 				$idnumber=$_POST['idnumber'];
 				$teamCode=$_POST['sportCode'];
 				$fullname=$_POST['fullname'];
-				echo'<div class="alert alert-success">
-											'.$fullname.' account has been activated.</a>
-				</div>';
-				$query="UPDATE `acadsosd`.`studentmanager` SET `teamCode`='".$teamCode."', `managerCode`='1' WHERE `idnumber`='".$idnumber."';";
-				mysqli_query($dbc,$query);	
+				$query="SELECT user.password, studentmanager.email FROM acadsosd.user JOIN studentmanager ON user.idnumber=studentmanager.idnumber WHERE user.idnumber='".$idnumber."';";
+				$result=mysqli_query($dbc,$query);
+				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+				$password=$row['password'];
+				$email=$row['email'];
 				//add email code here
-				
+				$to = $email;
+				$subject="Your Manager Account has been activated";
+				$message = "You may now login your account. Your password is ".$password.".";
+				$headers = "From: osddlsu@gmail.com\r\n";
+				if (mail($to, $subject, $message, $headers)) {
+					$query="UPDATE `acadsosd`.`studentmanager` SET `teamCode`='".$teamCode."', `managerCode`='1' WHERE `idnumber`='".$idnumber."';";
+					mysqli_query($dbc,$query);
+				   echo'<div class="alert alert-success">
+											'.$query.'
+					</div>';
+					
+				} else {
+				   echo "ERROR";
+				}
 				}
 				$query="SELECT CONCAT(user.lastName,', ', user.firstName,' ', user.middleName) AS fullname, user.idnumber, studentmanager.email FROM user JOIN studentmanager ON user.idnumber=studentmanager.idnumber WHERE studentmanager.managerCode='3';";
 				$result=mysqli_query($dbc, $query);
@@ -240,8 +252,7 @@ session_start();
 									echo '<tr class="odd gradeX"><td class="text-center" ><form action="athleteProfile" method="post"><input type="hidden" value="'.$idnumber.'"><input type="button" value="'.$fullname.'"></form></td><td class="text-center">
 									<button type="button" class="btn btn-default" data-toggle="modal" data-target="#'.$idnumber.'">View Request</button>  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalDecline">Decline</button></td></tr>';
 									
-								echo '</tbody>';
-                                echo '</table>';
+								
 								//<!-- Modal Approve-->
                                 echo '<div class="modal fade" id="'.$idnumber.'" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -262,11 +273,11 @@ session_start();
                                 <div class="form-group">
                                 <label>Team Code: </label>
                                 <select class="form-control inputsSM" name="sportCode" id="college">';
-                                $query='SELECT sportCode, sport FROM acadsosd.team;';
+                                $query='SELECT teamName, sportCode FROM acadsosd.team;';
 								$result2=mysqli_query($dbc, $query);
 								while($row2=mysqli_fetch_array($result2,MYSQLI_ASSOC)){
 									$sportCode=$row2['sportCode'];
-									$sport=$row2['sport'];
+									$sport=$row2['teamName'];
 									 echo '<option value="'.$sportCode.'">'.$sport.'</option>';
 								}
                                 echo'
@@ -312,7 +323,10 @@ session_start();
                                 </div>
 									<!-- /.modal Decline-->';
 									}
-									}
+							}
+							
+							echo '</tbody>';
+                            echo '</table>';
 							?>
                             </div>
                           

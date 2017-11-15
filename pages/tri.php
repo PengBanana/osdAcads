@@ -1,10 +1,12 @@
-<html>
-<body>
- <select>
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="mercedes">Mercedes</option>
-  <option value="audi">Audi</option>
-</select> 
-</body>
-</html>
+
+<?php
+$to = 'alvin_deguzman@dlsu.edu.ph';
+$subject = 'Hello from XAMPP!';
+$message = 'This is a test';
+$headers = "From: osddlsu@gmail.com\r\n";
+if (mail($to, $subject, $message, $headers)) {
+   echo "SUCCESS";
+} else {
+   echo "ERROR";
+}
+?>
