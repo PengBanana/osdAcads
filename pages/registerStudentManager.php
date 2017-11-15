@@ -10,9 +10,9 @@ if(isset($_POST['registerManager'])){
 	$email=$_POST['email'];
 	$password=substr(hash('sha512',rand()),0,6);;
 	$query="INSERT INTO `acadsosd`.`user` (`idnumber`, `usertypeID`, `firstName`, `lastName`, `middleName`, `password`) VALUES ('".$idNumber."', '3', '".$firstName."', '".$lastName."', '".$middleName."', '".$password."');";
-	mysqli_query($dbc,$query);	
+	mysqli_query($dbc,$query);
 	$query="INSERT INTO `acadsosd`.`studentmanager` (`idnumber`, `email`, `managerStatus_managerCode`) VALUES ('".$idNumber."', '".$email."', '3');";
-	mysqli_query($dbc,$query);	
+	mysqli_query($dbc,$query);
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerForApproval.php");
 }
 ?>
@@ -55,11 +55,11 @@ Email: <input type="text" name="email" maxlength="45" />
 
     <!-- Custom Fonts -->
     <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	
+
 	<!-- Custom CSS -->
 	<link href="custom.css" rel="stylesheet">
 
-	
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -69,7 +69,7 @@ Email: <input type="text" name="email" maxlength="45" />
 
 </head>
 
-<body>
+<body id="backgroundImage">
 
     <div class="container">
         <div class="row">
@@ -78,7 +78,9 @@ Email: <input type="text" name="email" maxlength="45" />
                     <div class="panel-heading">
                         <h3 class="panel-title">Register</h3>
                     </div>
-
+										<div class="form-group">
+                        <img src="Images/OSD.png" height="100px" width='auto' />
+                    </div>
                     <div class="panel-body">
 						<form action="registerStudentManager.php" method="post">
                             <fieldset>
@@ -104,7 +106,7 @@ Email: <input type="text" name="email" maxlength="45" />
                                 </div>
 
                                 <!-- Change this to a button or input when using this as a form -->
-                               	    <input class="btn btn-success btn-block" type="submit" name="registerManager" value="submit"/>
+                               	    <input class="btn btn-success btn-block" type="submit" name="registerManager" value="submit" id="registerBtn"/>
                             </fieldset>
                         </form>
                     </div>
@@ -128,4 +130,3 @@ Email: <input type="text" name="email" maxlength="45" />
 </body>
 
 </html>
-
