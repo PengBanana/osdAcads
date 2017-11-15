@@ -28,10 +28,10 @@ The installing instructions might not work for and make things worst for you
 
 The creators of this system are:
 
-## * Alvin de Guzman
-## * Christian Modino
-## * Francis Lozada
-## * Miguel Merle
+## Alvin de Guzman
+## Christian Modino
+## Francis Lozada
+## Miguel Merle
 
 ## Copyright and License
 
