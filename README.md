@@ -28,10 +28,10 @@ The installing instructions might not work for and make things worst for you
 
 The creators of this system are:
 
-## Alvin de Guzman
-## Christian Modino
-## Francis Lozada
-## Miguel Merle
+## Alvin de Guzman(https://web.facebook.com/AlvsdO.ob/)
+## Christian Modino(https://web.facebook.com/christian.modino)
+## Francis Lozada(https://web.facebook.com/francis.lozada.8/)
+## Miguel Merle(https://web.facebook.com/potatojuiceee/)
 
 * System development started on November 2017
 
