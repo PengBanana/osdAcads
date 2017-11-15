@@ -1,0 +1,33 @@
+Admin:
+add a Team
+edit a Team
+view all Teams
+view a team[details + all active members]
+view team achievments
+search a team(sport/name/code)
+
+view all Student Manager
+edit a student manager (details lang wag status)
+activate a student Manger
+deactivate a student manager
+view a student Manger[list of actions done]
+search a student Manager(BY id/name/lastname/firstname/middlename/team)
+
+view all athletes
+add an athlete
+view an athlete's profile
+edit a athlete's info(pati status[dropdown status])
+view athlete's achievments
+search an athlete(BY id/name/lastname/firstname/middlename/team)
+
+view all achievments
+view a achievment
+edit an achievment
+add an athlete to the achievment[meaning involve siya sa achievment na ito]
+search an achievment (by sport/name/date/name of activity/type)
+
+view all subjects(by default this term this year)
+view a subject
+edit a subject
+add a subject
+search a subject(by term+year+coursecode/term+year+courseName)
