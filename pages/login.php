@@ -84,16 +84,23 @@ if(isset($_POST['login'])){
 					//studentManager
 					$query="SELECT * FROM acadsosd.studentmanager WHERE idnumber='".$idnumber."';";
 					$result2=mysqli_query($dbc, $query);
-					$managerStatus=$row['username'];
-					if(){
+					$managerStatus=$row['managerCode'];
+					if($managerStatus==1){
 						//if activated
-						
 						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerHome.php");
 					}
-					else{
-					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/activateAccountFirst.php");
+					else if($managerStatus==2){
+					$message="Your account has been deactivated.";
 					}
-					//else activate your account first
+					else if($managerStatus==3){
+					$message="Please activate your account first.";
+					}
+					else{
+						$message="Please contact your administrator";
+					}
+					echo '<div class="alert alert-danger">
+                        '.$message.'
+						</div>';
 				}
 			}
 			else{

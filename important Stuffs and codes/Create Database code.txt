@@ -423,3 +423,15 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+ALTER TABLE `acadsosd`.`studentmanager` 
+DROP FOREIGN KEY `fk_studentManager_managerStatus1`;
+ALTER TABLE `acadsosd`.`studentmanager` 
+CHANGE COLUMN `managerStatus_managerCode` `managerCode` INT(11) NOT NULL ;
+ALTER TABLE `acadsosd`.`studentmanager` 
+ADD CONSTRAINT `fk_studentManager_managerStatus1`
+  FOREIGN KEY (`managerCode`)
+  REFERENCES `acadsosd`.`managerstatus` (`managerCode`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
