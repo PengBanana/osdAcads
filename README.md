@@ -33,6 +33,8 @@ The creators of this system are:
 ## Francis Lozada
 ## Miguel Merle
 
+* System development started on November 2017
+
 ## Copyright and License
 
 No copyright hehehe
