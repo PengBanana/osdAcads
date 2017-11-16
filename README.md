@@ -37,4 +37,7 @@ The creators of this system are:
 
 ## Copyright and License
 
-No copyright hehehe
+The system is owned by the Office of the Sports Development of De La Salle University and it's developers.
+
+Approved by Ms. Grace Alhambra
+
