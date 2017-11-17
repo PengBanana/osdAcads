@@ -188,7 +188,7 @@
                 <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Animo Squad
+                            Student Managers
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -197,89 +197,40 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">Name</th>
-                                            <th class="text-center">College</th>
-                                            <th class="text-center">Degree Program</th>
-                                            <th class="text-center">Academic Status</th>
-
-
+                                            <th class="text-center">Assigned Team</th>
+                                            <th class="text-center">Deactivate</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="odd gradeX">
                                             <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">Ureta,Miguel</u></a></td>
-                                            <td class="text-center"> CCS</td>
-                                            <td class="text-center"> BS-IT</td>
-                                            <td class="text-center statusCritical">CRITICAL</td>
-
-
+                                            <td class="text-center"> Animo Squad</td>
+                                            <td class="text-center"> <button class="btn btn-default" style="background:none; border:none;"  data-toggle="modal" data-target="#myModalDeactivate"><a class="glyphicon glyphicon-trash" style="color: black;"></a> </button></td>
 
                                         </tr>
-                                        <tr class="even gradeC">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">Modino, Christian</u></a></td>
-                                            <td class="text-center"> CCS</td>
-                                            <td class="text-center"> BS-IT</td>
-                                            <td class="text-center statusSuperCritical">CRITICAL</td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-											<td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">Merle, Miguel Luis</u></a></td>
-                                            <td class="text-center"> CCS</td>
-                                            <td class="text-center"> BS-IT</td>
-                                            <td class="text-center statusSuperCritical">CRITICAL</td>
-
-                                        </tr>
-
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">Toleran, Manuel Carl</u></a></td>
-                                            <td class="text-center"> CCS</td>
-                                            <td class="text-center"> BS-CS</td>
-                                            <td class="text-center statusNotCritical">CRITICAL</td>
-
-                                        </tr>
-
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">Sia, Johannes</u></a></td>
-                                            <td class="text-center"> COS</td>
-                                            <td class="text-center"> BS-BIO</td>
-                                            <td class="text-center statusNotCritical">CRITICAL</td>
-
-                                        </tr>
-
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">Fernandez, Francis</u></a></td>
-                                            <td class="text-center"> COB</td>
-                                            <td class="text-center"> BS-FIN</td>
-                                            <td class="text-center statusCritical">CRITICAL</td>
-
-                                        </tr>
-
-                                         <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">Lozada, Francis</u></a></td>
-                                            <td class="text-center"> COB</td>
-                                            <td class="text-center"> BS-A</td>
-                                            <td class="text-center statusNotCritical">CRITICAL</td>
-
-                                        </tr>
-
-
-                                         <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">Espiritu, Alexander</u></a></td>
-                                            <td class="text-center"> COE</td>
-                                            <td class="text-center"> BS-ECE</td>
-                                            <td class="text-center statusCritical">CRITICAL</td>
-
-                                        </tr>
-
-                                         <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">Petrola, Gregory</u></a></td>
-                                            <td class="text-center"> COB</td>
-                                            <td class="text-center"> BS-FIN</td>
-                                            <td class="text-center statusSuperCritical">CRITICAL</td>
-
-                                        </tr>
-
                                     </tbody>
                                 </table>
+                                <!-- Modal Decline-->
+                                <div class="modal fade" id="myModalDeactivate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Deactivate Account</h4>
+                                      </div>
+                                    <div class="modal-body">
+                                      <p>Are you sure you want to deactivate this account?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                    </div>
+                                  <!-- /.modal-content -->
+                                  </div>
+                                  <!-- /.modal-dialog -->
+                                </div>
+                                <!-- /.modal Decline-->
 
 
 
@@ -293,6 +244,7 @@
                 <!-- /.col-lg-12 -->
             </div>
         </div>
+
         <!-- /#page-wrapper -->
 
     </div>

@@ -1,31 +1,3 @@
-<?php
-session_start();
-//INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `teamSport`) VALUES ('BBM', 'Green Archers', 'Basketball Men');
-if(isset($_POST['submitTeam'])){
-	require_once('../osd_connect.php');
-	$sportCode=$_POST['sportCode'];
-	$teamName=$_POST['teamName'];
-	$sport=$_POST['sport'];
-	$query="INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `Sport`) VALUES ('".$sportCode."', '".$teamName."', '".$sport."');";
-	mysqli_query($dbc,$query);
-	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/teamAdded.php");
-}
-?>
-<!--
-<html>
-fix addteam UI
-<head>
-</head>
-<body>
-<form action="addTeam[admin].php" method="post">
-Sport Code: <input type="text" name="sportCode" maxlength="45" />
-Team Name: <input type="text" name="teamName" maxlength="45" />
-Sport: <input type="text" name="sport" maxlength="45" />
-<input type="submit" name="submitTeam" value="submit"/>
-</form>
-</body>
-</html>
--->
 <!DOCTYPE html>
 <html>
     <head>
@@ -51,7 +23,7 @@ Sport: <input type="text" name="sport" maxlength="45" />
 
         <!-- Custom CSS -->
         <link href="custom.css" rel="stylesheet">
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.min.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -198,63 +170,123 @@ Sport: <input type="text" name="sport" maxlength="45" />
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
+
             <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header"> Student Manager Registration </h1>
+
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 class="page-header"> Student Athlete Registration </h2>
+                    </div>
+                </div>
+                <div>
+                <form name="add_me" id="add_me">
+                <div class="dataTable_wrapper">
+                    <div><h4 class="page-header"> School History</h4></div>
+                                <table class="table table-striped table-bordered table-hover" id="schoolHistoryTable">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Level</th>
+                                            <th class="text-center"> Name and Address of School</th>
+                                            <th class="text-center" colspan="2"> School Year Attended </th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr class="odd gradeX">
+                                          <td class="text-center">Grade 1</td>
+                                          <td class="text-center"><input type="text" class="form-control inputs" name="name[]"></td>
+                                          <td class="text-center" colspan="2"><input type="text" class="form-control inputs" name="schoolYear[]"></td>
+                                           <td class="text-center bg-success-light" style="border-color:#999999">
+                                              <div class="btn-group" style="vertical-align: middle;">
+                                                  <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" type="button" style="background:none;border:none" id="add_input"><i class="glyphicon glyphicon-plus"></i></button></span>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                    </tbody>
+                                </table>
+
+                                <div><h4 class="page-header"> Collegiate</h4></div>
+                                <table class="table table-striped table-bordered table-hover" id="collegeTable">
+                                    <thead>
+                                            <th class="text-center">Degree</th>
+                                            <th class="text-center"> Name and Address of School</th>
+                                            <th class="text-center" colspan="2"> School Year Attended </th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr class="odd gradeX">
+                                          <td class="text-center"><input type="text" class="form-control inputs" name="degree[]"></td>
+                                          <td class="text-center"><input type="text" class="form-control inputs" name="university[]"></td>
+                                          <td class="text-center" colspan="2"><input type="text" class="form-control inputs" name="academicYear[]"></td>
+                                           <td class="text-center bg-success-light" style="border-color:#999999">
+                                              <div class="btn-group" style="vertical-align: middle;">
+                                                  <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default"  type="button" style="background:none;border:none" id="add_input2"><i class="glyphicon glyphicon-plus"></i></button></span>
+                                              </div>
+                                          </td>
+                                      </tr>
+                                    </tbody>
+                                </table>
+
+                                <div>
+                                <div><h4 class="page-header"> Athletic Achievements Background</h4></div>
+                                <div class="dataTable_wrapper">
+                                    <table class="table table-striped table-bordered table-hover" id="overtime">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Tournament</th>
+                                                <th class="text-center">Date</th>
+                                                <th class="text-center">Place</th>
+                                                <th class="text-center">Event</th>
+                                                <th class="text-center">Standing</th>
+                                                <th class="text-center">Actions</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                          <tr class="odd gradeX">
+                                          <td class="text-center"></td>
+                                          </tr>
+
+                                          <tr class="odd gradeX">
+                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
+                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
+                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
+                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
+                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
+                                            <td class="text-center bg-success-light" style="border-color:#999999">
+                                              <div class="btn-group" style="vertical-align: middle;">
+                                              <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
+                                              <span data-toggle="tooltip" title="Remove Equipment"><button class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-bobcat-remover" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-trash"></i></button></span>
+                                              </div>
+                                            </td>
+                                          </tr>
+
+                                          </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <form>
+                                <div class="row">
+                                  <div class="col-lg-10"></div>
+                                  <div class="col-lg-2">
+                                <button class="btn btn-default" id="submit" style="width: 60%; height: auto;">Next</button>
+                              </div>
+                              </div>
+                            </form>
+                            </div>
+                        </form>
                 </div>
             </div>
-
-
-            <div class="row" id="main-panel">
-            	<div class="col-lg-3"></div>
-                <div class="col-lg-5">
-                    <form action="addTeam[admin].php">
-                        <div class="form-group">
-                            <label> Sport Code: </label>
-                            <input type="text" class="form-control inputsSM" name="sportCode">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Name of Team: </label>
-                            <input type="text" class="form-control inputsSM" name="teamName">
-                        </div>
-
-                        <div class="form-group">
-                            <label> Sport: </label>
-                            <input type="text" class="form-control inputsSM" name="sport">
-                        </div>
-
-                        <div>
-                            <button type="button" class="btn btn-default" id="cancelbutton">Cancel</button>
-                        </div>
-
-                        <div id="submitPad">
-                        <input type="submit" class="btn btn-default" id="submitbutton" value="add">
-                        </div>
-                    </form>
-                </div>
-
-                </div>
-
-
-
+            <div>
             </div>
-
-
-
-
-
-            </div>
-
-        </div>
-
-
-
-
+    </div>
         <!-- /#page-wrapper -->
          <!-- jQuery -->
-    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
+    <script src="../dist/js/addInputField.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
