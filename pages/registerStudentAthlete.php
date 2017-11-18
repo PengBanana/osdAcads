@@ -174,12 +174,7 @@
                 <div class="col-lg-12">
                     <h1 class="page-header"> Student Athlete Registration </h1>
                 </div>
-                 <div class="row">
-                    <div class="col-lg-10"></div>
-                    <div class="col-lg-2" style="padding-bottom: 30px;">
-                        <a  href="#" style="color: #333; "><i class="glyphicon glyphicon-open-file" ></i> Import Data</a>
-                    </div>
-                </div>
+
             </div>
 
             <div class="row">
@@ -354,135 +349,15 @@
                 </div>
 
             </div>
-
-            <div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h2 class="page-header"> Competition Participated In: </h2>
-                    </div>
-                </div>
-                <div>
-                <div><h3 class="page-header"> National</h3></div>
-                <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="overtime">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Tournament</th>
-                                            <th class="text-center">Date</th>
-                                            <th class="text-center">Place</th>
-                                            <th class="text-center">Event</th>
-                                            <th class="text-center">Standing</th>
-                                            <th class="text-center">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"></td>
-
-
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                      <td class="text-center"><input type="text" class="form-control inputs"></td>
-                      <td class="text-center"><input type="text" class="form-control inputs"></td>
-                      <td class="text-center"><input type="text" class="form-control inputs"></td>
-                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
-                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
-                                            <td class="text-center bg-success-light" style="border-color:#999999">
-                                                <div class="btn-group" style="vertical-align: middle;">
-                                                    <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
-                                                    <span data-toggle="tooltip" title="Remove Equipment"><button class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-bobcat-remover" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-trash"></i></button></span>
-                                                </div>
-                                            </td>
-                                        </tr>
+            <div class="row">
+              <div class="col-lg-10"></div>
+              <div class="col-lg-2">
+            <button class="btn btn-default" id="submit">Proceed</button>
+          </div>
+          </div>
 
 
 
-
-                                    </tbody>
-                                </table>
-                            </div>
-                </div>
-                <div>
-                <div><h3 class="page-header"> International</h3></div>
-                <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover" id="overtime">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Tournament</th>
-                                            <th class="text-center">Date</th>
-                                            <th class="text-center">Place</th>
-                                            <th class="text-center">Event</th>
-                                            <th class="text-center">Standing</th>
-                                            <th class="text-center">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"></td>
-
-
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
-                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
-                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
-                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
-                                            <td class="text-center"><input type="text" class="form-control inputs"></td>
-                                            <td class="text-center bg-success-light" style="border-color:#999999">
-                                                <div class="btn-group" style="vertical-align: middle;">
-                                                    <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
-                                                    <span data-toggle="tooltip" title="Remove Equipment"><button class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-bobcat-remover" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-trash"></i></button></span>
-                                                </div>
-                                                                </td>
-                                        </tr>
-
-
-
-
-                                    </tbody>
-
-                                </table>
-                                <div class="row">
-                                    <div class="col-lg-1"></div>
-                                    <div class="col-lg-11" style="padding-left: 700px;">
-                                            <form>
-                                            <div class="form-inline">
-                                            <div class="form-group">
-                                               <button class="btn btn-default" onclick="myFunction()">Save</button>
-
-                                                    <script>
-                                                    function myFunction() {
-                                                        alert("New Student-Athlete Added!");
-                                                    }
-                                                    </script>
-
-
-                                            </div>
-                                                <div class="form-group">
-                                                   <button class="btn btn-default" onclick="myFunction2()">Cancel</button>
-
-                                                        <script>
-                                                        function myFunction2() {
-                                                            confirm("Are you sure you want to cancel?");
-                                                        }
-                                                        </script>
-
-
-                                                </div>
-                                            </div>
-                                            </form>
-
-
-                                    </div>
-                                </div>
-
-
-
-                    </div>
-                </div>
-            </div>
     </div>
         <!-- /#page-wrapper -->
          <!-- jQuery -->
