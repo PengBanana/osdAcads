@@ -1,9 +1,6 @@
 <?php
 if(isset($_POST['registerAthlete'])){
 	//for deletion
-	$college=$_POST['college'];
-	$unitnum=$_POST['unitnum'];
-	
 	//not required in form
 	$middlename=$_POST['middlename'];
 	$religion=$_POST['religion'];
