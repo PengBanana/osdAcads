@@ -1,0 +1,7 @@
+Change the word course to degree
+
+Create a list of teams with the number of managers
+
+Check Reports(not all reports are printed, fix the footer and header, not all reports are on screen, No color on reports, Seperate Queries from Reports)
+
+PTE TO ATE

@@ -10,7 +10,6 @@ if(isset($_POST['registerAthlete'])){
 	$mothername=$_POST['mothername'];
 	$fatheroccupation=$_POST['fatheroccupation'];
 	$motheroccupation=$_POST['motheroccupation'];
-	
 	//required
 	$idnum=$_POST['idnum'];
 	$lastname=$_POST['lastname'];
