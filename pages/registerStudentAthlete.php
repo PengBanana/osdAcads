@@ -1,3 +1,9 @@
+<?php
+//get form data
+
+//create sql statement
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -179,30 +185,30 @@
 
             <div class="row">
                 <div class="col-lg-4">
-                    <form>
+                    <form action="addEducationalBackground.php" method="post">
                         <div class="form-group">
                             <label> Last Name: </label>
-                            <input type="text" class="form-control inputs" id="lastname">
+                            <input type="text" class="form-control inputs" name="lastname" required />
                         </div>
 
                         <div class="form-group">
                             <label> First Name: </label>
-                            <input type="text" class="form-control inputs" id="firstname">
+                            <input type="text" class="form-control inputs" name="firstname" required />
                         </div>
 
                         <div class="form-group">
                             <label> Middle Name: </label>
-                            <input type="text" class="form-control inputs" id="middlename">
+                            <input type="text" class="form-control inputs" name="middlename">
                         </div>
 
                         <div class="form-group">
                             <label>ID Number: </label>
-                            <input type="text" class="form-control inputs" name="idno"/>
+                            <input type="text" class="form-control inputs" name="idnum"/>
                         </div>
 
                         <div class="form-group">
                             <label>College: </label>
-                            <select class="form-control inputs" name="scollege">
+                            <select class="form-control inputs" name="college">
                                 <option>College</option>
                                 <option>CCS</option>
                                 <option>COS</option>
@@ -215,17 +221,17 @@
 
                         <div class="form-group">
                             <label>Degree Program:</label>
-                            <input type="text" class="form-control inputs" name="scourse" />
+                            <input type="text" class="form-control inputs" name="degree" />
                         </div>
 
                         <div class="form-group">
                             <label>Total Units of Course: </label>
-                            <input type="text" class="form-control inputs" name="scourse" />
+                            <input type="text" class="form-control inputs" name="unitnum" />
                         </div>
 
                         <div class="form-group">
                             <label>Sport: </label>
-                            <select class="form-control inputs" id="ssports">
+                            <select class="form-control inputs" name="sport">
                                 <option>Choose team</option>
                                 <option>Animo Squad</option>
                                 <option>Badminton-</option>
@@ -249,110 +255,103 @@
 
                         <div class="form-group">
                             <label>Date of Birth: </label>
-                            <input type="date" class="form-control inputs" name="sdob"/>
+                            <input type="date" class="form-control inputs" name="birthday" required />
                         </div>
 
                         <div class="form-group">
                             <label>Nationality: </label>
-                            <input type="text" class="form-control inputs" name="snation"/>
+                            <input type="text" class="form-control inputs" name="nationality" required />
                         </div>
-
-
-
-
-                    </form>
-
                 </div>
 
                 <div class="col-lg-4">
-                    <form>
                     <div class="form-group">
                             <label>Religion: </label>
-                            <input type="text" class="form-control inputs" name="snation"/>
+                            <input type="text" class="form-control inputs" name="religion"/>
                         </div>
 
                      <div class="form-group">
                         <label>Weight: </label>
-                        <input type="text" class="form-control inputs" name="sweight" placeholder="lbs" />
+                        <input type="text" class="form-control inputs" name="weight" placeholder="lbs" required />
                     </div>
 
                     <div class="form-group">
                         <label>Height: </label>
-                        <input type="text" class="form-control inputs" name="sheight" placeholder="cm" />
+                        <input type="text" class="form-control inputs" name="height" placeholder="cm" required />
                     </div>
 
                      <div class="form-group">
                             <label>Blood Type:</label>
-                            <select class="form-control inputs">
+                            <select class="form-control inputs" name="bloodtype" required>
                                 <option></option>
-                                <option>A</option>
-                                <option>A-</option>
-                                <option>A+</option>
-                                <option>B</option>
-                                <option>B-</option>
-                                <option>B+</option>
-                                <option>AB</option>
-                                <option>AB+</option>
-                                <option>AB-</option>
-                                <option>O</option>
-                                <option>O+</option>
-                                <option>O-</option>
+                                <option value="A">A</option>
+                                <option value="A-">A-</option>
+                                <option value="A+">A+</option>
+                                <option value="B">B</option>
+                                <option value="B-">B-</option>
+                                <option value="B+">B+</option>
+                                <option value="AB">AB</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O">O</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
                             </select>
                         </div>
 
                     <div class="form-group">
                         <label>DLSU e-mail address: </label>
-                        <input type="text" class="form-control inputs" name="sEmail"/>
+                        <input type="text" class="form-control inputs" name="email" required />
                     </div>
 
                     <div class="form-group">
                         <label>Alternate e-mail address: </label>
-                        <input type="text" class="form-control inputs" name="sAlternate"/>
+                        <input type="text" class="form-control inputs" name="alternateemail"/>
                     </div>
 
 
                      <div class="form-group">
                         <label>Address Line 1: </label>
-                        <textarea rows="4" cols="50" class="form-control inputs">
+                        <textarea rows="4" cols="50" class="form-control inputs" name="address1" required>
                         </textarea>
                     </div>
                     <div class="form-group">
                         <label>Address Line 2: </label>
-                        <textarea rows="4" cols="50" class="form-control inputs">
+                        <textarea rows="4" cols="50" class="form-control inputs" name="address2">
                         </textarea>
                     </div>
-
-
-                    </form>
-
                 </div>
                 <div class="col-lg-4">
-                    <form>
                         <div class="form-group">
                         <label>Father's Name: </label>
-                        <input type="text" name="sfname" class="form-control inputs"/>
+                        <input type="text" name="fathername" class="form-control inputs"/>
 
                         <label>Occupation: </label>
-                        <input text="text" class="form-control inputs" name="sfoccup"/>
+                        <input text="text" class="form-control inputs" name="fatheroccupation"/>
                     </div>
 
                     <div class="form-group">
                         <label>Mother's Name: </label>
-                        <input type="text" name="smname" class="form-control inputs"/>
+                        <input type="text" name="mothername" class="form-control inputs"/>
                         <label>Occupation: </label>
-                        <input text="text" class="form-control inputs" name="smoccup"/>
-                    </div>
-
-
-                    </form>
-
+                        <input text="text" class="form-control inputs" name="motheroccupation"/>
+					</div>
+					<div class="form-group">
+                        <label>Emergency Contact Name: </label>
+                        <input type="text" name="emergencyname" class="form-control inputs" required />
+						<label>Emergency Contact Number: </label>
+                        <input type="text" name="emergencynumber" class="form-control inputs" required />
+                        <label>Relationship: </label>
+                        <input text="text" class="form-control inputs" name="emergencyrelationship" required/>
+					</div>
                 </div>
 
             </div>
             <div class="row">
               <div class="col-lg-10"></div>
               <div class="col-lg-2">
-            <button class="btn btn-default" id="submit">Proceed</button>
+            <input type="submit" class="btn btn-default" name="registerAthlete" value="Proceed">
+			</form>
           </div>
           </div>
 

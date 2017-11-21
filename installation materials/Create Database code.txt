@@ -439,3 +439,20 @@ CREATE TABLE `acadsosd`.`date` (
   `date` DATE NULL,
   `event` VARCHAR(160) NULL,
   `Term` VARCHAR(45) NULL);
+
+ALTER TABLE `acadsosd`.`studentathleteprofile` 
+DROP COLUMN `studentAthleteProfilecol`;
+
+ALTER TABLE `acadsosd`.`plannedenrollmentchart` 
+DROP FOREIGN KEY `fk_PlannedEnrollmentChart_studentAthlete1`;
+ALTER TABLE `acadsosd`.`plannedenrollmentchart` 
+CHANGE COLUMN `studentAthlete_studentIDNumber` `studentIDNumber` VARCHAR(8) NOT NULL ;
+ALTER TABLE `acadsosd`.`plannedenrollmentchart` 
+ADD CONSTRAINT `fk_PlannedEnrollmentChart_studentAthlete1`
+  FOREIGN KEY (`studentIDNumber`)
+  REFERENCES `acadsosd`.`studentathleteprofile` (`studentIDNumber`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+  ALTER TABLE `acadsosd`.`plannedenrollmentchart` 
+CHANGE COLUMN `pecID` `pecID` INT(11) NOT NULL AUTO_INCREMENT ;

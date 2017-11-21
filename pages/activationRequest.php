@@ -272,7 +272,7 @@ session_start();
                                 <div class="col-lg-6">
                                 <div class="form-group">
                                 <label>Team Code: </label>
-                                <select class="form-control inputsSM" name="sportCode" id="college">';
+                                <select class="form-control inputsSM" name="sportCode">';
                                 $query='SELECT TM.sportCode, TM.teamName, COUNT(SM.teamCode) AS NOM FROM acadsosd.studentmanager SM RIGHT JOIN team TM ON SM.teamCode=TM.sportCode GROUP BY TM.sportCode;';
 								$result2=mysqli_query($dbc, $query);
 								while($row2=mysqli_fetch_array($result2,MYSQLI_ASSOC)){

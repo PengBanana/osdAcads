@@ -68,3 +68,10 @@ INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('XASDR'
 INSERT INTO `acadsosd`.`user` (`idnumber`, `usertypeID`, `firstName`, `lastName`) VALUES ('00000000', '2', 'Grace', 'Alhambra');
 
 UPDATE `acadsosd`.`user` SET `password`='123456' WHERE `idnumber`='00000000';
+
+INSERT INTO `acadsosd`.`reconsiderationreference` (`reconsiderationCode`, `reconsiderationLevel`) VALUES ('REG', 'Regular');
+
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('IT', 'Information Technology', 'CCS');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('ST', 'Software Technology', 'CCS');
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('CT', 'Computer Technology', 'CCS');
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BS-IT', 'Information Technology', 'IT');

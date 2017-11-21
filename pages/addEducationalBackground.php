@@ -1,3 +1,82 @@
+<?php
+if(isset($_POST['registerAthlete'])){
+	//for deletion
+	$college=$_POST['college'];
+	$unitnum=$_POST['unitnum'];
+	
+	//not required in form
+	$middlename=$_POST['middlename'];
+	$religion=$_POST['religion'];
+	$alternateemail=$_POST['alternateemail'];
+	$address2=$_POST['address2'];
+	$fathername=$_POST['fathername'];
+	$mothername=$_POST['mothername'];
+	$fatheroccupation=$_POST['fatheroccupation'];
+	$motheroccupation=$_POST['motheroccupation'];
+	
+	//required
+	$idnum=$_POST['idnum'];
+	$lastname=$_POST['lastname'];
+	$degree=$_POST['degree'];
+	$firstname=$_POST['firstname'];
+	$birthday=$_POST['birthday'];
+	$weight=$_POST['weight'];
+	$height=$_POST['height'];
+	$bloodtype=$_POST['bloodtype'];
+	$nationality=$_POST['nationality'];
+	$email=$_POST['email'];
+	$emergencyname=$_POST['emergencyname'];
+	$emergencynumber=$_POST['emergencynumber'];
+	$emergencyrelationship=$_POST['emergencyrelationship'];
+	$sport=$_POST['sport'];
+	$address1=$_POST['address1'];
+
+	//sql required for profile
+	$part1="INSERT INTO `acadsosd`.`studentathleteprofile` (`studentIDNumber`, `studentLastName`, `studentFirstName`, `studentDateOfBirth`, `studentWeight`, `studentHeight`, `studentBloodType`, `studentNationality`, `studentDlsuEmail`, `studentAddressLine1`, `studentEmergencyContact`, `EmergencyContactNumber`, `EmergencyContactRelationship`, `teamCode`, `statusID`, `reconsiderationReference_reconsiderationCode`";
+
+	$part2="VALUES ('".$idnum."', '".$lastname."', '".$firstname."', '".$birthday."', '".$weight."', '".$height."', '".$bloodtype."', '".$nationality."', '".$email."', '".$email."', '".$emergencyname."', '".$emergencynumber."', '".$emergencyrelationship."', '".$sport."', '3', 'REG'";
+	if(isset($middlename)){
+		$part1.=", studentMiddleName";
+		$part2.=", ".$middlename;
+	}
+	if(isset($religion)){
+		$part1.=", studentReligion";
+		$part2.=", ".$religion;
+	}
+	if(isset($alternateemail)){
+		$part1.=", studentAlternateEmail";
+		$part2.=", ".$alternateemail;
+	}
+	if(isset($address2)){
+		$part1.=", studentAddressLine2";
+		$part2.=", ".$address2;
+	}
+	if(isset($fathername)){
+		$part1.=", studentFatherFullName";
+		$part2.=", ".$fathername;
+	}
+	if(isset($fatheroccupation)){
+		$part1.=", studentFatherOccupation";
+		$part2.=", ".$fatheroccupation;
+	}
+	if(isset($mothername)){
+		$part1.=", studentMotherFullName";
+		$part2.=", ".$mothername;
+	}
+	if(isset($motheroccupation)){
+		$part1.=", studentMotherOccupation";
+		$part2.=", ".$motheroccupation;
+	}
+	$part1.=")";
+	$part2.=")";
+	$sql=$part1." ".$part2;
+	$sql2="INSERT INTO `acadsosd`.`plannedenrollmentchart` (`degreeTable_degreeCode`, `termStarted`, `studentIDNumber`) VALUES ('".$degree."', 'T1', '".$idnum."');
+";
+}
+else{
+	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
