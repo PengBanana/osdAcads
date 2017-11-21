@@ -1,0 +1,11 @@
+register then add educational background
+
+Memo:
+* Add algorithm to compute what term na. (register SA)
+* Add algorithm to use ID number to know what year nag start student (register SA)
+
+Remove AMSL
+Remove ASSR
+Midterm Academic Report to Midterm Updates
+APFR to Project Failures
+AAPFR to Final Updates
