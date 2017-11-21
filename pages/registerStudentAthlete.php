@@ -1,8 +1,6 @@
 <?php
 //get form data
-
 //create sql statement
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -207,28 +205,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label>College: </label>
-                            <select class="form-control inputs" name="college">
-                                <option>College</option>
-                                <option>CCS</option>
-                                <option>COS</option>
-                                <option>RVRCOB</option>
-                                <option>GCOE</option>
-                                <option>CLA</option>
-                                <option>BAGCED</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
                             <label>Degree Program:</label>
                             <input type="text" class="form-control inputs" name="degree" />
                         </div>
-
-                        <div class="form-group">
-                            <label>Total Units of Course: </label>
-                            <input type="text" class="form-control inputs" name="unitnum" />
-                        </div>
-
                         <div class="form-group">
                             <label>Sport: </label>
                             <select class="form-control inputs" name="sport">
