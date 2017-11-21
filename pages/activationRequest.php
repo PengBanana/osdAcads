@@ -273,12 +273,13 @@ session_start();
                                 <div class="form-group">
                                 <label>Team Code: </label>
                                 <select class="form-control inputsSM" name="sportCode" id="college">';
-                                $query='SELECT teamName, sportCode FROM acadsosd.team;';
+                                $query='SELECT TM.sportCode, TM.teamName, COUNT(SM.teamCode) AS NOM FROM acadsosd.studentmanager SM RIGHT JOIN team TM ON SM.teamCode=TM.sportCode GROUP BY TM.sportCode;';
 								$result2=mysqli_query($dbc, $query);
 								while($row2=mysqli_fetch_array($result2,MYSQLI_ASSOC)){
 									$sportCode=$row2['sportCode'];
 									$sport=$row2['teamName'];
-									 echo '<option value="'.$sportCode.'">'.$sport.'</option>';
+									$NOM=$row2['NOM'];
+									 echo '<option value="'.$sportCode.'">'.$sport.': '.$NOM.' managers</option>';
 								}
                                 echo'
 								</select>

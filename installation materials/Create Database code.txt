@@ -435,3 +435,7 @@ ADD CONSTRAINT `fk_studentManager_managerStatus1`
   REFERENCES `acadsosd`.`managerstatus` (`managerCode`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+CREATE TABLE `acadsosd`.`date` (
+  `date` DATE NULL,
+  `event` VARCHAR(160) NULL,
+  `Term` VARCHAR(45) NULL);

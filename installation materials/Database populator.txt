@@ -68,4 +68,3 @@ INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('XASDR'
 INSERT INTO `acadsosd`.`user` (`idnumber`, `usertypeID`, `firstName`, `lastName`) VALUES ('00000000', '2', 'Grace', 'Alhambra');
 
 UPDATE `acadsosd`.`user` SET `password`='123456' WHERE `idnumber`='00000000';
-
