@@ -69,6 +69,29 @@ if(isset($_POST['registerAthlete'])){
 	$sql2="INSERT INTO `acadsosd`.`plannedenrollmentchart` (`degreeTable_degreeCode`, `termStarted`, `studentIDNumber`) VALUES ('".$degree."', 'T1', '".$idnum."');
 ";
 }
+else if(isset($_POST['addEducationalBackground'])){
+	//insert INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `yearStarted`, `yearEnded`, `studentIDNumber`) VALUES ('level', 'name', 2017, 2018, '113');
+	$sql1=$_POST['sql1'];
+	$sql2=$_POST['sql2'];
+	$id=$_POST['id'];
+	$schoolname=$_POST['name'];
+	$schooladdress=$_POST['address'];
+	$schoolyear=$_POST['schoolyear'];
+	$part1="insert INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `yearStarted`, `yearEnded`, `studentIDNumber`";
+	$part2="VALUES ('level', 'name', 2017, 2018, '113'";
+	/*while($
+	if(isset($)){
+		
+	}	
+	}
+	
+	
+	$part1.=")";
+	$part2.=");"
+	$sql3=$part1." ".$part2;
+	
+*/
+}
 else{
 	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 }
@@ -255,7 +278,7 @@ else{
                     </div>
                 </div>
                 <div>
-                <form name="add_me" id="add_me">
+                <form action="addEducationalBackground.php" method="post">
                 <div class="dataTable_wrapper">
                     <div><h4 class="page-header"> School History</h4></div>
                                 <table class="table table-striped table-bordered table-hover" id="schoolHistoryTable">
@@ -345,15 +368,16 @@ else{
                                     </div>
                                 </div>
 
-                                <form>
                                 <div class="row">
                                   <div class="col-lg-10"></div>
                                   <div class="col-lg-2">
-                                <button class="btn btn-default" id="submit">Submit</button>
+								<input type="hidden" name="sql1" value=<?php echo '"'.$sql1.'"'; ?> />
+								<input type="hidden" name="sql2" value=<?php echo '"'.$sql2.'"'; ?> />
+								<input type="hidden" name="id" value=<?php echo '"'.$$idnum.'"'; ?> />
+                                <input type="submit" name="addEducationalBackground" />
                                 <button class="btn btn-default" id="submit" >Skip Step</button>
                               </div>
                               </div>
-                            </form>
                             </div>
                         </form>
                 </div>

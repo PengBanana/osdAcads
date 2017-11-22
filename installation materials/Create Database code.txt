@@ -456,3 +456,6 @@ ADD CONSTRAINT `fk_PlannedEnrollmentChart_studentAthlete1`
 
   ALTER TABLE `acadsosd`.`plannedenrollmentchart` 
 CHANGE COLUMN `pecID` `pecID` INT(11) NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `acadsosd`.`educationalbackground` 
+CHANGE COLUMN `Grade` `schoolLevel` VARCHAR(160) NOT NULL ;
