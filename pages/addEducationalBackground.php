@@ -73,24 +73,73 @@ else if(isset($_POST['addEducationalBackground'])){
 	//insert INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `yearStarted`, `yearEnded`, `studentIDNumber`) VALUES ('level', 'name', 2017, 2018, '113');
 	$sql1=$_POST['sql1'];
 	$sql2=$_POST['sql2'];
+	if(mysqli_query($dbc, $sql1)){
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
+	}
+	if(mysqli_query($dbc, $sql2)){
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
+	}
 	$id=$_POST['id'];
 	$schoolname=$_POST['name'];
 	$schooladdress=$_POST['address'];
 	$schoolyear=$_POST['schoolyear'];
-	$part1="insert INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `yearStarted`, `yearEnded`, `studentIDNumber`";
-	$part2="VALUES ('level', 'name', 2017, 2018, '113'";
+	$schoolLevel=$_POST['schoollevel'];
+	$count=0;
+	
+	while(isset($schoolname[$count])){
+		$a=$schoolname[$count];
+		$b=$schooladdress[$count];
+		$c=$schoolyear[$count];
+		$d=$schoolLevel[$count];
+		$part1="INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `schoolYear`, `studentIDNumber`";
+		$part2="VALUES ('".$d."', '".$a."', ".$c.", '".$id."';";
+		if(isset($b)){
+			$part1.=", schoolAddress";
+			$part2.=", ".$b;
+		}
+		$part1.=")";
+		$part2.=")";
+		$sql=$part1." ".$part2;
+		if(mysqli_query($dbc, $sql)){
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
+		}
+		else{
+		$count++;	
+		}
+	}
+	
+	$schoollevel=$_POST['collegelevel'];
+	$schoolname=$_POST['university'];
+	$schooladdress=$_POST['univAddress'];
+	$schoolyear=$_POST['academicYear'];
+	$schooldegree=$_POST['collegedegree'];
 	$count=0;
 	while(isset($schoolname[$count])){
-		//$schoolname[$count];
-		$count++;
+		$a=$schoolname[$count];
+		$b=$schooladdress[$count];
+		$c=$schoolyear[$count];
+		$e=$schooldegree[$count];
+		$d=$schoollevel[$count];
+		$part1="INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `schoolYear`, `studentIDNumber`";
+		$part2="VALUES ('".$d."', '".$a."', ".$c.", '".$id."';";
+		if(isset($b)){
+			$part1.=", schoolAddress";
+			$part2.=", ".$b;
+		}
+		if(isset($e)){
+			$part1.=", degree";
+			$part2.=", ".$e;
+		}
+		$part1.=")";
+		$part2.=")";
+		$sql=$part1." ".$part2;
+		if(mysqli_query($dbc, $sql)){
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
+		}
+		else{
+		$count++;	
+		}
 	}
-	//if(isset($)){
-	//}
-
-
-	$part1.=")";
-	$part2.=");";
-	$sql3=$part1." ".$part2;
 }
 else{
 	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
@@ -294,7 +343,7 @@ else{
                                     <tbody>
                                       <tr class="odd gradeX">
                                           <td class="text-center">
-																						<select class="form-control">
+																						<select class="form-control name" name="schoollevel">
 																					   <option value="grade1">Grade 1</option>
 																					   <option value="grade2">Grade 2</option>
 																					   <option value="grade3">Grade 3</option>
@@ -333,16 +382,18 @@ else{
                                     </thead>
                                     <tbody>
                                       <tr class="odd gradeX">
-																					<td class="text-center"><input type="number" class="form-control inputs" name="year[]"></td>
-                                          <td class="text-center"><input type="text" class="form-control inputs" name="degree[]"></td>
-                                          <td class="text-center"><input type="text" class="form-control inputs" name="university[]"></td>
-                                          <td class="text-center"><input type="text" class="form-control inputs" name="univAddress[]"></td>
-                                          <td class="text-center" colspan="2"><input type="text" class="form-control inputs" name="academicYear[]"></td>
-                                           <td class="text-center bg-success-light" style="border-color:#999999">
-                                              <div class="btn-group" style="vertical-align: middle;">
-                                                  <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default"  type="button" style="background:none;border:none" id="add_input2"><i class="glyphicon glyphicon-plus"></i></button></span>
-                                              </div>
-                                          </td>
+										<td class="text-center">
+										<input type="number" class="form-control inputs" name="collegelevel[]">
+										</td>
+                                        <td class="text-center"><input type="text" class="form-control inputs" name="collegedegree[]"></td>
+                                        <td class="text-center"><input type="text" class="form-control inputs" name="university[]"></td>
+                                        <td class="text-center"><input type="text" class="form-control inputs" name="univAddress[]"></td>
+                                        <td class="text-center" colspan="2"><input type="text" class="form-control inputs" name="academicYear[]"></td>
+                                        <td class="text-center bg-success-light" style="border-color:#999999">
+                                        <div class="btn-group" style="vertical-align: middle;">
+										<span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default"  type="button" style="background:none;border:none" id="add_input2"><i class="glyphicon glyphicon-plus"></i></button></span>
+										</div>
+                                        </td>
                                       </tr>
                                     </tbody>
                                 </table>
@@ -368,7 +419,7 @@ else{
 
                                           <tr class="odd gradeX">
                                             <td class="text-center"><input type="text" class="form-control inputs" name="tournament[]"></td>
-                                            <td class="text-center"><input type="text" class="form-control inputs" name="tourDate[]"></td>
+                                            <td class="text-center"><input type="date" class="form-control inputs" name="tourDate[]"></td>
                                             <td class="text-center"><input type="text" class="form-control inputs" name="venue[]"></td>
                                             <td class="text-center"><input type="text" class="form-control inputs" name="eventName[]"></td>
                                             <td class="text-center"><input type="text" class="form-control inputs" name="standing[]"></td>
@@ -395,7 +446,7 @@ else{
                               </div>
                               </div>
                             </div>
-                        </form>
+                </form>
                 </div>
             </div>
             <div>

@@ -435,6 +435,7 @@ ADD CONSTRAINT `fk_studentManager_managerStatus1`
   REFERENCES `acadsosd`.`managerstatus` (`managerCode`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+  
 CREATE TABLE `acadsosd`.`date` (
   `date` DATE NULL,
   `event` VARCHAR(160) NULL,
@@ -463,3 +464,9 @@ CHANGE COLUMN `Grade` `schoolLevel` VARCHAR(160) NOT NULL ;
   ALTER TABLE `acadsosd`.`educationalbackground` 
 DROP COLUMN `yearEnded`,
 CHANGE COLUMN `yearStarted` `schoolYear` YEAR NOT NULL ;
+
+ALTER TABLE `acadsosd`.`date` 
+ADD COLUMN `schoolYear` YEAR NULL AFTER `Term`,
+ADD COLUMN `datecol` VARCHAR(45) NULL AFTER `schoolYear`;
+ALTER TABLE `acadsosd`.`date` 
+DROP COLUMN `datecol`;
