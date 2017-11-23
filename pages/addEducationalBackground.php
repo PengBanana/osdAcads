@@ -85,9 +85,9 @@ else if(isset($_POST['addEducationalBackground'])){
 		$count++;
 	}
 	//if(isset($)){
-	//}	
-	
-	
+	//}
+
+
 	$part1.=")";
 	$part2.=");";
 	$sql3=$part1." ".$part2;
@@ -293,7 +293,22 @@ else{
                                     </thead>
                                     <tbody>
                                       <tr class="odd gradeX">
-                                          <td class="text-center">Grade 1</td>
+                                          <td class="text-center">
+																						<select class="form-control">
+																					   <option value="grade1">Grade 1</option>
+																					   <option value="grade2">Grade 2</option>
+																					   <option value="grade3">Grade 3</option>
+																						 <option value="grade4">Grade 4</option>
+																						 <option value="grade5">Grade 5</option>
+																						 <option value="grade6">Grade 6</option>
+																						 <option value="grade7">Grade 7</option>
+																						 <option value="grade8">Grade 8</option>
+																						 <option value="grade9">Grade 9</option>
+																						 <option value="grade10">Grade 10</option>
+																						 <option value="grade11">Grade 11</option>
+																						 <option value="grade12">Grade 12</option>
+
+																					 </select> </td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="name[]"></td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="address[]"></td>
                                           <td class="text-center" colspan="2"><input type="text" class="form-control inputs" name="schoolYear[]"></td>
