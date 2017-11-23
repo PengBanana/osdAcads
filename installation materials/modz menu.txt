@@ -1,0 +1,21 @@
+Admin
+1. Academic Update
+>Midterm 
+>Projected Course Failures
+>Final (not available)
+>Final Report [printable and sendable to email](out of 25 7 failed)
+
+2. Team
+>View Varsity Teams
+>View Achievments
+>Register an Athlete
+
+3. Accounts
+>Activation Requests
+>Manage Accounts
+
+Student Manager
+>Home
+>View Athletes
+>Midterm Updates
+>Final Updates

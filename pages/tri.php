@@ -1,12 +1,17 @@
 
 <?php
-$to = 'alvin_deguzman@dlsu.edu.ph';
-$subject = 'Hello from XAMPP!';
-$message = 'This is a test';
-$headers = "From: osddlsu@gmail.com\r\n";
-if (mail($to, $subject, $message, $headers)) {
-   echo "SUCCESS";
-} else {
-   echo "ERROR";
+if(isset($_POST['tri'])){
+	$food=$_POST['food'];
+	$count=0;
+	while(isset($food[$count])){
+		echo $food[$count];
+		$count++;
+	}
 }
 ?>
+<form action="tri.php" method="post">
+<input type="text" name="food[]" />
+<input type="text" name="food[]" />
+<input type="text" name="food[]" />
+<input type="submit" name="tri">
+</form>

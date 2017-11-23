@@ -79,18 +79,18 @@ else if(isset($_POST['addEducationalBackground'])){
 	$schoolyear=$_POST['schoolyear'];
 	$part1="insert INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `yearStarted`, `yearEnded`, `studentIDNumber`";
 	$part2="VALUES ('level', 'name', 2017, 2018, '113'";
-	/*while($
-	if(isset($)){
-		
-	}	
+	$count=0;
+	while(isset($schoolname[$count])){
+		//$schoolname[$count];
+		$count++;
 	}
+	//if(isset($)){
+	//}	
 	
 	
 	$part1.=")";
-	$part2.=");"
+	$part2.=");";
 	$sql3=$part1." ".$part2;
-	
-*/
 }
 else{
 	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
