@@ -459,3 +459,7 @@ CHANGE COLUMN `pecID` `pecID` INT(11) NOT NULL AUTO_INCREMENT ;
 
 ALTER TABLE `acadsosd`.`educationalbackground` 
 CHANGE COLUMN `Grade` `schoolLevel` VARCHAR(160) NOT NULL ;
+
+  ALTER TABLE `acadsosd`.`educationalbackground` 
+DROP COLUMN `yearEnded`,
+CHANGE COLUMN `yearStarted` `schoolYear` YEAR NOT NULL ;
