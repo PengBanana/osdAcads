@@ -414,10 +414,6 @@ else{
                                           </thead>
                                           <tbody>
                                           <tr class="odd gradeX">
-                                          <td class="text-center"></td>
-                                          </tr>
-
-                                          <tr class="odd gradeX">
                                             <td class="text-center"><input type="text" class="form-control inputs" name="tournament[]"></td>
                                             <td class="text-center"><input type="date" class="form-control inputs" name="tourDate[]"></td>
                                             <td class="text-center"><input type="text" class="form-control inputs" name="venue[]"></td>
