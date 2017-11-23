@@ -77,37 +77,23 @@ else if(isset($_POST['addEducationalBackground'])){
 	$schoolname=$_POST['name'];
 	$schooladdress=$_POST['address'];
 	$schoolyear=$_POST['schoolyear'];
+	$part1="insert INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `yearStarted`, `yearEnded`, `studentIDNumber`";
+	$part2="VALUES ('level', 'name', 2017, 2018, '113'";
 	$count=0;
-	if(mysqli_query($dbc, $sql1)){
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
-	}
-	if(mysqli_query($dbc, $sql2)){
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
-	}
 	while(isset($schoolname[$count])){
-		$a=$schoolname[$count];
-		$b=$schooladdress[$count];
-		$c=$schoolyear[$count];
-		$part1="INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `schoolYear`, `studentIDNumber`";
-		$part2="VALUES ('level', '".$a."', ".$c.", '".$id."';";
-		if(isset($b)){
-			$part1.=", schoolAddress";
-			$part2.=", ".$b;
-		}
-		$part1.=")";
-		$part2.=")";
-		$sql=$part1." ".$part2;
-		if(mysqli_query($dbc, $sql)){
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
-		}
-		else{
-		$count++;	
-		}
+		//$schoolname[$count];
+		$count++;
 	}
-	
+	//if(isset($)){
+	//}
+
+
+	$part1.=")";
+	$part2.=");";
+	$sql3=$part1." ".$part2;
 }
 else{
-	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 }
 ?>
 <!DOCTYPE html>
@@ -308,19 +294,19 @@ else{
                                     <tbody>
                                       <tr class="odd gradeX">
                                           <td class="text-center">
-																						<select class="form-control" name="level">
-																						<option value="grade1">Grade 1</option>
-																						<option value="grade2">Grade 2</option>
-																						<option value="grade3">Grade 3</option>
-																						<option value="grade4">Grade 4</option>
-																						<option value="grade5">Grade 5</option>
-																						<option value="grade6">Grade 6</option>
-																						<option value="grade7">Grade 7</option>
-																						<option value="grade8">Grade 8</option>
-																						<option value="grade9">Grade 9</option>
-																						<option value="grade10">Grade 10</option>
-																						<option value="grade11">Grade 11</option>
-																						<option value="grade12">Grade 12</option>
+																						<select class="form-control">
+																					   <option value="grade1">Grade 1</option>
+																					   <option value="grade2">Grade 2</option>
+																					   <option value="grade3">Grade 3</option>
+																						 <option value="grade4">Grade 4</option>
+																						 <option value="grade5">Grade 5</option>
+																						 <option value="grade6">Grade 6</option>
+																						 <option value="grade7">Grade 7</option>
+																						 <option value="grade8">Grade 8</option>
+																						 <option value="grade9">Grade 9</option>
+																						 <option value="grade10">Grade 10</option>
+																						 <option value="grade11">Grade 11</option>
+																						 <option value="grade12">Grade 12</option>
 																					 </select> </td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="name[]"></td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="address[]"></td>
@@ -337,6 +323,7 @@ else{
                                 <div><h4 class="page-header"> Collegiate</h4></div>
                                 <table class="table table-striped table-bordered table-hover" id="collegeTable">
                                     <thead>
+																						<th class="text-center">Year</th>
                                             <th class="text-center">Degree</th>
                                             <th class="text-center"> Name University</th>
                                             <th class="text-center"> Address University</th>
@@ -346,6 +333,7 @@ else{
                                     </thead>
                                     <tbody>
                                       <tr class="odd gradeX">
+																					<td class="text-center"><input type="number" class="form-control inputs" name="year[]"></td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="degree[]"></td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="university[]"></td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="univAddress[]"></td>
