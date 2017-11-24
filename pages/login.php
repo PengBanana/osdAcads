@@ -60,7 +60,6 @@ if(isset($_POST['login'])){
 	$check=mysqli_num_rows($result);
 	if($check>0){
 		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-		$idnumber=$row['idnumber'];
 		$password=$row['password'];
 		$first=$row['firstName'];
 		$last=$row['lastName'];
@@ -82,13 +81,13 @@ if(isset($_POST['login'])){
 				}
 				else if($usertype=='3'){
 					//studentManager
-					$query="SELECT * FROM acadsosd.studentmanager WHERE idnumber='".$idnumber."';";
+					$query="SELECT * FROM acadsosd.studentManager WHERE idnumber=".$idnumberin.";";
 					$result2=mysqli_query($dbc, $query);
-					$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-					$managerStatus=$row['usertypeID'];
+					$row=mysqli_fetch_array($result2,MYSQLI_ASSOC);
+					$managerStatus=$row['managerCode'];
 					if($managerStatus==1){
 						//if activated
-						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerHome.php");
+					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerHome.php");
 					}
 					else if($managerStatus==2){
 					$message="Your account has been deactivated.";
@@ -97,7 +96,7 @@ if(isset($_POST['login'])){
 					$message="Your account has not been activated yet";
 					}
 					else{
-						$message=$managerStatus;
+						$message="Login Error: Please contact your System Developer";
 					}
 					echo '<div class="alert alert-danger">
                         '.$message.'
