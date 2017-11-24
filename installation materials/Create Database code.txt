@@ -470,3 +470,15 @@ ADD COLUMN `schoolYear` YEAR NULL AFTER `Term`,
 ADD COLUMN `datecol` VARCHAR(45) NULL AFTER `schoolYear`;
 ALTER TABLE `acadsosd`.`date` 
 DROP COLUMN `datecol`;
+
+ALTER TABLE `acadsosd`.`achievmenthistory` 
+DROP FOREIGN KEY `fk_achievmentHistory_studentAthleteProfile1`;
+ALTER TABLE `acadsosd`.`achievmenthistory` 
+CHANGE COLUMN `accomplishmentID` `accomplishmentID` INT(11) NOT NULL AUTO_INCREMENT ,
+CHANGE COLUMN `studentAthleteProfile_studentIDNumber` `studentIDNumber` VARCHAR(8) NOT NULL ;
+ALTER TABLE `acadsosd`.`achievmenthistory` 
+ADD CONSTRAINT `fk_achievmentHistory_studentAthleteProfile1`
+  FOREIGN KEY (`studentIDNumber`)
+  REFERENCES `acadsosd`.`studentathleteprofile` (`studentIDNumber`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
