@@ -60,7 +60,7 @@ if(isset($_POST['login'])){
 	$check=mysqli_num_rows($result);
 	if($check>0){
 		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-		//$username=$row['idnumber'];
+		$idnumber=$row['idnumber'];
 		$password=$row['password'];
 		$first=$row['firstName'];
 		$last=$row['lastName'];
@@ -85,7 +85,7 @@ if(isset($_POST['login'])){
 					$query="SELECT * FROM acadsosd.studentmanager WHERE idnumber='".$idnumber."';";
 					$result2=mysqli_query($dbc, $query);
 					$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-					$managerStatus=$row['managerCode'];
+					$managerStatus=$row['usertypeID'];
 					if($managerStatus==1){
 						//if activated
 						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerHome.php");
@@ -94,10 +94,10 @@ if(isset($_POST['login'])){
 					$message="Your account has been deactivated.";
 					}
 					else if($managerStatus==3){
-					$message="Please activate your account first.";
+					$message="Your account has not been activated yet";
 					}
 					else{
-						$message="Please contact your administrator";
+						$message=$managerStatus;
 					}
 					echo '<div class="alert alert-danger">
                         '.$message.'
