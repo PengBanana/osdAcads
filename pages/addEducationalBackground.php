@@ -140,6 +140,37 @@ else if(isset($_POST['addEducationalBackground'])){
 		$count++;	
 		}
 	}
+
+    $tourname=$_POST['tournament'];
+    $tourdate=$_POST['tourDate'];
+    $tourvenue=$_POST['venue'];
+    $tourevent=$_POST['eventName'];
+    $tourstanding=$_POST['standing'];
+    $tourtype=$_POST['type'];
+    $count=0;
+    while(isset($tourname[$count])){
+        $a=$tourname[$count];
+        $b=$tourdate[$count];
+        $c=$tourvenue[$count];
+        $e=$tourevent[$count];
+        $d=$tourstanding[$count];
+        $f=$tourtype[$count];
+        $part1="INSERT INTO `acadsosd`.`achievmenthistory` (`accomplishmentName`, `accomplishmentDate`, `accomplishmentEvent`,`accomplismentStanding`,`accomplismentType`, `studentIDNumber`";
+        $part2="VALUES ('".$a."', '".$b."', ".$e.",".$d." '".$id."';";
+        if(isset($c)){
+            $part1.=", accomplishmentVenue";
+            $part2.=", ".$c;
+        }
+        $part1.=")";
+        $part2.=")";
+        $sql=$part1." ".$part2;
+        if(mysqli_query($dbc, $sql)){
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");   
+        }
+        else{
+        $count++;   
+        }
+    }
 }
 else{
 	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
@@ -404,11 +435,12 @@ else{
                                     <table class="table table-striped table-bordered table-hover" id="achievementsTable">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">Tournament</th>
+                                                <th class="text-center">Tournament Name</th>
                                                 <th class="text-center">Date</th>
                                                 <th class="text-center">Venue</th>
                                                 <th class="text-center">Event</th>
                                                 <th class="text-center">Standing</th>
+                                                <th class="text-center">Type</th>
                                                 <th class="text-center">Actions</th>
                                             </tr>
                                           </thead>
@@ -419,6 +451,7 @@ else{
                                             <td class="text-center"><input type="text" class="form-control inputs" name="venue[]"></td>
                                             <td class="text-center"><input type="text" class="form-control inputs" name="eventName[]"></td>
                                             <td class="text-center"><input type="text" class="form-control inputs" name="standing[]"></td>
+                                            <td class="text-center"><input type="text" class="form-control inputs" name="type[]"></td>
                                             <td class="text-center bg-success-light" style="border-color:#999999">
                                               <div class="btn-group" style="vertical-align: middle;">
                                               <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input3" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
