@@ -80,7 +80,7 @@ if(isset($_POST['login'])){
 					//admin
 					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/adminHome.php");
 				}
-				else if(usertype=='3'){
+				else if($usertype=='3'){
 					//studentManager
 					$query="SELECT * FROM acadsosd.studentmanager WHERE idnumber='".$idnumber."';";
 					$result2=mysqli_query($dbc, $query);
