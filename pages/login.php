@@ -60,7 +60,7 @@ if(isset($_POST['login'])){
 	$check=mysqli_num_rows($result);
 	if($check>0){
 		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-		$idnumberin=$row['username'];
+		//$username=$row['idnumber'];
 		$password=$row['password'];
 		$first=$row['firstName'];
 		$last=$row['lastName'];
