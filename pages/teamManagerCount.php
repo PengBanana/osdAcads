@@ -6,6 +6,6 @@ $result=mysqli_query($dbc,$query);
 while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 	$a=$row['sportCode'];
 	$b=$row['teamName'];
-	$c$row['NOM'];
+	$c=$row['NOM'];
 }
 ?>
