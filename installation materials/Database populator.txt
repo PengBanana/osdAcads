@@ -75,3 +75,5 @@ INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `colleg
 INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('ST', 'Software Technology', 'CCS');
 INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('CT', 'Computer Technology', 'CCS');
 INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BS-IT', 'Information Technology', 'IT');
+
+INSERT INTO `acadsosd`.`managerstatus` (`managerCode`, `statusName`) VALUES ('4', 'Rejected');

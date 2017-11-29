@@ -209,12 +209,22 @@ session_start();
 					$query="UPDATE `acadsosd`.`studentmanager` SET `teamCode`='".$teamCode."', `managerCode`='1' WHERE `idnumber`='".$idnumber."';";
 					mysqli_query($dbc,$query);
 				   echo'<div class="alert alert-success">
-											'.$query.'
+					An email has been sent to '.$to.'
 					</div>';
 					
 				} else {
-				   echo "ERROR";
+				   echo '<div class="alert alert-danger">
+					There was a problem sending the mail
+					</div>';
 				}
+				}
+				else if(isset($_POST['rejectAccount'])){
+					$rejectID=$_POST['rejectID'];
+					$sql="UPDATE `acadsosd`.`studentmanager` SET `managerCode`='4' WHERE `idnumber`='".$rejectID."';";
+					mysqli_query($dbc,$sql);
+					echo '<div class="alert alert-danger">
+					The acitvation request has been declined
+					</div>';
 				}
 				$query="SELECT CONCAT(user.lastName,', ', user.firstName,' ', user.middleName) AS fullname, user.idnumber, studentmanager.email FROM user JOIN studentmanager ON user.idnumber=studentmanager.idnumber WHERE studentmanager.managerCode='3';";
 				$result=mysqli_query($dbc, $query);
@@ -250,7 +260,7 @@ session_start();
 									$email=$row['email'];
 									$fullname=$row['fullname'];
 									echo '<tr class="odd gradeX"><td class="text-center" ><form action="athleteProfile" method="post"><input type="hidden" value="'.$idnumber.'"><input type="button" value="'.$fullname.'"></form></td><td class="text-center">
-									<button type="button" class="btn btn-default" data-toggle="modal" data-target="#'.$idnumber.'">View Request</button>  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalDecline">Decline</button></td></tr>';
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#'.$idnumber.'">View Request</button>  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDecline">Decline</button></td></tr>';
 									
 								
 								//<!-- Modal Approve-->
@@ -290,7 +300,7 @@ session_start();
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-primary" name="activateAccount" value="submit">
+                                <input type="submit" class="btn btn-success" name="activateAccount" value="ACCEPT">
 								</form> 
                                 </div>
                                 </div>
@@ -314,8 +324,11 @@ session_start();
                                                     <p>Are you sure you want to decline this request?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <form action="activationRequest.php" method="post">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												<input type="hidden" value="'.$idnumber.'" name="rejectID">
+												<input type="submit" class="btn btn-warning" name="rejectAccount" value="REJECT">
+												</form>
                                             </div>
                                         </div>
                                         <!-- /.modal-content -->
