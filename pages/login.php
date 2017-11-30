@@ -49,53 +49,71 @@
                     </div>
                     <div class="panel-body">
                         <form action="login.php" method="post">
-						<?php
+<?php
 session_start();
 if(isset($_POST['login'])){
+	//if login was initiated
 	require_once('../osd_connect.php');
+	//get login data
 	$idnumberin=$_POST['username'];
 	$passwordin=$_POST['password'];
 	$query="SELECT * FROM acadsosd.user WHERE idnumber='".$idnumberin."';";
 	$result=mysqli_query($dbc, $query);
 	$check=mysqli_num_rows($result);
+	//login checking
 	if($check>0){
+		//if such user exist.
 		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 		$password=$row['password'];
 		$first=$row['firstName'];
 		$last=$row['lastName'];
-		$name="".$first." ".$last.".";
-		$_SESSION["name"]=$name;
-		$_SESSION["idnumber"]=$idnumberin;
+		$name="".$first." ".$last."";
 		$usertype=$row['usertypeID'];
-
-		
-			//checking
+			//checkings
 			if($passwordin==$password){
-				//correct password
+				//password checked
 				if($usertype=='1'){
+					$_SESSION["name"]=$name;
+					$_SESSION["idnumber"]=$idnumberin;
+					$_SESSION["usertype"]=$usertype;
 					//godAccount
+					//no homepage yet
 				}
 				else if($usertype=='2'){
-					//admin
+					//redirects to admin homepage
+					$_SESSION["name"]=$name;
+					$_SESSION["idnumber"]=$idnumberin;
+					$_SESSION["typex"]=$usertype;
 					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/adminHome.php");
 				}
 				else if($usertype=='3'){
-					//studentManager
+					//the account is student manager
 					$query="SELECT * FROM acadsosd.studentManager WHERE idnumber=".$idnumberin.";";
 					$result2=mysqli_query($dbc, $query);
 					$row=mysqli_fetch_array($result2,MYSQLI_ASSOC);
 					$managerStatus=$row['managerCode'];
+					//account status checking
 					if($managerStatus==1){
-						//if activated
-					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerHome.php");
+						//if account is activate and password was correct
+						$_SESSION["name"]=$name;
+						$_SESSION["idnumber"]=$idnumberin;
+						$_SESSION["typex"]=$usertype;
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerHome.php");
 					}
 					else if($managerStatus==2){
-					$message="Your account has been deactivated.";
+						//account has been deactivated
+						$message="Your account has been deactivated.";
 					}
 					else if($managerStatus==3){
-					$message="Your account has not been activated yet";
+						//account is not yet activated
+						$message="Your account has not been activated yet";
+					}
+					else if($managerStatus==4){
+						//account was registered but rejected by the admin
+						$message="Your account request was not accepted by the admin. You may ask the admin regarding the details";
 					}
 					else{
+						//
 						$message="Login Error: Please contact your System Developer";
 					}
 					echo '<div class="alert alert-danger">
@@ -106,14 +124,14 @@ if(isset($_POST['login'])){
 			else{
 				//wrong password
 				echo '<div class="alert alert-danger">
-                        The password you entered incorrect.
-				</div>';
+                        Invalid username or password.
+					</div>';
 			}
 	}
 	else{
 		//no such user found
 		echo '<div class="alert alert-danger">
-                        The username you entered is incorrect
+        Invalid username or password.
         </div>';
 	}
 }

@@ -1,6 +1,23 @@
-<?
+<?php
 session_start();
-?>
+$idx=$_SESSION['idnumber'];
+$typex=$_SESSION["typex"];
+if($idx===0){
+header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+if(empty($idx)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+	$name="wth";
+}
+else if($typex>2||$typex<1){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+}
+else if(empty($typex)){
+}
+else{
+	$name=$_SESSION["name"];
+}
+echo '
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +52,7 @@ session_start();
 	<link href="custom.css" rel="stylesheet">
 		
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -56,7 +73,7 @@ session_start();
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index.html">
-                <img src="Images/OSD-logo2.png" height="35px" width='auto' />
+                <img src="Images/OSD-logo2.png" height="35px" width="auto" />
                 </a>
             </div>
             
@@ -72,7 +89,7 @@ session_start();
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Grace Alhambra</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>'.$name.'</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
@@ -180,16 +197,12 @@ session_start();
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Account Activation Requests</h1>
                 <div>
-				
-                <!-- /.col-lg-12 -->
-            </div>
-			<?php
+            </div>';
 				require_once('../osd_connect.php');
 				if(isset($_POST['activateAccount'])){
 				$idnumber=$_POST['idnumber'];
@@ -226,10 +239,10 @@ session_start();
 					The acitvation request has been declined
 					</div>';
 				}
+				
 				$query="SELECT CONCAT(user.lastName,', ', user.firstName,' ', user.middleName) AS fullname, user.idnumber, studentmanager.email FROM user JOIN studentmanager ON user.idnumber=studentmanager.idnumber WHERE studentmanager.managerCode='3';";
 				$result=mysqli_query($dbc, $query);
 				?>
-            <!-- /.row -->
             <div class="row">
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8">
@@ -381,7 +394,5 @@ session_start();
         });
     });
     </script>
-
 </body>
-
 </html>
