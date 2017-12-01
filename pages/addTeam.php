@@ -1,6 +1,24 @@
 <?php
-session_start();
 //INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `teamSport`) VALUES ('BBM', 'Green Archers', 'Basketball Men');
+session_start();
+$idx=$_SESSION['idnumber'];
+$typex=$_SESSION["typex"];
+if($idx===0){
+header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+if(empty($idx)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+	$name="wth";
+}
+else if($typex>2||$typex<1){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+}
+else if(empty($typex)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+else{
+	$name=$_SESSION["name"];
+}
 if(isset($_POST['submitTeam'])){
 	require_once('../osd_connect.php');
 	$sportCode=$_POST['sportCode'];

@@ -1,4 +1,5 @@
 <?php
+require_once('../osd_connect.php');
 if(isset($_POST['registerAthlete'])){
 	//for deletion
 	//not required in form
@@ -33,39 +34,39 @@ if(isset($_POST['registerAthlete'])){
 	$part2="VALUES ('".$idnum."', '".$lastname."', '".$firstname."', '".$birthday."', '".$weight."', '".$height."', '".$bloodtype."', '".$nationality."', '".$email."', '".$email."', '".$emergencyname."', '".$emergencynumber."', '".$emergencyrelationship."', '".$sport."', '3', 'REG'";
 	if(isset($middlename)){
 		$part1.=", studentMiddleName";
-		$part2.=", ".$middlename;
+		$part2.=", '".$middlename."'";
 	}
 	if(isset($religion)){
 		$part1.=", studentReligion";
-		$part2.=", ".$religion;
+		$part2.=", '".$religion."'";
 	}
 	if(isset($alternateemail)){
 		$part1.=", studentAlternateEmail";
-		$part2.=", ".$alternateemail;
+		$part2.=", '".$alternateemail."'";
 	}
 	if(isset($address2)){
 		$part1.=", studentAddressLine2";
-		$part2.=", ".$address2;
+		$part2.=", '".$address2."'";
 	}
 	if(isset($fathername)){
 		$part1.=", studentFatherFullName";
-		$part2.=", ".$fathername;
+		$part2.=", '".$fathername."'";
 	}
 	if(isset($fatheroccupation)){
 		$part1.=", studentFatherOccupation";
-		$part2.=", ".$fatheroccupation;
+		$part2.=", '".$fatheroccupation."'";
 	}
 	if(isset($mothername)){
 		$part1.=", studentMotherFullName";
-		$part2.=", ".$mothername;
+		$part2.=", '".$mothername."'";
 	}
 	if(isset($motheroccupation)){
 		$part1.=", studentMotherOccupation";
-		$part2.=", ".$motheroccupation;
+		$part2.=", '".$motheroccupation."'";
 	}
 	$part1.=")";
-	$part2.=")";
-	$sql=$part1." ".$part2;
+	$part2.=");";
+	$sql1=$part1." ".$part2;
 	$sql2="INSERT INTO `acadsosd`.`plannedenrollmentchart` (`degreeTable_degreeCode`, `termStarted`, `studentIDNumber`) VALUES ('".$degree."', 'T1', '".$idnum."');
 ";
 }
@@ -73,11 +74,18 @@ else if(isset($_POST['addEducationalBackground'])){
 	//insert INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `yearStarted`, `yearEnded`, `studentIDNumber`) VALUES ('level', 'name', 2017, 2018, '113');
 	$sql1=$_POST['sql1'];
 	$sql2=$_POST['sql2'];
-	if(mysqli_query($dbc, $sql1)){
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
+
+	if(!mysqli_query($dbc, $sql1)){
+		echo '<div class="alert alert-danger">ERROR:
+        '.$sql1.'
+        </div>';
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");	
 	}
-	if(mysqli_query($dbc, $sql2)){
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
+	if(!mysqli_query($dbc, $sql2)){
+		echo '<div class="alert alert-danger">ERROR:
+        '.$sql2.'
+        </div>';
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");	
 	}
 	$id=$_POST['id'];
 	$schoolname=$_POST['name'];
@@ -92,19 +100,22 @@ else if(isset($_POST['addEducationalBackground'])){
 		$c=$schoolyear[$count];
 		$d=$schoolLevel[$count];
 		$part1="INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `schoolYear`, `studentIDNumber`";
-		$part2="VALUES ('".$d."', '".$a."', ".$c.", '".$id."';";
+		$part2="VALUES ('".$d."', '".$a."', '".$c."', '".$id."'";
 		if(isset($b)){
 			$part1.=", schoolAddress";
-			$part2.=", ".$b;
+			$part2.=", '".$b."'";
 		}
 		$part1.=")";
-		$part2.=")";
+		$part2.=");";
 		$sql=$part1." ".$part2;
+	
 		if(mysqli_query($dbc, $sql)){
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
+		$count++;	
+		
+			
 		}
 		else{
-		$count++;	
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 		}
 	}
 	
@@ -121,23 +132,26 @@ else if(isset($_POST['addEducationalBackground'])){
 		$e=$schooldegree[$count];
 		$d=$schoollevel[$count];
 		$part1="INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `schoolYear`, `studentIDNumber`";
-		$part2="VALUES ('".$d."', '".$a."', ".$c.", '".$id."';";
+		$part2="VALUES ('".$d."', '".$a."', '".$c."', '".$id."'";
 		if(isset($b)){
 			$part1.=", schoolAddress";
-			$part2.=", ".$b;
+			$part2.=", '".$b."'";
 		}
 		if(isset($e)){
 			$part1.=", degree";
-			$part2.=", ".$e;
+			$part2.=", '".$e.".'";
 		}
 		$part1.=")";
-		$part2.=")";
+		$part2.=");";
 		$sql=$part1." ".$part2;
+		
 		if(mysqli_query($dbc, $sql)){
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");	
+		$count++;
 		}
 		else{
-		$count++;	
+		echo '<div class="alert alert-danger"> ERROR:
+        '.$sql.'
+        </div>';
 		}
 	}
 
@@ -156,24 +170,25 @@ else if(isset($_POST['addEducationalBackground'])){
         $d=$tourstanding[$count];
         $f=$tourtype[$count];
         $part1="INSERT INTO `acadsosd`.`achievmenthistory` (`accomplishmentName`, `accomplishmentDate`, `accomplishmentEvent`,`accomplismentStanding`,`accomplismentType`, `studentIDNumber`";
-        $part2="VALUES ('".$a."', '".$b."', ".$e.",".$d." '".$id."';";
+        $part2="VALUES ('".$a."', '".$b."', '".$e."','".$d."', '".$id."'";
         if(isset($c)){
             $part1.=", accomplishmentVenue";
-            $part2.=", ".$c;
+            $part2.=", ".$c."'";
         }
         $part1.=")";
-        $part2.=")";
+        $part2.=");";
         $sql=$part1." ".$part2;
-        if(mysqli_query($dbc, $sql)){
-        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/Dberror.php");   
+		
+        if(!mysqli_query($dbc, $sql)){
+		$count++;  
         }
         else{
-        $count++;   
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
         }
     }
 }
 else{
-	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 }
 ?>
 <!DOCTYPE html>
@@ -390,7 +405,7 @@ else{
 																					 </select> </td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="name[]"></td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="address[]"></td>
-                                          <td class="text-center" colspan="2"><input type="text" class="form-control inputs" name="schoolYear[]"></td>
+                                          <td class="text-center" colspan="2"><input type="number" class="form-control inputs" name="schoolyear[]"></td>
                                            <td class="text-center bg-success-light" style="border-color:#999999">
                                               <div class="btn-group" style="vertical-align: middle;">
                                                   <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" type="button" style="background:none;border:none" id="add_input"><i class="glyphicon glyphicon-plus"></i></button></span>
@@ -419,7 +434,7 @@ else{
                                         <td class="text-center"><input type="text" class="form-control inputs" name="collegedegree[]"></td>
                                         <td class="text-center"><input type="text" class="form-control inputs" name="university[]"></td>
                                         <td class="text-center"><input type="text" class="form-control inputs" name="univAddress[]"></td>
-                                        <td class="text-center" colspan="2"><input type="text" class="form-control inputs" name="academicYear[]"></td>
+                                        <td class="text-center" colspan="2"><input type="number" class="form-control inputs" name="academicYear[]"></td>
                                         <td class="text-center bg-success-light" style="border-color:#999999">
                                         <div class="btn-group" style="vertical-align: middle;">
 										<span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default"  type="button" style="background:none;border:none" id="add_input2"><i class="glyphicon glyphicon-plus"></i></button></span>
@@ -469,7 +484,7 @@ else{
                                   <div class="col-lg-2">
 								<input type="hidden" name="sql1" value=<?php echo '"'.$sql1.'"'; ?> />
 								<input type="hidden" name="sql2" value=<?php echo '"'.$sql2.'"'; ?> />
-								<input type="hidden" name="id" value=<?php echo '"'.$$idnum.'"'; ?> />
+								<input type="hidden" name="id" value="<?php echo $idnum ?>" />
                                 <input type="submit" name="addEducationalBackground" />
                                 <button class="btn btn-default" id="submit" >Skip Step</button>
                               </div>

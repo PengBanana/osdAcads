@@ -82,13 +82,10 @@
 					else{
 						$name=$_SESSION["name"];
 					}
-					//get form data
-					//create sql statement
 					
                        echo'<li><a href="#"><i class="fa fa-user fa-fw"></i> '.$name.'</a>
                         </li>'; 
-						?>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
+                        echo '<li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -230,27 +227,19 @@
                             <input type="text" class="form-control inputs" name="degree" />
                         </div>
                         <div class="form-group">
-                            <label>Sport: </label>
-                            <select class="form-control inputs" name="sport">
-                                <option>Choose team</option>
-                                <option>Animo Squad</option>
-                                <option>Badminton-</option>
-                                <option>Basketball Men</option>
-                                <option>Basketball Women</option>
-                                <option>Baseball</option>
-                                <option>Chess</option>
-                                <option>Football Men</option>
-                                <option>Football Women</option>
-                                <option>Fencing</option>
-                                <option>Judo</option>
-                                <option>Lawn Tennis</option>
-                                <option>Swimming</option>
-                                <option>Table Tennis</option>
-                                <option>Taekwondo</option>
-                                <option>Track and Field</option>
-                                <option>Softball</option>
-                                <option>Volleyball</option>
-                            </select>
+						 <label>Sport: </label>
+                            <select class="form-control inputs" name="sport">';
+						require_once('../osd_connect.php');
+						$query="SELECT * FROM acadsosd.team;";
+						$result=mysqli_query($dbc, $query);
+                        while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+							$sportCode=$row['sportCode'];
+							$sport=$row['sport'];
+							$teamName=$row['teamName'];
+							echo '<option value="'.$sportCode.'">'.$teamName.' : '.$sport.'</option>';
+						}
+							?>
+							</select>
                         </div>
 
                         <div class="form-group">
