@@ -38,6 +38,10 @@ body {
     width: 70px;
     height: 35px;
 }
+i {
+  font-family: sans-serif!important;
+  font-size: 14px;
+}
 .statusSuperCritical{
     background-color:#f26c65 ;
 }

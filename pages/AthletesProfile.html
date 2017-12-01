@@ -560,28 +560,146 @@
 
 
                         <div id="pte" class="tabcontent">
-                          <h3>Actual Term Enrollment </h3>
+                          <div class="row">
+                              <div class="col-lg-8" >  <h3>Actual Term Enrollment </h3></div>
+                              <div class="col-lg-4"style="padding-top: 50px;" >
+
+                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#writeReport">
+                                    <i class="glyphicon glyphicon-plus">Add Academic Performance</i></button>
+
+                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#addCourse" >
+                                  <i class="glyphicon glyphicon-plus"> Add Course</i>
+                              </button></div>
+
 
                           <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper" >
+
+                              </div>
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th class="text-center">Course </th>
+                                            <th class="text-center">Course Name</th>
                                             <th class="text-center">Unit</th>
                                             <th class="text-center">Grade</th>
-                                            <th class="text-center"></th>
+                                            <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="odd gradeX">
                                             <td class="text-center"> KASPIL2</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> </td>
+                                            <td class="text-center ">hi  alvin</td>
+                                            <td class="text-center"> 3</td>
+                                            <td class="text-center">4  </td>
                                             <td class="text-center">
-                                              <button class="btn btn-default"><a href="#" class="glyphicon glyphicon-pencil" style="color: black;"></a> Edit</button>
+                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#remove">
+                                                  Remove
+                                              </button>
+                                              <!-- Modal -->
+                                              <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                              <h4 class="modal-title" id="myModalLabel">Add Course</h4>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                          <form>
+                                                              <div class="form-group">
+                                                                <label style="float:left"> Course code</label>
+                                                                <input class="form-control" type="text">
 
+                                                              </div>
+
+                                                          </form>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-primary">Save changes</button>
+                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                          </div>
+                                                      </div>
+                                                      <!-- /.modal-content -->
+                                                  </div>
+                                                  <!-- /.modal-dialog -->
+                                              </div>
+                                              <!-- /.modal -->
+
+
+                                              <div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                              <h4 class="modal-title" id="myModalLabel">Remove Course</h4>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                          <form>
+                                                              <div class="form-group">
+                                                                <p>Do you want to delete this course?</p>
+
+                                                              </div>
+                                                          </form>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-primary">Confirm</button>
+                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                          </div>
+                                                      </div>
+                                                      <!-- /.modal-content -->
+                                                  </div>
+                                                  <!-- /.modal-dialog -->
+                                              </div>
+                                              <!-- /.modal -->
+
+
+                                              <!-- Modal Add Apr -->
+                                              <div class="modal fade" id="writeReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                              <h4 class="modal-title" id="myModalLabel">Add Course</h4>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                          <form>
+                                                              <div class="form-group">
+                                                                <label style="float:left"> Choose type of Academic Report </label>
+                                                                <div class="form-group">
+                                                                    <select class="form-control">
+                                                                        <option>Midterm Performance</option>
+                                                                        <option>FinalS Performance</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <label style="float:left"> Course </label>
+                                                                <div class="form-group">
+                                                                    <select class="form-control">
+                                                                        <option>enrolled courses here</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                      <label style="float:left"> Write Report </label>
+                                                                      <textarea class="form-control" rows="4"></textarea>
+                                                                </div>
+
+
+
+                                                              </div>
+
+                                                          </form>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-primary" >Confirm</button>
+                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                          </div>
+                                                      </div>
+                                                      <!-- /.modal-content -->
+                                                  </div>
+                                                  <!-- /.modal-dialog -->
+                                              </div>
+                                              <!-- /.modal -->
                                             </td>
 
 
@@ -614,7 +732,7 @@
                                     </thead>
                                     <tbody>
                                         <tr class="odd gradeX">
-                                            <td class="text-center" ><a href="Athlete's Profile.html""><u style="color: black;">2014-2015</u></a></td>
+                                            <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">2014-2015</u></a></td>
                                             <td class="text-center"> T2</td>
                                             <td class="text-center ">INTPRG1</td>
                                             <td class="text-center ">3</td>
@@ -634,21 +752,7 @@
 
             </div>
 
-           <div class="row">
-           <div class="col-lg-1"></div>
-               <div class="col-lg-11" style="padding-left: 680px;">
-                    <div>
-                       <button" class="btn btn-default" onclick="myFunction()">Save</button>
 
-                            <script>
-                            function myFunction() {
-                                alert(" Course Added!");
-                            }
-                            </script>
-
-                    </div>
-               </div>
-           </div>
 
 
 
