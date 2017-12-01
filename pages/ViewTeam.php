@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+session_start();
+require_once('../osd_connect.php');
+?>
 <html lang="en">
 
 <head>
@@ -204,16 +208,26 @@
 
                                         </tr>
                                     </thead>
-                                    <tbody>
+
+                                    <?php
+                                    $getDetails = "SELECT T.SPORTCODE, T.TEAMNAME, T.SPORT, COUNT(SA.TEAMCODE) AS NUMBEROFSTUDENTS
+                                                     FROM TEAM T JOIN STUDENTATHLETEPROFILE SA ON T.SPORTCODE = SA.TEAMCODE
+                                                 GROUP BY  1;";
+                                    $result=mysqli_query($dbc,$getDetails);
+
+                                    while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                                        $sportcode=$row['SPORTCODE'];
+                                        echo'
                                         <tr class="odd gradeX">
-                                            <td class="text-center" ><a href="viewTeamAthletes.php"><u style="color: black;">XASD</u></a></td>
-                                            <td class="text-center"> Animo Squad</td>
-                                            <td class="text-center"> Cheerdance</td>
-                                            <td class="text-center ">30</td>
-                                        </tr>
+                                             <td><a href="viewTeamAthletes.php?value='.$sportcode.'"><div align="center">'.$sportcode.'</div></td>
+                                             <td><div align="center">'.$row['TEAMNAME'].'</div></td>
+                                             <td><div align="center">'.$row['SPORT'].'</div></td>
+                                             <td><div align="center">'.$row['NUMBEROFSTUDENTS'].'</div></td>
+                                        </tr>';
 
-
-                                    </tbody>
+                                    }
+                                    
+                                    ?>
                                 </table>
 
 
