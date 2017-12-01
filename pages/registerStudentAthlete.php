@@ -238,7 +238,7 @@
 							$teamName=$row['teamName'];
 							echo '<option value="'.$sportCode.'">'.$teamName.' : '.$sport.'</option>';
 						}
-							?>
+							echo'
 							</select>
                         </div>
 
@@ -249,10 +249,19 @@
 
                         <div class="form-group">
                             <label>Nationality: </label>
-                            <input type="text" class="form-control inputs" name="nationality" required />
-                        </div>
+							<select class="form-control inputs" name="nationality" required>';
+						$query="SELECT * FROM acadsosd.nationality;";
+						$result=mysqli_query($dbc, $query);
+                        while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+							$nationality=$row['nationality'];
+							echo '<option value="'.$nationality.'">'.$nationality.'</option>';
+						}
+						
+				// <input type="text" class="form-control inputs" name="nationality" required />
+				?>
+				</select>
+				  </div>
                 </div>
-
                 <div class="col-lg-4">
                     <div class="form-group">
                             <label>Religion: </label>
