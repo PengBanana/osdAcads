@@ -219,7 +219,9 @@ require_once('../osd_connect.php');
                                         $sportcode=$row['SPORTCODE'];
                                         echo'
                                         <tr class="odd gradeX">
-                                             <td><a href="viewTeamAthletes.php?value='.$sportcode.'"><div align="center">'.$sportcode.'</div></td>
+                                             <td><form action="viewTeamAthletes.php" method="post">
+												<div align="center"><input type="submit" value="'.$sportcode.'" class="btn btn-link" name="teamCode"></div>
+												</form></td>
                                              <td><div align="center">'.$row['TEAMNAME'].'</div></td>
                                              <td><div align="center">'.$row['SPORT'].'</div></td>
                                              <td><div align="center">'.$row['NUMBEROFSTUDENTS'].'</div></td>

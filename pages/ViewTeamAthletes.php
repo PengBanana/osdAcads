@@ -1,3 +1,25 @@
+<?php
+session_start();
+require_once('../osd_connect.php');
+					$idx=$_SESSION['idnumber'];
+					$typex=$_SESSION["typex"];
+					if($idx===0){
+					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+					}
+					if(empty($idx)){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+						$name="wth";
+					}
+					else if($typex>2||$typex<1){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+					}
+					else if(empty($typex)){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+					}
+					else{
+						$name=$_SESSION["name"];
+					}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -61,7 +83,7 @@
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i> Carlos Fontanilla</a>
+                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i><?php $name ?></a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
@@ -189,34 +211,35 @@
                 </div>
                 <div class="col-lg-5">
                     <form>
-
-                        <div class="form-group">
+					<?php
+					$teamCode=$_POST['teamCode'];
+					$query="SELECT * FROM acadsosd.team WHERE sportCode='".$teamCode."';";
+					$result=mysqli_query($dbc,$query);
+					$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+					$teamName=$row['teamName'];
+					$sport=$row['sport'];
+                    echo'   <div class="form-group">
                             <div>Team Name:
-                            <label> name of team </label>
+                            <label>'.$teamName.'</label>
                             </div>
                             <div>Team Code:
-                            <label> xasd </label>
+                            <label>'.$teamCode.'</label>
                             </div>
                             <div>Sport:
-                            <label> tukan </label>
+                            <label>'.$sport.'</label>
                             </div>
 
                         </div>
 
 
+					';
+                    
+		
 
-                    </form>
-
-
-
+				?>
+				</form>
                 </div>
                  <div class="col-lg-3"></div>
-                <div class="col-lg-2">
-                    <div>
-                      <label> Team Status: </label>
-                    </div>
-                    <div style="color: red;"> <label>SUPER CRITICAL</label></div>
-                    </div>
 
                  <div class="col-lg-7"></div>
 
@@ -240,7 +263,7 @@
                               <div class="col-lg-8">
                                   <div class="panel panel-default">
                                       <div class="panel-heading">
-                                          Animo Squad
+                                          <?php echo $teamName; ?>
                                       </div>
                                       <!-- /.panel-heading -->
                                       <div class="panel-body">
@@ -257,11 +280,40 @@
                                                       </tr>
                                                   </thead>
                                                   <tbody>
-                                                      <tr class="odd gradeX">
+												  <?php
+												  //SELECT concat(s.studentFirstName, " ", s.studentLastName) AS studentname, p.degreeTable_degreeCode AS degreeCode, de.college_collegeCode AS collegeCode, a.statusName FROM acadsosd.studentathleteprofile s JOIN academicclassification a ON s.statusID = a.statusID JOIN plannedenrollmentchart p ON s.studentIDNumber = p.studentIDNumber JOIN degree d ON p.degreeTable_degreeCode = d.degreeCode JOIN department de ON d.departmentCode = de.departmentCode WHERE s.teamCode='XASDR' AND s.statusID<'4';
+												  $query="SELECT s.studentIDNumber, concat(s.studentFirstName, \" \", s.studentLastName) AS studentname, p.degreeTable_degreeCode AS degreeCode, de.college_collegeCode AS collegeCode, a.statusName, a.statusID FROM acadsosd.studentathleteprofile s JOIN academicclassification a ON s.statusID = a.statusID JOIN plannedenrollmentchart p ON s.studentIDNumber = p.studentIDNumber JOIN degree d ON p.degreeTable_degreeCode = d.degreeCode JOIN department de ON d.departmentCode = de.departmentCode WHERE s.teamCode='".$teamCode."' AND s.statusID<'4';";
+												  $result=mysqli_query($dbc,$query);
+												  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+													  $studentID=$row['studentIDNumber'];
+													  $studentname=$row['studentname'];
+													  $degreeCode=$row['degreeCode'];
+													  $collegeCode=$row['collegeCode'];
+													  $statusName=$row['statusName'];
+													  $color=$row['statusID'];
+													  if($color==1){
+														 $color="statusSuperCritical"; 
+													  }
+													  else if($color==2){
+														  $color="statusCritical"; 
+													  }
+													  else if($color==3){
+														  $color="statusNotCritical"; 
+													  }
+													  echo '<tr class="odd gradeX">
+                                                          <td class="text-center" ><form action="AthleteProfile.php" method="post"><input type="hidden" value="'.$studentID.'" name="athleteID"><input type=submit class="btn btn-link" value="'.$studentname.'" name="viewAthlete"></form></td>
+                                                          <td class="text-center">'.$collegeCode.'</td>
+                                                          <td class="text-center">'.$degreeCode.'</td>
+                                                          <td class="text-center '.$color.'">'.$statusName.'</td>
+													</tr>';
+												  }
+												  ?>
+                                                    <!--<tr class="odd gradeX">
                                                           <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">Ureta,Miguel</u></a></td>
                                                           <td class="text-center"> CCS</td>
                                                           <td class="text-center"> BS-IT</td>
                                                           <td class="text-center statusCritical">CRITICAL</td>
+													</tr>-->
                                                   </tbody>
                                               </table>
                                           </div>
