@@ -107,3 +107,33 @@ $(document).ready(function(){
  });
  });
 });
+
+
+
+$(document).ready(function(){
+ var i=1;
+ $('#add_input4').click(function(){
+ i++;
+ $('#pec').append('<tr id="row'+i+'"><td class="text-center"><input type="text" class="form-control inputs" name="course[]"></td>'
+                                      + '<td class="text-center"><input type="text" class="form-control inputs" name="unit[]"></td>'
+                                      + '<td class="text-center"><input type="text" class="form-control inputs" name="grade[]"></td>'
+                                      + '<td class="text-center"><button type="button" name="remove" id="'+
+                                    i+'" class="btn_remove"><i class="glyphicon glyphicon-trash"></i></button></td></tr>');
+ });
+ $(document).on('click', '.btn_remove', function(){
+ var button_id = $(this).attr("id");
+ $('#row'+button_id+'').remove();
+ });
+ $('#submit').click(function(){
+ $.ajax({
+ url:"insert.php",
+ method:"POST",
+ data:$('#add_me').serialize(),
+ success: function(data)
+ {
+ alert(data);
+ $('#add_me')[0].reset();
+ }
+ });
+ });
+});
