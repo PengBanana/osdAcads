@@ -13,6 +13,7 @@ else if($typex>2||$typex<1){
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
 }
 else if(empty($typex)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 }
 else{
 	$name=$_SESSION["name"];
