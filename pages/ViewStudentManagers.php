@@ -1,3 +1,24 @@
+<?php
+session_start();
+$idx=$_SESSION['idnumber'];
+$typex=$_SESSION["typex"];
+if($idx===0){
+header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+if(empty($idx)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+	$name="wth";
+}
+else if($typex>2||$typex<1){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+}
+else if(empty($typex)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+else{
+	$name=$_SESSION["name"];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -216,7 +237,7 @@
                                             echo'<tr class="odd gradeX">
                                             <td class="text-center" ><a href="Athlete\'s Profile.html"><u style="color: black;">'.$row['smName'].'</u></a></td>
                                             <td class="text-center">'.$row['teamName'].'</td>
-                                            <td class="text-center"> <button class="btn btn-default" style="background:none; border:none;"  data-toggle="modal" data-target="#myModalDeactivate"><a class="glyphicon glyphicon-trash" style="color: black;"></a> </button></td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDeactivate">Remove</button></td>
 
                                             </tr>';
                                         }
