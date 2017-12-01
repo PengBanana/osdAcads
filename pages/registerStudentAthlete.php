@@ -1,7 +1,4 @@
-<?php
-//get form data
-//create sql statement
-?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +8,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>HR</title>
+        <title>New Athlete</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -65,8 +62,32 @@
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Grace Alhambra</a>
-                        </li>
+					<?php
+					session_start();
+					$idx=$_SESSION['idnumber'];
+					$typex=$_SESSION["typex"];
+					if($idx===0){
+					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+					}
+					if(empty($idx)){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+						$name="wth";
+					}
+					else if($typex>2||$typex<1){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+					}
+					else if(empty($typex)){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+					}
+					else{
+						$name=$_SESSION["name"];
+					}
+					//get form data
+					//create sql statement
+					
+                       echo'<li><a href="#"><i class="fa fa-user fa-fw"></i> '.$name.'</a>
+                        </li>'; 
+						?>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
                         <li class="divider"></li>
