@@ -41,6 +41,13 @@
 
 </head>
 
+<?php 
+
+        require_once('../osd_connect.php');
+        $selectAllStudentManagers = "SELECT CONCAT(u.lastName,', ', u.firstName) as 'smName', t.teamName FROM user u JOIN studentmanager sm  ON u.idNumber = sm.idNumber JOIN team t ON sm.teamCode = t.sportCode";
+
+?>
+
 <body>
 
     <div id="wrapper">
@@ -202,12 +209,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">Ureta,Miguel</u></a></td>
-                                            <td class="text-center"> Animo Squad</td>
+                                        <?php 
+
+                                        $result = mysqli_query($dbc, $selectAllStudentManagers);
+                                        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                                            echo'<tr class="odd gradeX">
+                                            <td class="text-center" ><a href="Athlete\'s Profile.html"><u style="color: black;">'.$row['smName'].'</u></a></td>
+                                            <td class="text-center">'.$row['teamName'].'</td>
                                             <td class="text-center"> <button class="btn btn-default" style="background:none; border:none;"  data-toggle="modal" data-target="#myModalDeactivate"><a class="glyphicon glyphicon-trash" style="color: black;"></a> </button></td>
 
-                                        </tr>
+                                            </tr>';
+                                        }
+
+                                        ?>
+                                        
                                     </tbody>
                                 </table>
                                 <!-- Modal Decline-->
