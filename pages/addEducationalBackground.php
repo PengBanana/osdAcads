@@ -31,7 +31,7 @@ if(isset($_POST['registerAthlete'])){
 	//sql required for profile
 	$part1="INSERT INTO `acadsosd`.`studentathleteprofile` (`studentIDNumber`, `studentLastName`, `studentFirstName`, `studentDateOfBirth`, `studentWeight`, `studentHeight`, `studentBloodType`, `studentNationality`, `studentDlsuEmail`, `studentAddressLine1`, `studentEmergencyContact`, `EmergencyContactNumber`, `EmergencyContactRelationship`, `teamCode`, `statusID`, `reconsiderationReference_reconsiderationCode`";
 
-	$part2="VALUES ('".$idnum."', '".$lastname."', '".$firstname."', '".$birthday."', '".$weight."', '".$height."', '".$bloodtype."', '".$nationality."', '".$email."', '".$email."', '".$emergencyname."', '".$emergencynumber."', '".$emergencyrelationship."', '".$sport."', '3', 'REG'";
+	$part2="VALUES ('".$idnum."', '".$lastname."', '".$firstname."', '".$birthday."', '".$weight."', '".$height."', '".$bloodtype."', '".$nationality."', '".$email."', '".$address1."', '".$emergencyname."', '".$emergencynumber."', '".$emergencyrelationship."', '".$sport."', '3', 'REG'";
 	if(isset($middlename)){
 		$part1.=", studentMiddleName";
 		$part2.=", '".$middlename."'";
