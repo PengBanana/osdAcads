@@ -64,6 +64,7 @@
                     <ul class="dropdown-menu dropdown-user" >
 					<?php
 					session_start();
+					require_once('../osd_connect.php');
 					$idx=$_SESSION['idnumber'];
 					$typex=$_SESSION["typex"];
 					if($idx===0){
@@ -224,12 +225,20 @@
 
                         <div class="form-group">
                             <label>Degree Program:</label>
-                            <input type="text" class="form-control inputs" name="degree" />
-                        </div>
+							<select class="form-control inputs" name="degree">';
+							$query="SELECT * FROM acadsosd.degree;";
+							$result=mysqli_query($dbc, $query);
+							while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+								$degreeCode=$row['degreeCode'];
+								$degreeName=$row['degreeName'];
+								$departmentCode=$row['departmentCode'];
+								echo '<option value="'.$degreeCode.'">'.$degreeCode.' : '.$degreeName.'-'.$departmentCode.'</option>';
+							}
+                        echo '</select>
+						</div>
                         <div class="form-group">
 						 <label>Sport: </label>
                             <select class="form-control inputs" name="sport">';
-						require_once('../osd_connect.php');
 						$query="SELECT * FROM acadsosd.team;";
 						$result=mysqli_query($dbc, $query);
                         while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){

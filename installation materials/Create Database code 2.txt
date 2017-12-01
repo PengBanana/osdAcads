@@ -463,3 +463,10 @@ CREATE TABLE `acadsosd`.`nationality` (
   `idnationality` INT NOT NULL,
   `nationality` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idnationality`));
+
+  CREATE TABLE `acadsosd`.`classificationhistory` (
+  `classificationAI` INT NOT NULL AUTO_INCREMENT,
+  `dateClassified` DATE NOT NULL,
+  `athleteID` VARCHAR(45) NOT NULL,
+  `classificationID` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`classificationAI`));

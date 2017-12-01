@@ -87,13 +87,20 @@ else if(isset($_POST['addEducationalBackground'])){
         </div>';
 		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");	
 	}
+
 	$id=$_POST['id'];
 	$schoolname=$_POST['name'];
 	$schooladdress=$_POST['address'];
 	$schoolyear=$_POST['schoolyear'];
 	$schoolLevel=$_POST['schoollevel'];
 	$count=0;
-	
+	$sql="INSERT INTO `acadsosd`.`classificationistory` (`classificationID`, `athleteID`, `dateClassified`) VALUES ('3', '".$id."', curDate());";
+	if(!mysqli_query($dbc, $sql)){
+		echo '<div class="alert alert-danger">ERROR:
+        '.$sql2.'
+        </div>';
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");	
+	}
 	while(isset($schoolname[$count])){
 		$a=$schoolname[$count];
 		$b=$schooladdress[$count];
@@ -189,7 +196,7 @@ else if(isset($_POST['addEducationalBackground'])){
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/athleteRegisteredConfirmed.php");
 }
 else{
-	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 }
 ?>
 <!DOCTYPE html>
@@ -255,7 +262,13 @@ else{
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Grace Alhambra</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>
+						<?php
+						session_start();
+						$name=$_SESSION["name"];
+						echo $name;
+						?>
+						</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
