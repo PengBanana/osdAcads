@@ -228,9 +228,9 @@ $idx=$_SESSION['idnumber'];
                                     </thead>
 
                                     <?php
-                                    $getDetails = "SELECT T.SPORTCODE, T.TEAMNAME, T.SPORT, COUNT(SA.TEAMCODE) AS NUMBEROFSTUDENTS
-                                                     FROM TEAM T JOIN STUDENTATHLETEPROFILE SA ON T.SPORTCODE = SA.TEAMCODE
-                                                 GROUP BY  1;";
+                                    $getDetails = "SELECT T.SPORTCODE, T.TEAMNAME, T.SPORT, IFNULL(COUNT(SA.STUDENTIDNUMBER), 0) AS NUMBEROFSTUDENTS 
+                                                   FROM TEAM T LEFT JOIN STUDENTATHLETEPROFILE SA ON T.SPORTCODE = SA.TEAMCODE 
+                                                   GROUP BY T.SPORTCODE;";
                                     $result=mysqli_query($dbc,$getDetails);
 
                                     while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
