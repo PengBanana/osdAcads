@@ -382,21 +382,48 @@ require_once('../osd_connect.php');
                                     <div class="col-lg-1">
                                     </div>
                                     <div class="col-lg-8">
-                                        <form>
-                                            <div class="form-group" style="padding-top: 20px;">
+                                        
+										<?php
+										$query="SELECT CONCAT(u.firstName, \" \", u.lastName) AS managername, m.idnumber, m.email FROM acadsosd.studentmanager m JOIN user u ON m.idnumber=u.idnumber WHERE teamCode='XASDR';";
+										$result=mysqli_query($dbc,$query);
+										while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+											$managername=$row['managername'];
+											$managerID=$row['idnumber'];
+											$managerEmail=$row['email'];
+											echo'
+											<form>
+										   <div class="form-group" style="padding-top: 20px;">
+                                                <div>Name:
+                                                  <label>'.$managername.'</label>
+                                                </div>
+                                                <div>ID No:
+                                                  <label>'.$managerID.'</label>
+                                                </div>
+                                                <div>E-mail:
+                                                  <label>'.$managerEmail.'</label>
+                                                </div>
+                                            </div>
+											</form>
+											<br>
+											';
+										}
+										?>
+                                           <!-- 
+										   <form>
+										   <div class="form-group" style="padding-top: 20px;">
                                                 <div>Name:
                                                   <label> Modino, Christian Concepcion</label>
                                                 </div>
-                                                <br>
                                                 <div>ID No:
                                                   <label> 11443359</label>
                                                 </div>
-                                                <br>
                                                 <div>E-mail:
                                                   <label>*e-mail* </label>
                                                 </div>
-                                            </div>
+                                            </div> 
+											
                                         </form>
+											-->
                                       </div>
                                     </div>
                               </div>
