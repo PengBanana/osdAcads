@@ -79,13 +79,13 @@ else if(isset($_POST['addEducationalBackground'])){
 		echo '<div class="alert alert-danger">ERROR:
         '.$sql1.'
         </div>';
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");	
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 	if(!mysqli_query($dbc, $sql2)){
 		echo '<div class="alert alert-danger">ERROR:
         '.$sql2.'
         </div>';
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");	
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 
 	$id=$_POST['id'];
@@ -99,7 +99,7 @@ else if(isset($_POST['addEducationalBackground'])){
 		echo '<div class="alert alert-danger">ERROR:
         '.$sql2.'
         </div>';
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");	
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 	while(isset($schoolname[$count])){
 		$a=$schoolname[$count];
@@ -115,17 +115,17 @@ else if(isset($_POST['addEducationalBackground'])){
 		$part1.=")";
 		$part2.=");";
 		$sql=$part1." ".$part2;
-	
+
 		if(mysqli_query($dbc, $sql)){
-		$count++;	
-		
-			
+		$count++;
+
+
 		}
 		else{
 		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 		}
 	}
-	
+
 	$schoollevel=$_POST['collegelevel'];
 	$schoolname=$_POST['university'];
 	$schooladdress=$_POST['univAddress'];
@@ -151,7 +151,7 @@ else if(isset($_POST['addEducationalBackground'])){
 		$part1.=")";
 		$part2.=");";
 		$sql=$part1." ".$part2;
-		
+
 		if(mysqli_query($dbc, $sql)){
 		$count++;
 		}
@@ -185,9 +185,9 @@ else if(isset($_POST['addEducationalBackground'])){
         $part1.=")";
         $part2.=");";
         $sql=$part1." ".$part2;
-		
+
         if(!mysqli_query($dbc, $sql)){
-		$count++;  
+		$count++;
         }
         else{
 		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
@@ -499,7 +499,7 @@ else{
 								<input type="hidden" name="sql1" value=<?php echo '"'.$sql1.'"'; ?> />
 								<input type="hidden" name="sql2" value=<?php echo '"'.$sql2.'"'; ?> />
 								<input type="hidden" name="id" value="<?php echo $idnum ?>" />
-                                <input type="submit" name="addEducationalBackground" />
+                                <button type="submit" class="btn btn-default"  name="addEducationalBackground">Submit</button>
                                 <button class="btn btn-default" id="submit" >Skip Step</button>
                               </div>
                               </div>
