@@ -268,7 +268,7 @@ else{
 				if(empty($address2)){
 					$address2="N/A";
 				}
-				
+
 				echo
 				'
 				<form>
@@ -312,9 +312,9 @@ else{
 
             </div>
 				';
-				
+
 				?>
-                    
+
 
 
             <div class="row">
@@ -358,27 +358,27 @@ else{
                                 <?php
 							echo
 							'
-								<p>->'.$birthday.'</p>
-								<p>->'.$weight.'</p>
-								<p>->'.$height.'</p>
-								<p>->'.$bloodtype.'</p>
-								<p>->'.$nationality.'</p>
-								<p>->'.$religion.'</p>
-								<p>->'.$email1.'</p>
-								<p>->'.$email2.'</p>
-								<p>->'.$address1.'</p>
-								<p>->'.$address2.'</p>
-								<p>->'.$father.'</p>
-								<p>->'.$fatherOccupation.'</p>
-								<p>->'.$mother.'</p>
-								<p>->'.$motherOccupation.'</p>
+								<p><p></p>'.$birthday.'</p>
+								<p><p></p>'.$weight.'</p>
+								<p><p></p>'.$height.'</p>
+								<p><p></p>'.$bloodtype.'</p>
+								<p><p></p>'.$nationality.'</p>
+								<p><p></p>'.$religion.'</p>
+								<p><p></p>'.$email1.'</p>
+								<p><p></p>'.$email2.'</p>
+								<p><p></p>'.$address1.'</p>
+								<p><p></p>'.$address2.'</p>
+								<p><p></p>'.$father.'</p>
+								<p><p></p>'.$fatherOccupation.'</p>
+								<p><p></p>'.$mother.'</p>
+								<p><p></p>'.$motherOccupation.'</p>
 								</br>
 								<p>'.$emergencyName.'</p>
 								<p>'.$emergencyNumber.'</p>
 								<p>'.$emergencyRelationship.'</p>
 							';
 								$color="";
-							?>	
+							?>
                             </div>
                           </div>
                           <div class="row" style="border-bottom: 1px solid #ccc; padding-left: 30px;">
