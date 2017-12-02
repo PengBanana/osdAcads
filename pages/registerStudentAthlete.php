@@ -91,6 +91,8 @@
                         <li class="divider"></li>
                         <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
+						';
+						?>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -226,6 +228,7 @@
                         <div class="form-group">
                             <label>Degree Program:</label>
 							<select class="form-control inputs" name="degree">';
+							<?php
 							$query="SELECT * FROM acadsosd.degree;";
 							$result=mysqli_query($dbc, $query);
 							while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -265,8 +268,6 @@
 							$nationality=$row['nationality'];
 							echo '<option value="'.$nationality.'">'.$nationality.'</option>';
 						}
-						
-				// <input type="text" class="form-control inputs" name="nationality" required />
 				?>
 				</select>
 				  </div>
