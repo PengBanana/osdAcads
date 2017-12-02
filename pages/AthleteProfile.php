@@ -1,3 +1,26 @@
+<?php
+session_start();
+require_once('../osd_connect.php');
+/*
+$idx=$_SESSION['idnumber'];
+$typex=$_SESSION["typex"];
+if($idx===0){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+if(empty($idx)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+else if($typex>2||$typex<1){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+}
+else if(empty($typex)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+else{
+	$name=$_SESSION["name"];
+}
+*/
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -188,23 +211,71 @@
                 <div class="col-lg-1">
                 </div>
                 <div class="col-lg-5">
-                    <form>
+                 <?php
+				//$athleteID=$_POST['athleteID'];
+				$athleteID="11327219";
+				$query="SELECT * FROM acadsosd.studentathleteprofile s JOIN team t ON s.teamCode=t.sportCode JOIN academicclassification c ON s.statusID=c.statusID JOIN plannedenrollmentchart pec ON s.studentIDNumber=pec.studentIDNumber JOIN degree dg ON pec.degreeTable_degreeCode=dg.degreeCode JOIN department dpt ON dg.departmentCode=dpt.departmentCode JOIN college col ON dpt.college_collegeCode = col.collegeCode WHERE s.studentIDNumber='".$athleteID."';";
+				$result=mysqli_query($dbc,$query);
+				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+				$lastname=$row['studentLastName'];
+				$firstname=$row['studentFirstName'];
+				$middleName=$row['studentMiddleName'];
+				$birthday=$row['studentDateOfBirth'];
+				$weight=$row['studentWeight'];
+				$height=$row['studentHeight'];
+				$bloodtype=$row['studentBloodType'];
+				$nationality=$row['studentNationality'];
+				$religion=$row['studentReligion'];
+				$email1=$row['studentDlsuEmail'];
+				$email2=$row['studentAlternateEmail'];
+				$address1=$row['studentAddressLine1'];
+				$address2=$row['studentAddressLine2'];
+				$father=$row['studentFatherFullName'];
+				$mother=$row['studentMotherFullName'];
+				$fatherOccupation=$row['studentFatherOccupation'];
+				$motherOccupation=$row['studentMotherOccupation'];
+				$emergencyName=$row['studentEmergencyContact'];
+				$emergencyNumber=$row['EmergencyContactNumber'];
+				$emergencyRelationship=$row['EmergencyContactRelationship'];
+				$sportCode=$row['sportCode'];
+				$teamName=$row['teamName'];
+				$sport=$row['sport'];
+				$status=$row['statusName'];
+				$degreeCode=$row['degreeTable_degreeCode'];
+				$degree=$row['degreeName'];
+				$department=$row['departmentCode'];
+				$collegeCode=$row['college_collegeCode'];
+				$college=$row['collegeName'];
+				if(empty($middleName)){
+					$middleName="";
+				}
+				if(empty($mother)){
+					$mother="Not Set";
+					$motherOccupation="Not Set";
+				}
+				if(empty($father)){
+					$father="Not Set";
+					$fatherOccupation="Not Set";
+				}
+				echo
+				'
+				<form>
 
                         <div class="form-group">
                             <div>Name:
-                            <label> Modino, Christian Concepcion</label>
+                            <label>'.$lastname.', '.$firstname.' '.$middleName.'</label>
                             </div>
                             <div>ID No:
-                            <label> 11443359</label>
+                            <label>'.$athleteID.'</label>
                             </div>
                             <div>Team:
-                            <label> Animo Squad</label>
+                            <label>'.$teamName.': '.$sport.'('.$sportCode.')</label>
                             </div>
                             <div>College:
-                            <label>College of Computer Studies </label>
+                            <label>'.$college.' ('.$collegeCode.')</label>
                             </div>
                             <div>Degree Program:
-                            <label>BS Information Technology</label>
+                            <label>'.$degree.' ('.$degreeCode.')</label>
                             </div>
 
                         </div>
@@ -218,16 +289,20 @@
                 </div>
                  <div class="col-lg-3"></div>
                 <div class="col-lg-2">
-                    <div style="color: red;"> <label>SUPER CRITICAL</label></div>
+                    <div style="color: red;"> <label>'.$status.'</label></div>
                     <div>
                         <label> Units Remaining: </label>
                     </div>
-                    <label style="font-size: 24px;">250.0(10)</label>
+                    <label style="font-size: 24px;">ALVINNNNNNN</label>
                 </div>
 
                  <div class="col-lg-7"></div>
 
             </div>
+				';
+				
+				?>
+                    
 
 
             <div class="row">
@@ -261,16 +336,21 @@
                                     </div>
                             </div>
                             <div class="col-lg-6" >
-                                <p>christian_modino@dlsu.edu.ph</p>
-                                <p>christian_modino@gmail.com</p>
-                                <p>808-0676</p>
-                                <p>9999 Green Residences</p>
-                                <p>1234 Sta. Rosa, Laguna</p>
-                                <p>O</p>
-                                <p>Modino, Rowena</p>
-                                <p>AAAAAAAAAAAAAAA</p>
-                                <p>Modino, Florentino</p>
-                                <p>AAAAAAAAAAAAAAA</p>
+                                <?php
+							echo
+							'
+							<p>'.$email1.'</p>
+                                <p>'.$email2.'</p>
+                                <p>'.$address1.'</p>
+                                <p>'.$address2.'</p>
+                                <p>'.$bloodtype.'</p>
+                                <p>'.$mother.'</p>
+                                <p>'.$motherOccupation.'</p>
+                                <p>'.$father.'</p>
+                                <p>'.$fatherOccupation.'</p>
+								';
+								$color="";
+							?>	
                             </div>
                           </div>
                           <div class="row" style="border-bottom: 1px solid #ccc; padding-left: 30px;">
