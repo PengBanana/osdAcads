@@ -237,7 +237,7 @@ else{
                                             echo'<tr class="odd gradeX">
                                             <td class="text-center" ><a href="Athlete\'s Profile.html"><u style="color: black;">'.$row['smName'].'</u></a></td>
                                             <td class="text-center">'.$row['teamName'].'</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDeactivate">Remove</button></td>
+                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDeactivate">DEACTIVATE</button></td>
 
                                             </tr>';
                                         }

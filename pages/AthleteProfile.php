@@ -332,7 +332,7 @@ else{
                         <div id="profile" class="tabcontent">
                           <div class="row" style="padding-left: 30px;">
                           <h3>Profile</h3>
-                              <div class="col-lg-6">
+                              <div class="col-lg-4">
                                   <div style="padding-top: 5px; font-size: 17px;">
                                       <div><label>Birthday</label></div>
                                       <div><label>Weight</label></div>
@@ -354,28 +354,28 @@ else{
                                       <div><label>Relationship</label></div>
                                   </div>
                             </div>
-                            <div class="col-lg-6" >
+                            <div class="col-lg-5" >
                                 <?php
 							echo
 							'
-								<p><p></p>'.$birthday.'</p>
-								<p><p></p>'.$weight.'</p>
-								<p><p></p>'.$height.'</p>
-								<p><p></p>'.$bloodtype.'</p>
-								<p><p></p>'.$nationality.'</p>
-								<p><p></p>'.$religion.'</p>
-								<p><p></p>'.$email1.'</p>
-								<p><p></p>'.$email2.'</p>
-								<p><p></p>'.$address1.'</p>
-								<p><p></p>'.$address2.'</p>
-								<p><p></p>'.$father.'</p>
-								<p><p></p>'.$fatherOccupation.'</p>
-								<p><p></p>'.$mother.'</p>
-								<p><p></p>'.$motherOccupation.'</p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$birthday.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$weight.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$height.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$bloodtype.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$nationality.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$religion.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$email1.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$email2.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$address1.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$address2.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$father.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span></p><p>'.$fatherOccupation.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right"><p>'.$mother.'</span></p>
+								<p><span class="glyphicon glyphicon-arrow-right">'.$motherOccupation.'</span></p>
 								</br>
-								<p>'.$emergencyName.'</p>
-								<p>'.$emergencyNumber.'</p>
-								<p>'.$emergencyRelationship.'</p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span><p></p>'.$emergencyName.'</p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span><p></p>'.$emergencyNumber.'</p>
+								<p><span class="glyphicon glyphicon-arrow-right"></span><p></p>'.$emergencyRelationship.'</p>
 							';
 								$color="";
 							?>
