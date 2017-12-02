@@ -1,3 +1,26 @@
+<?php
+session_start();
+require_once('../osd_connect.php');
+/*
+$idx=$_SESSION['idnumber'];
+$typex=$_SESSION["typex"];
+if($idx===0){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+if(empty($idx)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+else if($typex>2||$typex<1){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+}
+else if(empty($typex)){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+}
+else{
+	$name=$_SESSION["name"];
+}
+*/
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -61,7 +84,7 @@
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i> Carlos Fontanilla</a>
+                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i><?php echo $name; ?></a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
@@ -188,23 +211,63 @@
                 <div class="col-lg-1">
                 </div>
                 <div class="col-lg-5">
-                    <form>
+				<?php
+				//$athleteID=$_POST['athleteID'];
+				$athleteID="11327219";
+				$query="SELECT * FROM acadsosd.studentathleteprofile s JOIN team t ON s.teamCode=t.sportCode JOIN academicclassification c ON s.statusID=c.statusID JOIN plannedenrollmentchart pec ON s.studentIDNumber=pec.studentIDNumber JOIN degree dg ON pec.degreeTable_degreeCode=dg.degreeCode JOIN department dpt ON dg.departmentCode=dpt.departmentCode JOIN college col ON dpt.college_collegeCode = col.collegeCode WHERE s.studentIDNumber='".$athleteID."';";
+				$result=mysqli_query($dbc,$query);
+				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+				$lastname=$row['studentLastName'];
+				$firstname=$row['studentFirstName'];
+				$middleName=$row['studentMiddleName'];
+				$birthday=$row['studentDateOfBirth'];
+				$weight=$row['studentWeight'];
+				$height=$row['studentHeight'];
+				$bloodtype=$row['studentBloodType'];
+				$nationality=$row['studentNationality'];
+				$religion=$row['studentReligion'];
+				$email1=$row['studentDlsuEmail'];
+				$email2=$row['studentAlternateEmail'];
+				$address1=$row['studentAddressLine1'];
+				$address2=$row['studentAddressLine2'];
+				$father=$row['studentFatherFullName'];
+				$mother=$row['studentMotherFullName'];
+				$fatherOccupation=$row['studentFatherOccupation'];
+				$motherOccupation=$row['studentMotherOccupation'];
+				$emergencyName=$row['studentEmergencyContact'];
+				$emergencyNumber=$row['EmergencyContactNumber'];
+				$emergencyRelationship=$row['EmergencyContactRelationship'];
+				$sportCode=$row['sportCode'];
+				$teamName=$row['teamName'];
+				$sport=$row['sport'];
+				$status=$row['statusName'];
+				$degreeCode=$row['degreeTable_degreeCode'];
+				$degree=$row['degreeName'];
+				$department=$row['departmentCode'];
+				$collegeCode=$row['college_collegeCode'];
+				$college=$row['collegeName'];
+				if(empty($middleName)){
+					$middleName="";
+				}
+				echo
+				'
+				<form>
 
                         <div class="form-group">
                             <div>Name:
-                            <label> Modino, Christian Concepcion</label>
+                            <label>'.$lastname.', '.$firstname.' '.$middleName.'</label>
                             </div>
                             <div>ID No:
-                            <label> 11443359</label>
+                            <label>'.$athleteID.'</label>
                             </div>
                             <div>Team:
-                            <label> Animo Squad</label>
+                            <label>'.$teamName.': '.$sport.'('.$sportCode.')</label>
                             </div>
                             <div>College:
-                            <label>College of Computer Studies </label>
+                            <label>'.$college.' ('.$collegeCode.')</label>
                             </div>
                             <div>Degree Program:
-                            <label>BS Information Technology</label>
+                            <label>'.$degree.' ('.$degreeCode.')</label>
                             </div>
 
                         </div>
@@ -218,16 +281,20 @@
                 </div>
                  <div class="col-lg-3"></div>
                 <div class="col-lg-2">
-                    <div style="color: red;"> <label>SUPER CRITICAL</label></div>
+                    <div style="color: red;"> <label>'.$status.'</label></div>
                     <div>
                         <label> Units Remaining: </label>
                     </div>
-                    <label style="font-size: 24px;">250.0(10)</label>
+                    <label style="font-size: 24px;">ALVINNNNNNN</label>
                 </div>
 
                  <div class="col-lg-7"></div>
 
             </div>
+				';
+				
+				?>
+                    
 
 
             <div class="row">
@@ -300,7 +367,7 @@
                           </div>
 
                           <div class="row" style="padding-left: 30px;">
-                              <h3>Education</h3>
+                              <h3>ACHIEVEMENTS</h3>
 
                                 <div class="col-lg-12" style="padding-top: 8px;">
                                       <p>2nd Runner Up Palarong Pambansa in Basketball November 25, 2011</p>

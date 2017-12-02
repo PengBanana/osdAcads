@@ -83,7 +83,7 @@ require_once('../osd_connect.php');
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i><?php $name ?></a>
+                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i><?php echo $name; ?></a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>

@@ -2,6 +2,24 @@
 <?php
 session_start();
 require_once('../osd_connect.php');
+$idx=$_SESSION['idnumber'];
+					$typex=$_SESSION["typex"];
+					if($idx===0){
+					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+					}
+					if(empty($idx)){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+						$name="wth";
+					}
+					else if($typex>2||$typex<1){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+					}
+					else if(empty($typex)){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+					}
+					else{
+						$name=$_SESSION["name"];
+					}
 ?>
 <html lang="en">
 
@@ -75,7 +93,7 @@ require_once('../osd_connect.php');
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i> Carlos Fontanilla</a>
+                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i><?php echo $name; ?></a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
