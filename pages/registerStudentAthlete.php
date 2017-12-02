@@ -83,9 +83,9 @@
 					else{
 						$name=$_SESSION["name"];
 					}
-					
+
                        echo'<li><a href="#"><i class="fa fa-user fa-fw"></i> '.$name.'</a>
-                        </li>'; 
+                        </li>';
                         echo '<li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
                         <li class="divider"></li>
@@ -203,156 +203,170 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-4">
-                    <form action="addEducationalBackground.php" method="post">
-                        <div class="form-group">
-                            <label> Last Name: </label>
-                            <input type="text" class="form-control inputs" name="lastname" required />
-                        </div>
+                <div class="col-lg-3"></div>
+                <form action="addEducationalBackground.php" method="post">
 
-                        <div class="form-group">
-                            <label> First Name: </label>
-                            <input type="text" class="form-control inputs" name="firstname" required />
-                        </div>
+                <div class="col-lg-7">
+                  <div class="panel panel-default">
+                      
+                      <!-- /.panel-heading -->
+                      <div class="panel-body">
+                          <div class="dataTable_wrapper">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                  <div class="form-group">
+                                      <label> Last Name: </label>
+                                      <input type="text" class="form-control inputs" name="lastname" required />
+                                  </div>
+                                </div>
+                                <div class="col-lg-4">
+                                  <div class="form-group">
+                                      <label> Middle Name: </label>
+                                      <input type="text" class="form-control inputs" name="middlename">
+                                  </div>
+                                </div>
+                                <div class="col-lg-4">
+                                  <div class="form-group">
+                                      <label> First Name: </label>
+                                      <input type="text" class="form-control inputs" name="firstname" required />
+                                  </div>
+                                </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label> Middle Name: </label>
-                            <input type="text" class="form-control inputs" name="middlename">
-                        </div>
+                                <div class="form-group">
+                                    <label>ID Number: </label>
+                                    <input type="text" class="form-control inputs" name="idnum"/>
+                                </div>
 
-                        <div class="form-group">
-                            <label>ID Number: </label>
-                            <input type="text" class="form-control inputs" name="idnum"/>
-                        </div>
+                                <div class="form-group">
+                                    <label>Degree Program:</label>
+                            <select class="form-control inputs" name="degree">';
+                            <?php
+                            $query="SELECT * FROM acadsosd.degree;";
+                            $result=mysqli_query($dbc, $query);
+                            while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                            $degreeCode=$row['degreeCode'];
+                            $degreeName=$row['degreeName'];
+                            $departmentCode=$row['departmentCode'];
+                            echo '<option value="'.$degreeCode.'">'.$degreeCode.' : '.$degreeName.'-'.$departmentCode.'</option>';
+                            }
+                                echo '</select>
+                            </div>
+                                <div class="form-group">
+                            <label>Sport: </label>
+                                    <select class="form-control inputs" name="sport">';
+                            $query="SELECT * FROM acadsosd.team;";
+                            $result=mysqli_query($dbc, $query);
+                                while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                            $sportCode=$row['sportCode'];
+                            $sport=$row['sport'];
+                            $teamName=$row['teamName'];
+                            echo '<option value="'.$sportCode.'">'.$teamName.' : '.$sport.'</option>';
+                            }
+                            echo'
+                            </select>
+                                </div>
 
-                        <div class="form-group">
-                            <label>Degree Program:</label>
-							<select class="form-control inputs" name="degree">';
-							<?php
-							$query="SELECT * FROM acadsosd.degree;";
-							$result=mysqli_query($dbc, $query);
-							while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-								$degreeCode=$row['degreeCode'];
-								$degreeName=$row['degreeName'];
-								$departmentCode=$row['departmentCode'];
-								echo '<option value="'.$degreeCode.'">'.$degreeCode.' : '.$degreeName.'-'.$departmentCode.'</option>';
-							}
-                        echo '</select>
-						</div>
-                        <div class="form-group">
-						 <label>Sport: </label>
-                            <select class="form-control inputs" name="sport">';
-						$query="SELECT * FROM acadsosd.team;";
-						$result=mysqli_query($dbc, $query);
-                        while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-							$sportCode=$row['sportCode'];
-							$sport=$row['sport'];
-							$teamName=$row['teamName'];
-							echo '<option value="'.$sportCode.'">'.$teamName.' : '.$sport.'</option>';
-						}
-							echo'
-							</select>
-                        </div>
+                                <div class="form-group">
+                                    <label>Date of Birth: </label>
+                                    <input type="date" class="form-control inputs" name="birthday" required />
+                                </div>
 
-                        <div class="form-group">
-                            <label>Date of Birth: </label>
-                            <input type="date" class="form-control inputs" name="birthday" required />
-                        </div>
+                                <div class="form-group">
+                                    <label>Nationality: </label>
+                            <select class="form-control inputs" name="nationality" required>';
+                            $query="SELECT * FROM acadsosd.nationality;";
+                            $result=mysqli_query($dbc, $query);
+                                while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                            $nationality=$row['nationality'];
+                            echo '<option value="'.$nationality.'">'.$nationality.'</option>';
+                            }
+                            ?>
+                            </select>
+                            </div>
 
-                        <div class="form-group">
-                            <label>Nationality: </label>
-							<select class="form-control inputs" name="nationality" required>';
-						$query="SELECT * FROM acadsosd.nationality;";
-						$result=mysqli_query($dbc, $query);
-                        while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-							$nationality=$row['nationality'];
-							echo '<option value="'.$nationality.'">'.$nationality.'</option>';
-						}
-				?>
-				</select>
-				  </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="form-group">
+
+                            <div class="form-group">
                             <label>Religion: </label>
                             <input type="text" class="form-control inputs" name="religion"/>
-                        </div>
+                            </div>
 
-                     <div class="form-group">
-                        <label>Weight: </label>
-                        <input type="text" class="form-control inputs" name="weight" placeholder="lbs" required />
-                    </div>
+                            <div class="form-group">
+                            <label>Weight: </label>
+                            <input type="text" class="form-control inputs" name="weight" placeholder="lbs" required />
+                            </div>
 
-                    <div class="form-group">
-                        <label>Height: </label>
-                        <input type="text" class="form-control inputs" name="height" placeholder="cm" required />
-                    </div>
+                            <div class="form-group">
+                            <label>Height: </label>
+                            <input type="text" class="form-control inputs" name="height" placeholder="cm" required />
+                            </div>
 
-                     <div class="form-group">
+                            <div class="form-group">
                             <label>Blood Type:</label>
                             <select class="form-control inputs" name="bloodtype" required>
-                                <option></option>
-                                <option value="A">A</option>
-                                <option value="A-">A-</option>
-                                <option value="A+">A+</option>
-                                <option value="B">B</option>
-                                <option value="B-">B-</option>
-                                <option value="B+">B+</option>
-                                <option value="AB">AB</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O">O</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
+                              <option></option>
+                              <option value="A">A</option>
+                              <option value="A-">A-</option>
+                              <option value="A+">A+</option>
+                              <option value="B">B</option>
+                              <option value="B-">B-</option>
+                              <option value="B+">B+</option>
+                              <option value="AB">AB</option>
+                              <option value="AB+">AB+</option>
+                              <option value="AB-">AB-</option>
+                              <option value="O">O</option>
+                              <option value="O+">O+</option>
+                              <option value="O-">O-</option>
                             </select>
-                        </div>
+                            </div>
 
-                    <div class="form-group">
-                        <label>DLSU e-mail address: </label>
-                        <input type="text" class="form-control inputs" name="email" required />
-                    </div>
+                            <div class="form-group">
+                            <label>DLSU e-mail address: </label>
+                            <input type="text" class="form-control inputs" name="email" required />
+                            </div>
 
-                    <div class="form-group">
-                        <label>Alternate e-mail address: </label>
-                        <input type="text" class="form-control inputs" name="alternateemail"/>
-                    </div>
+                            <div class="form-group">
+                            <label>Alternate e-mail address: </label>
+                            <input type="text" class="form-control inputs" name="alternateemail"/>
+                            </div>
 
 
-                     <div class="form-group">
-                        <label>Address Line 1: </label>
-                        <textarea rows="4" cols="50" class="form-control inputs" name="address1" required>
-                        </textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Address Line 2: </label>
-                        <textarea rows="4" cols="50" class="form-control inputs" name="address2">
-                        </textarea>
-                    </div>
+                            <div class="form-group">
+                            <label>Address Line 1: </label>
+                            <textarea rows="4" cols="50" class="form-control inputs" name="address1" required>
+                            </textarea>
+                            </div>
+                            <div class="form-group">
+                            <label>Address Line 2: </label>
+                            <textarea rows="4" cols="50" class="form-control inputs" name="address2">
+                            </textarea>
+                            </div>
+                            <div class="form-group">
+                            <label>Father's Name: </label>
+                            <input type="text" name="fathername" class="form-control inputs"/>
+
+                            <label>Occupation: </label>
+                            <input text="text" class="form-control inputs" name="fatheroccupation"/>
+                            </div>
+
+                            <div class="form-group">
+                            <label>Mother's Name: </label>
+                            <input type="text" name="mothername" class="form-control inputs"/>
+                            <label>Occupation: </label>
+                            <input text="text" class="form-control inputs" name="motheroccupation"/>
+                            </div>
+                            <div class="form-group">
+                            <label>Emergency Contact Name: </label>
+                            <input type="text" name="emergencyname" class="form-control inputs" required />
+                            <label>Emergency Contact Number: </label>
+                            <input type="text" name="emergencynumber" class="form-control inputs" required />
+                            <label>Relationship: </label>
+                            <input text="text" class="form-control inputs" name="emergencyrelationship" required/>
+                            </div>
+                          </div>
+                      </div>
                 </div>
-                <div class="col-lg-4">
-                        <div class="form-group">
-                        <label>Father's Name: </label>
-                        <input type="text" name="fathername" class="form-control inputs"/>
 
-                        <label>Occupation: </label>
-                        <input text="text" class="form-control inputs" name="fatheroccupation"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Mother's Name: </label>
-                        <input type="text" name="mothername" class="form-control inputs"/>
-                        <label>Occupation: </label>
-                        <input text="text" class="form-control inputs" name="motheroccupation"/>
-					</div>
-					<div class="form-group">
-                        <label>Emergency Contact Name: </label>
-                        <input type="text" name="emergencyname" class="form-control inputs" required />
-						<label>Emergency Contact Number: </label>
-                        <input type="text" name="emergencynumber" class="form-control inputs" required />
-                        <label>Relationship: </label>
-                        <input text="text" class="form-control inputs" name="emergencyrelationship" required/>
-					</div>
-                </div>
 
             </div>
             <div class="row">
