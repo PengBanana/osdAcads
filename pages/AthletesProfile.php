@@ -249,6 +249,14 @@ else{
 				if(empty($middleName)){
 					$middleName="";
 				}
+				if(empty($mother)){
+					$mother="Not Set";
+					$motherOccupation="Not Set"
+				}
+				if(empty($father)){
+					$father="Not Set";
+					$fatherOccupation="Not Set"
+				}
 				echo
 				'
 				<form>
@@ -317,7 +325,6 @@ else{
                                       <div><label>DLSU mail</label>
                                       </div>
                                       <div><label>Alternate e-mail</label></div>
-                                      <div><label>Contact No.</label></div>
                                       <div><label>City Address</label></div>
                                       <div><label>Home Address</label></div>
                                       <div><label>Blood Type</label></div>
@@ -328,16 +335,21 @@ else{
                                     </div>
                             </div>
                             <div class="col-lg-6" >
-                                <p>christian_modino@dlsu.edu.ph</p>
-                                <p>christian_modino@gmail.com</p>
-                                <p>808-0676</p>
-                                <p>9999 Green Residences</p>
-                                <p>1234 Sta. Rosa, Laguna</p>
-                                <p>O</p>
-                                <p>Modino, Rowena</p>
-                                <p>AAAAAAAAAAAAAAA</p>
-                                <p>Modino, Florentino</p>
-                                <p>AAAAAAAAAAAAAAA</p>
+							<?php
+							echo
+							'
+							<p>'.$email1.'</p>
+                                <p>'.$email2.'</p>
+                                <p>'.$address1.'</p>
+                                <p>'.$address2.'</p>
+                                <p>'.$bloodtype.'</p>
+                                <p>'.$mother.'</p>
+                                <p>'.$motherOccupation.'</p>
+                                <p>'.$father.'</p>
+                                <p>'.$fatherOccupation.'</p>
+								';
+								$color="";
+							?>
                             </div>
                           </div>
                           <div class="row" style="border-bottom: 1px solid #ccc; padding-left: 30px;">
