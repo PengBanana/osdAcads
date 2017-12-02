@@ -8,16 +8,22 @@ require_once('../osd_connect.php');
 					}
 					if(empty($idx)){
 						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
-						$name="wth";
 					}
-					else if($typex>2||$typex<1){
-						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+					else if($typex>2){
+						$query="SELECT * FROM acadsosd.studentmanager";
+						$result=mysqli_query($dbc,$query);
+						$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+						$teamCode=$row['teamCode'];
 					}
 					else if(empty($typex)){
 						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 					}
 					else{
 						$name=$_SESSION["name"];
+						$teamCode=$_POST['teamCode'];
+						if(empty($teamCode)){
+							header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+						}
 					}
 
 
@@ -216,7 +222,6 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                 <div class="col-lg-5">
                     <form>
 					<?php
-					$teamCode=$_POST['teamCode'];
 					$query="SELECT * FROM acadsosd.team WHERE sportCode='".$teamCode."';";
 					$result=mysqli_query($dbc,$query);
 					$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
