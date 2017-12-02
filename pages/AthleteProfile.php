@@ -249,13 +249,26 @@ else{
 					$middleName="";
 				}
 				if(empty($mother)){
-					$mother="Not Set";
-					$motherOccupation="Not Set";
+					$mother="N/A";
+					$motherOccupation="N/A";
 				}
 				if(empty($father)){
-					$father="Not Set";
-					$fatherOccupation="Not Set";
+					$father="N/A";
+					$fatherOccupation="N/A";
 				}
+				if(empty($email1)){
+					$email2="N/A";
+				}
+				if(empty($email2)){
+					$email2="N/A";
+				}
+				if(empty($address1)){
+					$address1="N/A";
+				}
+				if(empty($address2)){
+					$address2="N/A";
+				}
+				
 				echo
 				'
 				<form>
@@ -321,33 +334,49 @@ else{
                           <h3>Profile</h3>
                               <div class="col-lg-6">
                                   <div style="padding-top: 5px; font-size: 17px;">
-                                      <div><label>DLSU mail</label>
-                                      </div>
-                                      <div><label>Alternate e-mail</label></div>
-                                      <div><label>Contact No.</label></div>
-                                      <div><label>City Address</label></div>
-                                      <div><label>Home Address</label></div>
+                                      <div><label>Birthday</label></div>
+                                      <div><label>Weight</label></div>
+                                      <div><label>Height</label></div>
                                       <div><label>Blood Type</label></div>
-                                      <div><label>Mother</label></div>
-                                      <div><label>Occupation </label></div>
-                                      <div><label>Father</label></div>
-                                      <div><label>Occupation</label></div>
-                                    </div>
+                                      <div><label>Nationality</label></div>
+                                      <div><label>Religion</label></div>
+                                      <div><label>Primary Email</label></div>
+                                      <div><label>Alternate Email</label></div>
+                                      <div><label>Primary Address</label></div>
+                                      <div><label>Secondary Address</label></div>
+                                      <div><label>Father's Name</label></div>
+                                      <div><label>Father's Occupation</label></div>
+                                      <div><label>Mother's Name</label></div>
+                                      <div><label>Mothers' Occupation</label></div>
+									  </br>
+                                      <div><label>Emergency Contact Name:</label></div>
+                                      <div><label>Contact Number</label></div>
+                                      <div><label>Relationship</label></div>
+                                  </div>
                             </div>
                             <div class="col-lg-6" >
                                 <?php
 							echo
 							'
-							<p>'.$email1.'</p>
-                                <p>'.$email2.'</p>
-                                <p>'.$address1.'</p>
-                                <p>'.$address2.'</p>
-                                <p>'.$bloodtype.'</p>
-                                <p>'.$mother.'</p>
-                                <p>'.$motherOccupation.'</p>
-                                <p>'.$father.'</p>
-                                <p>'.$fatherOccupation.'</p>
-								';
+								<p>->'.$birthday.'</p>
+								<p>->'.$weight.'</p>
+								<p>->'.$height.'</p>
+								<p>->'.$bloodtype.'</p>
+								<p>->'.$nationality.'</p>
+								<p>->'.$religion.'</p>
+								<p>->'.$email1.'</p>
+								<p>->'.$email2.'</p>
+								<p>->'.$address1.'</p>
+								<p>->'.$address2.'</p>
+								<p>->'.$father.'</p>
+								<p>->'.$fatherOccupation.'</p>
+								<p>->'.$mother.'</p>
+								<p>->'.$motherOccupation.'</p>
+								</br>
+								<p>'.$emergencyName.'</p>
+								<p>'.$emergencyNumber.'</p>
+								<p>'.$emergencyRelationship.'</p>
+							';
 								$color="";
 							?>	
                             </div>
