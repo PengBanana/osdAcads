@@ -87,6 +87,7 @@ $(document).ready(function(){
                                       + '<td class="text-center"><input type="text" class="form-control inputs" name="venue[]"></td>'
                                       + '<td class="text-center"><input type="text" class="form-control inputs" name="eventName[]"></td>'
                                       + '<td class="text-center"><input type="text" class="form-control inputs" name="standing[]"></td>'
+                                      + '<td class="text-center"><input type="text" class="form-control inputs" name="type[]"></td>'
                                       + '<td class="text-center"><button type="button" name="remove" id="'+
                                     i+'" class="btn_remove"><i class="glyphicon glyphicon-trash"></i></button></td></tr>');
  });
