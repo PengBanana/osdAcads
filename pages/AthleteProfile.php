@@ -700,9 +700,8 @@ else{
                                             <td class="text-center"> 3</td>
                                             <td class="text-center">4  </td>
                                             <td class="text-center">
-                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#remove">
-                                                  Remove
-                                              </button>
+                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#remove">Remove</button>
+                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editCourse">Edit Course</button>
                                               <!-- Modal -->
                                               <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">
@@ -758,6 +757,38 @@ else{
                                                   <!-- /.modal-dialog -->
                                               </div>
                                               <!-- /.modal -->
+
+                                              <!-- edit course modal -->
+                                              <div class="modal fade" id="editCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Edit Course</h4>
+                                                    </div>
+                                                  <div class="modal-body">
+                                                    <form>
+                                                      <div class="form-group">
+                                                        <label style="float:left">Professor ID No.</label>
+                                                        <input class="form-control" type="text">
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label style="float:left">Professor Name</label>
+                                                        <input class="form-control" type="text">
+                                                      </div>
+                                                    </form>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary">Confirm</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                  </div>
+                                                  </div>
+                                                  <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                              </div>
+                                              <!-- /.modal -->
+
 
 
                                               <!-- Modal Add Apr -->
