@@ -19,6 +19,10 @@ require_once('../osd_connect.php');
 					else{
 						$name=$_SESSION["name"];
 					}
+
+
+$selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomplishmentStanding FROM achievmenthistory;";
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -353,12 +357,19 @@ require_once('../osd_connect.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">2014-2015</u></a></td>
-                                            <td class="text-center"> National Cheerdance Competition</td>
-                                            <td class="text-center"> 3rd Place</td>
-                                        </tr>
+                                      <?php 
 
+                                        $result = mysqli_query($dbc, $selectAllAchievements);
+                                        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                                            echo'<tr class="odd gradeX">
+                                            <td class="text-center">'.$row['accomplishmentDate'].'</td>
+                                            <td class="text-center">'.$row['accomplishmentEvent'].'</td>
+                                            <td class="text-center">'.$row['accomplishmentStanding'].'</td>
+
+                                            </tr>';
+                                        }
+
+                                        ?>
                                     </tbody>
                                 </table>
 
