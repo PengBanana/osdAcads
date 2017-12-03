@@ -122,7 +122,7 @@ $idx=$_SESSION['idnumber'];
 														<li>
 																<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
 																<ul id="demo4" class="collapse" style="list-style: none;">
-																	 <li><a href="ViewTeamAthletes.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
+																	 <li><a href="ViewTeamAthletes_admin.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
 
 																</ul>
 														</li>
