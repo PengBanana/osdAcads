@@ -63,10 +63,8 @@ else{
 </head>
 
 <?php 
-
         require_once('../osd_connect.php');
         $selectAllStudentManagers = "SELECT SM.teamCode, CONCAT(u.lastName,', ', u.firstName) as 'smName', t.teamName FROM user u JOIN studentmanager sm  ON u.idNumber = sm.idNumber JOIN team t ON sm.teamCode = t.sportCode";
-
 ?>
 
 <body>
@@ -231,31 +229,18 @@ else{
                                     </thead>
                                     <tbody>
                                         <?php 
-
                                         $result = mysqli_query($dbc, $selectAllStudentManagers);
                                         while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
                                             $SPORTCODE = $row['teamCode'];
                                             $TEAMNAME = $row['teamName'];
                                             echo'<tr class="odd gradeX">
                                             <td class="text-center" ><a href="Athlete\'s Profile.html"><u style="color: black;">'.$row['smName'].'</u></a></td>
-<<<<<<< HEAD
-<<<<<<< HEAD
                                             <td><form action="viewTeamAthletes.php" method="post">
                                             <div align="center"><input type="hidden" name="teamCode" value="'.$SPORTCODE.'"><input type="submit" value="'.$SPORTCODE.' - '.$TEAMNAME.'" class="btn btn-link" name="submit"></div>
                                             </form></td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDeactivate">Remove</button></td>
-=======
-                                            <td class="text-center">'.$row['teamName'].'</td>
                                             <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDeactivate">DEACTIVATE</button></td>
->>>>>>> 3ec16379e3d8ca5901de9149de7fbbeaa4c2c415
-=======
-                                            <td class="text-center">'.$row['teamName'].'</td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDeactivate">DEACTIVATE</button></td>
->>>>>>> bacfb9ebaca8cc6cf4fd299c9f1e5fe506ed097a
-
                                             </tr>';
                                         }
-
                                         ?>
                                         
                                     </tbody>
