@@ -75,7 +75,7 @@ $idx=$_SESSION['idnumber'];
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[admin].php">
+							<a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[studentManager].php">
 							<img src="Images/OSD-logo2.png" height="35px" width='auto' />
 							</a>
 					</div>
@@ -109,32 +109,24 @@ $idx=$_SESSION['idnumber'];
 									<ul class="nav" id="side-menu" >
 
 													<li >
-															<a href="index[admin].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
+															<a href="index[studentManager].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
 													</li>
 
 													 <li>
 														<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
 														<ul id="demo1" class="collapse" style="list-style: none;">
-															<li><a href="MidtermUpdateList_admin.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
-															<li><a href="FinalsUpdateList_admin.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
-															<li><a href="FinalReport.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Generate Final Report </a></li>
-															<li><a href="FinalReportHistory.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Report History</a></li>
+															<li><a href="MidtermUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
+															<li><a href="FinalsUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
 														</ul>
 														</li>
 														<li>
 																<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
 																<ul id="demo4" class="collapse" style="list-style: none;">
-																	 <li><a href="ViewTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
-																	 <li><a href="registerStudentAthlete.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Register an Athlete </a></li>
+																	 <li><a href="ViewTeamAthletes.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
+
 																</ul>
 														</li>
-													<li>
-														<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-user" style="color: white"></i>    Accounts </a>
-														<ul id="demo2" class="collapse" style="list-style: none;">
-																<li><a href="activationRequest.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Activation Request </a></li>
-																<li><a href="viewStudentManagers.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i>  Manage Accounts </a></li>
-														</ul>
-													</li>
+
 									</ul>
 							</div>
 							<!-- /.sidebar-collapse -->
