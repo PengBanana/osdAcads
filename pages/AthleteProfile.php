@@ -240,6 +240,7 @@ else{
 				$department=$row['departmentCode'];
 				$collegeCode=$row['college_collegeCode'];
 				$college=$row['collegeName'];
+                $statusID=$row['statusID'];
 				if(empty($middleName)){
 					$middleName="";
 				}
@@ -263,6 +264,30 @@ else{
 				if(empty($address2)){
 					$address2="N/A";
 				}
+
+                $color="black";
+
+                if($statusID == '1'){
+                    $color = "red";
+                }
+                else if($statusID == '2'){
+                    $color = "orange";
+                }
+                else if($statusID == '3'){
+                    $color = "green";
+                }
+
+                $classcolor="";
+
+                if($statusID == '1'){
+                    $classcolor = "statusSuperCritical";
+                }
+                else if($statusID == '2'){
+                    $classcolor = "statusCritical";
+                }
+                else if($statusID == '3'){
+                    $classcolor = "statusNotCritical";
+                }
 
 				echo
 				'
@@ -296,7 +321,7 @@ else{
                 </div>
                  <div class="col-lg-3"></div>
                 <div class="col-lg-2">
-                    <div style="color: red;"> <label>'.$status.'</label></div>
+                    <div style="color: '.$color.';"> <label>'.$status.'</label></div>
                     <div>
                         <label> Units Remaining: </label>
                     </div>
@@ -607,49 +632,24 @@ else{
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">School Year</th>
-                                            <th class="text-center">Term</th>
-                                            <th class="text-center">Academic Status</th>
+                                            <th class="text-center">Date Classified</th>
+                                            <th class="text-center">Classification</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">2014-2015</u></a></td>
-                                            <td class="text-center"> T1</td>
-                                            <td class="text-center statusNotCritical">NOT CRITICAL</td>
+                                        <?php 
+                                        $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN
+                                                                        FROM classificationhistory ch JOIN academicclassification ac
+                                                                        ON ch.classificationID = ac.statusID;";
+                                        $result = mysqli_query($dbc, $selectClassificationHistory);
+                                        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+                                            echo'<tr class="odd gradeX">
+                                            <td class="text-center">'.$row['DC'].'</td>
+                                            <td class="text-center '.$classcolor.'">'.$row['SN'].'</td>
+                                            </tr>';
+                                        }
 
-                                        </tr>
-
-                                        <tr class="even gradeC">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">2014-2015</u></a></td>
-                                            <td class="text-center"> T2</td>
-                                            <td class="text-center statusNotCritical">NOT CRITICAL</td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">2014-2015</u></a></td>
-                                            <td class="text-center"> T3</td>
-                                            <td class="text-center statusCritical">CRITICAL</td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">2015-2016</u></a></td>
-                                            <td class="text-center"> T1</td>
-                                            <td class="text-center statusNotCritical">NOT CRITICAL</td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">2015-2016</u></a></td>
-                                            <td class="text-center"> T2</td>
-                                            <td class="text-center statusNotCritical">NOT CRITICAL</td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href="Athlete's Profile.html"><u style="color: black;">2015-2016</u></a></td>
-                                            <td class="text-center"> T3</td>
-                                            <td class="text-center statusNotCritical">NOT CRITICAL</td>
-
-                                        </tr>
+                                        ?>
                                     </tbody>
                                 </table>
 

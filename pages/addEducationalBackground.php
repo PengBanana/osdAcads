@@ -79,7 +79,7 @@ else if(isset($_POST['addEducationalBackground'])){
 		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 	if(!mysqli_query($dbc, $sql2)){
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+        header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 
 	$id=$_POST['id'];
@@ -88,7 +88,7 @@ else if(isset($_POST['addEducationalBackground'])){
 	$schoolyear=$_POST['academicYear'];
 	$schoolLevel=$_POST['schoollevel'];
 	$count=0;
-	$sql="INSERT INTO `acadsosd`.`classificationistory` (`classificationID`, `athleteID`, `dateClassified`) VALUES ('3', '".$id."', curDate());";
+	$sql="INSERT INTO `acadsosd`.`classificationhistory` (`classificationID`, `athleteID`, `dateClassified`) VALUES ('3', '".$id."', curDate());";
 	if(!mysqli_query($dbc, $sql)){
 		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
@@ -107,7 +107,9 @@ else if(isset($_POST['addEducationalBackground'])){
 		$part1.=")";
 		$part2.=");";
 		$sql=$part1." ".$part2;
-
+		echo '<div class="alert alert-danger">ERROR:
+        '.$sql.'
+        </div>';
 		mysqli_query($dbc, $sql);
 		$count++;
 	}
