@@ -79,13 +79,13 @@ else if(isset($_POST['addEducationalBackground'])){
 		echo '<div class="alert alert-danger">ERROR:
         '.$sql1.'
         </div>';
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 	if(!mysqli_query($dbc, $sql2)){
 		echo '<div class="alert alert-danger">ERROR:
         '.$sql2.'
         </div>';
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 
 	$id=$_POST['id'];
@@ -99,7 +99,7 @@ else if(isset($_POST['addEducationalBackground'])){
 		echo '<div class="alert alert-danger">ERROR:
         '.$sql2.'
         </div>';
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 	while(isset($schoolname[$count])){
 		$a=$schoolname[$count];
@@ -118,11 +118,9 @@ else if(isset($_POST['addEducationalBackground'])){
 
 		if(mysqli_query($dbc, $sql)){
 		$count++;
-
-
 		}
 		else{
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 		}
 	}
 
@@ -190,7 +188,7 @@ else if(isset($_POST['addEducationalBackground'])){
 		$count++;
         }
         else{
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
         }
     }
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/athleteRegisteredConfirmed.php");
