@@ -91,7 +91,7 @@ else if(isset($_POST['addEducationalBackground'])){
 	$id=$_POST['id'];
 	$schoolname=$_POST['name'];
 	$schooladdress=$_POST['address'];
-	$schoolyear=$_POST['schoolyear'];
+	$schoolyear=$_POST['academicYear'];
 	$schoolLevel=$_POST['schoollevel'];
 	$count=0;
 	$sql="INSERT INTO `acadsosd`.`classificationistory` (`classificationID`, `athleteID`, `dateClassified`) VALUES ('3', '".$id."', curDate());";
@@ -99,7 +99,7 @@ else if(isset($_POST['addEducationalBackground'])){
 		echo '<div class="alert alert-danger">ERROR:
         '.$sql2.'
         </div>';
-		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 	while(isset($schoolname[$count])){
 		$a=$schoolname[$count];
@@ -115,13 +115,11 @@ else if(isset($_POST['addEducationalBackground'])){
 		$part1.=")";
 		$part2.=");";
 		$sql=$part1." ".$part2;
-
-		if(mysqli_query($dbc, $sql)){
+		echo '<div class="alert alert-danger">ERROR:
+        '.$sql.'
+        </div>';
+		mysqli_query($dbc, $sql);
 		$count++;
-		}
-		else{
-		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
-		}
 	}
 
 	$schoollevel=$_POST['collegelevel'];
@@ -149,15 +147,8 @@ else if(isset($_POST['addEducationalBackground'])){
 		$part1.=")";
 		$part2.=");";
 		$sql=$part1." ".$part2;
-
-		if(mysqli_query($dbc, $sql)){
+		mysqli_query($dbc, $sql);
 		$count++;
-		}
-		else{
-		echo '<div class="alert alert-danger"> ERROR:
-        '.$sql.'
-        </div>';
-		}
 	}
 
     $tourname=$_POST['tournament'];
@@ -184,14 +175,10 @@ else if(isset($_POST['addEducationalBackground'])){
         $part2.=");";
         $sql=$part1." ".$part2;
 
-        if(!mysqli_query($dbc, $sql)){
+        mysqli_query($dbc, $sql);
 		$count++;
-        }
-        else{
-		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
-        }
     }
-	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/athleteRegisteredConfirmed.php");
+	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/athleteRegisteredConfirmed.php");
 }
 else{
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
@@ -401,7 +388,7 @@ else{
                                     <tbody>
                                       <tr class="odd gradeX">
                                           <td class="text-center">
-																						<select class="form-control name" name="schoollevel">
+																						<select class="form-control name" name="schoollevel[]">
 																					   <option value="grade1">Grade 1</option>
 																					   <option value="grade2">Grade 2</option>
 																					   <option value="grade3">Grade 3</option>
@@ -417,7 +404,7 @@ else{
 																					 </select> </td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="name[]"></td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="address[]"></td>
-                                          <td class="text-center" colspan="2"><input type="number" class="form-control inputs" name="schoolyear[]"></td>
+                                          <td class="text-center" colspan="2"><input type="number" class="form-control inputs" name="academicYear[]"></td>
                                            <td class="text-center bg-success-light" style="border-color:#999999">
                                               <div class="btn-group" style="vertical-align: middle;">
                                                   <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" type="button" style="background:none;border:none" id="add_input"><i class="glyphicon glyphicon-plus"></i></button></span>

@@ -416,7 +416,9 @@ else{
                             <h3>Enrollment Chart</h3>
                           </div>
                             <div class="col-lg-2">
-                               <a class="glyphicon glyphicon-pencil editLink" >Edit Planned Enrollment Chart </a>
+							<form>
+                               <input type="submit "class="glyphicon glyphicon-pencil editLink" value="Edit Planned Enrollment Chart">
+							   </form>
                               </div>
                           </div>
                           <div class="row">
