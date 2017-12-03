@@ -242,8 +242,8 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 
 
 					';
-                    
-		
+
+
 
 				?>
 				</form>
@@ -261,7 +261,6 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                     <div class="col-lg-10">
                         <div class="tab">
                           <button class="tablinks" onclick="openTab(event, 'athletes')">Athletes</button>
-                          <button class="tablinks" onclick="openTab(event, 'achievements')">Team Achievements</button>
                           <button class="tablinks" onclick="openTab(event, 'studentManager')">Student Manager</button>
                         </div>
 
@@ -301,13 +300,13 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 													  $statusName=$row['statusName'];
 													  $color=$row['statusID'];
 													  if($color==1){
-														 $color="statusSuperCritical"; 
+														 $color="statusSuperCritical";
 													  }
 													  else if($color==2){
-														  $color="statusCritical"; 
+														  $color="statusCritical";
 													  }
 													  else if($color==3){
-														  $color="statusNotCritical"; 
+														  $color="statusNotCritical";
 													  }
 													  echo '<tr class="odd gradeX">
                                                           <td class="text-center" ><form action="AthleteProfile.php" method="post"><input type="hidden" value="'.$studentID.'" name="athleteID"><input type=submit class="btn btn-link" value="'.$studentname.'" name="viewAthlete"></form></td>
@@ -337,51 +336,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 
                         </div>
 
-                          <div id="achievements" class="tabcontent">
-                            <div class ="row">
-                            <div class = "col-lg-9">
-                              <h3>Team Achievements</h3>
-                            </div>
-                            <div class="col-lg-3" style="padding-left: 70px; padding-top: 30px;">
-                              <button class="btn btn-default"> <a class="glyphicon glyphicon-plus" style="color:black;  "> Add Achievement</a></button>
-                            </div>
-                          </div>
 
-                          <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="dataTable_wrapper" >
-                              <!--
-                              <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                            -->
-                            <table class="table table-striped table-bordered table-hover" >
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center">Year</th>
-                                            <th class="text-center">Event</th>
-                                            <th class="text-center">Standing</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                      <?php 
-
-                                        $result = mysqli_query($dbc, $selectAllAchievements);
-                                        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                            echo'<tr class="odd gradeX">
-                                            <td class="text-center">'.$row['accomplishmentDate'].'</td>
-                                            <td class="text-center">'.$row['accomplishmentEvent'].'</td>
-                                            <td class="text-center">'.$row['accomplishmentStanding'].'</td>
-                                            </tr>';
-                                        }
-
-                                        ?>
-                                    </tbody>
-                                </table>
-
-                            </div>
-
-                        </div>
-                        <!-- /.panel-body -->
-                        </div>
 
                         <div id="studentManager" class="tabcontent">
                           <h3>Student Manager Details</h3>
@@ -397,7 +352,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                                     <div class="col-lg-1">
                                     </div>
                                     <div class="col-lg-8">
-                                        
+
 										<?php
 										$query="SELECT CONCAT(u.firstName, \" \", u.lastName) AS managername, m.idnumber, m.email FROM acadsosd.studentmanager m JOIN user u ON m.idnumber=u.idnumber WHERE teamCode='XASDR';";
 										$result=mysqli_query($dbc,$query);
@@ -423,7 +378,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 											';
 										}
 										?>
-                                           <!-- 
+                                           <!--
 										   <form>
 										   <div class="form-group" style="padding-top: 20px;">
                                                 <div>Name:
@@ -435,8 +390,8 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                                                 <div>E-mail:
                                                   <label>*e-mail* </label>
                                                 </div>
-                                            </div> 
-											
+                                            </div>
+
                                         </form>
 											-->
                                       </div>
