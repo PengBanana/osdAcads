@@ -22,6 +22,18 @@ require_once('../osd_connect.php');
 						$name=$_SESSION["name"];
 					}
 					$athleteID=$_POST['athleteID'];
+if(isset($_POST['updatePEC'])){
+	$courseName=$_POST['course'];
+	$courseUnit=$_POST['unit'];
+	$courseCode=$_POST['Code'];
+	$academicYear=$_POST['academicYear'];
+	$academicTerm=$_POST['term'];
+	$count=0;
+	while(isset($courseCode[$count])){
+		$count++;
+	}
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -232,7 +244,6 @@ require_once('../osd_connect.php');
 				$college=$row['collegeName'];
 				echo
 				'
-				<form>
 
                         <div class="form-group">
                             <div>Name:
@@ -252,10 +263,6 @@ require_once('../osd_connect.php');
                             </div>
 
                         </div>
-
-
-
-                    </form>
 
 
 
@@ -290,14 +297,21 @@ require_once('../osd_connect.php');
 
                           </div>
                           <div class="row">
-                          <form>
-                             <form>
-							 <div class="col-lg-7" style="padding-top:50px;padding-left:70px">
+							 <div class="col-lg-8" style="padding-top:50px;padding-left:70px">
 							 </div>
-                             <div class="col-lg-4" style="padding-top:50px;padding-left:70px">
-							 <form action="action.php">
-                                   <input type="submit" class="btn btn-default" name="updatePEC.php"> <i class="glyphicon glyphicon-ok"> Save</i></button>
-                                   <button type ="submit" class="btn btn-default" ><i class="glyphicon glyphicon-remove">Cancel</i></button>
+                             <div class="col-lg-1" style="padding-top:50px;padding-left:70px">
+							 <form action="athleteProfile.php" method="post">
+								<input type="hidden"  value="<?php echo $athleteID; ?>" name="athleteID">
+								<button type="submit" class="btn btn-default">
+								<i class="glyphicon glyphicon-remove"></i> Cancel
+								</button>
+								</form>
+								</div>
+								<div class="col-lg-1" style="padding-top:50px;padding-left:70px">
+								<form action="addPEC.php" method="post">
+                                <button type="submit" class="btn btn-default" name="updatePEC">
+								<i class="glyphicon glyphicon-ok"></i> Save
+								</button>
                              </div>
                            
                           </div>
@@ -307,7 +321,6 @@ require_once('../osd_connect.php');
                         <div class="panel-body">
                             <div class="table-responsive">
                               <div class="dataTable_wrapper">
-                                <form action="editPEC.html" method="post">
                                   <div>
 
                                   <div class="dataTable_wrapper">
@@ -323,8 +336,64 @@ require_once('../osd_connect.php');
                                               </tr>
                                             </thead>
                                             <tbody>
+											<?php
+											/*
+											SELECT * FROM acadsosd.plannedenrollmentchart pec
+											JOIN subjectdetails sd ON pec.pecID=sd.PlannedEnrollmentChart_pecID
+											WHERE pec.studentIDNumber='11327219' ORDER BY termtaken AND sd.YearTaken;
+											*/
+											$query="SELECT sd.courseCode, sd.termTaken, sd.YearTaken, s.courseUnit, s.courseName  FROM acadsosd.plannedenrollmentchart pec JOIN subjectdetails sd ON pec.pecID=sd.PlannedEnrollmentChart_pecID JOIN subjects s ON sd.courseCode=s.courseCode WHERE pec.studentIDNumber='".$athleteID."' ORDER BY termtaken AND sd.YearTaken";
+											$result=mysqli_query($dbc,$query);
+											while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+												$courseName=$row['courseName'];
+												$courseUnit=$row['courseUnit'];
+												$courseCode=$row['courseCode'];
+												$year=$row['YearTaken'];
+												$term=$row['termTaken'];
+												
+												echo'
+											<tr class="odd gradeX">
+                                              <td class="text-center">
+											  ';
+											  echo '
+											  <select class="form-control inputs" name="degree" value="">
+											  <option value="'.$courseCode.'">'.$courseCode.' : '.$courseName.'</option>';
+											  $query="SELECT * FROM acadsosd.subjects WHERE courseCode='".$courseCode."';";
+											$result=mysqli_query($dbc, $query);
+											while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+											$courseCode=$row['courseCode'];
+											$courseName=$row['courseName'];
+											echo '<option value="'.$courseCode.'">'.$courseCode.' : '.$courseName.'</option>';
+											}  
+                                              echo'
+											  </select>
+											  <td class="text-center"><input type="text" class="form-control inputs" name="unit[]" value="'.$courseUnit.'"></td>
+                                              <td class="text-center"><input type="text" class="form-control inputs" name="Code[]" value="'.$courseCode.'"></td>
+                                              <td class="text-center"><input type="number" class="form-control inputs" name="academicYear[]" value="'.$term.'"></td>
+                                              <td class="text-center"><input type="number" class="form-control inputs" name="term[]"></td>
+                                              <td class="text-center bg-success-light" style="border-color:#999999">
+                                                <div class="btn-group" style="vertical-align: middle;">
+                                                <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input4" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
+                                                </div>
+                                              </td>
+                                            </tr>
+												';
+											}
+											?>
                                             <tr class="odd gradeX">
-                                              <td class="text-center"><input type="text" class="form-control inputs" name="course[]" value=""></td>
+                                              <td class="text-center">
+											  <select class="form-control inputs" name="degree" value="">
+											  <?php
+											$query="SELECT * FROM acadsosd.subjects;";
+											$result=mysqli_query($dbc, $query);
+											while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+											$courseCode=$row['courseCode'];
+											$courseName=$row['courseName'];
+											echo '<option value="'.$courseCode.'">'.$courseCode.' : '.$courseName.'</option>';
+											}
+											?>
+											  </select>		  
+											  </td>
                                               <td class="text-center"><input type="text" class="form-control inputs" name="unit[]"></td>
                                               <td class="text-center"><input type="text" class="form-control inputs" name="Code[]"></td>
                                               <td class="text-center"><input type="number" class="form-control inputs" name="academicYear[]"></td>
@@ -341,8 +410,6 @@ require_once('../osd_connect.php');
 										</form>
                                       </div>
                                   </div>
-
-                                    </form>
                                   </div>
 
                             </div>
@@ -368,6 +435,7 @@ require_once('../osd_connect.php');
 
 
     </div>
+	</div>
         <!-- /#page-wrapper -->
          <!-- jQuery -->
     <script src="../dist/js/tab.js"></script>
@@ -395,7 +463,6 @@ require_once('../osd_connect.php');
         });
     });
     </script>
-    </div>
+    
     </body>
-
 </html>

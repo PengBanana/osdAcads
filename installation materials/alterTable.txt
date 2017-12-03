@@ -1,0 +1,10 @@
+ALTER TABLE `acadsosd`.`subjectdetails` 
+DROP FOREIGN KEY `fk_subjectDetails_department1`;
+ALTER TABLE `acadsosd`.`subjectdetails` 
+CHANGE COLUMN `department_departmentCode` `department_departmentCode` VARCHAR(45) NULL ;
+ALTER TABLE `acadsosd`.`subjectdetails` 
+ADD CONSTRAINT `fk_subjectDetails_department1`
+  FOREIGN KEY (`department_departmentCode`)
+  REFERENCES `acadsosd`.`department` (`departmentCode`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
