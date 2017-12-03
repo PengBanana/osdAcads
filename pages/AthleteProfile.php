@@ -248,6 +248,7 @@ else{
 				$collegeCode=$row['college_collegeCode'];
 				$college=$row['collegeName'];
                 $statusID=$row['statusID'];
+				$pecID=$row['pecID'];
 				if(empty($middleName)){
 					$middleName="";
 				}
@@ -271,9 +272,7 @@ else{
 				if(empty($address2)){
 					$address2="N/A";
 				}
-
                 $color="black";
-
                 if($statusID == '1'){
                     $color = "red";
                 }
@@ -283,9 +282,7 @@ else{
                 else if($statusID == '3'){
                     $color = "green";
                 }
-
                 $classcolor="";
-
                 if($statusID == '1'){
                     $classcolor = "statusSuperCritical";
                 }
@@ -295,11 +292,9 @@ else{
                 else if($statusID == '3'){
                     $classcolor = "statusNotCritical";
                 }
-
 				echo
 				'
 				<form>
-
                         <div class="form-group">
                             <div>Name:
                             <label>'.$lastname.', '.$firstname.' '.$middleName.'</label>
@@ -316,33 +311,21 @@ else{
                             <div>Degree Program:
                             <label>'.$degree.' ('.$degreeCode.')</label>
                             </div>
-
                         </div>
-
-
-
                     </form>
-
-
-
                 </div>
                  <div class="col-lg-3"></div>
                 <div class="col-lg-2">
                     <div style="color: '.$color.';"> <label>'.$status.'</label></div>
                     <div>
                         <label> Units Remaining: </label>
-
                     </div>
                     <label style="font-size: 24px;">'.$units.'</label>
-
                 </div>
-
                  <div class="col-lg-6" style="padding-left:320px;"><button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editStatus" style="height:40px; width: auto;font-size:14px;">Edit Status
 						 </button></div>
-
             </div>
 				';
-
 				?>
 
 
@@ -453,184 +436,65 @@ else{
                             <div class="col-lg-4" style="padding-left: 50px;">
 							<form action="addPEC.php" method="post"><input type="hidden" value="<?php echo $athleteID; ?>" name="athleteID"><input type=submit class="btn btn-link breadCrumb1" name="submit" value="EDIT PLANNED ENROLLMENT CHART"></form>
                               </div>
-                          </div>
-                          <div class="row">
-                          <div class="col-lg-3">
-                            <div class="form-group" style="padding-top: 25px;">
-                                 <label>School year</label>
-                                 <select class="form-control">
-                                 <option>-School year-</option>
-                                 <option>2014-2015</option>
-                                 <option>2015-2016</option>
-                                 <option>2017-2018</option>
-                                         </select>
-                                     </div>
-                           </div>
-                          </div>
+							  </div>
+						  <?php
+						  $query='SELECT SUM(s.courseUnit) AS TU FROM acadsosd.subjectdetails sd JOIN subjects s on sd.courseCode=s.courseCode WHERE PlannedEnrollmentChart_pecID='.$pecID.';';
+						  $result=mysqli_query($dbc,$query);
+						  $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+						  $tu=$row['TU'];
+						  if(empty($tu)){
+							  $tu=0;
+						  }
+						  echo'
+						  <div>
+						  <label>Total Units : '.$tu.'</label><br>
+						  </div>';
+						  $query='SELECT yearTaken FROM acadsosd.subjectdetails WHERE PlannedEnrollmentChart_pecID='.$pecID.' GROUP BY yearTaken ;';
+						  $result=mysqli_query($dbc,$query);
+						  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+							  $year=$row['yearTaken'];
+							  $year2=$year+1;
+							  $academicyear=$year." - ".$year2;
+							  echo'<div class="panel panel-default">
+							  <div class="panel-heading">'.$academicyear.'</div>
+							  <div class="panel-body">
+							  <div class="table-responsive">
+							  <table class="table table-striped table-bordered table-hover">
+							  <thead>
+							  <th class="text-center">Course</th>
+							  <th class="text-center">Unit</th>
+							  <th class="text-center">Term</th>
+							  </thead>';
+							  $query2="SELECT * FROM acadsosd.subjectdetails sd JOIN subjects s on sd.courseCode=s.courseCode WHERE PlannedEnrollmentChart_pecID=".$pecID." AND yearTaken=".$year.";";
+							  $result2=mysqli_query($dbc,$query2);
+							  while($row2=mysqli_fetch_array($result2,MYSQLI_ASSOC)){
+								$term=$row2['termTaken'];
+								$courseCode=$row2['courseCode'];
+								$courseName=$row2['courseName'];
+								$courseUnit=$row2['courseUnit'];
+								echo'
+								<tr class="odd gradeX">
+                                <td class="text-center">'.$courseCode.': '.$courseName.'</td>
+								<td class="text-center ">'.$courseUnit.'</td>
+								<td class="text-center">'.$term.'</td>
+								</tr>
+								';
+							  }
+							  echo '</tbody>
+							  </table>
+							  </div>
+							  </div>
+							  </div>';
+						  }
+						  ?>
 
-                        <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Term 1 SY 2014 - 2015
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <th class="text-center">Course</th>
-                                        <th class="text-center">Unit</th>
-                                        <th class="text-center">Grade</th>
-
-                                    </thead>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> KASPIL1</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> ITORGMT</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> INTRIT</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> TREDONE</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div><label>Term total: 12</label></div>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
+                   
 
 
 
-
-
-                    <!--SECOND TABLE -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Term 2 SY 2014 - 2015
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <th class="text-center">Course</th>
-                                        <th class="text-center">Unit</th>
-                                        <th class="text-center">Grade</th>
-
-                                    </thead>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> KASPIL1</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> ITORGMT</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> INTRIT</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> TREDONE</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div><label>Term total: 12</label></div>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- / end of second table -->
-
-
-
-                    <!-- Third Table -->
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Term 3 SY 2014 - 2015
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                        <th class="text-center">Course</th>
-                                        <th class="text-center">Unit</th>
-                                        <th class="text-center">Grade</th>
-
-                                    </thead>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> KASPIL1</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> ITORGMT</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-
-
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> INTRIT</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-
-                                        </tr>
-
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> TREDONE</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center"> 3</td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div><label>Term total: 12</label></div>
-                            </div>
-                            <!-- /.table-responsive -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-                    <!-- /. end of Third Table -->
+                    
                     <!-- /.panel -->
-                    <div>
-                      <label>Total Units : 36</label><br>
-                      <label>CGPA: 3.99</label>
-                    </div>
+                    
                         </div>
 
 
@@ -658,7 +522,6 @@ else{
                                             <td class="text-center '.$classcolor.'">'.$row['SN'].'</td>
                                             </tr>';
                                         }
-
                                         ?>
                                     </tbody>
                                 </table>
