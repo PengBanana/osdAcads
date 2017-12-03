@@ -51,7 +51,7 @@ echo '
 
 	<!-- Custom CSS -->
 	<link href="custom.css" rel="stylesheet">
-		
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesnt work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -77,13 +77,13 @@ echo '
                 <img src="Images/OSD-logo2.png" height="35px" width="auto" />
                 </a>
             </div>
-            
+
             <!-- /.navbar-header -->
-            
+
             <!-- NAV BAR -->
 
             <ul class="nav navbar-top-links navbar-right">
-                
+
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -103,15 +103,15 @@ echo '
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
- 
+
             <div class="navbar-fixed sidebar"  role="navigation" >
                 <div class="sidebar-nav navbar-f" >
                     <ul class="nav" id="side-menu" >
-                       
+
                             <li >
                                 <a href="index.html"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
                             </li>
-                          
+
                              <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-user" style="color: white"></i> Student Athletes </i></a>
                             <ul id="demo1" class="collapse" style="list-style: none;">
@@ -127,7 +127,7 @@ echo '
                                     <a href="AthletesAll.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> View Student Athletes </a>
                                 </li>
 
-                               
+
                             </ul>
                             </li>
 
@@ -144,11 +144,11 @@ echo '
                                 <li>
                                     <a href="ManageSM.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Manage Student Managers </a>
                                 </li>
-                               
+
                             </ul>
                         </li>
-                                              
-                       
+
+
 
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-education" style="color: white"></i> Scholarships </a>
@@ -162,12 +162,12 @@ echo '
                                 <li>
                                     <a href="Scholarships.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style></i> Scholarship Summary</a>
                                 </li>
-                                
-                               
-                    
+
+
+
                             </ul>
                         </li>
-                        
+
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-folder-open" style="color: white"></i> View Reports </a>
                             <ul id="demo4" class="collapse" style="list-style: none;">
@@ -191,7 +191,7 @@ echo '
                                 </li>
                             </ul>
                         </li>
-                                              
+
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -225,7 +225,7 @@ echo '
 				   echo'<div class="alert alert-success">
 					An email has been sent to '.$to.'
 					</div>';
-					
+
 				} else {
 				   echo '<div class="alert alert-danger">
 					There was a problem sending the mail
@@ -240,7 +240,7 @@ echo '
 					The acitvation request has been declined
 					</div>';
 				}
-				
+
 				$query="SELECT CONCAT(user.lastName,', ', user.firstName,' ', user.middleName) AS fullname, user.idnumber, studentmanager.email FROM user JOIN studentmanager ON user.idnumber=studentmanager.idnumber WHERE studentmanager.managerCode='3';";
 				$result=mysqli_query($dbc, $query);
 				?>
@@ -259,8 +259,8 @@ echo '
                                         <tr>
                                             <th class="text-center">Name</th>
                                             <th class="text-center">Actions</th>
-                                           
-                             
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -268,15 +268,15 @@ echo '
 									while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 									$idnumber=$row['idnumber'];
 									if(empty($idnumber)){
-									echo "";	
+									echo "";
 									}
 									else{
 									$email=$row['email'];
 									$fullname=$row['fullname'];
 									echo '<tr class="odd gradeX"><td class="text-center" ><form action="athleteProfile" method="post"><input type="hidden" value="'.$idnumber.'"><input type="button" value="'.$fullname.'"></form></td><td class="text-center">
 									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#'.$idnumber.'">View Request</button>  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDecline">Decline</button></td></tr>';
-									
-								
+
+
 								//<!-- Modal Approve-->
                                 echo '<div class="modal fade" id="'.$idnumber.'" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -315,7 +315,7 @@ echo '
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-success" name="activateAccount" value="ACCEPT">
-								</form> 
+								</form>
                                 </div>
                                 </div>
                                 <!-- /.modal-content -->
@@ -323,9 +323,9 @@ echo '
                                 <!-- /.modal-dialog -->
                                 </div>
                                 <!-- /.modal approve-->
-								
+
 								';
-								
+
                                 //<!-- Modal Decline-->
                                 echo'<div class="modal fade" id="myModalDecline" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -352,12 +352,12 @@ echo '
 									<!-- /.modal Decline-->';
 									}
 							}
-							
+
 							echo '</tbody>';
                             echo '</table>';
 							?>
                             </div>
-                          
+
                         </div>
                         <!-- /.panel-body -->
                     </div>

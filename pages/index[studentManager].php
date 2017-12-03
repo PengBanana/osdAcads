@@ -42,7 +42,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HR</title>
+    <title>SAMS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -77,7 +77,6 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
     <div id="wrapper">
 
         <!-- Navigation -->
-
        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -86,7 +85,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[admin].html">
+                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[studentManager].php">
                 <img src="Images/OSD-logo2.png" height="35px" width='auto' />
                 </a>
             </div>
@@ -106,7 +105,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                         <li><a href="changePassword.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -120,14 +119,14 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                     <ul class="nav" id="side-menu" >
 
                             <li >
-                                <a href="index[admin].html"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
+                                <a href="index[studentManager].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
                             </li>
 
                              <li>
                               <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
                               <ul id="demo1" class="collapse" style="list-style: none;">
-                                <li><a href="#"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
-                                <li><a href="#"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
+                                <li><a href="MidtermUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
+                                <li><a href="FinalsUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
                               </ul>
                               </li>
                               <li>
@@ -151,61 +150,102 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                     <h1 class="page-header">Welcome Grace!</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-				<div class="panel-body">
-                                          <div class="dataTable_wrapper" >
-                                              <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                                  <thead>
-                                                      <tr>
-                                                          <th class="text-center">Name</th>
-                                                          <th class="text-center">College</th>
-                                                          <th class="text-center">Degree Program</th>
-                                                          <th class="text-center">Academic Status</th>
+							<div class="panel-body">
+			             <div class="row">
+										 	<div class="col-lg-1"></div>
+											<div class="col-lg-7">
+												<div class="panel-body">
+													<div class="panel panel-default">
+															<div class="panel-heading">
+																	<h3 class="panel-title">alvin team name to</h3>
+															</div>
+															<div class="panel-body">
+																<div class="dataTable_wrapper" >
+																	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+																			<thead>
+																				<tr>
+																					<th class="text-center">Name</th>
+																					<th class="text-center">College</th>
+																					<th class="text-center">Degree Program</th>
+																					<th class="text-center">Academic Status</th>
+																				</tr>
+																			</thead>
+																			<tbody>
+																					<?php
+																					$query="SELECT s.studentIDNumber, concat(s.studentFirstName, \" \", s.studentLastName) AS studentname, p.degreeTable_degreeCode AS degreeCode, de.college_collegeCode AS collegeCode, a.statusName, a.statusID FROM acadsosd.studentathleteprofile s JOIN academicclassification a ON s.statusID = a.statusID JOIN plannedenrollmentchart p ON s.studentIDNumber = p.studentIDNumber JOIN degree d ON p.degreeTable_degreeCode = d.degreeCode JOIN department de ON d.departmentCode = de.departmentCode WHERE s.teamCode='".$teamCode."' AND s.statusID<'4';";
+																					$result=mysqli_query($dbc,$query);
+																					while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+																						$studentID=$row['studentIDNumber'];
+																						$studentname=$row['studentname'];
+																						$degreeCode=$row['degreeCode'];
+																						$collegeCode=$row['collegeCode'];
+																						$statusName=$row['statusName'];
+																						$color=$row['statusID'];
+																						if($color==1){
+																						 $color="statusSuperCritical";
+																						}
+																						else if($color==2){
+																							$color="statusCritical";
+																						}
+																						else if($color==3){
+																							$color="statusNotCritical";
+																						}
+																						echo '<tr class="odd gradeX">
+																																					<td class="text-center" ><form action="AthleteProfile.php" method="post"><input type="hidden" value="'.$studentID.'" name="athleteID"><input type=submit class="btn btn-link" value="'.$studentname.'" name="viewAthlete"></form></td>
+																																					<td class="text-center">'.$collegeCode.'</td>
+																																					<td class="text-center">'.$degreeCode.'</td>
+																																					<td class="text-center '.$color.'">'.$statusName.'</td>
+																					</tr>';
+																					}
+																					?>
+																																		<!--<tr class="odd gradeX">
+																																					<td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">Ureta,Miguel</u></a></td>
+																																					<td class="text-center"> CCS</td>
+																																					<td class="text-center"> BS-IT</td>
+																																					<td class="text-center statusCritical">CRITICAL</td>
+																					</tr>-->
+																					</tbody>
+																					</table>
+																				</div>
 
+															</div>
+															<div class="panel-footer text-right">
 
-                                                      </tr>
-                                                  </thead>
-                                                  <tbody>
-												  <?php
-												  $query="SELECT s.studentIDNumber, concat(s.studentFirstName, \" \", s.studentLastName) AS studentname, p.degreeTable_degreeCode AS degreeCode, de.college_collegeCode AS collegeCode, a.statusName, a.statusID FROM acadsosd.studentathleteprofile s JOIN academicclassification a ON s.statusID = a.statusID JOIN plannedenrollmentchart p ON s.studentIDNumber = p.studentIDNumber JOIN degree d ON p.degreeTable_degreeCode = d.degreeCode JOIN department de ON d.departmentCode = de.departmentCode WHERE s.teamCode='".$teamCode."' AND s.statusID<'4';";
-												  $result=mysqli_query($dbc,$query);
-												  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-													  $studentID=$row['studentIDNumber'];
-													  $studentname=$row['studentname'];
-													  $degreeCode=$row['degreeCode'];
-													  $collegeCode=$row['collegeCode'];
-													  $statusName=$row['statusName'];
-													  $color=$row['statusID'];
-													  if($color==1){
-														 $color="statusSuperCritical";
-													  }
-													  else if($color==2){
-														  $color="statusCritical";
-													  }
-													  else if($color==3){
-														  $color="statusNotCritical";
-													  }
-													  echo '<tr class="odd gradeX">
-                                                          <td class="text-center" ><form action="AthleteProfile.php" method="post"><input type="hidden" value="'.$studentID.'" name="athleteID"><input type=submit class="btn btn-link" value="'.$studentname.'" name="viewAthlete"></form></td>
-                                                          <td class="text-center">'.$collegeCode.'</td>
-                                                          <td class="text-center">'.$degreeCode.'</td>
-                                                          <td class="text-center '.$color.'">'.$statusName.'</td>
-													</tr>';
-												  }
-												  ?>
-                                                    <!--<tr class="odd gradeX">
-                                                          <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">Ureta,Miguel</u></a></td>
-                                                          <td class="text-center"> CCS</td>
-                                                          <td class="text-center"> BS-IT</td>
-                                                          <td class="text-center statusCritical">CRITICAL</td>
-													</tr>-->
-                                                  </tbody>
-                                              </table>
-                                          </div>
-                                      </div>
+															</div>
+													</div>
+
+												</div>
+											</div>
+											<div class="col-lg-3">
+									          <div class="panel panel-default">
+									                    <div class="panel-heading">
+									                        <h3 class="panel-title">Newly Added Athlete</h3>
+									                    </div>
+									                    <div class="panel-body">
+									                        <div class="list-group">
+									                                <a href="#" class="list-group-item" style="font-size: 14px;">
+									                                    <i class="glyphicon glyphicon-user"></i> Alvin query ng pinakalatest
+
+									                                </a>
+									                                <a href="#" class="list-group-item" style="font-size: 14px;">
+									                                    <i class="glyphicon glyphicon-user"></i> Alvin  query ng pinaka lates
+
+									                                </a>
+									                        </div>
+
+									                    </div>
+									                    <div class="panel-footer text-right">
+
+									                    </div>
+									         </div>
+									   </div>
+										 <div>
+									 </div>
+			  			</div>
             </div>
-		</div>
+					</div>
 
-		
+
 
 
 
