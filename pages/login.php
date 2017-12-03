@@ -84,7 +84,7 @@ if(isset($_POST['login'])){
 					$_SESSION["name"]=$name;
 					$_SESSION["idnumber"]=$idnumberin;
 					$_SESSION["typex"]=$usertype;
-					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[admin].html");
+					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[admin].php");
 				}
 				else if($usertype=='3'){
 					//the account is student manager

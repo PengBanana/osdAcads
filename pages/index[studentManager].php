@@ -42,7 +42,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HR</title>
+    <title>SAMS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
