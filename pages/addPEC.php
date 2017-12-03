@@ -33,7 +33,8 @@ if(isset($_POST['updatePEC'])){
 		echo '<div class="alert alert-danger">ERROR:
         '.$count.'
         </div>';
-		$query="INSERT INTO `acadsosd`.`subjectdetails` (`PlannedEnrollmentChart_pecID`, `termTaken`, `YearTaken`, `courseCode`) VALUES ('".$pecID."', '".$academicTerm[$count]."', '".$academicYear[$count]."', '".$courseCode[$count]."');";
+		$query="INSERT INTO `acadsosd`.`subjectdetails` (`PlannedEnrollmentChart_pecID`, `termTaken`, `YearTaken`, `courseCode`) 
+                VALUES ('".$pecID."', '".$academicTerm[$count]."', '".$academicYear[$count]."', '".$courseCode[$count]."');";
 		$count++;
 		echo '<div class="alert alert-danger">ERROR:
         '.$count.'

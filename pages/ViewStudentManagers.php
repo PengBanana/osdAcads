@@ -64,7 +64,9 @@ else{
 
 <?php 
         require_once('../osd_connect.php');
-        $selectAllStudentManagers = "SELECT SM.teamCode, CONCAT(u.lastName,', ', u.firstName) as 'smName', t.teamName FROM user u JOIN studentmanager sm  ON u.idNumber = sm.idNumber JOIN team t ON sm.teamCode = t.sportCode";
+        $selectAllStudentManagers = "SELECT SM.teamCode, CONCAT(u.lastName,', ', u.firstName) as 'smName', t.teamName 
+                                     FROM user u JOIN studentmanager sm  ON u.idNumber = sm.idNumber 
+                                     JOIN team t ON sm.teamCode = t.sportCode WHERE SM.managerCode = 1";
 ?>
 
 <body>
@@ -202,7 +204,7 @@ else{
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Student Athletes</h1>
+                    <h1 class="page-header">Student Managers</h1>
 
                 <div>
 
@@ -258,7 +260,7 @@ else{
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-primary">Save changes</button>
+                                      <button type="button" class="btn btn-primary">Deactivate</button>
                                     </div>
                                     </div>
                                   <!-- /.modal-content -->
