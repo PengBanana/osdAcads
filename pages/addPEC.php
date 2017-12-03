@@ -30,16 +30,23 @@ if(isset($_POST['updatePEC'])){
 	$query="DELETE FROM acadsosd.subjectdetails WHERE pecID='".$pecID."';";
 	mysqli_query($dbc, $query);
 	while(isset($courseCode[$count])){
+		echo '<div class="alert alert-danger">ERROR:
+        '.$count.'
+        </div>';
 		$query="INSERT INTO `acadsosd`.`subjectdetails` (`PlannedEnrollmentChart_pecID`, `termTaken`, `YearTaken`, `courseCode`) VALUES ('".$pecID."', '".$academicTerm[$count]."', '".$academicYear[$count]."', '".$courseCode[$count]."');";
 		$count++;
 		echo '<div class="alert alert-danger">ERROR:
-        '.$query.'
+        '.$count.'
         </div>';
 		mysqli_query($dbc, $query);
 	}
+	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 }
 else{
 	$athleteID=$_POST['athleteID'];
+	if(empty($athleteID)){
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+	}
 }
 
 ?>
@@ -378,16 +385,16 @@ else{
 											  </select>
 											  </td>
                                               <td class="text-center bg-success-light" style="border-color:#999999">
-                                                <div class="btn-group" style="vertical-align: middle;">
-												<span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input4" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
-                                                </div>
-                                              </td>
+                                              <div class="btn-group" style="vertical-align: middle;">
+                                              <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input4" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
+                                              </div>
+                                            </td>
                                             </tr>
 											<!--<input type="hidden" value="" id="jss">-->
                                             </tbody>
 											
                                           </table>
-										</form>
+										
                                       </div>
                                   </div>
                                   </div>
@@ -402,7 +409,7 @@ else{
 
 
 
-
+			</form>
             </div>
 
 
