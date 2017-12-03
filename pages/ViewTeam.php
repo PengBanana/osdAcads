@@ -66,134 +66,73 @@ $idx=$_SESSION['idnumber'];
 <body>
 
     <div id="wrapper">
+			<!-- Navigation -->
+		 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
+					<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[studentManager].php">
+							<img src="Images/OSD-logo2.png" height="35px" width='auto' />
+							</a>
+					</div>
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index.html">
-                <img src="Images/OSD-logo2.png" height="35px" width='auto' />
-                </a>
-            </div>
+					<!-- /.navbar-header -->
 
-            <!-- /.navbar-header -->
+					<!-- NAV BAR -->
 
-            <!-- NAV BAR -->
+					<ul class="nav navbar-top-links navbar-right">
 
-            <ul class="nav navbar-top-links navbar-right">
+							<!-- /.dropdown -->
+							<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+											<i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
+									</a>
+									<ul class="dropdown-menu dropdown-user" >
+											<li><a href="changePassword.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
+											</li>
+											<li class="divider"></li>
+											<li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+											</li>
+									</ul>
+									<!-- /.dropdown-user -->
+							</li>
+							<!-- /.dropdown -->
+					</ul>
+					<!-- /.navbar-top-links -->
 
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i><?php echo $name; ?></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <!-- /.navbar-top-links -->
+					<div class="navbar-fixed sidebar"  role="navigation" >
+							<div class="sidebar-nav navbar-f" >
+									<ul class="nav" id="side-menu" >
 
-            <div class="navbar-fixed sidebar"  role="navigation" >
-                <div class="sidebar-nav navbar-f" >
-                    <ul class="nav" id="side-menu" >
+													<li >
+															<a href="index[studentManager].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
+													</li>
 
-                            <li >
-                                <a href="index.html"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
-                            </li>
+													 <li>
+														<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
+														<ul id="demo1" class="collapse" style="list-style: none;">
+															<li><a href="MidtermUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
+															<li><a href="FinalsUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
+														</ul>
+														</li>
+														<li>
+																<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
+																<ul id="demo4" class="collapse" style="list-style: none;">
+																	 <li><a href="ViewTeamAthletes_admin.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
 
-                             <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-user" style="color: white"></i> Student Athletes </i></a>
-                            <ul id="demo1" class="collapse" style="list-style: none;">
-                                <li>
-                                    <a href="AthletesAll.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> View Student Athletes </a>
-                                </li>
+																</ul>
+														</li>
 
-
-                                    <li>
-                                        <a href="AddCourse1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Courses</a>
-                                    </li>
-                                    <li>
-                                        <a href="EditCourse1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Edit Courses</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="AddGrades.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Edit Grades</a>
-                                    </li>
-
-
-
-                            </ul>
-                        </li>
-
-
-                        <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-inbox" style="color: white"></i> Manage Reports </i></a>
-                            <ul id="demo1" class="collapse" style="list-style: none;">
-
-                                 <li>
-                                        <a href="AddASSR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Academic Status</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="AddMAR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Midterm Report</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="AddAPFR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Projected to Fail Course</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="AddAAPFR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Aftermath of the Projected to Fail Courses </a>
-                                    </li>
-
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-folder-open" style="color: white"></i> View Reports </a>
-                            <ul id="demo4" class="collapse" style="list-style: none;">
-                                <li>
-                                    <a href="ManagePEC.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Planned Enrollment Chart</a>
-                                </li>
-                               <li>
-                                    <a href="ASSR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white"></i> Academic Standing Summary Report </a>
-                                </li>
-                                <li>
-                                    <a href="AMSL.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Academic Monitoring Summary List</a>
-                                </li>
-                                <li>
-                                    <a href="MAR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Midterm Academic Report</a>
-                                </li>
-                                <li>
-                                    <a href="APFR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Academic Projected Failure Report</a>
-                                </li>
-                                <li>
-                                    <a href="AAPFR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Aftermath of Academic Projected Failure Report</a>
-                                </li>
-                            </ul>
-                        </li>
-
-
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
+									</ul>
+							</div>
+							<!-- /.sidebar-collapse -->
+					</div>
+					<!-- /.navbar-static-side -->
+			</nav>
 
         <div id="page-wrapper">
             <div class="row">
@@ -228,8 +167,8 @@ $idx=$_SESSION['idnumber'];
                                     </thead>
 
                                     <?php
-                                    $getDetails = "SELECT T.SPORTCODE, T.TEAMNAME, T.SPORT, IFNULL(COUNT(SA.STUDENTIDNUMBER), 0) AS NUMBEROFSTUDENTS 
-                                                   FROM TEAM T LEFT JOIN STUDENTATHLETEPROFILE SA ON T.SPORTCODE = SA.TEAMCODE 
+                                    $getDetails = "SELECT T.SPORTCODE, T.TEAMNAME, T.SPORT, IFNULL(COUNT(SA.STUDENTIDNUMBER), 0) AS NUMBEROFSTUDENTS
+                                                   FROM TEAM T LEFT JOIN STUDENTATHLETEPROFILE SA ON T.SPORTCODE = SA.TEAMCODE
                                                    GROUP BY T.SPORTCODE;";
                                     $result=mysqli_query($dbc,$getDetails);
 
@@ -246,7 +185,7 @@ $idx=$_SESSION['idnumber'];
                                         </tr>';
 
                                     }
-                                    
+
                                     ?>
                                 </table>
 
