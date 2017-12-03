@@ -13,8 +13,8 @@ if(empty($name)){
 	$name="no name";
 }
 }
-			
-		
+
+
 				if(isset($_POST['confirmPassword'])){
 					$password1=$_POST['password1'];
 					$password2=$_POST['password2'];
@@ -78,13 +78,13 @@ if(empty($name)){
                 <img src="Images/OSD-logo2.png" height="35px" width='auto' />
                 </a>
             </div>
-            
+
             <!-- /.navbar-header -->
-            
+
             <!-- NAV BAR -->
 
             <ul class="nav navbar-top-links navbar-right">
-                
+
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -104,15 +104,15 @@ if(empty($name)){
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
- 
+
             <div class="navbar-fixed sidebar"  role="navigation" >
                 <div class="sidebar-nav navbar-f" >
                     <ul class="nav" id="side-menu" >
-                       
+
                             <li >
                                 <a href="index.html"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
                             </li>
-                          
+
                              <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-user" style="color: white"></i> Student Athletes </i></a>
                             <ul id="demo1" class="collapse" style="list-style: none;">
@@ -128,7 +128,7 @@ if(empty($name)){
                                     <a href="AthletesAll.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> View Student Athletes </a>
                                 </li>
 
-                               
+
                             </ul>
                             </li>
 
@@ -145,11 +145,11 @@ if(empty($name)){
                                 <li>
                                     <a href="ManageSM.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Manage Student Managers </a>
                                 </li>
-                               
+
                             </ul>
                         </li>
-                                              
-                       
+
+
 
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-education" style="color: white"></i> Scholarships </a>
@@ -163,12 +163,12 @@ if(empty($name)){
                                 <li>
                                     <a href="Scholarships.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style></i> Scholarship Summary</a>
                                 </li>
-                                
-                               
-                    
+
+
+
                             </ul>
                         </li>
-                        
+
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-folder-open" style="color: white"></i> View Reports </a>
                             <ul id="demo4" class="collapse" style="list-style: none;">
@@ -192,7 +192,7 @@ if(empty($name)){
                                 </li>
                             </ul>
                         </li>
-                                              
+
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -200,10 +200,10 @@ if(empty($name)){
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
-		
+
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">  Welcome <?php echo $name; ?> </h1>
+                    <h1 class="page-header"> Change Password </h1>
 					<?php
 					if($error>0){
 						echo '<div class="alert alert-danger">
@@ -212,13 +212,12 @@ if(empty($name)){
 					}
 					?>
                 </div>
-				
+
             </div>
 
 
             <div class="row" id="main-panel">
-			
-                <p> <b>Congratulations!</b> You are now an official student manager, But before we proceed to Home page you need to set up the password for your account for your own privacy.<b> *Password must contain atleast five (5) characters*</b></p>
+
                 <div class="col-lg-3">  </div>
                 <div class="col-lg-5">
                     <form action="newUser.php" method="post">
@@ -232,28 +231,28 @@ if(empty($name)){
                             <label> Re-enter Password Name: </label>
                             <input type="password" class="form-control inputsSM" id="password" name="password2" required>
                         </div>
-                       
+
                         <div >
                         <input type="submit" class="btn btn-default" id="submitbutton" name="confirmPassword" value="Confirm">
                         </div>
-                    </form> 
+                    </form>
                 </div>
 
 
 
             </div>
 
-            
 
-               
+
+
 
             </div>
 
         </div>
 
 
-                
-        
+
+
         <!-- /#page-wrapper -->
          <!-- jQuery -->
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
