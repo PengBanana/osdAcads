@@ -208,6 +208,13 @@ else{
                 <div class="col-lg-5">
                  <?php
 				$athleteID=$_POST['athleteID'];
+				$query='SELECT SUM(courseUnit) AS rem FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.finalGrade IS NULL OR sd.finalGrade=0;';
+				$result=mysqli_query($dbc,$query);
+				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+				$units=$row['rem'];
+				if(empty($units)){
+					$units=0;
+				}
 				$query="SELECT * FROM acadsosd.studentathleteprofile s JOIN team t ON s.teamCode=t.sportCode JOIN academicclassification c ON s.statusID=c.statusID JOIN plannedenrollmentchart pec ON s.studentIDNumber=pec.studentIDNumber JOIN degree dg ON pec.degreeTable_degreeCode=dg.degreeCode JOIN department dpt ON dg.departmentCode=dpt.departmentCode JOIN college col ON dpt.college_collegeCode = col.collegeCode WHERE s.studentIDNumber='".$athleteID."';";
 				$result=mysqli_query($dbc,$query);
 				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -326,7 +333,7 @@ else{
                         <label> Units Remaining: </label>
 
                     </div>
-                    <label style="font-size: 24px;">150</label>
+                    <label style="font-size: 24px;">'.$units.'</label>
 
                 </div>
 
