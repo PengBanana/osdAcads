@@ -378,22 +378,6 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 											';
 										}
 										?>
-                                           <!--
-										   <form>
-										   <div class="form-group" style="padding-top: 20px;">
-                                                <div>Name:
-                                                  <label> Modino, Christian Concepcion</label>
-                                                </div>
-                                                <div>ID No:
-                                                  <label> 11443359</label>
-                                                </div>
-                                                <div>E-mail:
-                                                  <label>*e-mail* </label>
-                                                </div>
-                                            </div>
-
-                                        </form>
-											-->
                                       </div>
                                     </div>
                               </div>
