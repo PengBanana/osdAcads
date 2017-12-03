@@ -49,7 +49,7 @@ $(document).ready(function(){
  var i=1;
  $('#add_input2').click(function(){
  i++;
- $('#collegeTable').append('<tr id="row'+i+'""><td class="text-center"><input type="number" class="form-control inputs" name="collegelevvel[]"></td>'
+ $('#collegeTable').append('<tr id="row'+i+'""><td class="text-center"><input type="number" class="form-control inputs" name="collegelevel[]"></td>'
                                       + '<td class="text-center"><input type="text" class="form-control inputs" name="collegedegree[]"></td>'
                                       + '</td><td class="text-center"><input type="text" class="form-control inputs"  name="university[]"/></td>'
                                       + '<td class="text-center"><input type="text" class="form-control inputs" name="univAddress[]"></td>'

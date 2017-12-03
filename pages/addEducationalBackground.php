@@ -76,16 +76,10 @@ else if(isset($_POST['addEducationalBackground'])){
 	$sql2=$_POST['sql2'];
 
 	if(!mysqli_query($dbc, $sql1)){
-		echo '<div class="alert alert-danger">ERROR:
-        '.$sql1.'
-        </div>';
-		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 	if(!mysqli_query($dbc, $sql2)){
-		echo '<div class="alert alert-danger">ERROR:
-        '.$sql2.'
-        </div>';
-		//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
 
 	$id=$_POST['id'];
@@ -96,11 +90,9 @@ else if(isset($_POST['addEducationalBackground'])){
 	$count=0;
 	$sql="INSERT INTO `acadsosd`.`classificationistory` (`classificationID`, `athleteID`, `dateClassified`) VALUES ('3', '".$id."', curDate());";
 	if(!mysqli_query($dbc, $sql)){
-		echo '<div class="alert alert-danger">ERROR:
-        '.$sql2.'
-        </div>';
 		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/error.php");
 	}
+
 	while(isset($schoolname[$count])){
 		$a=$schoolname[$count];
 		$b=$schooladdress[$count];
@@ -109,46 +101,44 @@ else if(isset($_POST['addEducationalBackground'])){
 		$part1="INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `schoolYear`, `studentIDNumber`";
 		$part2="VALUES ('".$d."', '".$a."', '".$c."', '".$id."'";
 		if(isset($b)){
-			$part1.=", schoolAddress";
+			$part1.=", `schoolAddress`";
 			$part2.=", '".$b."'";
 		}
 		$part1.=")";
 		$part2.=");";
 		$sql=$part1." ".$part2;
-		echo '<div class="alert alert-danger">ERROR:
-        '.$sql.'
-        </div>';
+
 		mysqli_query($dbc, $sql);
 		$count++;
 	}
 
-	$schoollevel=$_POST['collegelevel'];
-	$schoolname=$_POST['university'];
-	$schooladdress=$_POST['univAddress'];
-	$schoolyear=$_POST['academicYear'];
-	$schooldegree=$_POST['collegedegree'];
+	$univlevel=$_POST['collegelevel'];
+	$univname=$_POST['university'];
+	$univaddress=$_POST['univAddress'];
+	$univschoolyear=$_POST['academicYear'];
+	$univdegree=$_POST['collegedegree'];
 	$count=0;
-	while(isset($schoolname[$count])){
-		$a=$schoolname[$count];
-		$b=$schooladdress[$count];
-		$c=$schoolyear[$count];
-		$e=$schooldegree[$count];
-		$d=$schoollevel[$count];
+	while(isset($univname[$count])){
+		$a=$univname[$count];
+		$b=$univaddress[$count];
+		$c=$univschoolyear[$count];
+		$e=$univdegree[$count];
+		$d=$univlevel[$count]; $count++;
 		$part1="INSERT INTO `acadsosd`.`educationalbackground` (`schoolLevel`, `SchoolName`, `schoolYear`, `studentIDNumber`";
 		$part2="VALUES ('".$d."', '".$a."', '".$c."', '".$id."'";
 		if(isset($b)){
-			$part1.=", schoolAddress";
+			$part1.=", `schoolAddress`";
 			$part2.=", '".$b."'";
 		}
 		if(isset($e)){
-			$part1.=", degree";
-			$part2.=", '".$e.".'";
+			$part1.=", `degree`";
+			$part2.=", '".$e."'";
 		}
 		$part1.=")";
 		$part2.=");";
 		$sql=$part1." ".$part2;
+
 		mysqli_query($dbc, $sql);
-		$count++;
 	}
 
     $tourname=$_POST['tournament'];
@@ -159,17 +149,17 @@ else if(isset($_POST['addEducationalBackground'])){
     $tourtype=$_POST['type'];
     $count=0;
     while(isset($tourname[$count])){
-        $a=$tourname[$count];
-        $b=$tourdate[$count];
-        $c=$tourvenue[$count];
-        $e=$tourevent[$count];
-        $d=$tourstanding[$count];
-        $f=$tourtype[$count];
-        $part1="INSERT INTO `acadsosd`.`achievmenthistory` (`accomplishmentName`, `accomplishmentDate`, `accomplishmentEvent`,`accomplismentStanding`,`accomplismentType`, `studentIDNumber`";
-        $part2="VALUES ('".$a."', '".$b."', '".$e."','".$d."', '".$id."'";
+        $a=$tourname[$count]; //name
+        $b=$tourdate[$count]; //date
+        $c=$tourvenue[$count]; //venue
+        $e=$tourevent[$count]; //event
+        $d=$tourstanding[$count]; //standing
+        $f=$tourtype[$count]; //type
+        $part1="INSERT INTO `acadsosd`.`achievmenthistory` (`accomplishmentName`, `accomplishmentDate`, `accomplishmentEvent`, `accomplishmentStanding`, `accomplishmentType`, `studentIDNumber`";
+        $part2="VALUES ('".$a."', '".$b."', '".$e."','".$d."', '".$f."', '".$id."'";
         if(isset($c)){
-            $part1.=", accomplishmentVenue";
-            $part2.=", ".$c."'";
+            $part1.=", `accomplishmentVenue`";
+            $part2.=", '".$c."'";
         }
         $part1.=")";
         $part2.=");";
@@ -178,7 +168,7 @@ else if(isset($_POST['addEducationalBackground'])){
         mysqli_query($dbc, $sql);
 		$count++;
     }
-	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/athleteRegisteredConfirmed.php");
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/athleteRegisteredConfirmed.php");
 }
 else{
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
@@ -417,7 +407,7 @@ else{
                                 <div><h4 class="page-header"> Collegiate</h4></div>
                                 <table class="table table-striped table-bordered table-hover" id="collegeTable">
                                     <thead>
-																						<th class="text-center">Year</th>
+											<th class="text-center">Year</th>
                                             <th class="text-center">Degree</th>
                                             <th class="text-center"> Name University</th>
                                             <th class="text-center"> Address University</th>
@@ -427,9 +417,7 @@ else{
                                     </thead>
                                     <tbody>
                                       <tr class="odd gradeX">
-										<td class="text-center">
-										<input type="number" class="form-control inputs" name="collegelevel[]">
-										</td>
+										<td class="text-center"><input type="number" class="form-control inputs" name="collegelevel[]"></td>
                                         <td class="text-center"><input type="text" class="form-control inputs" name="collegedegree[]"></td>
                                         <td class="text-center"><input type="text" class="form-control inputs" name="university[]"></td>
                                         <td class="text-center"><input type="text" class="form-control inputs" name="univAddress[]"></td>
