@@ -324,11 +324,14 @@ else{
                     <div style="color: '.$color.';"> <label>'.$status.'</label></div>
                     <div>
                         <label> Units Remaining: </label>
+
                     </div>
-                    <label style="font-size: 24px;">ALVINNNNNNN</label>
+                    <label style="font-size: 24px;">150</label>
+
                 </div>
 
-                 <div class="col-lg-7"></div>
+                 <div class="col-lg-6" style="padding-left:320px;"><button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editStatus" style="height:40px; width: auto;font-size:14px;">Edit Status
+						 </button></div>
 
             </div>
 				';
@@ -437,11 +440,11 @@ else{
 
                         <div id="pec" class="tabcontent">
                           <div class="row">
-                          <div class="col-lg-10">
+                          <div class="col-lg-8">
                             <h3>Enrollment Chart</h3>
                           </div>
-                            <div class="col-lg-2">
-							<form action="addPEC.php" method="post"><input type="hidden" value="<?php echo $athleteID; ?>" name="athleteID"><input type=submit class="btn btn-link" name="submit" value="EDIT PLANNED ENROLLMENT CHART"></form>
+                            <div class="col-lg-4" style="padding-left: 50px;">
+							<form action="addPEC.php" method="post"><input type="hidden" value="<?php echo $athleteID; ?>" name="athleteID"><input type=submit class="btn btn-link breadCrumb1" name="submit" value="EDIT PLANNED ENROLLMENT CHART"></form>
                               </div>
                           </div>
                           <div class="row">
@@ -637,7 +640,7 @@ else{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php 
+                                        <?php
                                         $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN
                                                                         FROM classificationhistory ch JOIN academicclassification ac
                                                                         ON ch.classificationID = ac.statusID;";
@@ -666,7 +669,7 @@ else{
                               <div class="col-lg-4"style="padding-top: 50px;" >
 
                                 <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#writeReport">
-                                    <i class="glyphicon glyphicon-plus btnFont">Add Academic Performance</i></button>
+                                    <i class="glyphicon glyphicon-plus btnFont" >Add Academic Performance</i></button>
 
                                 <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#addCourse" >
                                   <i class="glyphicon glyphicon-plus btnFont"> Add Course</i>
@@ -695,8 +698,8 @@ else{
                                             <td class="text-center"> 3</td>
                                             <td class="text-center">4  </td>
                                             <td class="text-center">
-                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#remove">Remove</button>
-                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editCourse">Edit Course</button>
+                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#remove" style="font-size: 12px;">Remove</button>
+                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editCourse" style="font-size: 12px;">Edit Course</button>
                                               <!-- Modal -->
                                               <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">
@@ -792,7 +795,7 @@ else{
                                                       <div class="modal-content">
                                                           <div class="modal-header">
                                                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                              <h4 class="modal-title" id="myModalLabel">Add Course</h4>
+                                                              <h4 class="modal-title" id="myModalLabel">Add Academic Performance Update</h4>
                                                           </div>
                                                           <div class="modal-body">
                                                           <form>
@@ -836,6 +839,41 @@ else{
                                                   <!-- /.modal-dialog -->
                                               </div>
                                               <!-- /.modal -->
+																							<!-- Modal edit Status -->
+																							<div class="modal fade" id="editStatus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																									<div class="modal-dialog">
+																											<div class="modal-content">
+																													<div class="modal-header">
+																															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+																															<h4 class="modal-title" id="myModalLabel">Edit Academic Status Course</h4>
+																													</div>
+																													<div class="modal-body">
+																													<form>
+																															<div class="form-group">
+																																<label style="float:left"> Choose type of Academic Report </label>
+																																<div class="form-group">
+																																		<select class="form-control">
+																																				<option>Inactive</option>
+																																				<option>Not Critical</option>
+																																				<option>Critical </option>
+																																				<option>Super Critical </option>
+
+																																		</select>
+																																</div>
+																															</div>
+
+																													</form>
+																													</div>
+																													<div class="modal-footer">
+																															<button type="button" class="btn btn-primary" >Confirm</button>
+																															<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+																													</div>
+																											</div>
+																											<!-- /.modal-content -->
+																									</div>
+																									<!-- /.modal-dialog -->
+																							</div>
+																							<!-- /.modal -->
                                             </td>
 
 
