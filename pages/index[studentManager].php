@@ -151,19 +151,61 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                     <h1 class="page-header">Welcome Grace!</h1>
                 </div>
                 <!-- /.col-lg-12 -->
+				<div class="panel-body">
+                                          <div class="dataTable_wrapper" >
+                                              <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                                  <thead>
+                                                      <tr>
+                                                          <th class="text-center">Name</th>
+                                                          <th class="text-center">College</th>
+                                                          <th class="text-center">Degree Program</th>
+                                                          <th class="text-center">Academic Status</th>
+
+
+                                                      </tr>
+                                                  </thead>
+                                                  <tbody>
+												  <?php
+												  $query="SELECT s.studentIDNumber, concat(s.studentFirstName, \" \", s.studentLastName) AS studentname, p.degreeTable_degreeCode AS degreeCode, de.college_collegeCode AS collegeCode, a.statusName, a.statusID FROM acadsosd.studentathleteprofile s JOIN academicclassification a ON s.statusID = a.statusID JOIN plannedenrollmentchart p ON s.studentIDNumber = p.studentIDNumber JOIN degree d ON p.degreeTable_degreeCode = d.degreeCode JOIN department de ON d.departmentCode = de.departmentCode WHERE s.teamCode='".$teamCode."' AND s.statusID<'4';";
+												  $result=mysqli_query($dbc,$query);
+												  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+													  $studentID=$row['studentIDNumber'];
+													  $studentname=$row['studentname'];
+													  $degreeCode=$row['degreeCode'];
+													  $collegeCode=$row['collegeCode'];
+													  $statusName=$row['statusName'];
+													  $color=$row['statusID'];
+													  if($color==1){
+														 $color="statusSuperCritical";
+													  }
+													  else if($color==2){
+														  $color="statusCritical";
+													  }
+													  else if($color==3){
+														  $color="statusNotCritical";
+													  }
+													  echo '<tr class="odd gradeX">
+                                                          <td class="text-center" ><form action="AthleteProfile.php" method="post"><input type="hidden" value="'.$studentID.'" name="athleteID"><input type=submit class="btn btn-link" value="'.$studentname.'" name="viewAthlete"></form></td>
+                                                          <td class="text-center">'.$collegeCode.'</td>
+                                                          <td class="text-center">'.$degreeCode.'</td>
+                                                          <td class="text-center '.$color.'">'.$statusName.'</td>
+													</tr>';
+												  }
+												  ?>
+                                                    <!--<tr class="odd gradeX">
+                                                          <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">Ureta,Miguel</u></a></td>
+                                                          <td class="text-center"> CCS</td>
+                                                          <td class="text-center"> BS-IT</td>
+                                                          <td class="text-center statusCritical">CRITICAL</td>
+													</tr>-->
+                                                  </tbody>
+                                              </table>
+                                          </div>
+                                      </div>
             </div>
+		</div>
 
-	<div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5">
-
-
-
-        </div>
-		<div class="col-lg-3">
-
-            </div>
-
+		
 
 
 
