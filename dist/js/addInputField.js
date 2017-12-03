@@ -51,7 +51,7 @@ $(document).ready(function(){
  i++;
  $('#collegeTable').append('<tr id="row'+i+'""><td class="text-center"><input type="number" class="form-control inputs" name="collegelevvel[]"></td>'
                                       + '<td class="text-center"><input type="text" class="form-control inputs" name="collegedegree[]"></td>'
-                                      + '</td><td class="text-center"><input type="text" class="form-control inputs"  name="univeristy[]"/></td>'
+                                      + '</td><td class="text-center"><input type="text" class="form-control inputs"  name="university[]"/></td>'
                                       + '<td class="text-center"><input type="text" class="form-control inputs" name="univAddress[]"></td>'
                                       + '<td class="text-center"  colspan="2"><input type="number" class="form-control inputs"  name="academicYear[]"/></td>'
                                       + '<td class="text-center"><button type="button" name="remove" id="'+
@@ -118,6 +118,8 @@ $(document).ready(function(){
  $('#pec').append('<tr id="row'+i+'"><td class="text-center"><input type="text" class="form-control inputs" name="course[]"></td>'
                                       + '<td class="text-center"><input type="text" class="form-control inputs" name="unit[]"></td>'
                                       + '<td class="text-center"><input type="text" class="form-control inputs" name="grade[]"></td>'
+                                      + '<td class="text-center"><input type="number" class="form-control inputs" name="academicYear[]"></td>'
+                                      + '<td class="text-center"><input type="number" class="form-control inputs" name="term[]"></td>'
                                       + '<td class="text-center"><button type="button" name="remove" id="'+
                                     i+'" class="btn_remove"><i class="glyphicon glyphicon-trash"></i></button></td></tr>');
  });

@@ -1,3 +1,28 @@
+<?php
+session_start();
+require_once('../osd_connect.php');
+					$idx=$_SESSION['idnumber'];
+					$typex=$_SESSION["typex"];
+					if($idx===0){
+					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+					}
+					if(empty($idx)){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+					}
+					else if($typex>2){
+						$query="SELECT * FROM acadsosd.studentmanager";
+						$result=mysqli_query($dbc,$query);
+						$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+						$teamCode=$row['teamCode'];
+					}
+					else if(empty($typex)){
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+					}
+					else{
+						$name=$_SESSION["name"];
+					}
+					$athleteID=$_POST['athleteID'];
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -62,12 +87,12 @@
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i> Carlos Fontanilla</a>
+                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i><?php echo $name; ?></a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -165,7 +190,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"> Athlete's Profile </h1>
+                    <h1 class="page-header"> Planned Enrollment Chart </h1>
                 </div>
             </div>
 
@@ -189,23 +214,41 @@
                 <div class="col-lg-1">
                 </div>
                 <div class="col-lg-5">
-                    <form>
+				<?php
+				$query="SELECT * FROM acadsosd.studentathleteprofile s JOIN team t ON s.teamCode=t.sportCode JOIN academicclassification c ON s.statusID=c.statusID JOIN plannedenrollmentchart pec ON s.studentIDNumber=pec.studentIDNumber JOIN degree dg ON pec.degreeTable_degreeCode=dg.degreeCode JOIN department dpt ON dg.departmentCode=dpt.departmentCode JOIN college col ON dpt.college_collegeCode = col.collegeCode WHERE s.studentIDNumber='".$athleteID."';";
+				$result=mysqli_query($dbc,$query);
+				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+				$lastname=$row['studentLastName'];
+				$firstname=$row['studentFirstName'];
+				$middleName=$row['studentMiddleName'];
+				$sportCode=$row['sportCode'];
+				$teamName=$row['teamName'];
+				$sport=$row['sport'];
+				$status=$row['statusName'];
+				$degreeCode=$row['degreeTable_degreeCode'];
+				$degree=$row['degreeName'];
+				$department=$row['departmentCode'];
+				$collegeCode=$row['college_collegeCode'];
+				$college=$row['collegeName'];
+				echo
+				'
+				<form>
 
                         <div class="form-group">
                             <div>Name:
-                            <label> Modino, Christian Concepcion</label>
+                            <label>'.$lastname.', '.$firstname.' '.$middleName.'</label>
                             </div>
                             <div>ID No:
-                            <label> 11443359</label>
+                            <label>'.$athleteID.'</label>
                             </div>
                             <div>Team:
-                            <label> Animo Squad</label>
+                            <label>'.$teamName.': '.$sport.'('.$sportCode.')</label>
                             </div>
                             <div>College:
-                            <label>College of Computer Studies </label>
+                            <label>'.$college.' ('.$collegeCode.')</label>
                             </div>
                             <div>Degree Program:
-                            <label>BS Information Technology</label>
+                            <label>'.$degree.' ('.$degreeCode.')</label>
                             </div>
 
                         </div>
@@ -219,16 +262,19 @@
                 </div>
                  <div class="col-lg-3"></div>
                 <div class="col-lg-2">
-                    <div style="color: red;"> <label>SUPER CRITICAL</label></div>
+                    <div style="color: red;"> <label>'.$status.'</label></div>
                     <div>
                         <label> Units Remaining: </label>
                     </div>
-                    <label style="font-size: 24px;">250.0(10)</label>
+                    <label style="font-size: 24px;">ALVINNNNNNN</label>
                 </div>
 
                  <div class="col-lg-7"></div>
 
             </div>
+				';
+
+				?>
 
 
             <div class="row">
@@ -245,36 +291,18 @@
                           </div>
                           <div class="row">
                           <form>
-                          <div class="col-lg-3">
-                            <div class="form-group" style="padding-top: 25px;">
-                                 <label>School year</label>
-                                 <select class="form-control">
-                                 <option>-School year-</option>
-                                 <option>2014-2015</option>
-                                 <option>2015-2016</option>
-                                 <option>2017-2018</option>
-                                         </select>
-                            </div>
-                           </div>
-                           <div class="col-lg-7" style="padding-top:50px;">
-
-                                 <button type="submit" class="btn btn-default">  <i class="glyphicon glyphicon-search"> Search</i></button>
-
-
-                             </form>
-                             </div>
                              <form>
-                             <div class="col-lg-2" style="padding-top:50px;padding-left:70px">
-                                   <button type="submit" class="btn btn-default" > <i class="glyphicon glyphicon-ok"> Save</i></button>
+							 <div class="col-lg-7" style="padding-top:50px;padding-left:70px">
+							 </div>
+                             <div class="col-lg-4" style="padding-top:50px;padding-left:70px">
+							 <form action="action.php">
+                                   <input type="submit" class="btn btn-default" name="updatePEC.php"> <i class="glyphicon glyphicon-ok"> Save</i></button>
                                    <button type ="submit" class="btn btn-default" ><i class="glyphicon glyphicon-remove">Cancel</i></button>
                              </div>
-                           </form>
+                           
                           </div>
 
                         <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Term 1 SY 2014 - 2015
-                        </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -289,24 +317,28 @@
                                                   <th class="text-center">Course</th>
                                                   <th class="text-center">Unit</th>
                                                   <th class="text-center">Code</th>
+                                                  <th class="text-center">Academic Year</th>
+                                                  <th class="text-center">Term</th>
                                                   <th class="text-center">Action</th>
                                               </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="odd gradeX">
-                                              <td class="text-center"><input type="text" class="form-control inputs" name="course[]"></td>
+                                              <td class="text-center"><input type="text" class="form-control inputs" name="course[]" value=""></td>
                                               <td class="text-center"><input type="text" class="form-control inputs" name="unit[]"></td>
-                                              <td class="text-center"><input type="text" class="form-control inputs" name="grade[]"></td>
+                                              <td class="text-center"><input type="text" class="form-control inputs" name="Code[]"></td>
+                                              <td class="text-center"><input type="number" class="form-control inputs" name="academicYear[]"></td>
+                                              <td class="text-center"><input type="number" class="form-control inputs" name="term[]"></td>
                                               <td class="text-center bg-success-light" style="border-color:#999999">
                                                 <div class="btn-group" style="vertical-align: middle;">
                                                 <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input4" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
                                                 </div>
                                               </td>
                                             </tr>
-
                                             </tbody>
+											
                                           </table>
-
+										</form>
                                       </div>
                                   </div>
 

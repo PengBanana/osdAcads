@@ -416,9 +416,7 @@ else{
                             <h3>Enrollment Chart</h3>
                           </div>
                             <div class="col-lg-2">
-							<form>
-                               <input type="submit "class="glyphicon glyphicon-pencil editLink" value="Edit Planned Enrollment Chart">
-							   </form>
+							<form action="addPEC.php" method="post"><input type="hidden" value="<?php echo $athleteID; ?>" name="athleteID"><input type=submit class="btn btn-link" name="submit" value="EDIT PLANNED ENROLLMENT CHART"></form>
                               </div>
                           </div>
                           <div class="row">

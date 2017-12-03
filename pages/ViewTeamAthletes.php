@@ -370,7 +370,6 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                                             <td class="text-center">'.$row['accomplishmentDate'].'</td>
                                             <td class="text-center">'.$row['accomplishmentEvent'].'</td>
                                             <td class="text-center">'.$row['accomplishmentStanding'].'</td>
-
                                             </tr>';
                                         }
 
