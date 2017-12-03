@@ -19,19 +19,27 @@ require_once('../osd_connect.php');
 						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 					}
 					else{
-						$name=$_SESSION["name"];
+					$name=$_SESSION["name"];
 					}
-					$athleteID=$_POST['athleteID'];
 if(isset($_POST['updatePEC'])){
-	$courseName=$_POST['course'];
-	$courseUnit=$_POST['unit'];
-	$courseCode=$_POST['Code'];
+	$courseCode=$_POST['course'];
 	$academicYear=$_POST['academicYear'];
 	$academicTerm=$_POST['term'];
+	$pecID=$_POST['pecID'];
 	$count=0;
+	$query="DELETE FROM acadsosd.subjectdetails WHERE pecID='".$pecID."';";
+	mysqli_query($dbc, $query);
 	while(isset($courseCode[$count])){
+		$query="INSERT INTO `acadsosd`.`subjectdetails` (`PlannedEnrollmentChart_pecID`, `termTaken`, `YearTaken`, `courseCode`) VALUES ('".$pecID."', '".$academicTerm[$count]."', '".$academicYear[$count]."', '".$courseCode[$count]."');";
 		$count++;
+		echo '<div class="alert alert-danger">ERROR:
+        '.$query.'
+        </div>';
+		mysqli_query($dbc, $query);
 	}
+}
+else{
+	$athleteID=$_POST['athleteID'];
 }
 
 ?>
@@ -328,8 +336,6 @@ if(isset($_POST['updatePEC'])){
                                           <thead>
                                               <tr>
                                                   <th class="text-center">Course</th>
-                                                  <th class="text-center">Unit</th>
-                                                  <th class="text-center">Code</th>
                                                   <th class="text-center">Academic Year</th>
                                                   <th class="text-center">Term</th>
                                                   <th class="text-center">Action</th>
@@ -342,47 +348,17 @@ if(isset($_POST['updatePEC'])){
 											JOIN subjectdetails sd ON pec.pecID=sd.PlannedEnrollmentChart_pecID
 											WHERE pec.studentIDNumber='11327219' ORDER BY termtaken AND sd.YearTaken;
 											*/
-											$query="SELECT sd.courseCode, sd.termTaken, sd.YearTaken, s.courseUnit, s.courseName  FROM acadsosd.plannedenrollmentchart pec JOIN subjectdetails sd ON pec.pecID=sd.PlannedEnrollmentChart_pecID JOIN subjects s ON sd.courseCode=s.courseCode WHERE pec.studentIDNumber='".$athleteID."' ORDER BY termtaken AND sd.YearTaken";
+											
+											$query="SELECT * FROM acadsosd.plannedenrollmentchart WHERE studentIDNumber='".$athleteID."';";
 											$result=mysqli_query($dbc,$query);
-											while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-												$courseName=$row['courseName'];
-												$courseUnit=$row['courseUnit'];
-												$courseCode=$row['courseCode'];
-												$year=$row['YearTaken'];
-												$term=$row['termTaken'];
-												
-												echo'
-											<tr class="odd gradeX">
-                                              <td class="text-center">
-											  ';
-											  echo '
-											  <select class="form-control inputs" name="degree" value="">
-											  <option value="'.$courseCode.'">'.$courseCode.' : '.$courseName.'</option>';
-											  $query="SELECT * FROM acadsosd.subjects WHERE courseCode='".$courseCode."';";
-											$result=mysqli_query($dbc, $query);
-											while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-											$courseCode=$row['courseCode'];
-											$courseName=$row['courseName'];
-											echo '<option value="'.$courseCode.'">'.$courseCode.' : '.$courseName.'</option>';
-											}  
-                                              echo'
-											  </select>
-											  <td class="text-center"><input type="text" class="form-control inputs" name="unit[]" value="'.$courseUnit.'"></td>
-                                              <td class="text-center"><input type="text" class="form-control inputs" name="Code[]" value="'.$courseCode.'"></td>
-                                              <td class="text-center"><input type="number" class="form-control inputs" name="academicYear[]" value="'.$term.'"></td>
-                                              <td class="text-center"><input type="number" class="form-control inputs" name="term[]"></td>
-                                              <td class="text-center bg-success-light" style="border-color:#999999">
-                                                <div class="btn-group" style="vertical-align: middle;">
-                                                <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input4" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
-                                                </div>
-                                              </td>
-                                            </tr>
-												';
-											}
+											$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+											$pecID=$row['pecID'];
+											echo '<input type="hidden" name="pecID" value="'.$pecID.'">';
+											
 											?>
                                             <tr class="odd gradeX">
                                               <td class="text-center">
-											  <select class="form-control inputs" name="degree" value="">
+											  <select class="form-control inputs" name="course[]">
 											  <?php
 											$query="SELECT * FROM acadsosd.subjects;";
 											$result=mysqli_query($dbc, $query);
@@ -394,16 +370,20 @@ if(isset($_POST['updatePEC'])){
 											?>
 											  </select>		  
 											  </td>
-                                              <td class="text-center"><input type="text" class="form-control inputs" name="unit[]"></td>
-                                              <td class="text-center"><input type="text" class="form-control inputs" name="Code[]"></td>
                                               <td class="text-center"><input type="number" class="form-control inputs" name="academicYear[]"></td>
-                                              <td class="text-center"><input type="number" class="form-control inputs" name="term[]"></td>
+                                              <td class="text-center"><select class="form-control inputs" name="term[]">
+											  <option value="T1">Term 1</option>
+											  <option value="T2">Term 2</option>
+											  <option value="T3">Term 3</option>
+											  </select>
+											  </td>
                                               <td class="text-center bg-success-light" style="border-color:#999999">
                                                 <div class="btn-group" style="vertical-align: middle;">
-                                                <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input4" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
+												<span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input4" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
                                                 </div>
                                               </td>
                                             </tr>
+											<!--<input type="hidden" value="" id="jss">-->
                                             </tbody>
 											
                                           </table>
