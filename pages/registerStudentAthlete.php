@@ -38,7 +38,7 @@
         <div id="wrapper">
 
         <!-- Navigation -->
-      <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
+       <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index.php">
+                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[admin].php">
                 <img src="Images/OSD-logo2.png" height="35px" width='auto' />
                 </a>
             </div>

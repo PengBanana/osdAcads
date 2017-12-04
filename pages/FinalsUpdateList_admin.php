@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HR</title>
+    <title>SAMS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -124,17 +124,17 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Midterm Updates</h1>
+                    <h1 class="page-header">Finals Updates</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div>
-                        <a class ="pull-right" href="#" style="color: #333; "><i class="glyphicon glyphicon-print" ></i> Print</a>
-                    </div>
+            <div class="breadCrumb1" style="padding-bottom:30px;">
+              <a class="breadCrumb1" href="index[admin].php">Home</a> >>>
+              <a class="breadCrumb1" href="">Final Updates</a> 
 
-
-
+            </div>
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">

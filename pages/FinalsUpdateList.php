@@ -122,11 +122,7 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            <div>
-                        <a class ="pull-right" href="#" style="color: #333; "><i class="glyphicon glyphicon-print" ></i> Print</a>
-                    </div>
-
-
+           
 
             <div class="row">
                 <div class="col-lg-12">

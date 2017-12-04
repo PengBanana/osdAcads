@@ -129,7 +129,11 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <div class="breadCrumb1" style="padding-bottom:20px;">
+              <a class="breadCrumb1" href="index[admin].php">Home</a> >>>
+              <a class="breadCrumb1" href="">Final Updates</a> 
 
+            </div>
 
 
             <div class="row">
