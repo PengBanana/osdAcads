@@ -19,7 +19,33 @@ else{
 		$newStatus=$_POST['statusUpdate'];
 		$query="UPDATE `acadsosd`.`studentathleteprofile` SET `statusID`='".$newStatus."' WHERE `studentIDNumber`='".$athleteID."'";
 		mysqli_query($dbc,$query);
-
+	}
+	else if(isset($_POST['addCoursetoATE'])){
+		$code=$_POST['course'];
+		$pecID=$_POST['pecID'];
+		$term=$_POST['term'];
+		$year=$_POST['year'];
+		$query="UPDATE `acadsosd`.`subjectdetails` SET `termTaken`='".$term."', `YearTaken`=".$year." WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and
+		`courseCode`='".$code."';";
+		mysqli_query($dbc,$query);
+		echo '<div class="alert alert-danger">ERROR:
+        '.$query.'
+        </div>';
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/viewTeam.php");
+	}
+	else if(isset($_POST['addReport'])){
+		$type=$_POST['reportType'];
+		$code=$_POST['course'];
+		$grade=$_POST['grade'];
+		$essay=$_POST['rUpdate'];
+		$pecID=$_POST['pecID'];
+		if($type=="M"){
+			$query="UPDATE `acadsosd`.`subjectdetails` SET `midtermAcademicReport`='".$essay."', `midtermGrade`='".$grade."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."';";
+		}
+		else if($type=="F"){
+			$query="UPDATE `acadsosd`.`subjectdetails` SET `finalGrade`='".$grade."', `finalReport`='".$essay."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."';";
+		}
+		mysqli_query($dbc,$query);
 	}
 }
 ?>
@@ -573,9 +599,39 @@ else{
 
 
                           <!-- /.panel-heading -->
+						  <?php
+						  $query='SELECT * FROM acadsosd.date x WHERE x.date < now() ORDER BY x.date DESC';
+						  $result=mysqli_query($dbc,$query);
+						  $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+						  $term=$row['Term'];
+						  $year=$row['schoolYear'];
+						  $query='SELECT s.courseCode, s.courseName, s.courseUnit, sd.finalGrade FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.yearTaken="'.$year.'" AND sd.termTaken="'.$term.'" AND sd.PlannedEnrollmentChart_pecID=\''.$pecID.'\';';
+						  $result=mysqli_query($dbc,$query);
+						  $x='';
+						  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+							  $code=$row['courseCode'];
+							  $name=$row['courseName'];
+							  $units=$row['courseUnit'];
+							  $fgrade=$row['finalGrade'];
+							  if(empty($fgrade)){
+								  $fgrade="NO GRADE";
+							  }
+							$x.='
+							<tr class="odd gradeX">
+							<td class="text-center">'.$code.'</td>
+							<td class="text-center ">'.$name.'</td>
+							<td class="text-center">'.$units.'</td>
+							<td class="text-center">'.$fgrade.'</td>
+							<td class="text-center">
+                            <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editCourse" style="font-size: 12px;">Edit Course</button>
+							</td>
+							</tr>
+							';
+						  }
+						  ?>
                         <div class="panel-body">
                             <div class="dataTable_wrapper" >
-
+							 <label style="float: LEFT;">Total Units: 3</label>
                               </div>
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
@@ -588,14 +644,13 @@ else{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> KASPIL2</td>
-                                            <td class="text-center ">hi  alvin</td>
-                                            <td class="text-center"> 3</td>
-                                            <td class="text-center">4  </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#remove" style="font-size: 12px;">Remove</button>
-                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editCourse" style="font-size: 12px;">Edit Course</button>
+                                        <?php
+										echo $x;
+										?>
+											</tbody>
+								</table>
+								
+								
                                               <div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">
                                                       <div class="modal-content">
@@ -652,6 +707,21 @@ else{
                                                 <!-- /.modal-dialog -->
                                               </div>
                                               <!-- /.modal -->
+											  <?php
+											  $query='SELECT * FROM acadsosd.date x WHERE x.date < now() ORDER BY x.date DESC';
+											  $result=mysqli_query($dbc,$query);
+											  $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+											  $term=$row['Term'];
+											  $year=$row['schoolYear'];
+											  $query='SELECT s.courseCode, s.courseName, s.courseUnit, sd.finalGrade FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.yearTaken="'.$year.'" AND sd.termTaken="'.$term.'" AND sd.PlannedEnrollmentChart_pecID=\''.$pecID.'\';';
+											  $result=mysqli_query($dbc,$query);
+											  $x='';
+											  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+												  $code=$row['courseCode'];
+												  $name=$row['courseName'];
+												  $x.='<option value="'.$code.'">'.$code.' : '.$name.'</option>';
+											  }
+											  ?>
 												<!-- Modal Add Apr -->
                                               <div class="modal fade" id="writeReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">
@@ -661,41 +731,55 @@ else{
                                                               <h4 class="modal-title" id="myModalLabel">Add Academic Performance Update</h4>
                                                           </div>
                                                           <div class="modal-body">
-                                                          <form>
+                                                          <form action="AthleteProfile.php" method="post">
                                                               <div class="form-group">
                                                                 <label style="float:left"> Choose type of Academic Report </label>
                                                                 <div class="form-group">
-                                                                    <select class="form-control">
-                                                                        <option>Midterm Performance</option>
-                                                                        <option>FinalS Performance</option>
+                                                                    <select class="form-control" name="reportType">
+                                                                        <option value="M">Midterm Performance</option>
+                                                                        <option value="F">Finals Performance</option>
                                                                     </select>
                                                                 </div>
 
                                                                 <label style="float:left"> Course </label>
                                                                 <div class="form-group">
-                                                                    <select class="form-control">
-                                                                        <option>enrolled courses here</option>
+                                                                    <select class="form-control" name="course">
+                                                                        <?php echo $x; ?>
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                       <label style="float:left">Grade</label>
-                                                                      <input class="form-control">
+                                                                      <select class="form-control" name="grade">
+                                                                        <option value="4.0">4.0</option>
+                                                                        <option value="3.5">3.5</option>
+                                                                        <option value="3.0">3.0</option>
+                                                                        <option value="2.5">2.5</option>
+                                                                        <option value="2.0">2.0</option>
+                                                                        <option value="1.5">1.5</option>
+                                                                        <option value="1.0">1.0</option>
+                                                                        <option value="0.0">0.0</option>
+																		
+                                                                    </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                       <label style="float:left"> Write Report </label>
-                                                                      <textarea class="form-control" rows="4"></textarea>
+                                                                      <textarea class="form-control" rows="4" name="rUpdate"></textarea>
                                                                 </div>
 
 
 
                                                               </div>
 
-                                                          </form>
+                                                          
                                                           </div>
                                                           <div class="modal-footer">
-                                                              <button type="button" class="btn btn-primary" >Confirm</button>
+																<input type="hidden" name="athleteID" value="<?php echo $athleteID; ?>">
+																<input type="hidden" name="pecID" value="<?php echo $pecID; ?>">
+                                                              <button type="submit" class="btn btn-primary" name="addReport">Confirm</button>
+															  </form>
                                                               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                           </div>
+														  
                                                       </div>
                                                       <!-- /.modal-content -->
                                                   </div>
@@ -745,19 +829,45 @@ else{
                                                           <div class="modal-header">
                                                               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                               <h4 class="modal-title" id="myModalLabel">Add Course</h4>
+															  <?php
+															  //<option value="ANMODEL">ANMODEL : An Model</option>
+															  $query="SELECT * FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE finalGrade=0 OR finalGrade IS NULL AND sd.PlannedEnrollmentChart_pecID='24';";
+															  $result=mysqli_query($dbc,$query);
+															  $x="";
+															  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+																  $code=$row['courseCode'];
+																  $name=$row['courseName'];
+																  $x.='<option value="'.$code.'">'.$code.' : '.$name.'</option>';
+															  }
+															  ?>
                                                           </div>
                                                           <div class="modal-body">
-                                                          <form>
+                                                          <form action="athleteProfile.php" method="post">
                                                               <div class="form-group">
-                                                                <label style="float:left"> Course code</label>
-                                                                <input class="form-control" type="text">
-
-                                                              </div>
-
-                                                          </form>
+                                                                <label style="float:left">Select Course to Add</label>
+																<select class="form-control inputs" name="course" required>
+																<?php echo $x; ?>
+																</select>
+																</br>
+																<div class="form-group">
+																<label style="float:left">Year to Take</label>
+																<input class="form-control" type="number" name="year" min="2017" required>
+																</div>
+																<div class="form-group">
+																<label style="float:left">Term to Take</label>
+																<select class="form-control inputs" name="term" required>
+																<option value="T1">Term 1</option>
+																<option value="T2">Term 2</option>
+																<option value="T3">Term 3</option>
+																</select>
+																</div>
+																<input type="hidden" name="athleteID" value="<?php echo $athleteID; ?>">
+																<input type="hidden" name="pecID" value="<?php echo $pecID; ?>">
+																</div>
                                                           </div>
                                                           <div class="modal-footer">
-                                                              <button type="button" class="btn btn-primary">Save changes</button>
+                                                              <button type="submit" class="btn btn-primary" name="addCoursetoATE">Save changes</button>
+															  </form>
                                                               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                           </div>
                                                       </div>
@@ -766,14 +876,9 @@ else{
                                                   <!-- /.modal-dialog -->
                                               </div>
                                               <!-- /.modal -->
-                                            </td>
 
-
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                                <label style="float: right;">Total Units: 3</label>
+                                    
+                               
 
                             </div>
 
