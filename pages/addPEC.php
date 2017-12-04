@@ -30,26 +30,38 @@ if(isset($_POST['updatePEC'])){
 	$query="DELETE FROM acadsosd.subjectdetails WHERE pecID='".$pecID."';";
 	mysqli_query($dbc, $query);
 	while(isset($courseCode[$count])){
-		echo '<div class="alert alert-danger">ERROR:
-        '.$count.'
-        </div>';
 		$query="INSERT INTO `acadsosd`.`subjectdetails` (`PlannedEnrollmentChart_pecID`, `termTaken`, `YearTaken`, `courseCode`) 
                 VALUES ('".$pecID."', '".$academicTerm[$count]."', '".$academicYear[$count]."', '".$courseCode[$count]."');";
 		$count++;
 		echo '<div class="alert alert-danger">ERROR:
-        '.$count.'
+        '.$query.'
         </div>';
 		mysqli_query($dbc, $query);
 	}
-	//header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/viewTeamAthletes.php");
 }
 else{
 	$athleteID=$_POST['athleteID'];
 	if(empty($athleteID)){
 		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 	}
+				$query="SELECT * FROM acadsosd.studentathleteprofile s JOIN team t ON s.teamCode=t.sportCode JOIN academicclassification c ON s.statusID=c.statusID JOIN plannedenrollmentchart pec ON s.studentIDNumber=pec.studentIDNumber JOIN degree dg ON pec.degreeTable_degreeCode=dg.degreeCode JOIN department dpt ON dg.departmentCode=dpt.departmentCode JOIN college col ON dpt.college_collegeCode = col.collegeCode WHERE s.studentIDNumber='".$athleteID."';";
+				$result=mysqli_query($dbc,$query);
+				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+				$lastname=$row['studentLastName'];
+				$firstname=$row['studentFirstName'];
+				$middleName=$row['studentMiddleName'];
+				$sportCode=$row['sportCode'];
+				$teamName=$row['teamName'];
+				$sport=$row['sport'];
+				$status=$row['statusName'];
+				$degreeCode=$row['degreeTable_degreeCode'];
+				$degree=$row['degreeName'];
+				$department=$row['departmentCode'];
+				$collegeCode=$row['college_collegeCode'];
+				$college=$row['collegeName'];
+				$pecID=$row['pecID'];
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,7 +72,7 @@ else{
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>HR</title>
+        <title>Planned Enrollment Chart</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -120,8 +132,7 @@ else{
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
@@ -218,7 +229,7 @@ else{
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"> Planned Enrollment Chart </h1>
+                    <h1 class="page-header">Planned Enrollment Chart</h1>
                 </div>
             </div>
 
@@ -242,76 +253,38 @@ else{
                 <div class="col-lg-1">
                 </div>
                 <div class="col-lg-5">
-				<?php
-				$query='SELECT SUM(courseUnit) AS rem FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.finalGrade IS NULL OR sd.finalGrade=0;';
-				$result=mysqli_query($dbc,$query);
-				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-				$units=$row['rem'];
-				if(empty($units)){
-					$units=0;
-				}
-				$query="SELECT * FROM acadsosd.studentathleteprofile s JOIN team t ON s.teamCode=t.sportCode JOIN academicclassification c ON s.statusID=c.statusID JOIN plannedenrollmentchart pec ON s.studentIDNumber=pec.studentIDNumber JOIN degree dg ON pec.degreeTable_degreeCode=dg.degreeCode JOIN department dpt ON dg.departmentCode=dpt.departmentCode JOIN college col ON dpt.college_collegeCode = col.collegeCode WHERE s.studentIDNumber='".$athleteID."';";
-				$result=mysqli_query($dbc,$query);
-				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-				$lastname=$row['studentLastName'];
-				$firstname=$row['studentFirstName'];
-				$middleName=$row['studentMiddleName'];
-				$sportCode=$row['sportCode'];
-				$teamName=$row['teamName'];
-				$sport=$row['sport'];
-				$status=$row['statusName'];
-				$degreeCode=$row['degreeTable_degreeCode'];
-				$degree=$row['degreeName'];
-				$department=$row['departmentCode'];
-				$collegeCode=$row['college_collegeCode'];
-				$college=$row['collegeName'];
-				echo
-				'
-
+                    <form>
                         <div class="form-group">
                             <div>Name:
-                            <label>'.$lastname.', '.$firstname.' '.$middleName.'</label>
+                            <label><?php echo $lastname.', '.$firstname.' '.$middleName; ?></label>
                             </div>
                             <div>ID No:
-                            <label>'.$athleteID.'</label>
+                            <label><?php echo $athleteID; ?></label>
                             </div>
                             <div>Team:
-                            <label>'.$teamName.': '.$sport.'('.$sportCode.')</label>
+                            <label><?php echo $teamName.': '.$sport.'('.$sportCode.')'; ?></label>
                             </div>
                             <div>College:
-                            <label>'.$college.' ('.$collegeCode.')</label>
+                            <label><?php echo $college.' ('.$collegeCode.')'; ?></label>
                             </div>
                             <div>Degree Program:
-                            <label>'.$degree.' ('.$degreeCode.')</label>
+                            <label><?php echo $degree.' ('.$degreeCode.')'; ?></label>
                             </div>
-
                         </div>
+                    </form>
 
 
 
                 </div>
                  <div class="col-lg-3"></div>
-                <div class="col-lg-2">
-                    <div style="color: red;"> <label>'.$status.'</label></div>
-                    <div>
-                        <label> Units Remaining: </label>
-                    </div>
-                    <label style="font-size: 24px;">'.$units.'</label>
-                </div>
-
                  <div class="col-lg-7"></div>
-
             </div>
-				';
-
-				?>
 
 
             <div class="row">
                 <div class="col-lg-1">
                 </div>
-                    <div class="col-lg-10">
-
+                    <div class="col-lg-10"><form action="addPEC.php" method="post">
 
                           <div class="row">
                           <div class="col-lg-10">
@@ -320,26 +293,20 @@ else{
 
                           </div>
                           <div class="row">
-							 <div class="col-lg-8" style="padding-top:50px;padding-left:70px">
-							 </div>
-                             <div class="col-lg-1" style="padding-top:50px;padding-left:70px">
-							 <form action="athleteProfile.php" method="post">
-								<input type="hidden"  value="<?php echo $athleteID; ?>" name="athleteID">
-								<button type="submit" class="btn btn-default">
-								<i class="glyphicon glyphicon-remove"></i> Cancel
-								</button>
-								</form>
-								</div>
-								<div class="col-lg-1" style="padding-top:50px;padding-left:70px">
-								<form action="addPEC.php" method="post">
-                                <button type="submit" class="btn btn-default" name="updatePEC">
-								<i class="glyphicon glyphicon-ok"></i> Save
-								</button>
+                          <div class="col-lg-2">
+                           </div>
+                           <div class="col-lg-6" style="padding-top:50px;">
+						   </div>
+                             <div class="col-lg-4" style="padding-top:50px;padding-left:70px">
+                                   <button type="submit" class="btn btn-default" name="updatePEC"> <i class="glyphicon glyphicon-ok"> Save</i></button>
+                                   <button type ="submit" class="btn btn-default" ><i class="glyphicon glyphicon-remove">Cancel</i></button>
                              </div>
                            
                           </div>
 
                         <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -357,56 +324,24 @@ else{
                                               </tr>
                                             </thead>
                                             <tbody>
-											<?php
-											/*
-											SELECT * FROM acadsosd.plannedenrollmentchart pec
-											JOIN subjectdetails sd ON pec.pecID=sd.PlannedEnrollmentChart_pecID
-											WHERE pec.studentIDNumber='11327219' ORDER BY termtaken AND sd.YearTaken;
-											*/
-											
-											$query="SELECT * FROM acadsosd.plannedenrollmentchart WHERE studentIDNumber='".$athleteID."';";
-											$result=mysqli_query($dbc,$query);
-											$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-											$pecID=$row['pecID'];
-											echo '<input type="hidden" name="pecID" value="'.$pecID.'">';
-											
-											?>
                                             <tr class="odd gradeX">
-                                              <td class="text-center">
-											  <select class="form-control inputs" name="course[]">
-											  <?php
-											$query="SELECT * FROM acadsosd.subjects;";
-											$result=mysqli_query($dbc, $query);
-											while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-											$courseCode=$row['courseCode'];
-											$courseName=$row['courseName'];
-											echo '<option value="'.$courseCode.'">'.$courseCode.' : '.$courseName.'</option>';
-											}
-											?>
-											  </select>		  
-											  </td>
-                                              <td class="text-center"><input type="number" class="form-control inputs" name="academicYear[]"></td>
-                                              <td class="text-center"><select class="form-control inputs" name="term[]">
-											  <option value="T1">Term 1</option>
-											  <option value="T2">Term 2</option>
-											  <option value="T3">Term 3</option>
-											  </select>
-											  </td>
-                                              <td class="text-center bg-success-light" style="border-color:#999999">
-                                              <div class="btn-group" style="vertical-align: middle;">
-                                              <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input4" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
-                                              </div>
-                                            </td>
+											<td><select class="form-control inputs" name="course[]"><option value="ANMODEL">ANMODEL : An Model</option><option value="APP-DEV">APP-DEV : Applications Development</option><option value="ARCH-OS">ARCH-OS : Architecture of Operating Systems</option><option value="ARCPLAN">ARCPLAN : Architecture Planning</option><option value="DASTAPP">DASTAPP : Data Structures in Applications</option><option value="DB-ADMI">DB-ADMI : Database Administration</option><option value="ENGLCOM">ENGLCOM : English Communications</option><option value="ENGLRES">ENGLRES : English Research</option><option value="FILDLAR">FILDLAR : Filipino DLAR</option><option value="FILKOMU">FILKOMU : Komunikasyon sa Filipino</option><option value="FIMODIT">FIMODIT : Finance and MODIT</option><option value="FITWELL">FITWELL : Fitness and Wellness</option><option value="FORMDEV">FORMDEV : Formation and Development</option><option value="FTDANCE">FTDANCE : Fitness in Dance</option><option value="FTSPORT">FTSPORT : Fitness in Sports</option><option value="FTTEAMS">FTTEAMS : Fitness in Team Sports</option><option value="GREATWK">GREATWK : Great Works</option><option value="HUMAART">HUMAART : Art Appreciation</option><option value="HUMALIT">HUMALIT : Literature Appreciation</option><option value="INTFILO">INTFILO : Introduction to Philosophy</option><option value="INTPRG1">INTPRG1 : Introduction to Programming 1</option><option value="INTPRG2">INTPRG2 : Introduction to Programming 2</option><option value="INTR-DB">INTR-DB : Intro to Databases</option><option value="INTR-IT">INTR-IT : Introduction to IT</option><option value="INTR-NW">INTR-NW : Introduction to Networks</option><option value="INTRSEC">INTRSEC : Introduction to Securities</option><option value="IPERSEF">IPERSEF : iPersonal Effectiveness</option><option value="ITELEC1">ITELEC1 : IT Elective 1</option><option value="ITELEC2">ITELEC2 : IT Elective 2</option><option value="ITELEC3">ITELEC3 : IT Elective 3</option><option value="ITELEC4">ITELEC4 : IT Elective 4</option><option value="ITETHIC">ITETHIC : Ethics in IT</option><option value="ITMATH1">ITMATH1 : IT Math 1</option><option value="ITMATH2">ITMATH2 : IT Math 2</option><option value="ITMATH3">ITMATH3 : IT Math 3</option><option value="ITMETHD">ITMETHD : IT Methodologies</option><option value="ITORMGT">ITORMGT : IT Organization and Management</option><option value="KASPIL1">KASPIL1 : Kasaysayan ng Pilipinas 1</option><option value="KASPIL2">KASPIL2 : Kasaysayan ng Pilipinas 2</option><option value="LASARE1">LASARE1 : La Sallian Recollection 1</option><option value="LASARE2">LASARE2 : La Sallian Recollection 2</option><option value="LASARE3">LASARE3 : La Sallian Recollection 3</option><option value="LBYENVC">LBYENVC : Chemsitry Lab</option><option value="LBYENVP">LBYENVP : Physics Lab</option><option value="LOGPROG">LOGPROG : Logic Formulation in Programming</option><option value="NET-DES">NET-DES : Network Designs</option><option value="NSTP-01">NSTP-01 : National Services Training Program 1</option><option value="NSTP-02">NSTP-02 : National Services Training Program 2</option><option value="NSTP101">NSTP101 : National Services Training Program 101</option><option value="PERSEF1">PERSEF1 : Personal Effetiveness</option><option value="PERSEF2">PERSEF2 : Personal Effectiveness 2</option><option value="PRCINFO">PRCINFO : Practicum</option><option value="PROBSTA">PROBSTA : Probability and Statistics</option><option value="SAS1000">SAS1000 : SAS 1000</option><option value="SCIENVB">SCIENVB : Science in Biologi</option><option value="SCIENVC">SCIENVC : Science in Chemistry</option><option value="SCIENVP">SCIENVP : Science in Physics</option><option value="SOCTEC1">SOCTEC1 : Social Technologies 1</option><option value="SOCTEC2">SOCTEC2 : Social Technologies 2</option><option value="SPECSYS">SPECSYS : Specialized Systems</option><option value="SPEECOM">SPEECOM : Speech Communications</option><option value="SPELEC1">SPELEC1 : Special Elective 1</option><option value="SPELEC2">SPELEC2 : Special Elective 2</option><option value="SPELEC3">SPELEC3 : Special Elective 3</option><option value="SWENGG">SWENGG : Software Engineering</option><option value="SYSINTG">SYSINTG : Systems Integration</option><option value="SYSMGMT">SYSMGMT : Systems Management</option><option value="SYSTANA">SYSTANA : Systems Analysis</option><option value="SYSTDES">SYSTDES : System Design</option><option value="SYSTIMP">SYSTIMP : Systems Implementation</option><option value="TECHMGT">TECHMGT : Technology Management</option><option value="THS-IT1">THS-IT1 : Thesis 1</option><option value="THS-IT2">THS-IT2 : Thesis 2</option><option value="TREDFOR">TREDFOR : Theology Four</option><option value="TREDONE">TREDONE : Theology One</option><option value="TREDTRI">TREDTRI : Theology Three</option><option value="TREDTWO">TREDTWO : Theology Two</option><option value="WEBTECH">WEBTECH : Web Technologies</option><option value="WIR-TEC">WIR-TEC : Wireless Technologies</option></select></td>
+											<td class="text-center"><input type="number" class="form-control inputs" name="academicYear[]"></td>
+											<td class="text-center"><select class="form-control inputs" name="term[]"><option value="T1">Term 1</option><option value="T2">Term 2</option><option value="T3">Term 3</option></select></td>
+												<td>
+                                                <div class="btn-group" style="vertical-align: middle;">
+                                                <span data-toggle="tooltip" title="Edit Equipment Details"><button class="btn btn-xs btn-default" id="add_input4" data-toggle="modal" data-target="#modal-b" type="button" style="background:none;border:none"><i class="glyphicon glyphicon-plus"></i></button></span>
+                                                </div>
+                                              </td>
                                             </tr>
-											<!--<input type="hidden" value="" id="jss">-->
+
                                             </tbody>
-											
                                           </table>
 										
                                       </div>
                                   </div>
                                   </div>
-
+								  <input type="hidden" name="pecID" value="<?php echo $pecID; ?>">
                             </div>
                             <!-- /.table-responsive -->
                         </div>
@@ -430,7 +365,6 @@ else{
 
 
     </div>
-	</div>
         <!-- /#page-wrapper -->
          <!-- jQuery -->
     <script src="../dist/js/tab.js"></script>
@@ -458,6 +392,7 @@ else{
         });
     });
     </script>
-    
+    </div>
     </body>
+
 </html>
