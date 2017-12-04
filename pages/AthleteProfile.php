@@ -14,6 +14,13 @@ else if(empty($typex)){
 }
 else{
 	$name=$_SESSION["name"];
+	$athleteID=$_POST['athleteID'];
+	if(isset($_POST['updateStatus'])){
+		$newStatus=$_POST['statusUpdate'];
+		$query="UPDATE `acadsosd`.`studentathleteprofile` SET `statusID`='".$newStatus."' WHERE `studentIDNumber`='".$athleteID."'";
+		mysqli_query($dbc,$query);
+
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -207,7 +214,6 @@ else{
                 </div>
                 <div class="col-lg-5">
                  <?php
-				$athleteID=$_POST['athleteID'];
 				$query='SELECT SUM(courseUnit) AS rem FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.finalGrade IS NULL OR sd.finalGrade=0;';
 				$result=mysqli_query($dbc,$query);
 				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -292,41 +298,37 @@ else{
                 else if($statusID == '3'){
                     $classcolor = "statusNotCritical";
                 }
-				echo
-				'
+				?>
 				<form>
                         <div class="form-group">
                             <div>Name:
-                            <label>'.$lastname.', '.$firstname.' '.$middleName.'</label>
+                            <label><?php echo' '.$lastname.', '.$firstname.' '.$middleName.' ';?></label>
                             </div>
                             <div>ID No:
-                            <label>'.$athleteID.'</label>
+                            <label><?php echo ' '.$athleteID.' '?></label>
                             </div>
                             <div>Team:
-                            <label>'.$teamName.': '.$sport.'('.$sportCode.')</label>
+                            <label><?php echo ' '.$teamName.': '.$sport.'('.$sportCode.') ';?></label>
                             </div>
                             <div>College:
-                            <label>'.$college.' ('.$collegeCode.')</label>
+                            <label><?php echo ' '.$college.' ('.$collegeCode.')  ';?></label>
                             </div>
                             <div>Degree Program:
-                            <label>'.$degree.' ('.$degreeCode.')</label>
+                            <label><?php echo ' '.$degree.' ('.$degreeCode.') ';?></label>
                             </div>
                         </div>
                     </form>
                 </div>
                  <div class="col-lg-3"></div>
                 <div class="col-lg-2">
-                    <div style="color: '.$color.';"> <label>'.$status.'</label></div>
+                    <div style="color: '.$color.';"> <label><?php echo ' '.$status.' ';?></label></div>
                     <div>
                         <label> Units Remaining: </label>
                     </div>
-                    <label style="font-size: 24px;">'.$units.'</label>
+                    <label style="font-size: 24px;"><?php echo ' '.$units.' ';?></label>
                 </div>
-                 <div class="col-lg-6" style="padding-left:320px;"><button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editStatus" style="height:40px; width: auto;font-size:14px;">Edit Status
-						 </button></div>
+                 <div class="col-lg-6" style="padding-left:320px;"><button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editStatus" style="height:40px; width: auto;font-size:14px;">Edit Status</button></div>
             </div>
-				';
-				?>
 
 
 
@@ -368,7 +370,7 @@ else{
                                   </div>
                             </div>
                             <div class="col-lg-6" >
-                                <?php
+                            <?php
 							echo
 							'
 								<p><span class="glyphicon glyphicon-minus"></span> 	'.$birthday.'</p>
@@ -395,34 +397,57 @@ else{
                             </div>
                           </div>
                           <div class="row" style="border-bottom: 1px solid #ccc; padding-left: 30px;">
-                              <h3>Education</h3>
+                              <h3>Educational Attainment</h3>
                               <div class="col-lg-6">
                                   <div style="padding-top: 5px; font-size: 17px;">
-                                      <div><label>Grade 6 </label></div>
-                                      <div><label>Grade 7 </label></div>
-                                      <div><label>Grade 9</label></div>
-                                      <div><label>Grade 10</label></div>
-                                      <div><label>Grade 11</label></div>
-                                      <div><label>Grade 12</label></div>
+								  <?php
+								  $query="SELECT * FROM acadsosd.educationalbackground WHERE studentIDNumber=".$athleteID.";";
+								  $result=mysqli_query($dbc,$query);
+								  $x=mysqli_num_rows($result);
+								  if($x<=0){
+									  echo '<div><label>No Data</label></div>';
+								  }
+								  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+									  $schoolLevel=$row['schoolLevel'];
+                                      echo '<div><label>'.$schoolLevel.'</label></div>';
+								  }
+								  ?>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6" style="padding-top: 8px;">
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
+								<?php
+								  $query="SELECT * FROM acadsosd.educationalbackground WHERE studentIDNumber=".$athleteID.";";
+								  $result=mysqli_query($dbc,$query);
+								  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+									  $schoolName=$row['schoolName'];
+                                      echo '<div><label>'.$schoolName.'</label></div>';
+								  }
+								  ?>
                                 </div>
                           </div>
 
                           <div class="row" style="padding-left: 30px;">
-                              <h3>Education</h3>
+                              <h3>Achievment</h3>
 
                                 <div class="col-lg-12" style="padding-top: 8px;">
-                                      <p>2nd Runner Up Palarong Pambansa in Basketball November 25, 2011</p>
+								<?php
+								  $query="SELECT * FROM acadsosd.achievmenthistory WHERE studentIDNumber=".$athleteID.";";
+								  $result=mysqli_query($dbc,$query);
+								  $x=mysqli_num_rows($result);
+								  if($x<=0){
+									  echo '<p>No Data</p>';
+								  }
+								  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+									  $standing=$row['accomplishmentStanding'];
+									  $type=$row['accomplishmentType'];
+									  $accomplishmentName=$row['accomplishmentName'];
+									  $event=$row['accomplishmentEvent'];
+									  $date=$row['accomplishmentDate'];
+                                      echo '<p>'.$standing.' '.$type.' '.$accomplishmentName.' in '.$event.' '.$date.'</p>';	
+								  }
+								  ?>
+                                      
                                 </div>
 
                           </div>
@@ -513,11 +538,12 @@ else{
                                     <tbody>
                                         <?php
                                         $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN
-                                                                        FROM classificationhistory ch JOIN academicclassification ac
-                                                                        ON ch.classificationID = ac.statusID;";
-                                        $result = mysqli_query($dbc, $selectClassificationHistory);
-                                        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                            echo'<tr class="odd gradeX">
+                                                                        FROM classificationistory ch JOIN academicclassification ac
+                                                                        ON ch.classificationID = ac.statusID WHERE athleteID=".$athleteID.";";
+                                        $result=mysqli_query($dbc, $selectClassificationHistory);
+                                        while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+                                            echo'
+											<tr class="odd gradeX">
                                             <td class="text-center">'.$row['DC'].'</td>
                                             <td class="text-center '.$classcolor.'">'.$row['SN'].'</td>
                                             </tr>';
@@ -570,36 +596,6 @@ else{
                                             <td class="text-center">
                                                 <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#remove" style="font-size: 12px;">Remove</button>
                                                 <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editCourse" style="font-size: 12px;">Edit Course</button>
-                                              <!-- Modal -->
-                                              <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                  <div class="modal-dialog">
-                                                      <div class="modal-content">
-                                                          <div class="modal-header">
-                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                              <h4 class="modal-title" id="myModalLabel">Add Course</h4>
-                                                          </div>
-                                                          <div class="modal-body">
-                                                          <form>
-                                                              <div class="form-group">
-                                                                <label style="float:left"> Course code</label>
-                                                                <input class="form-control" type="text">
-
-                                                              </div>
-
-                                                          </form>
-                                                          </div>
-                                                          <div class="modal-footer">
-                                                              <button type="button" class="btn btn-primary">Save changes</button>
-                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                          </div>
-                                                      </div>
-                                                      <!-- /.modal-content -->
-                                                  </div>
-                                                  <!-- /.modal-dialog -->
-                                              </div>
-                                              <!-- /.modal -->
-
-
                                               <div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">
                                                       <div class="modal-content">
@@ -656,10 +652,7 @@ else{
                                                 <!-- /.modal-dialog -->
                                               </div>
                                               <!-- /.modal -->
-
-
-
-                                              <!-- Modal Add Apr -->
+												<!-- Modal Add Apr -->
                                               <div class="modal fade" id="writeReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">
                                                       <div class="modal-content">
@@ -718,32 +711,61 @@ else{
 																															<h4 class="modal-title" id="myModalLabel">Edit Academic Status Course</h4>
 																													</div>
 																													<div class="modal-body">
-																													<form>
+																													<form action="AthleteProfile.php" method="post">
 																															<div class="form-group">
 																																<label style="float:left"> Choose type of Academic Report </label>
-																																<div class="form-group">
-																																		<select class="form-control">
-																																				<option>Inactive</option>
-																																				<option>Not Critical</option>
-																																				<option>Critical </option>
-																																				<option>Super Critical </option>
-
+																																<div class="form-group"> 
+																																		<select class="form-control" name="statusUpdate">
+																																				<option value="4">Inactive</option>
+																																				<option value="3">Not Critical</option>
+																																				<option value="2">Critical </option>
+																																				<option value="1">Super Critical </option>
 																																		</select>
+																																		<input type="hidden" name="athleteID" value="<?php echo $athleteID; ?>">
 																																</div>
 																															</div>
 
-																													</form>
 																													</div>
 																													<div class="modal-footer">
-																															<button type="button" class="btn btn-primary" >Confirm</button>
+																															<input type=submit class="btn btn-primary" value="Confirm" name="updateStatus">
+																															
 																															<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 																													</div>
+																													</form>
 																											</div>
 																											<!-- /.modal-content -->
 																									</div>
 																									<!-- /.modal-dialog -->
 																							</div>
-																							<!-- /.modal -->
+																							<!-- /.modal 
+																							 <!-- Modal -->
+                                              <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                              <h4 class="modal-title" id="myModalLabel">Add Course</h4>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                          <form>
+                                                              <div class="form-group">
+                                                                <label style="float:left"> Course code</label>
+                                                                <input class="form-control" type="text">
+
+                                                              </div>
+
+                                                          </form>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-primary">Save changes</button>
+                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                          </div>
+                                                      </div>
+                                                      <!-- /.modal-content -->
+                                                  </div>
+                                                  <!-- /.modal-dialog -->
+                                              </div>
+                                              <!-- /.modal -->
                                             </td>
 
 
