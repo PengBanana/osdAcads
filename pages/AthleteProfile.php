@@ -82,8 +82,11 @@ else{
 			$query="UPDATE `acadsosd`.`subjectdetails` SET `midtermAcademicReport`='".$essay."', `midtermGrade`='".$grade."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."'";
 		}
 		else if($type=="F"){
+			
 			//if the athlete fail, re-insert the data to next term
 			if($grade==0){
+			$query="UPDATE `acadsosd`.`subjectdetails` SET `finalGrade`='".$grade."', `finalReport`='".$essay."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."';";
+			mysqli_query($dbc,$query);
 				if($term="T1"){
 					$term="T2";
 				}
@@ -99,7 +102,6 @@ else{
 				$query="INSERT INTO `acadsosd`.`subjectdetails` (`PlannedEnrollmentChart_pecID`, `termTaken`, `YearTaken`, `courseCode`) VALUES ('".$pecID."', '".$term."', ".$year.", '".$code."');";
 				mysqli_query($dbc,$query);
 				$query="UPDATE `acadsosd`.`studentathleteprofile` SET `accumulatedFailures`='".$accumulatedFailures."' WHERE `studentIDNumber`='".$athleteID."';";
-				mysqli_query($dbc,$query);
 			}
 			else if($grade>2){
 				//execute all fail query
@@ -113,10 +115,16 @@ else{
 					//execute decrease accumlatedFailures
 					$query="UPDATE `acadsosd`.`studentathleteprofile` SET `accumulatedFailures`='".$accumulatedFailures."' WHERE `studentIDNumber`='".$athleteID."';";
 				}
+				$query="UPDATE `acadsosd`.`subjectdetails` SET `finalGrade`='".$grade."', `finalReport`='".$essay."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."';";
 			}
-			$query="UPDATE `acadsosd`.`subjectdetails` SET `finalGrade`='".$grade."', `finalReport`='".$essay."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."';";
 		}
 		mysqli_query($dbc,$query);
+		if($typex>2){
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[studentManager].php");
+		}
+		else{
+			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/viewTeam.php");
+		}
 	}
 }
 ?>
@@ -311,7 +319,7 @@ else{
                 </div>
                 <div class="col-lg-5">
                  <?php
-				$query='SELECT SUM(courseUnit) AS rem FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.finalGrade IS NULL OR sd.finalGrade=0;';
+				$query='SELECT SUM(courseUnit) AS rem FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.finalGrade IS NULL';
 				$result=mysqli_query($dbc,$query);
 				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 				$units=$row['rem'];
@@ -385,16 +393,6 @@ else{
                 else if($statusID == '3'){
                     $color = "green";
                 }
-                $classcolor="";
-                if($statusID == '1'){
-                    $classcolor = "statusSuperCritical";
-                }
-                else if($statusID == '2'){
-                    $classcolor = "statusCritical";
-                }
-                else if($statusID == '3'){
-                    $classcolor = "statusNotCritical";
-                }
 				?>
 				<form>
                         <div class="form-group">
@@ -418,7 +416,7 @@ else{
                 </div>
                  <div class="col-lg-3"></div>
                 <div class="col-lg-2">
-                    <div style="color: '.$color.';"> <label><?php echo ' '.$status.' ';?></label></div>
+                    <div style="color: <?php echo $color; ?>;"> <label><?php echo ' '.$status.' ';?></label></div>
                     <div>
                         <label> Units Remaining: </label>
                     </div>
@@ -634,11 +632,20 @@ else{
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN
-                                                                        FROM classificationistory ch JOIN academicclassification ac
-                                                                        ON ch.classificationID = ac.statusID WHERE athleteID=".$athleteID.";";
+                                        $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN, ch.classificationID as sID FROM classificationistory ch JOIN academicclassification ac ON ch.classificationID = ac.statusID WHERE athleteID=".$athleteID.";";
                                         $result=mysqli_query($dbc, $selectClassificationHistory);
                                         while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+										$sID=$row['sID'];
+										$classcolor="";
+										if($sID == '1'){
+											$classcolor = "statusSuperCritical";
+										}
+										else if($sID == '2'){
+											$classcolor = "statusCritical";
+										}
+										else if($sID == '3'){
+											$classcolor = "statusNotCritical";
+										}
                                             echo'
 											<tr class="odd gradeX">
                                             <td class="text-center">'.$row['DC'].'</td>
@@ -994,7 +1001,8 @@ else{
 									$nor=mysqli_num_rows($result);
 									$exo='';
 									if($nor>0){
-									$exo.='<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+									$exo.='
+									<label style="float: right;">Total Units Failed: '.$accumulatedFailures.'</label><table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th class="text-center">School Year</th>
@@ -1017,7 +1025,6 @@ else{
                                         </tr>';
 									}
 									$exo.='</tbody></table>
-									<label style="float: right;">Total Units Failed: '.$accumulatedFailures.'</label>
 									';
 									}
 									else{
