@@ -640,15 +640,12 @@ else{
 							  $name=$row['courseName'];
 							  $units=$row['courseUnit'];
 							  $fgrade=$row['finalGrade'];
-							  if(empty($fgrade)){
-								  $y='<button class="btn btn-default btn-lg" data-toggle="modal" data-target="#'.$code.'" style="font-size: 12px;" >Edit Course</button>
+							  $y='<button class="btn btn-default btn-lg" data-toggle="modal" data-target="#'.$code.'" style="font-size: 12px;" >Edit Course</button>
 								  ';
+							  if(empty($fgrade)){
 								  $fgrade="NO GRADE";
 							  $count++;
 							  }
-							  else{
-								$y=" ";  
-							  } 
 							$x.='
 							<tr class="odd gradeX">
 							<td class="text-center">'.$code.'</td>
