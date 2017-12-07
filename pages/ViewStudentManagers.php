@@ -64,8 +64,8 @@ else{
 
 <?php
         require_once('../osd_connect.php');
-        $selectAllStudentManagers = "SELECT SM.teamCode, CONCAT(u.lastName,', ', u.firstName) as 'smName', t.teamName 
-                                     FROM user u JOIN studentmanager sm  ON u.idNumber = sm.idNumber 
+        $selectAllStudentManagers = "SELECT SM.teamCode, CONCAT(u.lastName,', ', u.firstName) as 'smName', t.teamName
+                                     FROM user u JOIN studentmanager sm  ON u.idNumber = sm.idNumber
                                      JOIN team t ON sm.teamCode = t.sportCode WHERE SM.managerCode = 1";
 ?>
 
@@ -187,7 +187,10 @@ else{
                                             <td><form action="viewTeamAthletes.php" method="post">
                                             <div align="center"><input type="hidden" name="teamCode" value="'.$SPORTCODE.'"><input type="submit" value="'.$SPORTCODE.' - '.$TEAMNAME.'" class="btn btn-link" name="submit"></div>
                                             </form></td>
-                                            <td class="text-center"><button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDeactivate">DEACTIVATE</button></td>
+                                            <td class="text-center">
+                                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalReassign">Re-assign</button>
+                                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDeactivate">Deactivate</button>
+                                            </td>
                                             </tr>';
                                         }
                                         ?>
@@ -215,6 +218,29 @@ else{
                                   <!-- /.modal-dialog -->
                                 </div>
                                 <!-- /.modal Decline-->
+
+                                <!--reassign modal-->
+                                <div class="modal fade" id="myModalReassign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel">Re-assign Student Manager</h4>
+                                      </div>
+                                    <div class="modal-body">
+                                      <label>Sport Code</label>
+                                      <select class="form-control"></select>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-primary">Confirm</button>
+                                    </div>
+                                    </div>
+                                  <!-- /.modal-content -->
+                                  </div>
+                                  <!-- /.modal-dialog -->
+                                </div>
+                                <!--end modal reassign-->
 
 
 
