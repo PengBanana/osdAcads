@@ -496,10 +496,10 @@ else{
 									  $accomplishmentName=$row['accomplishmentName'];
 									  $event=$row['accomplishmentEvent'];
 									  $date=$row['accomplishmentDate'];
-                                      echo '<p>'.$standing.' '.$type.' '.$accomplishmentName.' in '.$event.' '.$date.'</p>';	
+                                      echo '<p>'.$standing.' '.$type.' '.$accomplishmentName.' in '.$event.' '.$date.'</p>';
 								  }
 								  ?>
-                                      
+
                                 </div>
 
                           </div>
@@ -510,7 +510,7 @@ else{
                           <div class="col-lg-8">
                             <h3>Enrollment Chart</h3>
                           </div>
-                            <div class="col-lg-4" style="padding-left: 50px;">
+                            <div class="col-lg-3" style="padding-left: 50px;">
 							<form action="addPEC.php" method="post"><input type="hidden" value="<?php echo $athleteID; ?>" name="athleteID"><input type=submit class="btn btn-link breadCrumb1" name="submit" value="EDIT PLANNED ENROLLMENT CHART"></form>
                               </div>
 							  </div>
@@ -565,13 +565,13 @@ else{
 						  }
 						  ?>
 
-                   
 
 
 
-                    
+
+
                     <!-- /.panel -->
-                    
+
                         </div>
 
 
@@ -676,7 +676,7 @@ else{
 													   <div class="form-group">
                                                         <label style="float:left">School Year:</label>
 														<input class="form-control" type="number" name="year" min="2017" required>
-                                                      </div>	
+                                                      </div>
 													  <div class="form-group">
 													  <label style="float:left">Term:</label>
                                                         <select class="form-control" name="term" required>
@@ -687,8 +687,8 @@ else{
                                                       </div>
 													  <input type="hidden" name="editedCourse" value="'.$code.'">
 													  <input type="hidden" name="editedCourse" value="'.$pecID.'">
-													 
-                                                    
+
+
                                                   </div>
                                                   <div class="modal-footer">
                                                     <button type="submit" class="btn btn-primary" name="editCourse">Confirm</button>
@@ -722,8 +722,8 @@ else{
 										?>
 											</tbody>
 								</table>
-								
-								
+
+
                                               <div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">
                                                       <div class="modal-content">
@@ -751,7 +751,7 @@ else{
                                               <!-- /.modal -->
 
                                               <!-- edit course modal -->
-                                              
+
                                               <!-- /.modal -->
 											  <?php
 											  $query='SELECT * FROM acadsosd.date x WHERE x.date < now() ORDER BY x.date DESC';
@@ -804,7 +804,7 @@ else{
                                                                         <option value="1.5">1.5</option>
                                                                         <option value="1.0">1.0</option>
                                                                         <option value="0.0">0.0</option>
-																		
+
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
@@ -816,7 +816,7 @@ else{
 
                                                               </div>
 
-                                                          
+
                                                           </div>
                                                           <div class="modal-footer">
 																<input type="hidden" name="athleteID" value="<?php echo $athleteID; ?>">
@@ -825,7 +825,7 @@ else{
 															  </form>
                                                               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                                           </div>
-														  
+
                                                       </div>
                                                       <!-- /.modal-content -->
                                                   </div>
@@ -844,7 +844,7 @@ else{
 																													<form action="AthleteProfile.php" method="post">
 																															<div class="form-group">
 																																<label style="float:left"> Choose type of Academic Report </label>
-																																<div class="form-group"> 
+																																<div class="form-group">
 																																		<select class="form-control" name="statusUpdate">
 																																				<option value="4">Inactive</option>
 																																				<option value="3">Not Critical</option>
@@ -858,7 +858,7 @@ else{
 																													</div>
 																													<div class="modal-footer">
 																															<input type=submit class="btn btn-primary" value="Confirm" name="updateStatus">
-																															
+
 																															<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 																													</div>
 																													</form>
@@ -867,7 +867,7 @@ else{
 																									</div>
 																									<!-- /.modal-dialog -->
 																							</div>
-																							<!-- /.modal 
+																							<!-- /.modal
 																							 <!-- Modal -->
                                               <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">
@@ -923,8 +923,8 @@ else{
                                               </div>
                                               <!-- /.modal -->
 
-                                    
-                               
+
+
 
                             </div>
 
