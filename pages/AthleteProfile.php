@@ -65,11 +65,56 @@ else{
 		$grade=$_POST['grade'];
 		$essay=$_POST['rUpdate'];
 		$pecID=$_POST['pecID'];
+		$term=$_POST['term'];
+		$year=$_POST['year'];
+		$query="SELECT courseUnit FROM acadsosd.subjects WHERE courseCode='".$code."';";
+		$result=mysqli_query($dbc, $query);
+		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+		$courseUnit=$row['courseUnit'];
+		$query="SELECT accumulatedFailures FROM acadsosd.studentathleteprofile WHERE studentIDNumber='11327219';";
+		$result=mysqli_query($dbc, $query);
+		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+		$accumulatedFailures=$row['accumulatedFailures'];
+		if(empty($accumulatedFailures)){
+			$accumulatedFailures=0;
+		}
 		if($type=="M"){
-			$query="UPDATE `acadsosd`.`subjectdetails` SET `midtermAcademicReport`='".$essay."', `midtermGrade`='".$grade."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."';";
+			$query="UPDATE `acadsosd`.`subjectdetails` SET `midtermAcademicReport`='".$essay."', `midtermGrade`='".$grade."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."'";
 		}
 		else if($type=="F"){
-			$query="UPDATE `acadsosd`.`subjectdetails` SET `finalGrade`='".$grade."', `finalReport`='".$essay."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."';";
+			//if the athlete fail, re-insert the data to next term
+			if($grade==0){
+				if($term="T1"){
+					$term="T2";
+				}
+				else if($term="T2"){
+					$term="T3";
+				}
+				else if($term="T3"){
+					$term="T1";
+					$year++;
+				}
+				$accumulatedFailures+=$courseUnit;
+				//insert retake course
+				$query="INSERT INTO `acadsosd`.`subjectdetails` (`PlannedEnrollmentChart_pecID`, `termTaken`, `YearTaken`, `courseCode`) VALUES ('".$pecID."', '".$term."', ".$year.", '".$code."');";
+				mysqli_query($dbc,$query);
+				$query="UPDATE `acadsosd`.`studentathleteprofile` SET `accumulatedFailures`='".$accumulatedFailures."' WHERE `studentIDNumber`='".$athleteID."';";
+				mysqli_query($dbc,$query);
+			}
+			else if($grade>2){
+				//execute all fail query
+				//SELECT * FROM acadsosd.subjectdetails WHERE courseCode='FILKOMU' and finalGrade=0;
+				$query="SELECT * FROM acadsosd.subjectdetails WHERE courseCode='".$code."' and finalGrade=0;";
+				$result=mysqli_query($dbc,$query);
+				$x=mysql_num_rows($result);
+				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+				if($x>0){
+					$accumulatedFailures-=$courseUnit;
+					//execute decrease accumlatedFailures
+					$query="UPDATE `acadsosd`.`studentathleteprofile` SET `accumulatedFailures`='".$accumulatedFailures."' WHERE `studentIDNumber`='".$athleteID."';";
+				}
+			}
+			$query="UPDATE `acadsosd`.`subjectdetails` SET `finalGrade`='".$grade."', `finalReport`='".$essay."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."';";
 		}
 		mysqli_query($dbc,$query);
 	}
@@ -176,7 +221,7 @@ else{
                                     </li>
 
                                     <li>
-                                        <a href="AddGrades.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Edit Grades</a>
+                                        <a href="	s.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Edit Grades</a>
                                     </li>
 
 
@@ -804,7 +849,6 @@ else{
                                                                         <option value="1.5">1.5</option>
                                                                         <option value="1.0">1.0</option>
                                                                         <option value="0.0">0.0</option>
-
                                                                     </select>
                                                                 </div>
                                                                 <div class="form-group">
@@ -821,6 +865,8 @@ else{
                                                           <div class="modal-footer">
 																<input type="hidden" name="athleteID" value="<?php echo $athleteID; ?>">
 																<input type="hidden" name="pecID" value="<?php echo $pecID; ?>">
+																<input type="hidden" name="year" value="<?php echo $year; ?>">
+																<input type="hidden" name="term" value="<?php echo $term; ?>">
                                                               <button type="submit" class="btn btn-primary" name="addReport">Confirm</button>
 															  </form>
                                                               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -937,28 +983,48 @@ else{
                           <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper" >
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                
+									<?php
+									$query="SELECT accumulatedFailures FROM acadsosd.studentathleteprofile WHERE studentIDNumber='".$athleteID."';";
+									$result=mysqli_query($dbc, $query);
+									$row=mysqli_fetch_array($result);
+									$accumulatedFailures=$row['accumulatedFailures'];
+									$query="SELECT * FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.finalGrade=0;";
+									$result=mysqli_query($dbc, $query);
+									$nor=mysqli_num_rows($result);
+									$exo='';
+									if($nor>0){
+									$exo.='<table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th class="text-center">School Year</th>
                                             <th class="text-center">Term</th>
                                             <th class="text-center">Course </th>
                                             <th class="text-center">Unit</th>
-                                            <th class="text-center">Reinstated</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">2014-2015</u></a></td>
-                                            <td class="text-center"> T2</td>
-                                            <td class="text-center ">INTPRG1</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center ">Yes</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                                <label style="float: right;">Total Units: 3</label>
+									<tbody>';
+									while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+										$schoolYear=$row['YearTaken'];
+										$term=$row['termTaken'];
+										$courseCode=$row['courseCode'];
+										$units=$row['courseUnit'];
+										$exo.='<tr class="odd gradeX">
+                                            <td class="text-center">'.$schoolYear.'</td>
+                                            <td class="text-center">'.$term.'</td>
+                                            <td class="text-center ">'.$courseCode.'</td>
+                                            <td class="text-center ">'.$units.'</td>
+                                        </tr>';
+									}
+									$exo.='</tbody></table>
+									<label style="float: right;">Total Units Failed: '.$accumulatedFailures.'</label>
+									';
+									}
+									else{
+										$exo.="<label>NO FAILURES ACCUMULATED</label>";
+									}
+									echo $exo;
+									?>
                             </div>
 
                         </div>

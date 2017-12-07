@@ -1,0 +1,776 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+-- -----------------------------------------------------
+-- Schema acadsosd
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema acadsosd
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `acadsosd` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`agency`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`agency` (
+  `agencyID` INT(11) NOT NULL AUTO_INCREMENT,
+  `agencyName` VARCHAR(45) NOT NULL,
+  `agencyAddress` VARCHAR(200) NOT NULL,
+  `agencyTelNo` VARCHAR(11) NOT NULL,
+  `agencyEmail` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`agencyID`),
+  UNIQUE INDEX `branchID_UNIQUE` (`agencyID` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`carregistration`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`carregistration` (
+  `registrationNum` INT(11) NOT NULL AUTO_INCREMENT,
+  `carPlateNum` INT(11) NOT NULL,
+  `carRegistrationcol` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`registrationNum`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`client`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`client` (
+  `clientID` INT(11) NOT NULL AUTO_INCREMENT,
+  `clientFirstName` VARCHAR(45) NOT NULL,
+  `clientLastName` VARCHAR(45) NOT NULL,
+  `clientMiddleName` VARCHAR(45) NOT NULL,
+  `clientAddress` VARCHAR(100) NOT NULL,
+  `clientContact` VARCHAR(45) NOT NULL,
+  `clientEmail` VARCHAR(45) NOT NULL,
+  `clientStatus` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`clientID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`company`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`company` (
+  `companyID` INT(11) NOT NULL AUTO_INCREMENT,
+  `companyName` VARCHAR(45) NOT NULL,
+  `companyAddress` VARCHAR(45) NOT NULL,
+  `CompanyStatus` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`companyID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`customer`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`customer` (
+  `customerContactNumber` VARCHAR(45) NOT NULL,
+  `customerID` INT(11) NOT NULL,
+  `customerFirstName` VARCHAR(45) NOT NULL,
+  `customerLastName` VARCHAR(45) NOT NULL,
+  `customerAddress` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`customerContactNumber`),
+  UNIQUE INDEX `customerID_UNIQUE` (`customerID` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`users` (
+  `userID` INT(11) NOT NULL AUTO_INCREMENT,
+  `userEmail` VARCHAR(45) NOT NULL,
+  `UsersPassword` VARCHAR(45) NOT NULL,
+  `userStatus` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`userID`, `userEmail`),
+  UNIQUE INDEX `userID_UNIQUE` (`userID` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`employee`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`employee` (
+  `agencyID` INT(11) NOT NULL,
+  `userID` INT(11) NOT NULL,
+  `userEmail` VARCHAR(45) NOT NULL,
+  `employeeId` INT(11) NOT NULL AUTO_INCREMENT,
+  `employeeFirstName` VARCHAR(45) NOT NULL,
+  `employeeLastName` VARCHAR(45) NOT NULL,
+  `employeeMiddleName` VARCHAR(45) NOT NULL,
+  `employeeBirthdate` DATETIME NOT NULL,
+  `employeeStatus` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`agencyID`, `userID`, `userEmail`, `employeeId`),
+  UNIQUE INDEX `employeeId_UNIQUE` (`employeeId` ASC),
+  INDEX `fk_Employee_Branch_idx` (`agencyID` ASC),
+  INDEX `fk_Employee_Users1_idx` (`userID` ASC, `userEmail` ASC),
+  CONSTRAINT `fk_Employee_Branch`
+    FOREIGN KEY (`agencyID`)
+    REFERENCES `mydb`.`agency` (`agencyID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Employee_Users1`
+    FOREIGN KEY (`userID` , `userEmail`)
+    REFERENCES `mydb`.`users` (`userID` , `userEmail`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`itemstatus`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`itemstatus` (
+  `statusID` CHAR(1) NOT NULL DEFAULT '',
+  `description` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`statusID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`product`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`product` (
+  `productID` INT(11) NOT NULL,
+  `productname` VARCHAR(45) NOT NULL,
+  `productdescription` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`productID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`items`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`items` (
+  `prodoctID` INT(11) NOT NULL,
+  `itemCode` INT(11) NOT NULL,
+  `statusID` CHAR(1) NOT NULL,
+  PRIMARY KEY (`prodoctID`, `itemCode`),
+  INDEX `fk_Product_product1_idx` (`prodoctID` ASC),
+  INDEX `fk_items_itemStatus1_idx` (`statusID` ASC),
+  CONSTRAINT `fk_items_itemStatus1`
+    FOREIGN KEY (`statusID`)
+    REFERENCES `mydb`.`itemstatus` (`statusID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Product_product1`
+    FOREIGN KEY (`prodoctID`)
+    REFERENCES `mydb`.`product` (`productID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`licenseinformation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`licenseinformation` (
+  `licenseId` INT(11) NOT NULL AUTO_INCREMENT,
+  `licenseName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`licenseId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`officerinformation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`officerinformation` (
+  `officerId` INT(11) NOT NULL AUTO_INCREMENT,
+  `officerName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`officerId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`status` (
+  `orderStatus` CHAR(1) NOT NULL,
+  `statusdescription` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`orderStatus`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`order` (
+  `productID` INT(11) NOT NULL,
+  `itemCode` INT(11) NOT NULL,
+  `orderID` INT(11) NOT NULL,
+  `customerContactNumber` VARCHAR(45) NOT NULL,
+  `orderStatus` CHAR(1) NOT NULL,
+  `orderDate` DATE NOT NULL,
+  `orderArrivalDate` DATE NOT NULL,
+  PRIMARY KEY (`productID`, `itemCode`, `orderID`),
+  INDEX `fk_order_status1_idx` (`orderStatus` ASC),
+  INDEX `fk_order_customer1_idx` (`customerContactNumber` ASC),
+  INDEX `fk_order_items1_idx` (`productID` ASC, `itemCode` ASC),
+  CONSTRAINT `fk_order_customer1`
+    FOREIGN KEY (`customerContactNumber`)
+    REFERENCES `mydb`.`customer` (`customerContactNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_items1`
+    FOREIGN KEY (`productID` , `itemCode`)
+    REFERENCES `mydb`.`items` (`prodoctID` , `itemCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_status1`
+    FOREIGN KEY (`orderStatus`)
+    REFERENCES `mydb`.`status` (`orderStatus`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`property`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`property` (
+  `propertyID` INT(11) NOT NULL,
+  `propertyTyphoonCoverage` TINYINT(1) NOT NULL,
+  `propertyType` DECIMAL(10,0) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`propertyID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`violationinformation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`violationinformation` (
+  `violationId` INT(11) NOT NULL AUTO_INCREMENT,
+  `violationNature` VARCHAR(45) NOT NULL,
+  `violationLocation` VARCHAR(45) NOT NULL,
+  `violationComments` VARCHAR(45) NOT NULL,
+  `officerInformation_officerId` INT(11) NOT NULL,
+  `carRegistration_registrationNum` INT(11) NOT NULL,
+  `licenseInformation_licenseId` INT(11) NOT NULL,
+  PRIMARY KEY (`violationId`),
+  INDEX `fk_violationInformation_officerInformation_idx` (`officerInformation_officerId` ASC),
+  INDEX `fk_violationInformation_carRegistration1_idx` (`carRegistration_registrationNum` ASC),
+  INDEX `fk_violationInformation_licenseInformation1_idx` (`licenseInformation_licenseId` ASC),
+  CONSTRAINT `fk_violationInformation_carRegistration1`
+    FOREIGN KEY (`carRegistration_registrationNum`)
+    REFERENCES `mydb`.`carregistration` (`registrationNum`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_violationInformation_licenseInformation1`
+    FOREIGN KEY (`licenseInformation_licenseId`)
+    REFERENCES `mydb`.`licenseinformation` (`licenseId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_violationInformation_officerInformation`
+    FOREIGN KEY (`officerInformation_officerId`)
+    REFERENCES `mydb`.`officerinformation` (`officerId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+USE `acadsosd` ;
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`academicclassification`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`academicclassification` (
+  `statusID` INT(11) NOT NULL,
+  `statusName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`statusID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`reconsiderationreference`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`reconsiderationreference` (
+  `reconsiderationCode` VARCHAR(45) NOT NULL,
+  `reconsiderationLevel` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`reconsiderationCode`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`team`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`team` (
+  `sportCode` VARCHAR(45) NOT NULL,
+  `teamName` VARCHAR(45) NOT NULL,
+  `sport` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`sportCode`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`studentathleteprofile`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`studentathleteprofile` (
+  `studentIDNumber` VARCHAR(8) NOT NULL,
+  `studentLastName` VARCHAR(45) NOT NULL,
+  `studentFirstName` VARCHAR(45) NOT NULL,
+  `studentMiddleName` VARCHAR(45) NULL DEFAULT NULL,
+  `studentDateOfBirth` DATE NOT NULL,
+  `studentWeight` DECIMAL(7,2) NOT NULL,
+  `studentHeight` DECIMAL(7,2) NOT NULL,
+  `studentBloodType` VARCHAR(3) NOT NULL,
+  `studentNationality` VARCHAR(45) NOT NULL,
+  `studentReligion` VARCHAR(45) NULL DEFAULT NULL,
+  `studentDlsuEmail` VARCHAR(45) NOT NULL,
+  `studentAlternateEmail` VARCHAR(45) NULL DEFAULT NULL,
+  `studentAddressLine1` VARCHAR(160) NOT NULL,
+  `studentAddressLine2` VARCHAR(160) NULL DEFAULT NULL,
+  `studentFatherFullName` VARCHAR(160) NULL DEFAULT NULL,
+  `studentMotherFullName` VARCHAR(160) NULL DEFAULT NULL,
+  `studentFatherOccupation` VARCHAR(45) NULL DEFAULT NULL,
+  `studentMotherOccupation` VARCHAR(45) NULL DEFAULT NULL,
+  `studentEmergencyContact` VARCHAR(160) NOT NULL,
+  `EmergencyContactNumber` VARCHAR(45) NOT NULL,
+  `EmergencyContactRelationship` VARCHAR(45) NOT NULL,
+  `teamCode` VARCHAR(45) NOT NULL,
+  `statusID` INT(11) NOT NULL,
+  `reconsiderationReference_reconsiderationCode` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`studentIDNumber`),
+  INDEX `fk_studentAthlete_team1_idx` (`teamCode` ASC),
+  INDEX `fk_studentAthleteProfile_academicStatus1_idx` (`statusID` ASC),
+  INDEX `fk_studentAthleteProfile_reconsiderationReference1_idx` (`reconsiderationReference_reconsiderationCode` ASC),
+  CONSTRAINT `fk_studentAthleteProfile_academicStatus1`
+    FOREIGN KEY (`statusID`)
+    REFERENCES `acadsosd`.`academicclassification` (`statusID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentAthleteProfile_reconsiderationReference1`
+    FOREIGN KEY (`reconsiderationReference_reconsiderationCode`)
+    REFERENCES `acadsosd`.`reconsiderationreference` (`reconsiderationCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentAthlete_team1`
+    FOREIGN KEY (`teamCode`)
+    REFERENCES `acadsosd`.`team` (`sportCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`achievmenthistory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`achievmenthistory` (
+  `accomplishmentName` VARCHAR(160) NULL DEFAULT NULL,
+  `accomplishmentDate` DATE NULL DEFAULT NULL,
+  `accomplishmentVenue` VARCHAR(45) NULL DEFAULT NULL,
+  `accomplishmentEvent` VARCHAR(45) NULL DEFAULT NULL,
+  `accomplishmentStanding` VARCHAR(45) NULL DEFAULT NULL,
+  `accomplishmentType` VARCHAR(45) NULL DEFAULT NULL,
+  `accomplishmentID` INT(11) NOT NULL AUTO_INCREMENT,
+  `studentIDNumber` VARCHAR(8) NOT NULL,
+  PRIMARY KEY (`accomplishmentID`),
+  INDEX `fk_achievmentHistory_studentAthleteProfile1_idx` (`studentIDNumber` ASC),
+  CONSTRAINT `fk_achievmentHistory_studentAthleteProfile1`
+    FOREIGN KEY (`studentIDNumber`)
+    REFERENCES `acadsosd`.`studentathleteprofile` (`studentIDNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`usertype`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`usertype` (
+  `usertypeID` INT(11) NOT NULL,
+  `usertypeName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`usertypeID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`user` (
+  `idnumber` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NULL DEFAULT NULL,
+  `usertypeID` INT(11) NOT NULL,
+  `firstName` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NOT NULL,
+  `middleName` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idnumber`),
+  INDEX `fk_users_userType1_idx` (`usertypeID` ASC),
+  CONSTRAINT `fk_users_userType1`
+    FOREIGN KEY (`usertypeID`)
+    REFERENCES `acadsosd`.`usertype` (`usertypeID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`actionlog`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`actionlog` (
+  `actionID` INT(11) NOT NULL,
+  `actionDetails` VARCHAR(160) NULL DEFAULT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`actionID`),
+  INDEX `fk_actionLog_user1_idx` (`username` ASC),
+  CONSTRAINT `fk_actionLog_user1`
+    FOREIGN KEY (`username`)
+    REFERENCES `acadsosd`.`user` (`idnumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`classificationistory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`classificationistory` (
+  `classificationID` INT(11) NOT NULL,
+  `athleteID` VARCHAR(45) NOT NULL,
+  `dateClassified` DATE NOT NULL,
+  `classificationAI` INT(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`classificationAI`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 22
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`college`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`college` (
+  `collegeCode` VARCHAR(45) NOT NULL,
+  `collegeName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`collegeCode`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`date`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`date` (
+  `date` DATE NOT NULL,
+  `event` VARCHAR(160) NULL DEFAULT NULL,
+  `Term` VARCHAR(45) NULL DEFAULT NULL,
+  `schoolYear` YEAR NULL DEFAULT NULL,
+  PRIMARY KEY (`date`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`department`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`department` (
+  `departmentCode` VARCHAR(45) NOT NULL,
+  `departmentName` VARCHAR(45) NOT NULL,
+  `college_collegeCode` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`departmentCode`),
+  INDEX `fk_department_college1_idx` (`college_collegeCode` ASC),
+  CONSTRAINT `fk_department_college1`
+    FOREIGN KEY (`college_collegeCode`)
+    REFERENCES `acadsosd`.`college` (`collegeCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`degree`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`degree` (
+  `degreeCode` VARCHAR(45) NOT NULL,
+  `degreeName` VARCHAR(400) NOT NULL,
+  `departmentCode` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`degreeCode`),
+  INDEX `fk_degreeTable_department1_idx` (`departmentCode` ASC),
+  CONSTRAINT `fk_degreeTable_department1`
+    FOREIGN KEY (`departmentCode`)
+    REFERENCES `acadsosd`.`department` (`departmentCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`educationalbackground`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`educationalbackground` (
+  `schoolLevel` VARCHAR(160) NOT NULL,
+  `SchoolName` VARCHAR(160) NOT NULL,
+  `schoolYear` YEAR NOT NULL,
+  `schoolAddress` VARCHAR(300) NULL DEFAULT NULL,
+  `studentIDNumber` VARCHAR(8) NOT NULL,
+  `degree` VARCHAR(45) NULL DEFAULT NULL,
+  INDEX `fk_educationalBackground_studentAthleteProfile1_idx` (`studentIDNumber` ASC),
+  CONSTRAINT `fk_educationalBackground_studentAthleteProfile1`
+    FOREIGN KEY (`studentIDNumber`)
+    REFERENCES `acadsosd`.`studentathleteprofile` (`studentIDNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`gradetype_reference`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`gradetype_reference` (
+  `gradeTypeCode` INT(11) NOT NULL,
+  `gradeTypeName` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`gradeTypeCode`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`managerstatus`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`managerstatus` (
+  `managerCode` INT(11) NOT NULL AUTO_INCREMENT,
+  `statusName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`managerCode`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`nationality`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`nationality` (
+  `idnationality` INT(11) NOT NULL,
+  `nationality` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idnationality`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`plannedenrollmentchart`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`plannedenrollmentchart` (
+  `pecID` INT(11) NOT NULL AUTO_INCREMENT,
+  `degreeTable_degreeCode` VARCHAR(45) NOT NULL,
+  `academicYearStarted` YEAR NULL DEFAULT NULL,
+  `termStarted` VARCHAR(45) NULL DEFAULT NULL,
+  `studentIDNumber` VARCHAR(8) NOT NULL,
+  PRIMARY KEY (`pecID`),
+  INDEX `fk_PlannedEnrollmentChart_degreeTable_idx` (`degreeTable_degreeCode` ASC),
+  INDEX `fk_PlannedEnrollmentChart_studentAthlete1_idx` (`studentIDNumber` ASC),
+  CONSTRAINT `fk_PlannedEnrollmentChart_degreeTable`
+    FOREIGN KEY (`degreeTable_degreeCode`)
+    REFERENCES `acadsosd`.`degree` (`degreeCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PlannedEnrollmentChart_studentAthlete1`
+    FOREIGN KEY (`studentIDNumber`)
+    REFERENCES `acadsosd`.`studentathleteprofile` (`studentIDNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 44
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`professor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`professor` (
+  `professorID` INT(11) NOT NULL,
+  `professorName` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`professorID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`teamaccomplishment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`teamaccomplishment` (
+  `accomplishmentName` VARCHAR(160) NULL DEFAULT NULL,
+  `accomplishmentDate` DATE NULL DEFAULT NULL,
+  `accomplishmentVenue` VARCHAR(45) NULL DEFAULT NULL,
+  `accomplishmentEvent` VARCHAR(45) NULL DEFAULT NULL,
+  `accomplishmentStanding` VARCHAR(45) NULL DEFAULT NULL,
+  `accomplishmentType` VARCHAR(45) NULL DEFAULT NULL,
+  `accomplishmentID` INT(11) NOT NULL,
+  `teamCode` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`accomplishmentID`),
+  INDEX `fk_teamAchievments_team1_idx` (`teamCode` ASC),
+  CONSTRAINT `fk_teamAchievments_team1`
+    FOREIGN KEY (`teamCode`)
+    REFERENCES `acadsosd`.`team` (`sportCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`studentinvolved`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`studentinvolved` (
+  `accomplishmentID` INT(11) NOT NULL,
+  `studentIDNumber` VARCHAR(8) NOT NULL,
+  INDEX `fk_studentInvolved_teamAchievments1_idx` (`accomplishmentID` ASC),
+  INDEX `fk_studentInvolved_studentAthleteProfile1_idx` (`studentIDNumber` ASC),
+  CONSTRAINT `fk_studentInvolved_studentAthleteProfile1`
+    FOREIGN KEY (`studentIDNumber`)
+    REFERENCES `acadsosd`.`studentathleteprofile` (`studentIDNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentInvolved_teamAchievments1`
+    FOREIGN KEY (`accomplishmentID`)
+    REFERENCES `acadsosd`.`teamaccomplishment` (`accomplishmentID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`studentmanager`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`studentmanager` (
+  `teamCode` VARCHAR(45) NULL DEFAULT NULL,
+  `idnumber` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `managerCode` INT(11) NOT NULL,
+  INDEX `fk_studentManager_team1_idx` (`teamCode` ASC),
+  INDEX `fk_studentManager_user1_idx` (`idnumber` ASC),
+  INDEX `fk_studentManager_managerStatus1_idx` (`managerCode` ASC),
+  CONSTRAINT `fk_studentManager_managerStatus1`
+    FOREIGN KEY (`managerCode`)
+    REFERENCES `acadsosd`.`managerstatus` (`managerCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentManager_team1`
+    FOREIGN KEY (`teamCode`)
+    REFERENCES `acadsosd`.`team` (`sportCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_studentManager_user1`
+    FOREIGN KEY (`idnumber`)
+    REFERENCES `acadsosd`.`user` (`idnumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`subjects`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`subjects` (
+  `courseCode` VARCHAR(7) NOT NULL,
+  `courseName` VARCHAR(45) NOT NULL,
+  `courseUnit` VARCHAR(45) NOT NULL,
+  `courseType` VARCHAR(45) NOT NULL,
+  `courseGradingType` INT(11) NOT NULL,
+  PRIMARY KEY (`courseCode`),
+  INDEX `fk_Subjects_gradeType_reference1_idx` (`courseGradingType` ASC),
+  CONSTRAINT `fk_Subjects_gradeType_reference1`
+    FOREIGN KEY (`courseGradingType`)
+    REFERENCES `acadsosd`.`gradetype_reference` (`gradeTypeCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `acadsosd`.`subjectdetails`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `acadsosd`.`subjectdetails` (
+  `PlannedEnrollmentChart_pecID` INT(11) NOT NULL,
+  `SubjectGrade` VARCHAR(45) NULL DEFAULT NULL,
+  `professorID` INT(11) NULL DEFAULT NULL,
+  `department_departmentCode` VARCHAR(45) NULL DEFAULT NULL,
+  `midtermAcademicReport` LONGTEXT NULL DEFAULT NULL,
+  `midtermGrade` VARCHAR(45) NULL DEFAULT NULL,
+  `numberOfLates` INT(11) NULL DEFAULT NULL,
+  `numberOfAbsences` INT(11) NULL DEFAULT NULL,
+  `finalGrade` VARCHAR(45) NULL DEFAULT NULL,
+  `finalReport` LONGTEXT NULL DEFAULT NULL,
+  `termTaken` VARCHAR(45) NOT NULL,
+  `YearTaken` YEAR NOT NULL,
+  `courseCode` VARCHAR(7) NOT NULL,
+  PRIMARY KEY (`PlannedEnrollmentChart_pecID`, `courseCode`, `YearTaken`, `termTaken`),
+  INDEX `fk_Subjects_has_PlannedEnrollmentChart_PlannedEnrollmentCha_idx` (`PlannedEnrollmentChart_pecID` ASC),
+  INDEX `fk_Subjects_has_PlannedEnrollmentChart_professor1_idx` (`professorID` ASC),
+  INDEX `fk_subjectDetails_department1_idx` (`department_departmentCode` ASC),
+  INDEX `fk_subjectDetails_Subjects1_idx` (`courseCode` ASC),
+  CONSTRAINT `fk_subjectDetails_department1`
+    FOREIGN KEY (`department_departmentCode`)
+    REFERENCES `acadsosd`.`department` (`departmentCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_subjectDetails_Subjects1`
+    FOREIGN KEY (`courseCode`)
+    REFERENCES `acadsosd`.`subjects` (`courseCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Subjects_has_PlannedEnrollmentChart_PlannedEnrollmentChart1`
+    FOREIGN KEY (`PlannedEnrollmentChart_pecID`)
+    REFERENCES `acadsosd`.`plannedenrollmentchart` (`pecID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Subjects_has_PlannedEnrollmentChart_professor1`
+    FOREIGN KEY (`professorID`)
+    REFERENCES `acadsosd`.`professor` (`professorID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+ALTER TABLE `acadsosd`.`studentathleteprofile` 
+ADD COLUMN `accumulatedFailures` FLOAT NULL AFTER `reconsiderationReference_reconsiderationCode`;
+
+ALTER TABLE `acadsosd`.`studentathleteprofile` 
+CHANGE COLUMN `accumulatedFailures` `accumulatedFailures` FLOAT NULL DEFAULT 0 ;
