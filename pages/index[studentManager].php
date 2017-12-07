@@ -157,7 +157,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 												<div class="panel-body">
 													<div class="panel panel-default">
 															<div class="panel-heading">
-																	<h3 class="panel-title">alvin team name to</h3>
+																	<h3 class="panel-title">Team: Green Archers: Basketball Men</h3>
 															</div>
 															<div class="panel-body">
 																<div class="dataTable_wrapper" >
@@ -224,11 +224,10 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 									                    <div class="panel-body">
 									                        <div class="list-group">
 									                                <a href="#" class="list-group-item" style="font-size: 14px;">
-									                                    <i class="glyphicon glyphicon-user"></i> Alvin query ng pinakalatest
-
+									                                    <i class="glyphicon glyphicon-user"></i>Alvin de Guzman was added to your Team
 									                                </a>
 									                                <a href="#" class="list-group-item" style="font-size: 14px;">
-									                                    <i class="glyphicon glyphicon-user"></i> Alvin  query ng pinaka lates
+									                                    <i class="glyphicon glyphicon-user"></i>Christian Modino was added to your Team
 
 									                                </a>
 									                        </div>
