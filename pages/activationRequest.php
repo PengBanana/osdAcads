@@ -217,7 +217,7 @@ echo '
 				//add email code here
 				$to = $email;
 				$subject="Your Manager Account has been activated";
-				$message = "You may now login your account. Your password is ".$password.".";
+				$message = "Thank you for registering as a Student Manager, to activate your account. use the temporary password ".$password.".";
 				$headers = "From: osddlsu@gmail.com\r\n";
 				if (mail($to, $subject, $message, $headers)) {
 					$query="UPDATE `acadsosd`.`studentmanager` SET `teamCode`='".$teamCode."', `managerCode`='1' WHERE `idnumber`='".$idnumber."';";

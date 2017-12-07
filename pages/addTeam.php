@@ -170,17 +170,17 @@ Sport: <input type="text" name="sport" maxlength="45" />
                     <form action="addTeam[admin].php">
                         <div class="form-group">
                             <label> Sport Code: </label>
-                            <input type="text" class="form-control inputsSM" name="sportCode">
+                            <input type="text" class="form-control inputsSM" name="sportCode" required>
                         </div>
 
                         <div class="form-group">
                             <label> Name of Team: </label>
-                            <input type="text" class="form-control inputsSM" name="teamName">
+                            <input type="text" class="form-control inputsSM" name="teamName" required>
                         </div>
 
                         <div class="form-group">
                             <label> Sport: </label>
-                            <input type="text" class="form-control inputsSM" name="sport">
+                            <input type="text" class="form-control inputsSM" name="sport" require>
                         </div>
 
                         <div>
