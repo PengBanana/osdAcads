@@ -14,8 +14,8 @@
   else if(empty($fname)){
     header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
   }
-  if($userType>2||$userType<1){
-	 header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[studentManager].php"); 
+  if($userType<3){
+	 header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[admin].php"); 
   }
 
 //if student manager
