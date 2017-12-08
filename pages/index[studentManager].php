@@ -101,7 +101,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="changePassword.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
+                        <li><a href="changePassword2.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -124,8 +124,8 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                              <li>
                               <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
                               <ul id="demo1" class="collapse" style="list-style: none;">
-                                <li><a href="MidtermUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
-                                <li><a href="FinalsUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
+                                <li><a href="updateList2.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
+                                <li><a href="fupdateList2.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
                               </ul>
                               </li>
                               <li>

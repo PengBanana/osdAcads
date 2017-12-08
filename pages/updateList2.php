@@ -165,6 +165,11 @@ else{
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
+            <div class="breadCrumb1" style="padding-bottom:20px;">
+                  <a class="breadCrumb1" href="index[studentManager].php">Home</a> >>>
+                  <a class="breadCrumb1" href="">Midterm Updates</a>
+
+                </div>
 
 
 
