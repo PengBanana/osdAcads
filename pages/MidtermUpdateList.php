@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php 
+  session_start();
+  require_once('../osd_connect.php');
+  $fname = $_SESSION["name"];
+  $idNum = $_SESSION["idnumber"];
+  $userType = $_SESSION["typex"];
+
+  if(empty($idNum)){
+    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+  }
+  else if(empty($fname)){
+    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+  }
+  else if(empty($userType)){
+    header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+  }
+
+
+  $teamCodeQuery = "SELECT teamCode FROM studentManager WHERE idnumber = '".$idNum."'";
+  $teamCodeResult = mysqli_query($dbc, $teamCodeQuery);
+  $teamCodeRow = mysqli_fetch_array($teamCodeResult, MYSQLI_ASSOC);
+  $teamCodeFinal = $teamCodeRow['teamCode'];
+
+
+?>
+
 <head>
 
     <meta charset="utf-8">
@@ -116,6 +142,14 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
+                    <?php 
+
+                      $teamNameQuery = "SELECT teamName FROM team WHERE sportCode = '".$teamCodeFinal."'";
+                      $teamNameResult = mysqli_query($dbc, $teamNameQuery);
+                      $teamNameRow = mysqli_fetch_array($teamNameResult,MYSQLI_ASSOC);
+                      $teamNameFinal = $teamNameRow['teamName'];
+
+                    ?>
                     <h1 class="page-header">Midterm Updates</h1>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -128,14 +162,15 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <b>Animo Squad</b>
+                            <label><b><?php echo $teamNameFinal ?></b><label>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper">
-                                <table class="table table-striped table-bordered table-hover">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">Student Athlete</th>
                                             <th class="text-center">Course</th>
                                             <th class="text-center">Professor</th>
                                             <th class="text-center">Midterm Grade</th>
@@ -144,12 +179,42 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        
+                                          <?php
 
-                                        <tr class="odd gradeA">
-											                      <td class="text-center">DASTAPP</td>
-                                            <td class="text-center">Mande, Thomas</td>
-                                            <td class="text-center"> 0 </td>
-                                            <td class="text-center"> <p>The student-athlete has been attending his classes. He was helped by the Academic Coordinator, He got 80 in his homework in Programming (September 20). The Student Manager sent an e-mail to the professor on 22 September to consult about the student-athlete’s academic performance in class</p></td>
+                                            $allQuery = "SELECT CONCAT(sap.studentLastName, ', ', sap.studentFirstName) as saFullName, sd.courseCode as courseCode, sd.midtermAcademicReport as MAR, sd.midtermGrade as midtermGrade, p.professorName as profName
+                                                         FROM studentathleteprofile sap
+                                                         JOIN plannedenrollmentchart pec ON sap.studentidnumber = pec.studentidnumber
+                                                         JOIN subjectdetails sd ON pec.pecID = sd.PlannedEnrollmentChart_pecID
+                                                         JOIN professor p ON sd.professorID = p.professorID WHERE sap.teamCode = '".$teamCodeFinal."';";
+                                            $saNameQuery = "SELECT CONCAT(studentLastName, ', ', studentFirstName) as saFullName FROM studentathleteprofile";
+                                            $allQueryResult = mysqli_query($dbc, $allQuery);
+
+                                          ?>
+
+                                          <?php
+                                            foreach ($allQueryResult as $row) {
+                                            ?>
+                                            <tr class="odd gradeA">
+                                            <td class="text-center">
+                                              <?php echo $row['saFullName'];?>
+                                            </td>
+                                            <td class="text-center">
+                                              <?php echo $row['courseCode'];?>
+                                            </td>
+                                            <td class="text-center">
+                                              <?php echo $row['profName'];?>
+                                            </td>
+                                            <td class="text-center">
+                                              <?php echo $row['midtermGrade'];?>
+                                            </td>
+                                            <td class="text-center"><p>
+                                              <?php echo $row['MAR'];?>
+                                            </p></td>
+                                          </tr>
+                                            
+                                        <?php }?>
+											                      
 
                                     </tbody>
                                 </table>

@@ -147,7 +147,7 @@ $idx=$_SESSION['idnumber'];
             </div>
 			<div class="row">
 			<div class="col-lg-12">
-			<label>Dean Lister's for School Year 2017-2018 Term: 1</label>
+			<label>Dean's Listers for School Year 2017-2018 Term: 1</label>
 			</div>
 			</div>
 			<div class="row">

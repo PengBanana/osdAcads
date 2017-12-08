@@ -632,7 +632,7 @@ else{
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN, ch.classificationID as sID FROM classificationistory ch JOIN academicclassification ac ON ch.classificationID = ac.statusID WHERE athleteID=".$athleteID.";";
+                                        $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN, ch.classificationID as sID FROM classificationhistory ch JOIN academicclassification ac ON ch.classificationID = ac.statusID WHERE athleteID=".$athleteID.";";
                                         $result=mysqli_query($dbc, $selectClassificationHistory);
                                         while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 										$sID=$row['sID'];
