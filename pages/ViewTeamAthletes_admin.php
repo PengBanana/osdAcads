@@ -258,7 +258,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                                                           <td class="text-center">'.$degreeCode.'</td>
                                                           <td class="text-center '.$color.'">'.$statusName.'</td>
                                                           <td class="text-center" >
-														  <form action="AthleteProfile.php" method="post">
+														  <form action="AthleteProfile_admin.php" method="post">
 														  <input type="hidden" value="'.$studentID.'" name="athleteID">
 														  <input type=submit class="btn btn-default" value="View" name="viewAthlete">
 														  </form>
