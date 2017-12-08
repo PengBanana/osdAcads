@@ -179,7 +179,6 @@ else{
                                         <tr>
                                             <th class="text-center">Student Athlete</th>
                                             <th class="text-center">Course</th>
-                                            <th class="text-center">Professor</th>
                                             <th class="text-center">Midterm Grade</th>
                                             <th class="text-center">Midterm Update</th>
 
@@ -189,11 +188,9 @@ else{
                                         
                                           <?php
 
-                                            $allQuery = "SELECT CONCAT(sap.studentLastName, ', ', sap.studentFirstName) as saFullName, sd.courseCode as courseCode, sd.midtermAcademicReport as MAR, sd.midtermGrade as midtermGrade, p.professorName as profName
-                                                         FROM studentathleteprofile sap
-                                                         JOIN plannedenrollmentchart pec ON sap.studentidnumber = pec.studentidnumber
-                                                         JOIN subjectdetails sd ON pec.pecID = sd.PlannedEnrollmentChart_pecID
-                                                         JOIN professor p ON sd.professorID = p.professorID WHERE sap.teamCode = '".$teamCodeFinal."';";
+                                            $allQuery = "SELECT CONCAT(sap.studentLastName, ', ', sap.studentFirstName) as saFullName, sd.courseCode as 	courseCode, sd.midtermAcademicReport as MAR, sd.midtermGrade as midtermGrade
+														FROM studentathleteprofile sap JOIN plannedenrollmentchart pec ON sap.studentidnumber = pec.studentidnumber
+													JOIN subjectdetails sd ON pec.pecID = sd.PlannedEnrollmentChart_pecID WHERE sd.midtermGrade IS NOT NULL and sap.teamCode = '".$teamCodeFinal."';";
                                             $saNameQuery = "SELECT CONCAT(studentLastName, ', ', studentFirstName) as saFullName FROM studentathleteprofile";
                                             $allQueryResult = mysqli_query($dbc, $allQuery);
 
@@ -208,9 +205,6 @@ else{
                                             </td>
                                             <td class="text-center">
                                               <?php echo $row['courseCode'];?>
-                                            </td>
-                                            <td class="text-center">
-                                              <?php echo $row['profName'];?>
                                             </td>
                                             <td class="text-center">
                                               <?php echo $row['midtermGrade'];?>
