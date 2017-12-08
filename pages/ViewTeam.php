@@ -12,7 +12,7 @@ $idx=$_SESSION['idnumber'];
 						$name="wth";
 					}
 					else if($typex>2||$typex<1){
-						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 					}
 					else if(empty($typex)){
 						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
@@ -174,8 +174,7 @@ $idx=$_SESSION['idnumber'];
                                             <th class="text-center">TEAM NAME</th>
                                             <th class="text-center">TEAM SPORT</th>
                                             <th class="text-center">No. Athetes</th>
-
-
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
 
@@ -189,12 +188,18 @@ $idx=$_SESSION['idnumber'];
                                         $sportcode=$row['SPORTCODE'];
                                         echo'
                                         <tr class="odd gradeX">
-                                             <td><form action="viewTeamAthletes_admin.php" method="post">
-												<div align="center"><input type="submit" value="'.$sportcode.'" class="btn btn-link" name="teamCode"></div>
-												</form></td>
+                                             <td>
+											 <div align="center"><label>'.$sportcode.'</label></div>
+											 </td>
                                              <td><div align="center">'.$row['TEAMNAME'].'</div></td>
                                              <td><div align="center">'.$row['SPORT'].'</div></td>
                                              <td><div align="center">'.$row['NUMBEROFSTUDENTS'].'</div></td>
+                                             <td><div align="center">
+											 <form action="viewTeamAthletes_admin.php" method="post">
+											  <input type="hidden" value="'.$sportcode.'" name="teamCode">
+											 <input type="submit" value="View" name="submit" class="btn btn-default">
+											 </form>
+											 </div></td>
                                         </tr>';
 
                                     }

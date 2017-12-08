@@ -188,7 +188,7 @@ else{
                                             $SPORTCODE = $row['teamCode'];
                                             $TEAMNAME = $row['teamName'];
                                             echo'<tr class="odd gradeX">
-                                            <td class="text-center" ><a href="Athlete\'s Profile.html"><u style="color: black;">'.$row['smName'].'</u></a></td>
+                                            <td class="text-center" ><label>'.$row['smName'].'</label></td>
                                             <td><form action="viewTeamAthletes.php" method="post">
                                             <div align="center"><input type="hidden" name="teamCode" value="'.$SPORTCODE.'"><input type="submit" value="'.$SPORTCODE.' - '.$TEAMNAME.'" class="btn btn-link" name="submit"></div>
                                             </form></td>
