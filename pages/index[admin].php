@@ -4,7 +4,9 @@ require_once('../osd_connect.php');
 $idx=$_SESSION['idnumber'];
 $typex=$_SESSION["typex"];
 $name=$_SESSION["name"];
-$message=$_SESSION['message'];
+if(isset($_SESSION['message'])){
+	$message=$_SESSION['message'];
+}
 if($idx===0){
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 	}
@@ -212,7 +214,7 @@ if($idx===0){
 		<?php
 		if(isset($message)){
 			echo $message;
-			unset($_SESSION["message"])
+			unset($_SESSION["message"]);
 		}
 		?>
         <div id="page-wrapper">

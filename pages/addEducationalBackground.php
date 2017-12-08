@@ -170,10 +170,12 @@ else if(isset($_POST['addEducationalBackground'])){
         mysqli_query($dbc, $sql);
 		$count++;
     }
+		$_SESSION['message'] = '<div class="alert alert-success">
+					 New Student-Athlete was registered!
+					</div>';
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[admin].php");
-	$_SESSION['message'] = '<div class="alert alert-success">
-				 New Student-Athlete was registered!
-				</div>';
+
+
 }
 else{
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
