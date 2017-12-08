@@ -158,3 +158,55 @@ INSERT INTO `acadsosd`.`subjects` (`courseCode`, `courseName`, `courseUnit`, `co
 INSERT INTO `acadsosd`.`subjects` (`courseCode`, `courseName`, `courseUnit`, `courseType`, `courseGradingType`) VALUES ('SPELEC2', 'Special Elective 2', '3.0', 'Academic', '1');
 INSERT INTO `acadsosd`.`subjects` (`courseCode`, `courseName`, `courseUnit`, `courseType`, `courseGradingType`) VALUES ('SPELEC3', 'Special Elective 3', '3.0', 'Academic', '1');
 INSERT INTO `acadsosd`.`subjects` (`courseCode`, `courseName`, `courseUnit`, `courseType`, `courseGradingType`) VALUES ('PRCINFO', 'Practicum', '3.0', 'Academic', '2');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('XASDA', 'Animo Squad Dancers', 'Cheerdance');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('BDM', 'Green Shuttlers', 'Badminton Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('BDW', 'Lady Shuttlers', 'Badminton Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('BSM', 'Green Batters', 'Baseball Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('BSW', 'Lady Batters', 'Baseball Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('BBW', 'Lady Archers', 'Basketball Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('CHM', 'Green Woodpushers', 'Chess Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('CHL', 'Lady Woodpushers', 'Chess Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('FEM', 'Green Fencers', 'Fencing Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('FEL', 'Lady Fencers', 'Fencing Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('FBM', 'Green Booters', 'Football Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('FBW', 'Lady Booters', 'Football Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('JDM', 'Green Judokas', 'Judo Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('JDW', 'Lady Judokas', 'Judo Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('TBM', 'Green Paddlers', 'Table Tennis Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('TBW', 'Lady Paddlers', 'Table Tennis Womens');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('SMM', 'Green Tankers', 'Swimming Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('SMW', 'Lady Tankers', 'Swimming Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('TKM', 'Green Jins', 'Taekwondo Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('TKW', 'Lady Jins', 'Taekwondo Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('TNM', 'Green Tennisters', 'Tennis Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('TNW', 'Lady Tennisters', 'Tennis Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('TFM', 'Green Tracksters', 'Track and Field Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('TFW', 'Lady Tracksters', 'Track and Field Women');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('VBM', 'Green Spikers', 'Volleyball Men');
+
+INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('VBW', 'Lady Spikers', 'Volleyball Women');
