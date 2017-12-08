@@ -15,7 +15,7 @@
     header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
   }
   if($userType>2||$userType<1){
-	 header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[studentManager].php"); 
+	 header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[studentManager].php");
   }
 
 //if student manager
@@ -169,6 +169,11 @@ else{
 
                     ?>
                     <h1 class="page-header">Midterm Updates</h1>
+                    <div class="breadCrumb1" style="padding-bottom:20px;">
+                      <a class="breadCrumb1" href="index[admin].php">Home</a> >>>
+                      <a class="breadCrumb1" href="MidtermUpdateList.php">View Teams</a> >>>
+                      <a class="breadCrumb1" href="#">Midterm Update</a>
+                    </div>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>

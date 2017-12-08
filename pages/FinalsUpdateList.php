@@ -144,16 +144,17 @@ $idx=$_SESSION['idnumber'];
 
         <div id="page-wrapper">
 					<div class="row">
-							<div class="col-lg-12">
-								
-							</div>
 					</div>
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Select a team</h1>
 
                 <div>
+									<div class="breadCrumb1" style="padding-bottom:20px;">
+										<a class="breadCrumb1" href="index[admin].php">Home</a> >>>
+										<a class="breadCrumb1" href="">View Team</a>
 
+									</div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
@@ -162,7 +163,7 @@ $idx=$_SESSION['idnumber'];
                 <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           View Midterm Updates
+                           View Finals Updates
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">

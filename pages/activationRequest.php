@@ -146,6 +146,12 @@ else{
                     <h1 class="page-header">Account Activation Requests</h1>
                 <div>
             </div>
+						<div class="breadCrumb1" style="padding-bottom:20px;">
+							<a class="breadCrumb1" href="index[admin].php">Home</a> >>>
+							<a class="breadCrumb1" href="">Activation Requests</a>
+
+							</div>
+
 			<?php
 				require_once('../osd_connect.php');
 				if(isset($_POST['activateAccount'])){
