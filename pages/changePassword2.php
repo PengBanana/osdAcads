@@ -31,7 +31,7 @@
 			$query="UPDATE `acadsosd`.`user` SET `password`='".$n1."' WHERE `idnumber`='".$idNum."';";
 			mysqli_query($dbc,$query);
 			$_SESSION['message']='<div class="alert alert-success">Password Changed<div>';
-			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[admin].php");
+			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[studentManager].php");
 		}
 		else{
 			$message='<div class="alert alert-danger">
