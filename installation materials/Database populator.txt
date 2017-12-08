@@ -210,3 +210,82 @@ INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('TFW', 
 INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('VBM', 'Green Spikers', 'Volleyball Men');
 
 INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `sport`) VALUES ('VBW', 'Lady Spikers', 'Volleyball Women');
+
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CS-ST', 'Computer Science Major in  Software Technology', 'ST');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CS-NE', 'Computer Science Major in Network Engineering', 'NE');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BS-IS', 'Information Systems', 'IT');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSA', 'Accountancy', 'ACCTY');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BS-ENT', 'Entreprenurship', 'MOD');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSMGT', 'Management', 'MOD');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSFIN', 'Finance', 'MKTG');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSMKT', 'Marketing', 'MKTG');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('ECM-MKT', 'Economics and Marketing', 'MKTG');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('ECM-MGT', 'Economics and Management', 'MKTG');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('ECM-LGL', 'Economics and Legal Management', 'POLSCI');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CHE', 'Chemical Engineering', 'CHE');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CIV', 'Civil Engineering', 'IE');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CPE', 'Computer Engineering', 'CT');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('MEM', 'Manufacturing Engineering', 'MEM');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('AB-CAM', 'Communication Arts', 'COMM');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('AB-OCM', 'Organizational Communication', 'COMM');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CAM-ADV', 'Communication Arts and Advertising Management', 'COMM');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CAM-BSA', 'Communication Arts and Accountancy', 'COMM');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CAM-ENT', 'Communication Arts and Entrepreneurship', 'COMM');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CAM-FIN', 'Communication Arts and Finance', 'COMM');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CAM-LGL', 'Communication Arts and Legal Management', 'COMM');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('CAM-MGT', 'Communication Arts and Management', 'COMM');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('AB-PSM', 'Psychology', 'CEPD');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('AB-SPM', 'Sports Studies', 'PED');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('AB-HIM', 'History', 'HIST');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('AB-ISA', 'International Studies Major in American Studies', 'ISD');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('AB-ISE', 'International Studies Major in European Studies', 'ISD');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('AB-ISJ', 'International Studies Major in Japanese Studies', 'ISD');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BS-BIO', 'Biology', 'BIO');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BS-CHY', 'Chemistry', 'SED');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSBCHEM', 'Biochemistry', 'SED');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BS-PHY', 'Physics', 'PHY');
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSPHYEC', 'Physics minor in Economics', 'PHY');
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSPHYFI', 'Physics minor in Finance', 'PHY');
+
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('PHY-MED', 'Physics specialization in Medical Instrumentation', 'PHY');
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSE-ENG', 'English', 'DEAL');
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSE-BIO', 'Secondary Education in Biology', 'ELMD');
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSE-CHE', 'Secondary Education in Chemistry', 'ELMD');
+INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) VALUES ('BSE-PHY', 'Secondary Education in Physics', 'ELMD');
+
+
+
+INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('NE', 'Network Engineering', 'CCS');
