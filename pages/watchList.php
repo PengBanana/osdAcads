@@ -2,7 +2,11 @@
 <?php
 session_start();
 require_once('../osd_connect.php');
+
+$fname = $_SESSION["name"];
+$userType = $_SESSION["typex"];
 $idx=$_SESSION['idnumber'];
+
 					$typex=$_SESSION["typex"];
 					if($idx===0){
 					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
@@ -177,17 +181,37 @@ $idx=$_SESSION['idnumber'];
                                         </tr>
                                     </thead>
 									<tbody>
-									<tr>
-									<td class="center">Alvin de Guzman</td>
-									<td class="center">Green Archers: Basketball Men</td>
-									<td class="center">12.0</td>
-									<td class="center">CRITICAL</td>
-									</tr><tr>
-									<td class="center">Christian Modino</td>
-									<td class="center">Animo Squad Drummers: Cheerdance</td>
-									<td class="center">9.0</td>
-									<td class="center">CRITICAL</td>
-									</tr>
+
+										  <?php
+
+                                            $allQuery = "SELECT CONCAT(sap.studentLastName, ', ', sap.studentFirstName) as saFullName, t.teamName as teamName, sap.accumulatedFailures as accumulatedFailures, ac.statusName as statusName
+                                                         FROM studentathleteprofile sap JOIN team t ON sap.teamCode = t.sportCode
+																						JOIN academicclassification ac ON sap.statusID = ac.statusID
+														 WHERE sap.statusID != '4';";
+                                            $allQueryResult = mysqli_query($dbc, $allQuery);
+
+                                          ?>
+
+                                          <?php
+                                            foreach ($allQueryResult as $row) {
+                                            ?>
+                                            <tr class="odd gradeA">
+                                            <td class="text-center">
+                                              <?php echo $row['saFullName'];?>
+                                            </td>
+                                            <td class="text-center">
+                                              <?php echo $row['teamName'];?>
+                                            </td>
+                                            <td class="text-center">
+                                              <?php echo $row['accumulatedFailures'];?>
+                                            </td>
+                                            <td class="text-center">
+                                              <?php echo $row['statusName'];?>
+                                            </td>
+                                          </tr>
+                                            
+                                        <?php }?>
+
 									</tbody>
                                 </table>
 
