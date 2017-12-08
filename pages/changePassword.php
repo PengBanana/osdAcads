@@ -66,83 +66,81 @@ if(empty($name)){
         <div id="wrapper">
 
 					<!-- Navigation -->
+					<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
+							 <div class="navbar-header">
+									 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+											 <span class="sr-only">Toggle navigation</span>
+											 <span class="icon-bar"></span>
+											 <span class="icon-bar"></span>
+											 <span class="icon-bar"></span>
+									 </button>
+									 <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[admin].php">
+									 <img src="Images/OSD-logo2.png" height="35px" width='auto' />
+									 </a>
+							 </div>
 
-				 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
-							<div class="navbar-header">
-									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-											<span class="sr-only">Toggle navigation</span>
-											<span class="icon-bar"></span>
-											<span class="icon-bar"></span>
-											<span class="icon-bar"></span>
-									</button>
-									<a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[admin].html">
-									<img src="Images/OSD-logo2.png" height="35px" width='auto' />
-									</a>
-							</div>
+							 <!-- /.navbar-header -->
 
-							<!-- /.navbar-header -->
+							 <!-- NAV BAR -->
 
-							<!-- NAV BAR -->
+							 <ul class="nav navbar-top-links navbar-right">
 
-							<ul class="nav navbar-top-links navbar-right">
+									 <!-- /.dropdown -->
+									 <li class="dropdown">
+											 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+													 <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
+											 </a>
+											 <ul class="dropdown-menu dropdown-user" >
+													 <li><a href="changePassword.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
+													 </li>
+													 <li class="divider"></li>
+													 <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+													 </li>
+											 </ul>
+											 <!-- /.dropdown-user -->
+									 </li>
+									 <!-- /.dropdown -->
+							 </ul>
+							 <!-- /.navbar-top-links -->
 
-									<!-- /.dropdown -->
-									<li class="dropdown">
-											<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-													<i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
-											</a>
-											<ul class="dropdown-menu dropdown-user" >
-													<li><a href="#"><i class="fa fa-user fa-fw"></i> Grace Alhambra</a>
-													</li>
-													<li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
-													</li>
-													<li class="divider"></li>
-													<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-													</li>
-											</ul>
-											<!-- /.dropdown-user -->
-									</li>
-									<!-- /.dropdown -->
-							</ul>
-							<!-- /.navbar-top-links -->
+							 <div class="navbar-fixed sidebar"  role="navigation" >
+									 <div class="sidebar-nav navbar-f" >
+											 <ul class="nav" id="side-menu" >
 
-							<div class="navbar-fixed sidebar"  role="navigation" >
-									<div class="sidebar-nav navbar-f" >
-											<ul class="nav" id="side-menu" >
+															 <li >
+																	 <a href="index[admin].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
+															 </li>
 
-															<li >
-																	<a href="index[admin].html"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
-															</li>
-
-															 <li>
-																<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
-																<ul id="demo1" class="collapse" style="list-style: none;">
-																	<li><a href="#"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
-																	<li><a href="#"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
-																	<li><a href="#"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Generate Final Report </a></li>
-																	<li><a href="#"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Report History</a></li>
-																</ul>
-																</li>
 																<li>
-																		<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
-																		<ul id="demo4" class="collapse" style="list-style: none;">
-																			 <li><a href="ViewTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
-																			 <li><a href="registerStudentAthlete.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Register an Athlete </a></li>
-																		</ul>
-																</li>
-															<li>
-																<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-user" style="color: white"></i>    Accounts </a>
-																<ul id="demo2" class="collapse" style="list-style: none;">
-																		<li><a href="activationRequest.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Activation Request </a></li>
-																		<li><a href="viewAllAccounts.php.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i>  Manage Accounts </a></li>
-																</ul>
-															</li>
-											</ul>
-									</div>
-									<!-- /.sidebar-collapse -->
-							</div>
-							<!-- /.navbar-static-side -->
-					</nav>
+																 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
+																 <ul id="demo1" class="collapse" style="list-style: none;">
+																	 <li><a href="MidtermUpdateList_admin.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
+																	 <li><a href="FinalsUpdateList_admin.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
+																	 <li><a href="FinalReport.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Generate Final Report </a></li>
+																	 <li><a href="FinalReportHistory.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Report History</a></li>
+																 </ul>
+																 </li>
+																 <li>
+																		 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
+																		 <ul id="demo4" class="collapse" style="list-style: none;">
+																				<li><a href="ViewTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
+																				<li><a href="registerStudentAthlete.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Register an Athlete </a></li>
+																				<li><a href="addTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Add New Team </a></li>
+																		 </ul>
+																 </li>
+															 <li>
+																 <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-user" style="color: white"></i>    Accounts </a>
+																 <ul id="demo2" class="collapse" style="list-style: none;">
+																		 <li><a href="activationRequest.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Activation Request </a></li>
+																		 <li><a href="viewStudentManagers.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i>  Manage Accounts </a></li>
+																 </ul>
+															 </li>
+											 </ul>
+									 </div>
+									 <!-- /.sidebar-collapse -->
+							 </div>
+							 <!-- /.navbar-static-side -->
+					 </nav>
         <div id="page-wrapper">
 
             <div class="row">
