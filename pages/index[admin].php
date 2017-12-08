@@ -7,6 +7,9 @@ $name=$_SESSION["name"];
 if(isset($_SESSION['message'])){
 	$message=$_SESSION['message'];
 }
+else{
+	$message="";
+}
 if($idx===0){
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 	}
@@ -211,14 +214,15 @@ if($idx===0){
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-		<?php
-		if(isset($message)){
-			echo $message;
-			unset($_SESSION["message"]);
-		}
-		?>
+		
         <div id="page-wrapper">
             <div class="row">
+			<?php
+			if(isset($message)){
+			echo $message;
+			unset($_SESSION["message"]);
+			}
+			?>
                 <div class="col-lg-12">
                     <h1 class="page-header">Welcome Admin <?php echo $name; ?>!</h1>
                 </div>

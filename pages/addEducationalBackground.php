@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('../osd_connect.php');
 if(isset($_POST['registerAthlete'])){
 	//for deletion
