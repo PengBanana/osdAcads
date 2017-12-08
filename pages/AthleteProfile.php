@@ -244,21 +244,20 @@ else{
                 </div>
             </div>
 
+
             <!--New course
             <div class="alert alert-success">
                 <strong>New Course has been added.</strong>
             </div>
             -->
 
-            <div class="row" id="breadPad">
-                <div class="col-lg-12">
-                     <form class="form-inline ">
-                         <a href="AddCourse1.html" class="breadCrumb1">View Team</a>
-                         <a class="breadCrumb1">>></a>
-                         <a href="" class="breadCrumb1">Athlete's Profile</a>
-                     </form>
+            <div class="breadCrumb1" style="padding-bottom:20px;">
+                  <a class="breadCrumb1" href="index[studentManager].php">Home</a> >>>
+                  <a class="breadCrumb1" href="ViewTeamAthletes.php">Team Profile</a> >>>
+                  <a class="breadCrumb1" href="ViewTeamAthletes.php">Athlete's Profile</a>
+
+
                 </div>
-            </div>
 
             <div class="row">
                 <div class="col-lg-1">

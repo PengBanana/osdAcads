@@ -179,7 +179,7 @@ else{
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index.html">
+                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[admin].php">
                 <img src="Images/OSD-logo2.png" height="35px" width='auto' />
                 </a>
             </div>
@@ -196,9 +196,7 @@ else{
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i><?php echo $name; ?></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
+                        <li><a href="changePassword.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -215,81 +213,32 @@ else{
                     <ul class="nav" id="side-menu" >
 
                             <li >
-                                <a href="index.html"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
+                                <a href="index[admin].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
                             </li>
 
                              <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-user" style="color: white"></i> Student Athletes </i></a>
-                            <ul id="demo1" class="collapse" style="list-style: none;">
-                                <li>
-                                    <a href="AthletesAll.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> View Student Athletes </a>
-                                </li>
-
-
-                                    <li>
-                                        <a href="AddCourse1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Courses</a>
-                                    </li>
-                                    <li>
-                                        <a href="EditCourse1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Edit Courses</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="	s.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Edit Grades</a>
-                                    </li>
-
-
-
-                            </ul>
-                        </li>
-
-
-                        <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-inbox" style="color: white"></i> Manage Reports </i></a>
-                            <ul id="demo1" class="collapse" style="list-style: none;">
-
-                                 <li>
-                                        <a href="AddASSR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Academic Status</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="AddMAR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Midterm Report</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="AddAPFR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Projected to Fail Course</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="AddAAPFR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Aftermath of the Projected to Fail Courses </a>
-                                    </li>
-
-                            </ul>
-                        </li>
-
-                        <li>
-                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-folder-open" style="color: white"></i> View Reports </a>
-                            <ul id="demo4" class="collapse" style="list-style: none;">
-                                <li>
-                                    <a href="ManagePEC.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Planned Enrollment Chart</a>
-                                </li>
-                               <li>
-                                    <a href="ASSR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white"></i> Academic Standing Summary Report </a>
-                                </li>
-                                <li>
-                                    <a href="AMSL.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Academic Monitoring Summary List</a>
-                                </li>
-                                <li>
-                                    <a href="MAR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Midterm Academic Report</a>
-                                </li>
-                                <li>
-                                    <a href="APFR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Academic Projected Failure Report</a>
-                                </li>
-                                <li>
-                                    <a href="AAPFR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Aftermath of Academic Projected Failure Report</a>
-                                </li>
-                            </ul>
-                        </li>
-
+                              <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
+                              <ul id="demo1" class="collapse" style="list-style: none;">
+                                <li><a href="MidtermUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
+                                <li><a href="FinalsUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
+                                <li><a href="FinalReport.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Generate Final Report </a></li>
+                              </ul>
+                              </li>
+                              <li>
+                                  <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
+                                  <ul id="demo4" class="collapse" style="list-style: none;">
+                                     <li><a href="ViewTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
+                                     <li><a href="registerStudentAthlete.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Register an Athlete </a></li>
+                                     <li><a href="addTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Add New Team </a></li>
+                                  </ul>
+                              </li>
+                            <li>
+                              <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-user" style="color: white"></i>    Accounts </a>
+                              <ul id="demo2" class="collapse" style="list-style: none;">
+                                  <li><a href="activationRequest.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Activation Request </a></li>
+                                  <li><a href="viewStudentManagers.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i>  Manage Accounts </a></li>
+                              </ul>
+                            </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -309,15 +258,14 @@ else{
             </div>
             -->
 
-            <div class="row" id="breadPad">
-                <div class="col-lg-12">
-                     <form class="form-inline ">
-                         <a href="AddCourse1.html" class="breadCrumb1">View Team</a>
-                         <a class="breadCrumb1">>></a>
-                         <a href="" class="breadCrumb1">Athlete's Profile</a>
-                     </form>
+            <div class="breadCrumb1" style="padding-bottom:20px;">
+                  <a class="breadCrumb1" href="index[admin].php">Home</a> >>>
+                  <a class="breadCrumb1" href="ViewTeam.php">View Team</a> >>>
+                  <a class="breadCrumb1" href="ViewTeamAthletes.php">Team Profile</a> >>>
+                  <a class="breadCrumb1" href="#.php">Athlete's Profile</a>
+
+
                 </div>
-            </div>
 
             <div class="row">
                 <div class="col-lg-1">
