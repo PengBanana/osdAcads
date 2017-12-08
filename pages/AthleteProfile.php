@@ -321,7 +321,8 @@ else{
                 </div>
                 <div class="col-lg-5">
                  <?php
-				$query='SELECT SUM(courseUnit) AS rem FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.finalGrade IS NULL AND sd.PlannedEnrollmentChart_pecID='.$pecID.';';
+				$query='SELECT SUM(courseUnit) AS rem FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode 
+				JOIN plannedenrollmentchart pec ON sd.PlannedEnrollmentChart_pecID=pec.pecID WHERE sd.finalGrade IS NULL AND studentIDNumber="11327219";';
 				$result=mysqli_query($dbc,$query);
 				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 				$units=$row['rem'];
