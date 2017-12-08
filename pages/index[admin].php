@@ -146,10 +146,18 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Welcome Grace!</h1>
+                    <h1 class="page-header">Welcome Admin!</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-6">
+              </div>
+                <div class="col-lg-2">
+                  <b><?php echo "Today is ".date("m/d/Y") . "<br>";?></b>
+            </div>
+          </div>
 
 	<div class="row">
         <div class="col-lg-1"></div>
