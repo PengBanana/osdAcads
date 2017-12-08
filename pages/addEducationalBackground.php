@@ -350,7 +350,7 @@ else{
                                 <div><h4 class="page-header"> Collegiate</h4></div>
                                 <table class="table table-striped table-bordered table-hover" id="collegeTable">
                                     <thead>
-											<th class="text-center">Year</th>
+											<th class="text-center">Year Level</th>
                                             <th class="text-center">Degree</th>
                                             <th class="text-center"> Name University</th>
                                             <th class="text-center"> Address University</th>
