@@ -12,8 +12,125 @@ if(empty($idx)){
 else if(empty($typex)){
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 }
+else if($typex>2||$typex<1){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/AthleteProfile.php");
+}
 else{
 	$name=$_SESSION["name"];
+	$athleteID=$_POST['athleteID'];
+	if(isset($_POST['updateStatus'])){
+		$newStatus=$_POST['statusUpdate'];
+		$query="UPDATE `acadsosd`.`studentathleteprofile` SET `statusID`='".$newStatus."' WHERE `studentIDNumber`='".$athleteID."'";
+		mysqli_query($dbc,$query);
+        $query2="INSERT INTO acadsosd.classificationistory(classificationID, athleteID, dateClassified) VALUES('".$newStatus."', '".$athleteID."', Date(Now()));";
+        mysqli_query($dbc,$query2);
+	}
+	else if(isset($_POST['addCoursetoATE'])){
+		$code=$_POST['course'];
+		$pecID=$_POST['pecID'];
+		$term=$_POST['term'];
+		$year=$_POST['year'];
+		$query="UPDATE `acadsosd`.`subjectdetails` SET `termTaken`='".$term."', `YearTaken`=".$year." WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and
+		`courseCode`='".$code."';";
+		mysqli_query($dbc,$query);
+		echo '<div class="alert alert-danger">ERROR:
+        '.$query.'
+        </div>';
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/viewTeam.php");
+	}
+	else if(isset($_POST['editCourse'])){
+		$code=$_POST['course'];
+		$pecID=$_POST['pecID'];
+		$term=$_POST['term'];
+		$year=$_POST['year'];
+		$pID=$_POST['pID'];
+		$pName=$_POST['pName'];
+		$query="UPDATE `acadsosd`.`subjectdetails` SET `termTaken`='".$term."', `YearTaken`=".$year." WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and
+		`courseCode`='".$code."';";
+		mysqli_query($dbc,$query);
+		$query="SELECT * FROM acadsosd.professor WHERE professorID='';";
+		$result=mysqli_query($dbc,$query);
+		if(mysqli_num_rows($result)>0){
+			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$pID=$row['professorID'];
+			$query="UPDATE `acadsosd`.`subjectdetails` SET `professorID`='".$pID."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."';";
+			mysqli_query($dbc,$query);
+		}
+		else{
+			$query="INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('".$pID."', '".$pName."');";
+			mysqli_query($dbc,$query);
+			$query="UPDATE `acadsosd`.`subjectdetails` SET `professorID`='".$pID."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."';";
+			mysqli_query($dbc,$query);
+		}
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/viewTeam.php");
+	}
+	else if(isset($_POST['addReport'])){
+		$type=$_POST['reportType'];
+		$code=$_POST['course'];
+		$grade=$_POST['grade'];
+		$essay=$_POST['rUpdate'];
+		$pecID=$_POST['pecID'];
+		$term=$_POST['term'];
+		$year=$_POST['year'];
+		$query="SELECT courseUnit FROM acadsosd.subjects WHERE courseCode='".$code."';";
+		$result=mysqli_query($dbc, $query);
+		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+		$courseUnit=$row['courseUnit'];
+		$query="SELECT accumulatedFailures FROM acadsosd.studentathleteprofile WHERE studentIDNumber='11327219';";
+		$result=mysqli_query($dbc, $query);
+		$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+		$accumulatedFailures=$row['accumulatedFailures'];
+		if(empty($accumulatedFailures)){
+			$accumulatedFailures=0;
+		}
+		if($type=="M"){
+			$query="UPDATE `acadsosd`.`subjectdetails` SET `midtermAcademicReport`='".$essay."', `midtermGrade`='".$grade."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."'";
+		}
+		else if($type=="F"){
+
+			//if the athlete fail, re-insert the data to next term
+			if($grade==0){
+			$query="UPDATE `acadsosd`.`subjectdetails` SET `finalGrade`='".$grade."', `finalReport`='".$essay."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."';";
+			mysqli_query($dbc,$query);
+				if($term="T1"){
+					$term="T2";
+				}
+				else if($term="T2"){
+					$term="T3";
+				}
+				else if($term="T3"){
+					$term="T1";
+					$year++;
+				}
+				$accumulatedFailures+=$courseUnit;
+				//insert retake course
+				$query="INSERT INTO `acadsosd`.`subjectdetails` (`PlannedEnrollmentChart_pecID`, `termTaken`, `YearTaken`, `courseCode`) VALUES ('".$pecID."', '".$term."', ".$year.", '".$code."');";
+				mysqli_query($dbc,$query);
+				$query="UPDATE `acadsosd`.`studentathleteprofile` SET `accumulatedFailures`='".$accumulatedFailures."' WHERE `studentIDNumber`='".$athleteID."';";
+			}
+			else if($grade>2){
+				//execute all fail query
+				//SELECT * FROM acadsosd.subjectdetails WHERE courseCode='FILKOMU' and finalGrade=0;
+				$query="SELECT * FROM acadsosd.subjectdetails WHERE courseCode='".$code."' and finalGrade=0;";
+				$result=mysqli_query($dbc,$query);
+				$x=mysql_num_rows($result);
+				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+				if($x>0){
+					$accumulatedFailures-=$courseUnit;
+					//execute decrease accumlatedFailures
+					$query="UPDATE `acadsosd`.`studentathleteprofile` SET `accumulatedFailures`='".$accumulatedFailures."' WHERE `studentIDNumber`='".$athleteID."';";
+				}
+				$query="UPDATE `acadsosd`.`subjectdetails` SET `finalGrade`='".$grade."', `finalReport`='".$essay."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."';";
+			}
+		}
+		mysqli_query($dbc,$query);
+		if($typex>2){
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[studentManager].php");
+		}
+		else{
+			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/viewTeam.php");
+		}
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -53,81 +170,132 @@ else{
     <body>
     <div id="wrapper">
 
-			<!-- Navigation -->
-		 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
-					<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-							</button>
-							<a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[admin].php">
-							<img src="Images/OSD-logo2.png" height="35px" width='auto' />
-							</a>
-					</div>
+        <!-- Navigation -->
+      <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index.html">
+                <img src="Images/OSD-logo2.png" height="35px" width='auto' />
+                </a>
+            </div>
 
-					<!-- /.navbar-header -->
+            <!-- /.navbar-header -->
 
-					<!-- NAV BAR -->
+            <!-- NAV BAR -->
 
-					<ul class="nav navbar-top-links navbar-right">
+            <ul class="nav navbar-top-links navbar-right">
 
-							<!-- /.dropdown -->
-							<li class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-											<i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
-									</a>
-									<ul class="dropdown-menu dropdown-user" >
-											<li><a href="changePassword.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
-											</li>
-											<li class="divider"></li>
-											<li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-											</li>
-									</ul>
-									<!-- /.dropdown-user -->
-							</li>
-							<!-- /.dropdown -->
-					</ul>
-					<!-- /.navbar-top-links -->
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user" >
+                        <li><a href="SMprofile.html"><i class="fa fa-user fa-fw"></i><?php echo $name; ?></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
 
-					<div class="navbar-fixed sidebar"  role="navigation" >
-							<div class="sidebar-nav navbar-f" >
-									<ul class="nav" id="side-menu" >
+            <div class="navbar-fixed sidebar"  role="navigation" >
+                <div class="sidebar-nav navbar-f" >
+                    <ul class="nav" id="side-menu" >
 
-													<li >
-															<a href="index[admin].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
-													</li>
+                            <li >
+                                <a href="index.html"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
+                            </li>
 
-													 <li>
-														<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
-														<ul id="demo1" class="collapse" style="list-style: none;">
-															<li><a href="MidtermUpdateList_admin.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
-															<li><a href="FinalsUpdateList_admin.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
-															<li><a href="FinalReport.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Generate Final Report </a></li>
-															<li><a href="FinalReportHistory.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Report History</a></li>
-														</ul>
-														</li>
-														<li>
-																<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
-																<ul id="demo4" class="collapse" style="list-style: none;">
-																	 <li><a href="ViewTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
-																	 <li><a href="registerStudentAthlete.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Register an Athlete </a></li>
-																</ul>
-														</li>
-													<li>
-														<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-user" style="color: white"></i>    Accounts </a>
-														<ul id="demo2" class="collapse" style="list-style: none;">
-																<li><a href="activationRequest.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Activation Request </a></li>
-																<li><a href="viewStudentManagers.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i>  Manage Accounts </a></li>
-														</ul>
-													</li>
-									</ul>
-							</div>
-							<!-- /.sidebar-collapse -->
-					</div>
-					<!-- /.navbar-static-side -->
-			</nav>
+                             <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-user" style="color: white"></i> Student Athletes </i></a>
+                            <ul id="demo1" class="collapse" style="list-style: none;">
+                                <li>
+                                    <a href="AthletesAll.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> View Student Athletes </a>
+                                </li>
+
+
+                                    <li>
+                                        <a href="AddCourse1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Courses</a>
+                                    </li>
+                                    <li>
+                                        <a href="EditCourse1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Edit Courses</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="	s.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Edit Grades</a>
+                                    </li>
+
+
+
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-inbox" style="color: white"></i> Manage Reports </i></a>
+                            <ul id="demo1" class="collapse" style="list-style: none;">
+
+                                 <li>
+                                        <a href="AddASSR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Academic Status</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="AddMAR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Midterm Report</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="AddAPFR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Projected to Fail Course</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="AddAAPFR1.html"><i class="glyphicon glyphicon-duplicate"  style="color: white" style ></i> Add Aftermath of the Projected to Fail Courses </a>
+                                    </li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-folder-open" style="color: white"></i> View Reports </a>
+                            <ul id="demo4" class="collapse" style="list-style: none;">
+                                <li>
+                                    <a href="ManagePEC.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Planned Enrollment Chart</a>
+                                </li>
+                               <li>
+                                    <a href="ASSR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white"></i> Academic Standing Summary Report </a>
+                                </li>
+                                <li>
+                                    <a href="AMSL.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Academic Monitoring Summary List</a>
+                                </li>
+                                <li>
+                                    <a href="MAR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Midterm Academic Report</a>
+                                </li>
+                                <li>
+                                    <a href="APFR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Academic Projected Failure Report</a>
+                                </li>
+                                <li>
+                                    <a href="AAPFR.html" style="font-size: 11px;"><i class="glyphicon glyphicon-duplicate"  style="color: white" ></i> Aftermath of Academic Projected Failure Report</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -156,8 +324,8 @@ else{
                 </div>
                 <div class="col-lg-5">
                  <?php
-				$athleteID=$_POST['athleteID'];
-				$query='SELECT SUM(courseUnit) AS rem FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.finalGrade IS NULL OR sd.finalGrade=0;';
+				$query='SELECT SUM(courseUnit) AS rem FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode 
+				JOIN plannedenrollmentchart pec ON sd.PlannedEnrollmentChart_pecID=pec.pecID WHERE sd.finalGrade IS NULL AND studentIDNumber="'.$athleteID.'";';
 				$result=mysqli_query($dbc,$query);
 				$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 				$units=$row['rem'];
@@ -231,51 +399,37 @@ else{
                 else if($statusID == '3'){
                     $color = "green";
                 }
-                $classcolor="";
-                if($statusID == '1'){
-                    $classcolor = "statusSuperCritical";
-                }
-                else if($statusID == '2'){
-                    $classcolor = "statusCritical";
-                }
-                else if($statusID == '3'){
-                    $classcolor = "statusNotCritical";
-                }
-				echo
-				'
+				?>
 				<form>
                         <div class="form-group">
                             <div>Name:
-                            <label>'.$lastname.', '.$firstname.' '.$middleName.'</label>
+                            <label><?php echo' '.$lastname.', '.$firstname.' '.$middleName.' ';?></label>
                             </div>
                             <div>ID No:
-                            <label>'.$athleteID.'</label>
+                            <label><?php echo ' '.$athleteID.' '?></label>
                             </div>
                             <div>Team:
-                            <label>'.$teamName.': '.$sport.'('.$sportCode.')</label>
+                            <label><?php echo ' '.$teamName.': '.$sport.'('.$sportCode.') ';?></label>
                             </div>
                             <div>College:
-                            <label>'.$college.' ('.$collegeCode.')</label>
+                            <label><?php echo ' '.$college.' ('.$collegeCode.')  ';?></label>
                             </div>
                             <div>Degree Program:
-                            <label>'.$degree.' ('.$degreeCode.')</label>
+                            <label><?php echo ' '.$degree.' ('.$degreeCode.') ';?></label>
                             </div>
                         </div>
                     </form>
                 </div>
                  <div class="col-lg-3"></div>
                 <div class="col-lg-2">
-                    <div style="color: '.$color.';"> <label>'.$status.'</label></div>
+                    <div style="color: <?php echo $color; ?>;"> <label><?php echo ' '.$status.' ';?></label></div>
                     <div>
                         <label> Units Remaining: </label>
                     </div>
-                    <label style="font-size: 24px;">'.$units.'</label>
+                    <label style="font-size: 24px;"><?php echo ' '.$units.' ';?></label>
                 </div>
-                 <div class="col-lg-6" style="padding-left:320px;"><button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editStatus" style="height:40px; width: auto;font-size:14px;">Edit Status
-						 </button></div>
+                 <div class="col-lg-6" style="padding-left:320px;"><button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editStatus" style="height:40px; width: auto;font-size:14px;">Edit Status</button></div>
             </div>
-				';
-				?>
 
 
 
@@ -317,7 +471,7 @@ else{
                                   </div>
                             </div>
                             <div class="col-lg-6" >
-                                <?php
+                            <?php
 							echo
 							'
 								<p><span class="glyphicon glyphicon-minus"></span> 	'.$birthday.'</p>
@@ -344,34 +498,65 @@ else{
                             </div>
                           </div>
                           <div class="row" style="border-bottom: 1px solid #ccc; padding-left: 30px;">
-                              <h3>Education</h3>
+                              <h3>Educational Attainment</h3>
                               <div class="col-lg-6">
                                   <div style="padding-top: 5px; font-size: 17px;">
-                                      <div><label>Grade 6 </label></div>
-                                      <div><label>Grade 7 </label></div>
-                                      <div><label>Grade 9</label></div>
-                                      <div><label>Grade 10</label></div>
-                                      <div><label>Grade 11</label></div>
-                                      <div><label>Grade 12</label></div>
+								  <?php
+								  $query="SELECT * FROM acadsosd.educationalbackground WHERE studentIDNumber=".$athleteID.";";
+								  $result=mysqli_query($dbc,$query);
+								  $x=mysqli_num_rows($result);
+								  if($x<=0){
+									  echo '<div><label>No Data</label></div>';
+								  }
+								  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+									  $schoolLevel=$row['schoolLevel'];
+                                      echo '<div><label>'.$schoolLevel.'</label></div>';
+								  }
+								  ?>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6" style="padding-top: 8px;">
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
-                                      <p>Collegio San Agustin</p>
+
+                                <?php
+
+                                    $allQuery = "SELECT schoolName FROM acadsosd.educationalbackground WHERE studentIDNumber=".$athleteID.";";
+                                    $allQueryResult = mysqli_query($dbc, $allQuery);
+
+                                ?>
+
+                                <?php
+                                    foreach ($allQueryResult as $row) {
+                                ?>
+                                    <p><span class="glyphicon glyphicon-minus"></span>
+                                        <?php echo $row['schoolName'] ?>
+                                    </p>
+                                <?php }?>
+
                                 </div>
                           </div>
 
                           <div class="row" style="padding-left: 30px;">
-                              <h3>Education</h3>
+                              <h3>Achievment</h3>
 
                                 <div class="col-lg-12" style="padding-top: 8px;">
-                                      <p>2nd Runner Up Palarong Pambansa in Basketball November 25, 2011</p>
+								<?php
+								  $query="SELECT * FROM acadsosd.achievmenthistory WHERE studentIDNumber=".$athleteID.";";
+								  $result=mysqli_query($dbc,$query);
+								  $x=mysqli_num_rows($result);
+								  if($x<=0){
+									  echo '<p>No Data</p>';
+								  }
+								  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+									  $standing=$row['accomplishmentStanding'];
+									  $type=$row['accomplishmentType'];
+									  $accomplishmentName=$row['accomplishmentName'];
+									  $event=$row['accomplishmentEvent'];
+									  $date=$row['accomplishmentDate'];
+                                      echo '<p>'.$standing.' '.$type.' '.$accomplishmentName.' in '.$event.' '.$date.'</p>';
+								  }
+								  ?>
+
                                 </div>
 
                           </div>
@@ -379,10 +564,10 @@ else{
 
                         <div id="pec" class="tabcontent">
                           <div class="row">
-                          <div class="col-lg-8">
-                            <h3>Enrollment Chart</h3>
+                          <div class="col-lg-7">
+                            <h3>Planned Enrollment Chart</h3>
                           </div>
-                            <div class="col-lg-4" style="padding-left: 50px;">
+                            <div class="col-lg-3" style="padding-left: 50px;">
 							<form action="addPEC.php" method="post"><input type="hidden" value="<?php echo $athleteID; ?>" name="athleteID"><input type=submit class="btn btn-link breadCrumb1" name="submit" value="EDIT PLANNED ENROLLMENT CHART"></form>
                               </div>
 							  </div>
@@ -414,7 +599,7 @@ else{
 							  <th class="text-center">Unit</th>
 							  <th class="text-center">Term</th>
 							  </thead>';
-							  $query2="SELECT * FROM acadsosd.subjectdetails sd JOIN subjects s on sd.courseCode=s.courseCode WHERE PlannedEnrollmentChart_pecID=".$pecID." AND yearTaken=".$year.";";
+							  $query2="SELECT * FROM acadsosd.subjectdetails sd JOIN subjects s on sd.courseCode=s.courseCode WHERE PlannedEnrollmentChart_pecID=".$pecID." AND yearTaken=".$year." ORDER BY sd.termTaken;";
 							  $result2=mysqli_query($dbc,$query2);
 							  while($row2=mysqli_fetch_array($result2,MYSQLI_ASSOC)){
 								$term=$row2['termTaken'];
@@ -461,12 +646,22 @@ else{
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN
-                                                                        FROM classificationhistory ch JOIN academicclassification ac
-                                                                        ON ch.classificationID = ac.statusID;";
-                                        $result = mysqli_query($dbc, $selectClassificationHistory);
-                                        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                                            echo'<tr class="odd gradeX">
+                                        $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN, ch.classificationID as sID FROM classificationistory ch JOIN academicclassification ac ON ch.classificationID = ac.statusID WHERE athleteID=".$athleteID.";";
+                                        $result=mysqli_query($dbc, $selectClassificationHistory);
+                                        while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+										$sID=$row['sID'];
+										$classcolor="";
+										if($sID == '1'){
+											$classcolor = "statusSuperCritical";
+										}
+										else if($sID == '2'){
+											$classcolor = "statusCritical";
+										}
+										else if($sID == '3'){
+											$classcolor = "statusNotCritical";
+										}
+                                            echo'
+											<tr class="odd gradeX">
                                             <td class="text-center">'.$row['DC'].'</td>
                                             <td class="text-center '.$classcolor.'">'.$row['SN'].'</td>
                                             </tr>';
@@ -484,16 +679,98 @@ else{
 
                         <div id="pte" class="tabcontent">
                           <div class="row">
-                              <div class="col-lg-8" >  <h3>Actual Term Enrollment </h3></div>
-                              <div class="col-lg-4"style="padding-top: 50px;" >
+                              <div class="col-lg-7" >  <h3>Actual Term Enrollment </h3></div>
+                              <div class="col-lg-5"style="padding-top: 50px;" >
 
-                              </div>
+                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#writeReport">
+                                    <i class="glyphicon glyphicon-plus btnFont" >Add Academic Performance</i></button>
+
+                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#addCourse" >
+                                  <i class="glyphicon glyphicon-plus btnFont"> Add Course</i>
+                              </button></div>
 
 
                           <!-- /.panel-heading -->
+						  <?php
+						  $query='SELECT * FROM acadsosd.date x WHERE x.date < now() ORDER BY x.date DESC LIMIT 1';
+						  $result=mysqli_query($dbc,$query);
+						  $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+						  $term=$row['Term'];
+						  $year=$row['schoolYear'];
+						  $query="SELECT s.courseCode, s.courseName, s.courseUnit, sd.finalGrade FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.yearTaken='".$year."' AND sd.termTaken= '".$term."' AND sd.PlannedEnrollmentChart_pecID='".$pecID."';";
+						  $result=mysqli_query($dbc,$query);
+						  $x='';
+						  $count=0;
+						  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+							  $code=$row['courseCode'];
+							  $name=$row['courseName'];
+							  $units=$row['courseUnit'];
+							  $fgrade=$row['finalGrade'];
+							  $y='<button class="btn btn-default btn-lg" data-toggle="modal" data-target="#'.$code.'" style="font-size: 12px;" >Edit Course</button>
+								  ';
+							  if(empty($fgrade)){
+								  $fgrade="NO GRADE";
+							  $count++;
+							  }
+							$x.='
+							<tr class="odd gradeX">
+							<td class="text-center">'.$code.'</td>
+							<td class="text-center ">'.$name.'</td>
+							<td class="text-center">'.$units.'</td>
+							<td class="text-center">'.$fgrade.'</td>
+							<td class="text-center">';
+							$x.=$y.'</td>
+							</tr>
+							';
+							echo'<div class="modal fade" id="'.$code.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">Edit Course</h4>
+                                                    </div>
+                                                  <div class="modal-body">
+                                                    <form action="AthleteProfile.php" method="post">
+                                                      <div class="form-group">
+                                                        <label style="float:left">Professor ID:</label>
+                                                        <input class="form-control" type="text" name="pID">
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label style="float:left">Professor Name:</label>
+                                                        <input class="form-control" type="text" name="pName">
+                                                      </div>
+													   <div class="form-group">
+                                                        <label style="float:left">School Year:</label>
+														<input class="form-control" type="number" name="year" min="2017" required>
+                                                      </div>
+													  <div class="form-group">
+													  <label style="float:left">Term:</label>
+                                                        <select class="form-control" name="term" required>
+																<option value="T1">Term 1</option>
+																<option value="T2">Term 2</option>
+																<option value="T3">Term 3</option>
+														</select>
+                                                      </div>
+													  <input type="hidden" name="editedCourse" value="'.$code.'">
+													  <input type="hidden" name="editedCourse" value="'.$pecID.'">
+
+
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary" name="editCourse">Confirm</button>
+													</form>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                  </div>
+                                                  </div>
+                                                  <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                              </div>';
+						  }
+						  ?>
                         <div class="panel-body">
                             <div class="dataTable_wrapper" >
-
+							 <label style="float: LEFT;">Total Units: *INSERT ECHO HERE*</label>
                               </div>
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
@@ -506,23 +783,215 @@ else{
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center"> KASPIL2</td>
-                                            <td class="text-center ">hi  alvin</td>
-                                            <td class="text-center"> 3</td>
-                                            <td class="text-center">4  </td>
-                                            <td class="text-center">
-                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#remove" style="font-size: 12px;">Remove</button>
-                                                <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#editCourse" style="font-size: 12px;">Edit Course</button>
-
-                                            </td>
+                                        <?php
+										echo $x;
+										?>
+											</tbody>
+								</table>
 
 
-                                        </tr>
+                                              <div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                              <h4 class="modal-title" id="myModalLabel">Remove Course</h4>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                          <form>
+                                                              <div class="form-group">
+                                                                <p>Do you want to delete this course?</p>
 
-                                    </tbody>
-                                </table>
-                                <label style="float: right;">Total Units: 3</label>
+                                                              </div>
+                                                          </form>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="button" class="btn btn-primary">Confirm</button>
+                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                          </div>
+                                                      </div>
+                                                      <!-- /.modal-content -->
+                                                  </div>
+                                                  <!-- /.modal-dialog -->
+                                              </div>
+                                              <!-- /.modal -->
+
+                                              <!-- edit course modal -->
+
+                                              <!-- /.modal -->
+											  <?php
+											  $query='SELECT * FROM acadsosd.date x WHERE x.date < now() ORDER BY x.date DESC';
+											  $result=mysqli_query($dbc,$query);
+											  $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+											  $term=$row['Term'];
+											  $year=$row['schoolYear'];
+											  $query='SELECT s.courseCode, s.courseName, s.courseUnit, sd.finalGrade FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.yearTaken="'.$year.'" AND sd.termTaken="'.$term.'" AND sd.PlannedEnrollmentChart_pecID=\''.$pecID.'\';';
+											  $result=mysqli_query($dbc,$query);
+											  $x='';
+											  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+												  $code=$row['courseCode'];
+												  $name=$row['courseName'];
+												  $x.='<option value="'.$code.'">'.$code.' : '.$name.'</option>';
+											  }
+											  ?>
+												<!-- Modal Add Apr -->
+                                              <div class="modal fade" id="writeReport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                              <h4 class="modal-title" id="myModalLabel">Add Academic Performance Update</h4>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                          <form action="AthleteProfile.php" method="post">
+                                                              <div class="form-group">
+                                                                <label style="float:left"> Choose type of Academic Report </label>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" name="reportType">
+                                                                        <option value="M">Midterm Performance</option>
+                                                                        <option value="F">Finals Performance</option>
+                                                                    </select>
+                                                                </div>
+
+                                                                <label style="float:left"> Course </label>
+                                                                <div class="form-group">
+                                                                    <select class="form-control" name="course">
+                                                                        <?php echo $x; ?>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                      <label style="float:left">Grade</label>
+                                                                      <select class="form-control" name="grade">
+                                                                        <option value="4.0">4.0</option>
+                                                                        <option value="3.5">3.5</option>
+                                                                        <option value="3.0">3.0</option>
+                                                                        <option value="2.5">2.5</option>
+                                                                        <option value="2.0">2.0</option>
+                                                                        <option value="1.5">1.5</option>
+                                                                        <option value="1.0">1.0</option>
+                                                                        <option value="0.0">0.0</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                      <label style="float:left"> Write Report </label>
+                                                                      <textarea class="form-control" rows="4" name="rUpdate"></textarea>
+                                                                </div>
+
+
+
+                                                              </div>
+
+
+                                                          </div>
+                                                          <div class="modal-footer">
+																<input type="hidden" name="athleteID" value="<?php echo $athleteID; ?>">
+																<input type="hidden" name="pecID" value="<?php echo $pecID; ?>">
+																<input type="hidden" name="year" value="<?php echo $year; ?>">
+																<input type="hidden" name="term" value="<?php echo $term; ?>">
+                                                              <button type="submit" class="btn btn-primary" name="addReport">Confirm</button>
+															  </form>
+                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                          </div>
+
+                                                      </div>
+                                                      <!-- /.modal-content -->
+                                                  </div>
+                                                  <!-- /.modal-dialog -->
+                                              </div>
+                                              <!-- /.modal -->
+																							<!-- Modal edit Status -->
+																							<div class="modal fade" id="editStatus" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+																									<div class="modal-dialog">
+																											<div class="modal-content">
+																													<div class="modal-header">
+																															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+																															<h4 class="modal-title" id="myModalLabel">Edit Academic Status Course</h4>
+																													</div>
+																													<div class="modal-body">
+																													<form action="AthleteProfile.php" method="post">
+																															<div class="form-group">
+																																<label style="float:left"> Choose type of Academic Report </label>
+																																<div class="form-group">
+																																		<select class="form-control" name="statusUpdate">
+																																				<option value="4">Inactive</option>
+																																				<option value="3">Not Critical</option>
+																																				<option value="2">Critical </option>
+																																				<option value="1">Super Critical </option>
+																																		</select>
+																																		<input type="hidden" name="athleteID" value="<?php echo $athleteID; ?>">
+																																</div>
+																															</div>
+
+																													</div>
+																													<div class="modal-footer">
+																															<input type=submit class="btn btn-primary" value="Confirm" name="updateStatus">
+
+																															<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+																													</div>
+																													</form>
+																											</div>
+																											<!-- /.modal-content -->
+																									</div>
+																									<!-- /.modal-dialog -->
+																							</div>
+																							<!-- /.modal
+																							 <!-- Modal -->
+                                              <div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                  <div class="modal-dialog">
+                                                      <div class="modal-content">
+                                                          <div class="modal-header">
+                                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                              <h4 class="modal-title" id="myModalLabel">Add Course</h4>
+															  <?php
+															  //<option value="ANMODEL">ANMODEL : An Model</option>
+															  $query="SELECT * FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE finalGrade=0 OR finalGrade IS NULL AND sd.PlannedEnrollmentChart_pecID='".$pecID."';";
+															  $result=mysqli_query($dbc,$query);
+															  $x="";
+															  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+																  $code=$row['courseCode'];
+																  $name=$row['courseName'];
+																  $x.='<option value="'.$code.'">'.$code.' : '.$name.'</option>';
+															  }
+															  ?>
+                                                          </div>
+                                                          <div class="modal-body">
+                                                          <form action="athleteProfile.php" method="post">
+                                                              <div class="form-group">
+                                                                <label style="float:left">Select Course to Add</label>
+																<select class="form-control inputs" name="course" required>
+																<?php echo $x; ?>
+																</select>
+																</br>
+																<div class="form-group">
+																<label style="float:left">Year to Take</label>
+																<input class="form-control" type="number" name="year" min="2017" required>
+																</div>
+																<div class="form-group">
+																<label style="float:left">Term to Take</label>
+																<select class="form-control inputs" name="term" required>
+																<option value="T1">Term 1</option>
+																<option value="T2">Term 2</option>
+																<option value="T3">Term 3</option>
+																</select>
+																</div>
+																<input type="hidden" name="athleteID" value="<?php echo $athleteID; ?>">
+																<input type="hidden" name="pecID" value="<?php echo $pecID; ?>">
+																</div>
+                                                          </div>
+                                                          <div class="modal-footer">
+                                                              <button type="submit" class="btn btn-primary" name="addCoursetoATE">Save changes</button>
+															  </form>
+                                                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                          </div>
+                                                      </div>
+                                                      <!-- /.modal-content -->
+                                                  </div>
+                                                  <!-- /.modal-dialog -->
+                                              </div>
+                                              <!-- /.modal -->
+
+
+
 
                             </div>
 
@@ -535,28 +1004,48 @@ else{
                           <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper" >
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+
+									<?php
+									$query="SELECT accumulatedFailures FROM acadsosd.studentathleteprofile WHERE studentIDNumber='".$athleteID."';";
+									$result=mysqli_query($dbc, $query);
+									$row=mysqli_fetch_array($result);
+									$accumulatedFailures=$row['accumulatedFailures'];
+									$query="SELECT * FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.finalGrade=0;";
+									$result=mysqli_query($dbc, $query);
+									$nor=mysqli_num_rows($result);
+									$exo='';
+									if($nor>0){
+									$exo.='
+									<label style="float: right;">Total Units Failed: '.$accumulatedFailures.'</label><table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th class="text-center">School Year</th>
                                             <th class="text-center">Term</th>
                                             <th class="text-center">Course </th>
                                             <th class="text-center">Unit</th>
-                                            <th class="text-center">Reinstated</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr class="odd gradeX">
-                                            <td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">2014-2015</u></a></td>
-                                            <td class="text-center"> T2</td>
-                                            <td class="text-center ">INTPRG1</td>
-                                            <td class="text-center ">3</td>
-                                            <td class="text-center ">Yes</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                                <label style="float: right;">Total Units: 3</label>
+									<tbody>';
+									while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
+										$schoolYear=$row['YearTaken'];
+										$term=$row['termTaken'];
+										$courseCode=$row['courseCode'];
+										$units=$row['courseUnit'];
+										$exo.='<tr class="odd gradeX">
+                                            <td class="text-center">'.$schoolYear.'</td>
+                                            <td class="text-center">'.$term.'</td>
+                                            <td class="text-center ">'.$courseCode.'</td>
+                                            <td class="text-center ">'.$units.'</td>
+                                        </tr>';
+									}
+									$exo.='</tbody></table>
+									';
+									}
+									else{
+										$exo.="<label>NO FAILURES ACCUMULATED</label>";
+									}
+									echo $exo;
+									?>
                             </div>
 
                         </div>
