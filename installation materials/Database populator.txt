@@ -289,3 +289,24 @@ INSERT INTO `acadsosd`.`degree` (`degreeCode`, `degreeName`, `departmentCode`) V
 
 
 INSERT INTO `acadsosd`.`department` (`departmentCode`, `departmentName`, `college_collegeCode`) VALUES ('NE', 'Network Engineering', 'CCS');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0001', 'Mr. Oliver Malabanan');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0002', 'Mrs. Marivick Tangkeko');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0003', 'Mr. Thomas Tiam-Lee');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0004', 'Mr. Lance Alcabasa');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0005', 'Mr. Danny Cheng');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0006', 'Mrs. Natalie Lim- Cheng');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0007', 'Mr. Fritz Flores');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0008', 'Ms. Arlyn Ong');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0009', 'Mr. Glenn Sipin');
+
+INSERT INTO `acadsosd`.`professor` (`professorID`, `professorName`) VALUES ('0010', 'Mr. Alain Encarnacion');
+ 
