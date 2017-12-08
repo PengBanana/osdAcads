@@ -84,7 +84,7 @@ else{
 			$query="UPDATE `acadsosd`.`subjectdetails` SET `midtermAcademicReport`='".$essay."', `midtermGrade`='".$grade."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."'";
 		}
 		else if($type=="F"){
-			
+
 			//if the athlete fail, re-insert the data to next term
 			if($grade==0){
 			$query="UPDATE `acadsosd`.`subjectdetails` SET `finalGrade`='".$grade."', `finalReport`='".$essay."' WHERE `PlannedEnrollmentChart_pecID`='".$pecID."' and`courseCode`='".$code."' and`YearTaken`=".$year." and`termTaken`='".$term."';";
@@ -524,7 +524,7 @@ else{
                                 <?php
                                     foreach ($allQueryResult as $row) {
                                 ?>
-                                    <p><span class="glyphicon glyphicon-minus"></span> 
+                                    <p><span class="glyphicon glyphicon-minus"></span>
                                         <?php echo $row['schoolName'] ?>
                                     </p>
                                 <?php }?>
@@ -560,8 +560,8 @@ else{
 
                         <div id="pec" class="tabcontent">
                           <div class="row">
-                          <div class="col-lg-8">
-                            <h3>Enrollment Chart</h3>
+                          <div class="col-lg-7">
+                            <h3>Planned Enrollment Chart</h3>
                           </div>
                             <div class="col-lg-3" style="padding-left: 50px;">
 							<form action="addPEC.php" method="post"><input type="hidden" value="<?php echo $athleteID; ?>" name="athleteID"><input type=submit class="btn btn-link breadCrumb1" name="submit" value="EDIT PLANNED ENROLLMENT CHART"></form>
@@ -675,8 +675,8 @@ else{
 
                         <div id="pte" class="tabcontent">
                           <div class="row">
-                              <div class="col-lg-8" >  <h3>Actual Term Enrollment </h3></div>
-                              <div class="col-lg-4"style="padding-top: 50px;" >
+                              <div class="col-lg-7" >  <h3>Actual Term Enrollment </h3></div>
+                              <div class="col-lg-5"style="padding-top: 50px;" >
 
                                 <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#writeReport">
                                     <i class="glyphicon glyphicon-plus btnFont" >Add Academic Performance</i></button>
@@ -1000,7 +1000,7 @@ else{
                           <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="dataTable_wrapper" >
-                                
+
 									<?php
 									$query="SELECT accumulatedFailures FROM acadsosd.studentathleteprofile WHERE studentIDNumber='".$athleteID."';";
 									$result=mysqli_query($dbc, $query);
