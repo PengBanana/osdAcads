@@ -261,6 +261,25 @@ if($idx===0){
                     </div>
                 </div>
             </div>
+			<div class="row">
+			</div>
+		<div class="row">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+                <b>List of Teams</b>
+                </div>
+                <div class="panel-body">
+				<b>Number of <font color="red">Super Critical</font> Athletes:</b><p><?php echo $superCritical; ?></p>
+				<b>Number of <font color="orange">Critical</font> Athletes:</b><p><?php echo $critical; ?></p>
+				<b>Number of <font color="green">Not Critical</font> Athletes:</b><p><?php echo $notCritical; ?></p>
+				<b>Projected Student's with Failures:</b><p><?php echo $midFStudents; ?></p>
+				</div>
+			</div>
+			</div>
+		</div>
 
 <!--
         <div class="row">
