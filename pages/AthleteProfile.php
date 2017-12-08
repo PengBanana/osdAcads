@@ -940,7 +940,7 @@ else{
                                                               <h4 class="modal-title" id="myModalLabel">Add Course</h4>
 															  <?php
 															  //<option value="ANMODEL">ANMODEL : An Model</option>
-															  $query="SELECT * FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE finalGrade=0 OR finalGrade IS NULL AND sd.PlannedEnrollmentChart_pecID='24';";
+															  $query="SELECT * FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE finalGrade=0 OR finalGrade IS NULL AND sd.PlannedEnrollmentChart_pecID='".$pecID."';";
 															  $result=mysqli_query($dbc,$query);
 															  $x="";
 															  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){

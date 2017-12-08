@@ -24,6 +24,12 @@ $idx=$_SESSION['idnumber'];
 					else{
 						$name=$_SESSION["name"];
 					}
+					$query='SELECT * FROM acadsosd.date x WHERE x.date < now() ORDER BY x.date DESC';
+					$result=mysqli_query($dbc,$query);
+					$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+					$term=$row['Term'];
+					$year=$row['schoolYear'];
+					$schoolYear=$year.' - '.$year+1;
 ?>
 <html lang="en">
 
@@ -171,13 +177,13 @@ $idx=$_SESSION['idnumber'];
 			<div class="row">
 			<div class="col-lg-12">
 			<label>Summary Report on Athletes with Accumulated Failures</label></br>
-			<label>School Year 2017-2018</label></br>
-			<label>Term 1</label></br>
+			<label>School Year <?php echo $schoolYear; ?></label></br>
+			<label><?php echo $term; ?></label></br>
 			</div>
 			</div>
 			<div class="row">
 			<div class="col-lg-12">
-			<label>05/12/2017</label>
+			<label><?php echo date("m/d/Y"); ?></label>
 			</div>
 			</div>
 			</center>
@@ -244,7 +250,6 @@ $idx=$_SESSION['idnumber'];
                         </div>
 						<center>
 						<hr><hr></br>
-						<label>Page 1 of 1</label></br>
 						<label>--End of Report--</label></br>
 						</center>
                         <!-- /.panel-body -->
