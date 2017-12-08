@@ -162,6 +162,14 @@
 
                     <h1 class="page-header">Final Updates</h1>
                 </div>
+
+                <div class="breadCrumb1" style="padding-bottom:20px;">
+    							<a class="breadCrumb1" href="index[admin].php">Home</a> >>>
+    							<a class="breadCrumb1" href="FinalsUpdateList.php">View Team</a> >>>
+      							<a class="breadCrumb1" href="#">Finals Updates</a>
+
+      						</div>
+
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->

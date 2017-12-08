@@ -162,6 +162,10 @@ Sport: <input type="text" name="sport" maxlength="45" />
                     <h1 class="page-header"> Add Team </h1>
                 </div>
             </div>
+						<div class="breadCrumb1" style="padding-bottom:20px;">
+							<a class="breadCrumb1" href="index[admin].php">Home</a> >>>
+							<a class="breadCrumb1" href="">Add New Team</a>
+							</div>
 
 
             <div class="row" id="main-panel">
