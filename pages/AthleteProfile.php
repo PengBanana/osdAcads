@@ -12,6 +12,9 @@ if(empty($idx)){
 else if(empty($typex)){
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 }
+else if($typex<3){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/AthleteProfile_admin.php");
+}
 else{
 	$name=$_SESSION["name"];
 	$athleteID=$_POST['athleteID'];
