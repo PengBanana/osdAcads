@@ -1,3 +1,66 @@
+<?php
+session_start();
+require_once('../osd_connect.php');
+$idx=$_SESSION['idnumber'];
+$typex=$_SESSION["typex"];
+$name=$_SESSION["name"];
+if($idx===0){
+	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+	}
+	if(empty($idx)){
+		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+		$name="wth";
+		}
+		else if($typex>2||$typex<1){
+			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/invalidRequest.php");
+		}
+		else if(empty($typex)){
+			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
+			}
+		else{
+			$query="SELECT COUNT(*) AS numAthletes FROM acadsosd.studentathleteprofile WHERE statusID<4;";
+			$result=mysqli_query($dbc,$query);
+			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$numAthletes=$row['numAthletes'];
+			if(empty($numAthletes)){
+				$numAthletes="No Active Athletes";
+			}
+			else{
+				$numAthletes.=" Athletes";
+			}
+			$query="SELECT COUNT(*) AS numAthletes FROM acadsosd.studentathleteprofile WHERE statusID=3;";
+			$result=mysqli_query($dbc,$query);
+			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$notCritical=$row['numAthletes'];
+			if(empty($notCritical)){
+				$notCritical="0";
+			}
+			$query="SELECT COUNT(*) AS numAthletes FROM acadsosd.studentathleteprofile WHERE statusID=2;";
+			$result=mysqli_query($dbc,$query);
+			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$critical=$row['numAthletes'];
+			if(empty($critical)){
+				$critical="0";
+			}
+			$query="SELECT COUNT(*) AS numAthletes FROM acadsosd.studentathleteprofile WHERE statusID=1;";
+			$result=mysqli_query($dbc,$query);
+			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$superCritical=$row['numAthletes'];
+			if(empty($superCritical)){
+				$superCritical="0";
+			}
+			$query="SELECT COUNT(*) AS numManagers FROM acadsosd.studentmanager WHERE managerCode=1;;";
+			$result=mysqli_query($dbc,$query);
+			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$numManagers=$row['numManagers'];
+			if(empty($numManagers)){
+				$numManagers="No Active Managers";
+			}
+			else{
+				$numManagers.=" Managers";
+			}
+		}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,9 +107,9 @@
 
         var data = google.visualization.arrayToDataTable([
           ['Classification', 'Number of Student'],
-          ['Not Critical',     11],
-          ['Super Critical',      2],
-          ['Critical',  2]
+          ['Not Critical',     <?php echo $notCritical; ?>],
+          ['Super Critical', <?php echo $superCritical; ?>],
+          ['Critical',<?php echo $critical; ?>]
         ]);
 
         var options = {
@@ -146,7 +209,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Welcome Admin!</h1>
+                    <h1 class="page-header">Welcome Admin <?php echo $name; ?>!</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -179,12 +242,12 @@
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                                <a href="#" class="list-group-item" style="font-size: 24px;">
-                                    <i class="glyphicon glyphicon-user"></i> 600 Athletes
+                                <a href="viewTeam.php" class="list-group-item" style="font-size: 24px;">
+                                    <i class="glyphicon glyphicon-user"></i><?php echo " ".$numAthletes; ?>
 
                                 </a>
-                                <a href="#" class="list-group-item" style="font-size: 24px;">
-                                    <i class="glyphicon glyphicon-user"></i> 30 Managers
+                                <a href="viewStudentManagers.php" class="list-group-item" style="font-size: 24px;">
+                                    <i class="glyphicon glyphicon-user"></i><?php echo " ".$numManagers; ?>
 
                                 </a>
                         </div>
