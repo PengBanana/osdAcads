@@ -28,7 +28,7 @@
 	if($o==$o2){
 		//matched old
 		if($n1==$n2){
-			$query="UPDATE `acadsosd`.`user` SET `password`='".$asd."' WHERE `idnumber`='".$idNum."';";
+			$query="UPDATE `acadsosd`.`user` SET `password`='".$n1."' WHERE `idnumber`='".$idNum."';";
 			mysqli_query($dbc,$query);
 			$_SESSION['message']='<div class="alert alert-success">Password Changed<div>';
 			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[admin].php");
@@ -172,7 +172,7 @@
 
                 <div class="col-lg-3">  </div>
                 <div class="col-lg-5">
-                    <form action="newUser.php" method="post">
+                    <form action="changePassword2.php" method="post">
 
                         <div class="form-group">
                             <label> Old Password: </label>
