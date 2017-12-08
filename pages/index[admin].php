@@ -59,6 +59,10 @@ if($idx===0){
 			else{
 				$numManagers.=" Managers";
 			}
+			$query="SELECT count(*) as mid FROM acadsosd.subjectdetails WHERE midtermGrade=0 GROUP BY PlannedEnrollmentChart_pecID;";
+			$result=mysqli_query($dbc,$query);
+			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+			$midFStudents=$row['mid'];
 		}
 ?>
 <!DOCTYPE html>
@@ -104,7 +108,6 @@ if($idx===0){
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-
         var data = google.visualization.arrayToDataTable([
           ['Classification', 'Number of Student'],
           ['Not Critical',     <?php echo $notCritical; ?>],

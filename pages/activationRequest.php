@@ -18,7 +18,7 @@ else if(empty($typex)){
 else{
 	$name=$_SESSION["name"];
 }
-echo '
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,7 +90,7 @@ echo '
                         <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user" >
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>'.$name.'</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>Grace Alhambra</a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
@@ -204,6 +204,7 @@ echo '
                     <h1 class="page-header">Account Activation Requests</h1>
                 <div>
             </div>';
+			<?php
 				require_once('../osd_connect.php');
 				if(isset($_POST['activateAccount'])){
 				$idnumber=$_POST['idnumber'];

@@ -2,6 +2,7 @@
 session_start();
 require_once('../osd_connect.php');
 $idx=$_SESSION['idnumber'];
+$name=$_SESSION["name"];
 $typex=$_SESSION["typex"];
 					if($idx===0){
 					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
@@ -145,7 +146,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Welcome Grace!</h1>
+                    <h1 class="page-header">Welcome Manager <?php echo $name; ?>!</h1>
                 </div>
                 <!-- /.col-lg-12 -->
 							<div class="panel-body">
