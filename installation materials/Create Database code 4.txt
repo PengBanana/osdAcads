@@ -5,6 +5,14 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+-- -----------------------------------------------------
 -- Schema acadsosd
 -- -----------------------------------------------------
 
@@ -12,6 +20,284 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- Schema acadsosd
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `acadsosd` DEFAULT CHARACTER SET utf8 ;
+USE `mydb` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`agency`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`agency` (
+  `agencyID` INT(11) NOT NULL AUTO_INCREMENT,
+  `agencyName` VARCHAR(45) NOT NULL,
+  `agencyAddress` VARCHAR(200) NOT NULL,
+  `agencyTelNo` VARCHAR(11) NOT NULL,
+  `agencyEmail` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`agencyID`),
+  UNIQUE INDEX `branchID_UNIQUE` (`agencyID` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`carregistration`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`carregistration` (
+  `registrationNum` INT(11) NOT NULL AUTO_INCREMENT,
+  `carPlateNum` INT(11) NOT NULL,
+  `carRegistrationcol` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`registrationNum`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`client`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`client` (
+  `clientID` INT(11) NOT NULL AUTO_INCREMENT,
+  `clientFirstName` VARCHAR(45) NOT NULL,
+  `clientLastName` VARCHAR(45) NOT NULL,
+  `clientMiddleName` VARCHAR(45) NOT NULL,
+  `clientAddress` VARCHAR(100) NOT NULL,
+  `clientContact` VARCHAR(45) NOT NULL,
+  `clientEmail` VARCHAR(45) NOT NULL,
+  `clientStatus` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`clientID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`company`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`company` (
+  `companyID` INT(11) NOT NULL AUTO_INCREMENT,
+  `companyName` VARCHAR(45) NOT NULL,
+  `companyAddress` VARCHAR(45) NOT NULL,
+  `CompanyStatus` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`companyID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`customer`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`customer` (
+  `customerContactNumber` VARCHAR(45) NOT NULL,
+  `customerID` INT(11) NOT NULL,
+  `customerFirstName` VARCHAR(45) NOT NULL,
+  `customerLastName` VARCHAR(45) NOT NULL,
+  `customerAddress` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`customerContactNumber`),
+  UNIQUE INDEX `customerID_UNIQUE` (`customerID` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`users`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`users` (
+  `userID` INT(11) NOT NULL AUTO_INCREMENT,
+  `userEmail` VARCHAR(45) NOT NULL,
+  `UsersPassword` VARCHAR(45) NOT NULL,
+  `userStatus` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`userID`, `userEmail`),
+  UNIQUE INDEX `userID_UNIQUE` (`userID` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`employee`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`employee` (
+  `agencyID` INT(11) NOT NULL,
+  `userID` INT(11) NOT NULL,
+  `userEmail` VARCHAR(45) NOT NULL,
+  `employeeId` INT(11) NOT NULL AUTO_INCREMENT,
+  `employeeFirstName` VARCHAR(45) NOT NULL,
+  `employeeLastName` VARCHAR(45) NOT NULL,
+  `employeeMiddleName` VARCHAR(45) NOT NULL,
+  `employeeBirthdate` DATETIME NOT NULL,
+  `employeeStatus` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`agencyID`, `userID`, `userEmail`, `employeeId`),
+  UNIQUE INDEX `employeeId_UNIQUE` (`employeeId` ASC),
+  INDEX `fk_Employee_Branch_idx` (`agencyID` ASC),
+  INDEX `fk_Employee_Users1_idx` (`userID` ASC, `userEmail` ASC),
+  CONSTRAINT `fk_Employee_Branch`
+    FOREIGN KEY (`agencyID`)
+    REFERENCES `mydb`.`agency` (`agencyID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Employee_Users1`
+    FOREIGN KEY (`userID` , `userEmail`)
+    REFERENCES `mydb`.`users` (`userID` , `userEmail`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`itemstatus`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`itemstatus` (
+  `statusID` CHAR(1) NOT NULL DEFAULT '',
+  `description` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`statusID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`product`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`product` (
+  `productID` INT(11) NOT NULL,
+  `productname` VARCHAR(45) NOT NULL,
+  `productdescription` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`productID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`items`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`items` (
+  `prodoctID` INT(11) NOT NULL,
+  `itemCode` INT(11) NOT NULL,
+  `statusID` CHAR(1) NOT NULL,
+  PRIMARY KEY (`prodoctID`, `itemCode`),
+  INDEX `fk_Product_product1_idx` (`prodoctID` ASC),
+  INDEX `fk_items_itemStatus1_idx` (`statusID` ASC),
+  CONSTRAINT `fk_items_itemStatus1`
+    FOREIGN KEY (`statusID`)
+    REFERENCES `mydb`.`itemstatus` (`statusID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Product_product1`
+    FOREIGN KEY (`prodoctID`)
+    REFERENCES `mydb`.`product` (`productID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`licenseinformation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`licenseinformation` (
+  `licenseId` INT(11) NOT NULL AUTO_INCREMENT,
+  `licenseName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`licenseId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`officerinformation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`officerinformation` (
+  `officerId` INT(11) NOT NULL AUTO_INCREMENT,
+  `officerName` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`officerId`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`status`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`status` (
+  `orderStatus` CHAR(1) NOT NULL,
+  `statusdescription` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`orderStatus`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`order`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`order` (
+  `productID` INT(11) NOT NULL,
+  `itemCode` INT(11) NOT NULL,
+  `orderID` INT(11) NOT NULL,
+  `customerContactNumber` VARCHAR(45) NOT NULL,
+  `orderStatus` CHAR(1) NOT NULL,
+  `orderDate` DATE NOT NULL,
+  `orderArrivalDate` DATE NOT NULL,
+  PRIMARY KEY (`productID`, `itemCode`, `orderID`),
+  INDEX `fk_order_status1_idx` (`orderStatus` ASC),
+  INDEX `fk_order_customer1_idx` (`customerContactNumber` ASC),
+  INDEX `fk_order_items1_idx` (`productID` ASC, `itemCode` ASC),
+  CONSTRAINT `fk_order_customer1`
+    FOREIGN KEY (`customerContactNumber`)
+    REFERENCES `mydb`.`customer` (`customerContactNumber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_items1`
+    FOREIGN KEY (`productID` , `itemCode`)
+    REFERENCES `mydb`.`items` (`prodoctID` , `itemCode`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_order_status1`
+    FOREIGN KEY (`orderStatus`)
+    REFERENCES `mydb`.`status` (`orderStatus`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`property`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`property` (
+  `propertyID` INT(11) NOT NULL,
+  `propertyTyphoonCoverage` TINYINT(1) NOT NULL,
+  `propertyType` DECIMAL(10,0) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`propertyID`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`violationinformation`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`violationinformation` (
+  `violationId` INT(11) NOT NULL AUTO_INCREMENT,
+  `violationNature` VARCHAR(45) NOT NULL,
+  `violationLocation` VARCHAR(45) NOT NULL,
+  `violationComments` VARCHAR(45) NOT NULL,
+  `officerInformation_officerId` INT(11) NOT NULL,
+  `carRegistration_registrationNum` INT(11) NOT NULL,
+  `licenseInformation_licenseId` INT(11) NOT NULL,
+  PRIMARY KEY (`violationId`),
+  INDEX `fk_violationInformation_officerInformation_idx` (`officerInformation_officerId` ASC),
+  INDEX `fk_violationInformation_carRegistration1_idx` (`carRegistration_registrationNum` ASC),
+  INDEX `fk_violationInformation_licenseInformation1_idx` (`licenseInformation_licenseId` ASC),
+  CONSTRAINT `fk_violationInformation_carRegistration1`
+    FOREIGN KEY (`carRegistration_registrationNum`)
+    REFERENCES `mydb`.`carregistration` (`registrationNum`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_violationInformation_licenseInformation1`
+    FOREIGN KEY (`licenseInformation_licenseId`)
+    REFERENCES `mydb`.`licenseinformation` (`licenseId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_violationInformation_officerInformation`
+    FOREIGN KEY (`officerInformation_officerId`)
+    REFERENCES `mydb`.`officerinformation` (`officerId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
 USE `acadsosd` ;
 
 -- -----------------------------------------------------
@@ -76,7 +362,6 @@ CREATE TABLE IF NOT EXISTS `acadsosd`.`studentathleteprofile` (
   `teamCode` VARCHAR(45) NOT NULL,
   `statusID` INT(11) NOT NULL,
   `reconsiderationReference_reconsiderationCode` VARCHAR(45) NOT NULL,
-  `accumulatedFailures` FLOAT NULL DEFAULT '0',
   PRIMARY KEY (`studentIDNumber`),
   INDEX `fk_studentAthlete_team1_idx` (`teamCode` ASC),
   INDEX `fk_studentAthleteProfile_academicStatus1_idx` (`statusID` ASC),
@@ -483,3 +768,9 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+ALTER TABLE `acadsosd`.`studentathleteprofile` 
+ADD COLUMN `accumulatedFailures` FLOAT NULL AFTER `reconsiderationReference_reconsiderationCode`;
+
+ALTER TABLE `acadsosd`.`studentathleteprofile` 
+CHANGE COLUMN `accumulatedFailures` `accumulatedFailures` FLOAT NULL DEFAULT 0 ;
