@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once('../osd_connect.php');
-					$idx=$_SESSION['idnumber'];
-					$typex=$_SESSION["typex"];
+$idx=$_SESSION['idnumber'];
+$typex=$_SESSION["typex"];
 					if($idx===0){
 					header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 					}
