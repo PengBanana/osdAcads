@@ -10,7 +10,7 @@ require_once('../osd_connect.php');
 						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
 					}
 					else if($typex>2){
-						$query="SELECT * FROM acadsosd.studentmanager";
+						$query="SELECT * FROM acadsosd.studentmanager WHERE idnumber='".$idx."'";
 						$result=mysqli_query($dbc,$query);
 						$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 						$teamCode=$row['teamCode'];

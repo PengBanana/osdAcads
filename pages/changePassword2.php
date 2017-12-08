@@ -17,27 +17,6 @@
   if($userType<1||$userType>2){
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/changePassword2.php");
   }
-  if(isset($_POST['changePassword'])){
-	$o=$_POST['oldpassword'];
-	$n1=$_POST['password1'];
-	$n2=$_POST['password2'];
-	$query="SELECT password FROM acadsosd.user WHERE idnumber='".$idNum."';";
-	$result=mysqli_query($dbc,$query);
-	$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
-	$o2=$row['password'];
-	if($o==$o2){
-		//matched old
-		if($n1==$n2){
-			//matched new password
-		}
-		else{
-			//failed matched new password
-		}
-	}
-	else{
-		//match fail
-	}
-  }
   ?>
 <!DOCTYPE html>
 <html>
@@ -157,6 +136,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header"> Change Password </h1>
+					<?php
+					if($error>0){
+						echo '<div class="alert alert-danger">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+						</div>';
+					}
+					?>
                 </div>
 
             </div>
@@ -169,10 +155,6 @@
                     <form action="newUser.php" method="post">
 
                         <div class="form-group">
-                            <label> Old Password: </label>
-                            <input type="password" class="form-control inputsSM" id="password" name="oldpassword" required>
-                        </div>
-						<div class="form-group">
                             <label> Password: </label>
                             <input type="password" class="form-control inputsSM" id="password" name="password1" required>
                         </div>
@@ -183,7 +165,7 @@
                         </div>
 
                         <div >
-                        <input type="submit" class="btn btn-primary" id="submitbutton" name="changePassword" value="Save">
+                        <input type="submit" class="btn btn-default" id="submitbutton" name="confirmPassword" value="Confirm">
                         </div>
                     </form>
                 </div>
