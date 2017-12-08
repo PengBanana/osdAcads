@@ -294,7 +294,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                                     <div class="col-lg-8">
 
 										<?php
-										$query="SELECT CONCAT(u.firstName, \" \", u.lastName) AS managername, m.idnumber, m.email FROM acadsosd.studentmanager m JOIN user u ON m.idnumber=u.idnumber WHERE teamCode='XASDR';";
+										$query="SELECT CONCAT(u.firstName, \" \", u.lastName) AS managername, m.idnumber, m.email FROM acadsosd.studentmanager m JOIN user u ON m.idnumber=u.idnumber WHERE teamCode='".$teamCode."';";
 										$result=mysqli_query($dbc,$query);
 										while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 											$managername=$row['managername'];

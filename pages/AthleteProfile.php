@@ -511,14 +511,22 @@ else{
                                 </div>
 
                                 <div class="col-lg-6" style="padding-top: 8px;">
-								<?php
-								  $query="SELECT * FROM acadsosd.educationalbackground WHERE studentIDNumber=".$athleteID.";";
-								  $result=mysqli_query($dbc,$query);
-								  while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
-									  $schoolName=$row['schoolName'];
-                                      echo '<div><label>'.$schoolName.'</label></div>';
-								  }
-								  ?>
+
+                                <?php
+
+                                    $allQuery = "SELECT schoolName FROM acadsosd.educationalbackground WHERE studentIDNumber=".$athleteID.";";
+                                    $allQueryResult = mysqli_query($dbc, $allQuery);
+
+                                ?>
+
+                                <?php
+                                    foreach ($allQueryResult as $row) {
+                                ?>
+                                    <p><span class="glyphicon glyphicon-minus"></span> 
+                                        <?php echo $row['schoolName'] ?>
+                                    </p>
+                                <?php }?>
+
                                 </div>
                           </div>
 
@@ -632,7 +640,7 @@ else{
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN, ch.classificationID as sID FROM classificationhistory ch JOIN academicclassification ac ON ch.classificationID = ac.statusID WHERE athleteID=".$athleteID.";";
+                                        $selectClassificationHistory = "SELECT ch.dateClassified as DC, ac.statusName as SN, ch.classificationID as sID FROM classificationistory ch JOIN academicclassification ac ON ch.classificationID = ac.statusID WHERE athleteID=".$athleteID.";";
                                         $result=mysqli_query($dbc, $selectClassificationHistory);
                                         while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
 										$sID=$row['sID'];
@@ -678,7 +686,7 @@ else{
 
                           <!-- /.panel-heading -->
 						  <?php
-						  $query='SELECT * FROM acadsosd.date x WHERE x.date < now() ORDER BY x.date DESC';
+						  $query='SELECT * FROM acadsosd.date x WHERE x.date < now() ORDER BY x.date DESC LIMIT 1';
 						  $result=mysqli_query($dbc,$query);
 						  $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 						  $term=$row['Term'];

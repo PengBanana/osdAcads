@@ -316,18 +316,18 @@ else{
                                       <tr class="odd gradeX">
                                           <td class="text-center">
 																						<select class="form-control name" name="schoollevel[]">
-																					   <option value="grade1">Grade 1</option>
-																					   <option value="grade2">Grade 2</option>
-																					   <option value="grade3">Grade 3</option>
-																						 <option value="grade4">Grade 4</option>
-																						 <option value="grade5">Grade 5</option>
-																						 <option value="grade6">Grade 6</option>
-																						 <option value="grade7">Grade 7</option>
-																						 <option value="grade8">Grade 8</option>
-																						 <option value="grade9">Grade 9</option>
-																						 <option value="grade10">Grade 10</option>
-																						 <option value="grade11">Grade 11</option>
-																						 <option value="grade12">Grade 12</option>
+																					   <option value="Grade 1">Grade 1</option>
+																					   <option value="Grade 2">Grade 2</option>
+																					   <option value="Grade 3">Grade 3</option>
+																						 <option value="Grade 4">Grade 4</option>
+																						 <option value="Grade 5">Grade 5</option>
+																						 <option value="Grade 6">Grade 6</option>
+																						 <option value="Grade 7">Grade 7</option>
+																						 <option value="Grade 8">Grade 8</option>
+																						 <option value="Grade 9">Grade 9</option>
+																						 <option value="Grade 10">Grade 10</option>
+																						 <option value="Grade 11">Grade 11</option>
+																						 <option value="Grade 12">Grade 12</option>
 																					 </select> </td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="name[]"></td>
                                           <td class="text-center"><input type="text" class="form-control inputs" name="address[]"></td>
