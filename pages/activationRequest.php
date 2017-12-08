@@ -145,7 +145,7 @@ else{
                 <div class="col-lg-12">
                     <h1 class="page-header">Account Activation Requests</h1>
                 <div>
-            </div>';
+            </div>
 			<?php
 				require_once('../osd_connect.php');
 				if(isset($_POST['activateAccount'])){

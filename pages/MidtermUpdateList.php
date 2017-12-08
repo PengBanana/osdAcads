@@ -12,7 +12,7 @@ $idx=$_SESSION['idnumber'];
 						$name="wth";
 					}
 					else if($typex>2||$typex<1){
-						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/updateList.php");
+						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/updateList2.php");
 					}
 					else if(empty($typex)){
 						header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");

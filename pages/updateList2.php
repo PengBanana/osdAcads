@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
+<?php 
   session_start();
   require_once('../osd_connect.php');
   $fname = $_SESSION["name"];
@@ -14,12 +14,12 @@
   else if(empty($fname)){
     header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/login.php");
   }
-  if($userType>2||$userType<1){
-	 header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[studentManager].php"); 
+  if($userType<3){
+	 header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[admin].php"); 
   }
 
 //if student manager
-
+  
 //if admin
 if(isset($_POST['viewMU'])){
 	$teamCodeFinal=$_POST['sportCode'];
@@ -79,80 +79,72 @@ else{
 
 <body>
   <!-- Navigation -->
-  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
-       <div class="navbar-header">
-           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-           </button>
-           <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[admin].php">
-           <img src="Images/OSD-logo2.png" height="35px" width='auto' />
-           </a>
-       </div>
+ <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[studentManager].php">
+          <img src="Images/OSD-logo2.png" height="35px" width='auto' />
+          </a>
+      </div>
 
-       <!-- /.navbar-header -->
+      <!-- /.navbar-header -->
 
-       <!-- NAV BAR -->
+      <!-- NAV BAR -->
 
-       <ul class="nav navbar-top-links navbar-right">
+      <ul class="nav navbar-top-links navbar-right">
 
-           <!-- /.dropdown -->
-           <li class="dropdown">
-               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                   <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
-               </a>
-               <ul class="dropdown-menu dropdown-user" >
-                   <li><a href="changePassword.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
-                   </li>
-                   <li class="divider"></li>
-                   <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                   </li>
-               </ul>
-               <!-- /.dropdown-user -->
-           </li>
-           <!-- /.dropdown -->
-       </ul>
-       <!-- /.navbar-top-links -->
+          <!-- /.dropdown -->
+          <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-user" >
+                  <li><a href="changePassword.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
+                  </li>
+                  <li class="divider"></li>
+                  <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                  </li>
+              </ul>
+              <!-- /.dropdown-user -->
+          </li>
+          <!-- /.dropdown -->
+      </ul>
+      <!-- /.navbar-top-links -->
 
-       <div class="navbar-fixed sidebar"  role="navigation" >
-           <div class="sidebar-nav navbar-f" >
-               <ul class="nav" id="side-menu" >
+      <div class="navbar-fixed sidebar"  role="navigation" >
+          <div class="sidebar-nav navbar-f" >
+              <ul class="nav" id="side-menu" >
 
-                       <li >
-                           <a href="index[admin].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
-                       </li>
+                      <li >
+                          <a href="index[studentManager].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
+                      </li>
 
-                        <li>
-                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
-                         <ul id="demo1" class="collapse" style="list-style: none;">
-                           <li><a href="MidtermUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
-                           <li><a href="FinalsUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
-                           <li><a href="FinalReport.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Generate Final Report </a></li>
-                         </ul>
-                         </li>
-                         <li>
-                             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
-                             <ul id="demo4" class="collapse" style="list-style: none;">
-                                <li><a href="ViewTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
-                                <li><a href="registerStudentAthlete.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Register an Athlete </a></li>
-                                <li><a href="addTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Add New Team </a></li>
-                             </ul>
-                         </li>
                        <li>
-                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-user" style="color: white"></i>    Accounts </a>
-                         <ul id="demo2" class="collapse" style="list-style: none;">
-                             <li><a href="activationRequest.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Activation Request </a></li>
-                             <li><a href="viewStudentManagers.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i>  Manage Accounts </a></li>
-                         </ul>
-                       </li>
-               </ul>
-           </div>
-           <!-- /.sidebar-collapse -->
-       </div>
-       <!-- /.navbar-static-side -->
-   </nav>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
+                        <ul id="demo1" class="collapse" style="list-style: none;">
+                          <li><a href="MidtermUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
+                          <li><a href="FinalsUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
+                        </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
+                            <ul id="demo4" class="collapse" style="list-style: none;">
+                               <li><a href="ViewTeamAthletes.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
+
+                            </ul>
+                        </li>
+
+              </ul>
+          </div>
+          <!-- /.sidebar-collapse -->
+      </div>
+      <!-- /.navbar-static-side -->
+  </nav>
 
     <div id="wrapper" >
 
@@ -160,7 +152,7 @@ else{
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <?php
+                    <?php 
 
                       $teamNameQuery = "SELECT teamName FROM team WHERE sportCode = '".$teamCodeFinal."'";
                       $teamNameResult = mysqli_query($dbc, $teamNameQuery);
@@ -196,7 +188,7 @@ else{
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        
                                           <?php
 
                                             $allQuery = "SELECT CONCAT(sap.studentLastName, ', ', sap.studentFirstName) as saFullName, sd.courseCode as 	courseCode, sd.midtermAcademicReport as MAR, sd.midtermGrade as midtermGrade
@@ -224,9 +216,9 @@ else{
                                               <?php echo $row['MAR'];?>
                                             </p></td>
                                           </tr>
-
+                                            
                                         <?php }?>
-
+											                      
 
                                     </tbody>
                                 </table>
