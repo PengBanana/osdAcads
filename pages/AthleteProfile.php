@@ -19,6 +19,8 @@ else{
 		$newStatus=$_POST['statusUpdate'];
 		$query="UPDATE `acadsosd`.`studentathleteprofile` SET `statusID`='".$newStatus."' WHERE `studentIDNumber`='".$athleteID."'";
 		mysqli_query($dbc,$query);
+        $query2="INSERT INTO acadsosd.classificationistory(classificationID, athleteID, dateClassified) VALUES('".$newStatus."', '".$athleteID."', Date(Now()));";
+        mysqli_query($dbc,$query2);
 	}
 	else if(isset($_POST['addCoursetoATE'])){
 		$code=$_POST['course'];
@@ -196,7 +198,7 @@ else{
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> FAQS</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -691,7 +693,7 @@ else{
 						  $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 						  $term=$row['Term'];
 						  $year=$row['schoolYear'];
-						  $query='SELECT s.courseCode, s.courseName, s.courseUnit, sd.finalGrade FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.yearTaken="'.$year.'" AND sd.termTaken="'.$term.'" AND sd.PlannedEnrollmentChart_pecID=\''.$pecID.'\';';
+						  $query="SELECT s.courseCode, s.courseName, s.courseUnit, sd.finalGrade FROM acadsosd.subjectdetails sd JOIN subjects s ON sd.courseCode=s.courseCode WHERE sd.yearTaken='".$year."' AND sd.termTaken= '".$term."' AND sd.PlannedEnrollmentChart_pecID='".$pecID."';";
 						  $result=mysqli_query($dbc,$query);
 						  $x='';
 						  $count=0;
@@ -764,7 +766,7 @@ else{
 						  ?>
                         <div class="panel-body">
                             <div class="dataTable_wrapper" >
-							 <label style="float: LEFT;">Total Units: 3</label>
+							 <label style="float: LEFT;">Total Units: *INSERT ECHO HERE*</label>
                               </div>
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
