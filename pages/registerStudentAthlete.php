@@ -142,6 +142,11 @@
                 <div class="col-lg-12">
                     <h1 class="page-header"> Student Athlete Registration </h1>
                 </div>
+                <div class="breadCrumb1" style="padding-bottom:20px;">
+                  <a class="breadCrumb1" href="index[admin].php">Home</a> >>>
+                  <a class="breadCrumb1" href="#">Register Student Athletes</a>
+
+                  </div>
 
             </div>
 
@@ -308,15 +313,23 @@
                             </div>
                           </div>
                       </div>
+                      <div class="row">
+                        <div class="col-lg-8"></div>
+                        <div class="col-lg-2">
+                            <input type="submit" class="btn btn-default" name="registerAthlete" value="Proceed">
+                        </div>
+
+                      </form>
+                        <div class="col-lg-2">
+                      <form action="index[admin].php" method="post">
+
+                          <button class="btn btn-default" type="submit">Cancel</button>
+
+                    </form>
+                      </div>
+                    </div>
                 </div>
-
-
             </div>
-            <div class="row">
-              <div class="col-lg-10"></div>
-              <div class="col-lg-2">
-            <input type="submit" class="btn btn-default" name="registerAthlete" value="Proceed">
-			</form>
           </div>
           </div>
 
