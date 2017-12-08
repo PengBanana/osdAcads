@@ -28,14 +28,21 @@
 	if($o==$o2){
 		//matched old
 		if($n1==$n2){
-			//matched new password
+			$query="UPDATE `acadsosd`.`user` SET `password`='".$asd."' WHERE `idnumber`='".$idNum."';";
+			mysqli_query($dbc,$query);
+			$_SESSION['message']='<div class="alert alert-success">Password Changed<div>';
+			header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/index[admin].php");
 		}
 		else{
-			//failed matched new password
+			$message='<div class="alert alert-danger">
+					 Change Password Failed
+					</div>';
 		}
 	}
 	else{
-		//match fail
+		$message='<div class="alert alert-danger">
+					 Change Password Failed
+					</div>';
 	}
   }
   ?>
