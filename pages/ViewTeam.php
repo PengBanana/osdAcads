@@ -75,7 +75,7 @@ $idx=$_SESSION['idnumber'];
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[studentManager].php">
+							<a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[admin].php">
 							<img src="Images/OSD-logo2.png" height="35px" width='auto' />
 							</a>
 					</div>

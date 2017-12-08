@@ -21,7 +21,10 @@ if(isset($_POST['registerManager'])){
 		mysqli_query($dbc,$query);
 		$query="INSERT INTO `acadsosd`.`studentmanager` (`idnumber`, `email`, `managerCode`) VALUES ('".$idNumber."', '".$email."', '3');";
 		mysqli_query($dbc,$query);
-		header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/studentManagerForApproval.php");	
+		echo '<div class="alert alert-success">
+					 You will recieve an email once your account is activated.
+					</div>';
+
 	}
 	else{
 		$checker=$row['managerCode'];
@@ -29,7 +32,7 @@ if(isset($_POST['registerManager'])){
 				//proceeds with registration if the account was just deactivated
 				$query="UPDATE `acadsosd`.`studentmanager` SET `managerCode`='3' WHERE `idnumber`='".$idNumber."';";
 				mysqli_query($dbc,$query);
-				header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/reactivation.php");	
+				header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/reactivation.php");
 			}
 			else if($checker==3){
 				//if account is currently for activation
@@ -46,7 +49,7 @@ if(isset($_POST['registerManager'])){
 				//if account was rejected but wants to retry registration
 				$query="UPDATE `acadsosd`.`studentmanager` SET `managerCode`='3' WHERE `idnumber`='".$idNumber."';";
 				mysqli_query($dbc,$query);
-				header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/reactivation.php");	
+				header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/reactivation.php");
 			}
 			else{
 				echo '<div class="alert alert-danger">
@@ -54,8 +57,8 @@ if(isset($_POST['registerManager'])){
 					</div>';
 			}
 	}
-	
-	
+
+
 }
 ?>
 <!DOCTYPE html>
@@ -133,7 +136,14 @@ if(isset($_POST['registerManager'])){
                                 </div>
 
                                 <!-- Change this to a button or input when using this as a form -->
-                               	    <input class="btn btn-success btn-block" type="submit" name="registerManager" value="submit" id="registerBtn"/>
+
+																		<div class="row">
+		                                		<div class="col-md-6">
+		                                			 <input class="btn btn-success btn-block" type="submit" name="registerManager" value="submit" id="registerBtn"/>
+		                                		</div>
+		                                		<div class="col-md-6">
+		                                			<a href="login.php" class="btn btn-success btn-block" id="registerBtn">Back</a>
+		                                		</div>
                             </fieldset>
                         </form>
                     </div>
