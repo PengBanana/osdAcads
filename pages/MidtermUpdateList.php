@@ -218,6 +218,7 @@ $idx=$_SESSION['idnumber'];
                     </div>
                     <!-- /.panel -->
                 </div>
+                </div>
                 <!-- /.col-lg-12 -->
             </div>
         </div>
