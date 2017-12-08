@@ -33,9 +33,6 @@ if(isset($_POST['updatePEC'])){
 		$query="INSERT INTO `acadsosd`.`subjectdetails` (`PlannedEnrollmentChart_pecID`, `termTaken`, `YearTaken`, `courseCode`) 
                 VALUES ('".$pecID."', '".$academicTerm[$count]."', '".$academicYear[$count]."', '".$courseCode[$count]."');";
 		$count++;
-		echo '<div class="alert alert-danger">ERROR:
-        '.$query.'
-        </div>';
 		mysqli_query($dbc, $query);
 	}
 	header("Location: http://".$_SERVER['HTTP_HOST'].  dirname($_SERVER['PHP_SELF'])."/viewTeamAthletes.php");
