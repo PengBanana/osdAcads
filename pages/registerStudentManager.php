@@ -103,47 +103,50 @@ if(isset($_POST['registerManager'])){
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
+            <div class="col-md-12" style="padding-top:10%">
+                <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Register</h3>
+                        <img src="Images/OSDLOZADA.png" height="100px" width='auto' />
                     </div>
 										<div class="form-group">
-                        <img src="Images/OSD.png" height="100px" width='auto' />
-                    </div>
+											<h3>Step 2 out of 2: Personal Information</h3>
+										</div>
                     <div class="panel-body">
 						<form action="registerStudentManager.php" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <label>ID Number</label>
+                                    <label class="required">ID Number</label> <label
                                     <input class="form-control" placeholder="ID No" Name="idNumber" type="text" autofocus>
                                 </div>
                                  <div class="form-group">
-                                    <label>First Name</label>
+                                    <label <label class="required">First Name</label>
                                     <input class="form-control" placeholder="First Name" name="firstName" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <label>Middle Name</label>
+                                    <label <label class="required">Middle Name</label>
                                     <input class="form-control" placeholder="Middle Name" name="middleName" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <label>Last Name</label>
+                                    <label <label class="required">Last Name</label>
                                     <input class="form-control" placeholder="Last Name" name="lastName" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <label>E-mail Address</label>
+                                    <label <label class="required">E-mail Address</label>
                                     <input class="form-control" placeholder="email" name="email" type="text" autofocus>
                                 </div>
 
                                 <!-- Change this to a button or input when using this as a form -->
 
 																		<div class="row">
-		                                		<div class="col-md-6">
-		                                			 <input class="btn btn-success btn-block" type="submit" name="registerManager" value="submit" id="registerBtn"/>
-		                                		</div>
-		                                		<div class="col-md-6">
-		                                			<a href="login.php" class="btn btn-success btn-block" id="registerBtn">Back</a>
-		                                		</div>
+																				<div class="col-md-9"></div>
+		                                		<div class="col-md-3">
+																					<button type="submit" class="btn btn-default" type="submit" name="registerManager">Cancel</button>
+		                                			 <button type="submit" class="btn btn-success" type="submit" name="registerManager" id="registerBtn">Next Step<i class=" 	glyphicon glyphicon-chevron-right"></i></button>
+		                                </div>
+																		<div class="row">
+		                                		<div class="col-md-12" style="padding-top:10px;">
+
+		                                </div>
                             </fieldset>
                         </form>
                     </div>

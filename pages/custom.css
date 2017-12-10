@@ -13,6 +13,32 @@ body {
   margin: 0;
 }
 
+.btnReg{
+  height: 250px;
+  width: 530px;
+
+}
+.btnReg i {
+
+  font-size: 150px;
+}
+
+.form-group h3{
+  padding-left: 20px;
+  color: gray;
+  margin-bottom:auto;
+  padding-bottom: 10px;
+  border-bottom: 2px solid green;
+}
+.required:after {
+  content:" *";
+  color: red;
+}
+.form-group  {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 
 #backgroundImage{
   background-image: url("Images/razon.png");
