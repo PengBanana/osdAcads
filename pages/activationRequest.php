@@ -222,7 +222,7 @@ else{
 									else{
 									$email=$row['email'];
 									$fullname=$row['fullname'];
-									echo '<tr class="odd gradeX"><td class="text-center" ><form action="athleteProfile" method="post"><input type="hidden" value="'.$idnumber.'"><input type="button" value="'.$fullname.'"></form></td><td class="text-center">
+									echo '<tr class="odd gradeX"><td class="text-center" ><form action="athleteProfile" method="post"><input type="hidden" value="'.$idnumber.'"><label>'.$fullname.'</label></form></td><td class="text-center">
 									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#'.$idnumber.'">View Request</button>  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModalDecline">Decline</button></td></tr>';
 
 

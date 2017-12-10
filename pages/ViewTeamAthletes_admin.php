@@ -229,8 +229,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                                                           <th class="text-center">College</th>
                                                           <th class="text-center">Degree Program</th>
                                                           <th class="text-center">Academic Status</th>
-
-
+                                                          <th class="text-center">Action</th>
                                                       </tr>
                                                   </thead>
                                                   <tbody>
@@ -254,10 +253,16 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 														  $color="statusNotCritical";
 													  }
 													  echo '<tr class="odd gradeX">
-                                                          <td class="text-center" ><form action="AthleteProfile.php" method="post"><input type="hidden" value="'.$studentID.'" name="athleteID"><input type=submit class="btn btn-link" value="'.$studentname.'" name="viewAthlete"></form></td>
+                                                          <td class="text-center" ><label>'.$studentname.'</label></td>
                                                           <td class="text-center">'.$collegeCode.'</td>
                                                           <td class="text-center">'.$degreeCode.'</td>
                                                           <td class="text-center '.$color.'">'.$statusName.'</td>
+                                                          <td class="text-center" >
+														  <form action="AthleteProfile_admin.php" method="post">
+														  <input type="hidden" value="'.$studentID.'" name="athleteID">
+														  <input type=submit class="btn btn-default" value="View" name="viewAthlete">
+														  </form>
+														  </td>
 													</tr>';
 												  }
 												  ?>

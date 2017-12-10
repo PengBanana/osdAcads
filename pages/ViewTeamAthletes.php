@@ -69,71 +69,71 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 
 			<!-- Navigation -->
 		 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0" id="up">
-					<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-									<span class="sr-only">Toggle navigation</span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-							</button>
-							<a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[studentManager].php">
-							<img src="Images/OSD-logo2.png" height="35px" width='auto' />
-							</a>
-					</div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo" style="padding: 10px 0px 0px 30px" href="index[studentManager].php">
+                <img src="Images/OSD-logo2.png" height="35px" width='auto' />
+                </a>
+            </div>
 
-					<!-- /.navbar-header -->
+            <!-- /.navbar-header -->
 
-					<!-- NAV BAR -->
+            <!-- NAV BAR -->
 
-					<ul class="nav navbar-top-links navbar-right">
+            <ul class="nav navbar-top-links navbar-right">
 
-							<!-- /.dropdown -->
-							<li class="dropdown">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-											<i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
-									</a>
-									<ul class="dropdown-menu dropdown-user" >
-											<li><a href="changePassword.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
-											</li>
-											<li class="divider"></li>
-											<li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-											</li>
-									</ul>
-									<!-- /.dropdown-user -->
-							</li>
-							<!-- /.dropdown -->
-					</ul>
-					<!-- /.navbar-top-links -->
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw" style="color: white"></i>  <i class="fa fa-caret-down" style="color: white"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user" >
+                        <li><a href="changePassword2.php"><i class="fa fa-gear fa-fw"></i> Change Password</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
 
-					<div class="navbar-fixed sidebar"  role="navigation" >
-							<div class="sidebar-nav navbar-f" >
-									<ul class="nav" id="side-menu" >
+            <div class="navbar-fixed sidebar"  role="navigation" >
+                <div class="sidebar-nav navbar-f" >
+                    <ul class="nav" id="side-menu" >
 
-													<li >
-															<a href="index[studentManager].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
-													</li>
+                            <li >
+                                <a href="index[studentManager].php"><i class="glyphicon glyphicon-home" style="color: white"></i> Home</a>
+                            </li>
 
-													 <li>
-														<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
-														<ul id="demo1" class="collapse" style="list-style: none;">
-															<li><a href="MidtermUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
-															<li><a href="FinalsUpdateList.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
-														</ul>
-														</li>
-														<li>
-																<a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
-																<ul id="demo4" class="collapse" style="list-style: none;">
-																	 <li><a href="ViewTeamAthletes.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
+                             <li>
+                              <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="    glyphicon glyphicon-folder-open" style="color: white"></i>    Academic Performance</i></a>
+                              <ul id="demo1" class="collapse" style="list-style: none;">
+                                <li><a href="updateList2.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Midterm Updates </a></li>
+                                <li><a href="fupdateList2.php"><i class="glyphicon glyphicon-menu-right"  style="color: white" style ></i> Final Updates </a></li>
+                              </ul>
+                              </li>
+                              <li>
+                                  <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
+                                  <ul id="demo4" class="collapse" style="list-style: none;">
+                                     <li><a href="ViewTeamAthletes.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
 
-																</ul>
-														</li>
+                                  </ul>
+                              </li>
 
-									</ul>
-							</div>
-							<!-- /.sidebar-collapse -->
-					</div>
-					<!-- /.navbar-static-side -->
-			</nav>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -150,7 +150,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
             <div class="row" id="breadPad">
                 <div class="col-lg-12">
                      <form class="form-inline ">
-                         <a href="ViewTeam.php" class="breadCrumb1">Teams</a>
+                         <a href="index[studentManager].php" class="breadCrumb1">Home</a>
                          <a class="breadCrumb1">>></a>
                          <a href="" class="breadCrumb1">Team Profile</a>
                      </form>
@@ -224,8 +224,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                                                           <th class="text-center">College</th>
                                                           <th class="text-center">Degree Program</th>
                                                           <th class="text-center">Academic Status</th>
-
-
+														  <th class="text-center">Action</th>
                                                       </tr>
                                                   </thead>
                                                   <tbody>
@@ -249,10 +248,16 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 														  $color="statusNotCritical";
 													  }
 													  echo '<tr class="odd gradeX">
-                                                          <td class="text-center" ><form action="AthleteProfile.php" method="post"><input type="hidden" value="'.$studentID.'" name="athleteID"><input type=submit class="btn btn-link" value="'.$studentname.'" name="viewAthlete"></form></td>
+                                                          <td class="text-center" ><label>'.$studentname.'</label></td>
                                                           <td class="text-center">'.$collegeCode.'</td>
                                                           <td class="text-center">'.$degreeCode.'</td>
                                                           <td class="text-center '.$color.'">'.$statusName.'</td>
+                                                          <td class="text-center" >
+														  <form action="AthleteProfile.php" method="post">
+														  <input type="hidden" value="'.$studentID.'" name="athleteID">
+														  <input type=submit class="btn btn-default" value="View" name="viewAthlete">
+														  </form>
+														  </td>
 													</tr>';
 												  }
 												  ?>
