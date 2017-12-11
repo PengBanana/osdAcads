@@ -1,4 +1,5 @@
 <?php
+/*
 session_start();
 //INSERT INTO `acadsosd`.`team` (`sportCode`, `teamName`, `teamSport`) VALUES ('BBM', 'Green Archers', 'Basketball Men');
 if(isset($_POST['registerManager'])){
@@ -60,6 +61,7 @@ if(isset($_POST['registerManager'])){
 
 
 }
+*/
 ?>
 <!DOCTYPE html>
 <html lang="en">

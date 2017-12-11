@@ -82,6 +82,7 @@
 		                                    <label class="required">Degree Program:</label>
 		                            <select class="form-control inputs" name="degree">';
 		                            <?php
+									/*
 		                            $query="SELECT * FROM acadsosd.degree;";
 		                            $result=mysqli_query($dbc, $query);
 		                            while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -121,6 +122,7 @@
 		                            $nationality=$row['nationality'];
 		                            echo '<option value="'.$nationality.'">'.$nationality.'</option>';
 		                            }
+									*/
 		                            ?>
 		                            </select>
 		                            </div>

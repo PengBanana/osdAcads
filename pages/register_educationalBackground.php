@@ -157,9 +157,9 @@
                               <div class="row">
                                 <div class="col-lg-10"></div>
                                 <div class="col-lg-2">
-              <input type="hidden" name="sql1" value=<?php echo '"'.$sql1.'"'; ?> />
-              <input type="hidden" name="sql2" value=<?php echo '"'.$sql2.'"'; ?> />
-              <input type="hidden" name="id" value="<?php echo $idnum ?>" />
+              <input type="hidden" name="sql1" value="" />
+              <input type="hidden" name="sql2" value="" />
+              <input type="hidden" name="id" value="" />
 
                             </div>
                             </div>
