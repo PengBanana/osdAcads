@@ -163,8 +163,6 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 						</div>
 
             <div class="row">
-                <div class="col-lg-1">
-                </div>
                 <div class="col-lg-5">
                     <form>
 					<?php
@@ -202,9 +200,8 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 
 
             <div class="row">
-                <div class="col-lg-1">
                 </div>
-                    <div class="col-lg-10">
+                    <div class="col-lg-12">
                         <div class="tab">
                           <button class="tablinks" onclick="openTab(event, 'athletes')">Athletes</button>
                           <button class="tablinks" onclick="openTab(event, 'studentManager')">Student Manager</button>
@@ -213,8 +210,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                         <div id="athletes" class="tabcontent">
                           <!-- /.row -->
                           <div class="row">
-                              <div class="col-lg-2"></div>
-                              <div class="col-lg-8">
+                              <div class="col-lg-12">
                                   <div class="panel panel-default">
                                       <div class="panel-heading">
                                           <?php echo $teamName; ?>
@@ -292,8 +288,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                           <h3>Student Manager Details</h3>
                           <br>
                           <div class="row">
-                            <div class="col-lg-3"></div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                               <div class="panel panel-default">
                                 <div class="panel-heading">
                                    The Student Manager

@@ -196,7 +196,6 @@ if($idx===0){
                                   <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="glyphicon glyphicon-certificate" style="color: white"></i>    Team </a>
                                   <ul id="demo4" class="collapse" style="list-style: none;">
                                      <li><a href="ViewTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white"></i> View Varsity Teams </a></li>
-                                     <li><a href="registerStudentAthlete.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Register an Athlete </a></li>
                                      <li><a href="addTeam.php" style="font-size: 11px;"><i class="glyphicon glyphicon-menu-right"  style="color: white" ></i> Add New Team </a></li>
                                   </ul>
                               </li>
@@ -228,17 +227,15 @@ if($idx===0){
                 <!-- /.col-lg-12 -->
             </div>
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-6">
-              </div>
+                <div class="col-lg-10"></div>
+
                 <div class="col-lg-2">
                   <b><?php echo "Today is ".date("m/d/Y") . "<br>";?></b>
             </div>
           </div>
 
 	<div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5">
+        <div class="col-lg-8">
 			<div class="panel panel-default">
                         <div class="panel-heading">
 						<h3 class="panel-title"><i class="glyphicon glyphicon-stats"></i> Academic Summary:</h3>
@@ -249,7 +246,7 @@ if($idx===0){
 
 
         </div>
-		<div class="col-lg-3">
+		<div class="col-lg-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">People</h3>
@@ -271,121 +268,41 @@ if($idx===0){
 
                     </div>
                 </div>
+
+								<div class="row">
+									<div class="col-lg-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+						                <b>Academic Status Summary</b>
+						                </div>
+														<div class="panel-body">
+																<div class="list-group">
+																				<a class="list-group-item" style="font-size: 14px;">
+																						<b><font color="red">Super Critical</font> Athletes:</b><?php echo $superCritical; ?>
+
+																				</a>
+																				<a class="list-group-item" style="font-size: 14px;">
+																						<b><font color="orange">Critical</font> Athletes:</b><?php echo $critical; ?>
+
+																				</a>
+																				<a class="list-group-item" style="font-size: 14px;">
+																					<b><font color="green">Not Critical</font> Athletes:</b><?php echo $notCritical; ?>
+																				</a>
+
+																				<a  class="list-group-item" style="font-size: 14px;">
+																					<b>Projected Student's with Failures:</b><?php echo $midFStudents; ?>
+																				</a>
+																</div>
+
+														</div>
+									</div>
+									</div>
+								</div>
             </div>
 			<div class="row">
 			</div>
-		<div class="row">
-			<div class="col-lg-1">
-			</div>
-			<div class="col-lg-5">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-                <b>Academic Status Summary</b>
-                </div>
-								<div class="panel-body">
-										<div class="list-group">
-														<a class="list-group-item" style="font-size: 14px;">
-																<b><font color="red">Super Critical</font> Athletes:</b><?php echo $superCritical; ?>
-
-														</a>
-														<a class="list-group-item" style="font-size: 14px;">
-																<b><font color="orange">Critical</font> Athletes:</b><?php echo $critical; ?>
-
-														</a>
-														<a class="list-group-item" style="font-size: 14px;">
-															<b><font color="green">Not Critical</font> Athletes:</b><?php echo $notCritical; ?>
-														</a>
-
-														<a  class="list-group-item" style="font-size: 14px;">
-															<b>Projected Student's with Failures:</b><?php echo $midFStudents; ?>
-														</a>
-										</div>
-
-								</div>
-			</div>
-			</div>
-		</div>
 
 
-<!--
-        <div class="row">
-
-                <div class="col-lg-10">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <b>List of Teams</b>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="dataTable_wrapper">
-                                <table class="table table-striped t table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr >
-                                            <th class="text-center ">Name of Team</th>
-                                            <th class="text-center">Number of Active Athletes</th>
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"> <a href class="list-group-item" style="font-size: 24px;">Baseball</a></td>
-                                            <td class="text-center"><a class="list-group-item" style="font-size: 24px;"> 15</a></td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"> <a href class="list-group-item" style="font-size: 24px;">Basketball Men</a></td>
-                                            <td class="text-center"><a class="list-group-item" style="font-size: 24px;"> 10</a></td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"> <a href class="list-group-item" style="font-size: 24px;">Judo </a></td>
-                                            <td class="text-center"><a class="list-group-item" style="font-size: 24px;"> 8</a></td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href class="list-group-item" style="font-size: 24px;"> Taekwondo </a></td>
-                                            <td class="text-center"><a class="list-group-item" style="font-size: 24px;"> 7</a></td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href class="list-group-item" style="font-size: 24px;"> Animo Squad </a></td>
-                                            <td class="text-center"><a class="list-group-item" style="font-size: 24px;"> 7</a></td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href class="list-group-item" style="font-size: 24px;"> Softball </a></td>
-                                            <td class="text-center"><a class="list-group-item" style="font-size: 24px;"> 6</a></td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href class="list-group-item" style="font-size: 24px;"> Table Tennis Women </a></td>
-                                            <td class="text-center"><a class="list-group-item" style="font-size: 24px;">3</a></td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href class="list-group-item" style="font-size: 24px;"> Table Tennis Men </a></td>
-                                            <td class="text-center"><a class="list-group-item" style="font-size: 24px;"> 3</a></td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href class="list-group-item" style="font-size: 24px;"> Basketball Women </a></td>
-                                            <td class="text-center"><a class="list-group-item" style="font-size: 24px;"> 3</a></td>
-
-                                        </tr>
-                                        <tr class="odd gradeA">
-                                            <td class="text-center"><a href class="list-group-item" style="font-size: 24px;"> Chess </a></td>
-                                            <td class="text-center"> <a class="list-group-item" style="font-size: 24px;">0</a></td>
-
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-        </div>
- -->
 
 
         <!-- /#page-wrapper -->
