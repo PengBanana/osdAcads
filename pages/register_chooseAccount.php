@@ -50,16 +50,16 @@
 												<h3>Step 1 : Choose type of Account</h3>
                     </div>
                     <div class="panel-body">
-						<form action="registerStudentManager.php" method="post">
+						<form  method="post">
                             <fieldset>
 
                                 <!-- Change this to a button or input when using this as a form -->
 																<dic class="row">
 
 																		<div class="col-md-12">
-																			<button class="btn btn-default btnReg" type="submit" name="registerManager" value="submit" id="studentManager" ><i class="glyphicon glyphicon-user"></i><br>Student Manager</button>
+																			<button class="btn btn-default btnReg" type="submit" name="registerManager" value="submit" ><i class="glyphicon glyphicon-user"></i><br>Student Manager</button>
 																			OR
-																			<button class="btn btn-default btnReg" type="submit" name="registerManager" value="submit" id="studentAthlete"><i class="fa fa-futbol-o"></i><br>Athlete</button>
+																			<button class="btn btn-default btnReg" type="submit" name="registerManager" value="submit"><i class="fa fa-futbol-o"></i><br>Athlete</button>
 
 																		</div>
 																		<div class="col-md-1">
@@ -71,9 +71,9 @@
 
 																		<div class="row">
 																				<div class="col-md-9"></div>
-		                                		<div class="col-md-2">
-																					<button type="submit" class="btn btn-default btn-block" type="submit" name="registerManager" id="registerBtn">Cancel<i class=" 	glyphicon glyphicon-chevron-right"></i></button>
-		                                			 <button type="submit" class="btn btn-success btn-block" type="submit" name="registerManager" id="registerBtn">Next Step<i class=" 	glyphicon glyphicon-chevron-right"></i></button>
+		                                		<div class="col-md-3">
+																					<button class="btn btn-default" >Cancel</button>
+		                                			 <button type="submit" class="btn btn-success " type="submit" name="registerManager" id="registerBtn">Next Step<i class="glyphicon glyphicon-chevron-right"></i></button>
 		                                </div>
 																		<div class="row">
 		                                		<div class="col-md-12" style="padding-top:10px;">

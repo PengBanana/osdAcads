@@ -201,7 +201,7 @@
                                 echo '</select>
                             </div>
                                 <div class="form-group">
-                            <label>Sport: </label>
+                            <label class="required">Sport: </label>
                                     <select class="form-control inputs" name="sport">';
                             $query="SELECT * FROM acadsosd.team;";
                             $result=mysqli_query($dbc, $query);
@@ -216,7 +216,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Date of Birth: </label>
+                                    <label class="required">Date of Birth: </label>
                                     <input type="date" class="form-control inputs" name="birthday" required />
                                 </div>
 
