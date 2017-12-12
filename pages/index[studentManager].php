@@ -1,4 +1,5 @@
 <?php
+/*
 session_start();
 require_once('../osd_connect.php');
 $idx=$_SESSION['idnumber'];
@@ -27,7 +28,7 @@ $typex=$_SESSION["typex"];
 						}
 					}
 $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomplishmentStanding FROM achievmenthistory;";
-
+*/
 ?>
 
 <!DOCTYPE html>
@@ -146,7 +147,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Welcome Manager <?php echo $name; ?>!</h1>
+                    <h1 class="page-header">Welcome Manager Christian Modino!</h1>
                 </div>
                 <!-- /.col-lg-12 -->
 							<div class="panel-body">
@@ -155,11 +156,11 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 												<div class="panel-body">
 													<div class="panel panel-default">
 															<div class="panel-heading">
-																	<h3 class="panel-title">Team: Green Archers: Basketball Men</h3>
+																	<h3 class="panel-title">Team: Green Archers: Basketball Men Roster</h3>
 															</div>
 															<div class="panel-body">
 																<div class="dataTable_wrapper" >
-																	<table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 																			<thead>
 																				<tr>
 																					<th class="text-center">Name</th>
@@ -169,7 +170,32 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 																				</tr>
 																			</thead>
 																			<tbody>
+																			<tr>
+																			<td>Alvin de Guzman</td>
+																			<td>CCS</td>
+																			<td>BS-IT</td>
+																			<td>NOT CRITICAL</td>
+																			</tr>
+																			<tr>
+																			<td>Carl Anthony Genio</td>
+																			<td>CCS</td>
+																			<td>BS-IS</td>
+																			<td>CRITICAL</td>
+																			</tr>
+																			<tr>
+																			<td>Miguel Uy</td>
+																			<td>COB</td>
+																			<td>BS-MM</td>
+																			<td>SUPER CRITICAL</td>
+																			</tr>
+																			<tr>
+																			<td>Rufael John Mayer</td>
+																			<td>CLA</td>
+																			<td>BS-PSY</td>
+																			<td>STAR PLAYER</td>
+																			</tr>
 																					<?php
+																					/*
 																					$query="SELECT s.studentIDNumber, concat(s.studentFirstName, \" \", s.studentLastName) AS studentname, p.degreeTable_degreeCode AS degreeCode, de.college_collegeCode AS collegeCode, a.statusName, a.statusID FROM acadsosd.studentathleteprofile s JOIN academicclassification a ON s.statusID = a.statusID JOIN plannedenrollmentchart p ON s.studentIDNumber = p.studentIDNumber JOIN degree d ON p.degreeTable_degreeCode = d.degreeCode JOIN department de ON d.departmentCode = de.departmentCode WHERE s.teamCode='".$teamCode."' AND s.statusID<'4';";
 																					$result=mysqli_query($dbc,$query);
 																					while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
@@ -195,6 +221,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 																																					<td class="text-center '.$color.'">'.$statusName.'</td>
 																					</tr>';
 																					}
+																					*/
 																					?>
 																																		<!--<tr class="odd gradeX">
 																																					<td class="text-center" ><a href="Athlete's Profile.html"><u style="color: black;">Ureta,Miguel</u></a></td>
@@ -225,7 +252,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 									                                    <i class="glyphicon glyphicon-user"></i>Alvin de Guzman was added to your Team
 									                                </a>
 									                                <a href="#" class="list-group-item" style="font-size: 14px;">
-									                                    <i class="glyphicon glyphicon-user"></i>Christian Modino was added to your Team
+									                                    <i class="glyphicon glyphicon-user"></i>Carl Anthony Genio was added to your Team
 
 									                                </a>
 									                        </div>
@@ -240,7 +267,22 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
 									 </div>
 			  			</div>
             </div>
-					</div>
+			</div>
+			<div class="row">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+			<h3 class="panel-title text-left"><i class="glyphicon glyphicon-time"></i>Term Deadlines</h3>
+			</div>
+			<div class="panel-body">
+			<div class="list-group">
+			<a href="#" class="list-group-item" style="font-size: 14px;">
+			<i class="glyphicon glyphicon-pushpin"></i> Midterm Updates before November 11,2017</a>
+			<a href="#" class="list-group-item" style="font-size: 14px;">
+			<i class="glyphicon glyphicon-pushpin"></i> Finals Updates before January 8, 2017</a>
+			</div>
+			</div>
+			</div>
+			</div>
 
 
 

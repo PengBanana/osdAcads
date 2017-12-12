@@ -1,4 +1,5 @@
 <?php
+/*
 session_start();
 require_once('../osd_connect.php');
 $idx=$_SESSION['idnumber'];
@@ -70,6 +71,7 @@ if($idx===0){
 			$row=mysqli_fetch_array($result,MYSQLI_ASSOC);
 			$midFStudents=$row['mid'];
 		}
+		*/
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -116,19 +118,22 @@ if($idx===0){
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Classification', 'Number of Student'],
-          ['Not Critical',     <?php echo $notCritical; ?>],
-          ['Super Critical', <?php echo $superCritical; ?>],
-          ['Critical',<?php echo $critical; ?>]
+          ['Not Critical',     <?php echo 80; ?>],
+          ['Critical',<?php echo 10; ?>],
+          ['Super Critical', <?php echo 15; ?>]
         ]);
 
         var options = {
 		pieHole: 0.4,
 		pieStartAngle: 100,
+		
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-        chart.draw(data, options);
+        chart.draw(data, {
+			colors: ['#7CBB00', '#FFBB00', '#F65314']
+		});
       }
     </script>
 
@@ -222,7 +227,7 @@ if($idx===0){
 			}
 			?>
                 <div class="col-lg-12">
-                    <h1 class="page-header">Welcome Admin <?php echo $name; ?>!</h1>
+                    <h1 class="page-header">Welcome Admin <?php echo "Grace Alhambra"; ?>!</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -240,6 +245,23 @@ if($idx===0){
                         <div class="panel-heading">
 						<h3 class="panel-title"><i class="glyphicon glyphicon-stats"></i> Academic Summary:</h3>
 							<div id="piechart"></div>
+							<div class="list-group">
+																				<a class="list-group-item text-left" style="font-size: 14px;">
+																						<b><font color="red">Super Critical</font> Athletes:</b><?php echo 15; ?>
+
+																				</a>
+																				<a class="list-group-item text-left" style="font-size: 14px;">
+																						<b><font color="orange">Critical</font> Athletes:</b><?php echo 10; ?>
+
+																				</a>
+																				<a class="list-group-item text-left" style="font-size: 14px;">
+																					<b><font color="green">Not Critical</font> Athletes:</b><?php echo 80; ?>
+																				</a>
+
+																				<a  class="list-group-item text-left" style="font-size: 14px;">
+																					<b>Projected Student's with Failures:</b><?php echo 11; ?>
+																				</a>
+																</div>
                         </div>
 
 			</div>
@@ -247,57 +269,42 @@ if($idx===0){
 
         </div>
 		<div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">People</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="list-group">
-                                <a href="viewTeam.php" class="list-group-item" style="font-size: 24px;">
-                                    <i class="glyphicon glyphicon-user"></i><?php echo " ".$numAthletes; ?>
 
-                                </a>
-                                <a href="viewStudentManagers.php" class="list-group-item" style="font-size: 24px;">
-                                    <i class="glyphicon glyphicon-user"></i><?php echo " ".$numManagers; ?>
+								
+			<div class="row">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+			<h3 class="panel-title text-left"><i class="glyphicon glyphicon-comment"></i> Deadlines</h3>
+			</div>
+			<div class="panel-body">
+			<div class="list-group">
+			<a href="#" class="list-group-item" style="font-size: 14px;">
+			<i class="glyphicon glyphicon-pushpin"></i> Submission of Final Report on January 9,2018</a>
+			<a href="#" class="list-group-item" style="font-size: 14px;">
+			<i class="glyphicon glyphicon-pushpin"></i> Try-outs Cut-off January 23,2018</a>
+			<a href="#" class="list-group-item" style="font-size: 14px;">
+			<i class="glyphicon glyphicon-pushpin"></i> Student Manager Registration cut-off January 30,2018</a>
+			</div>
+			</div>
+			</div>
+			</div>
+			
+			<div class="row">
+			<div class="panel panel-default">
+			<div class="panel-heading">
+			<h3 class="panel-title text-left"><i class="glyphicon glyphicon-comment"></i> Notifications</h3>
+			</div>
+			<div class="panel-body">
+			<div class="list-group">
+			<a href="#" class="list-group-item" style="font-size: 14px;">
+			<i class="glyphicon glyphicon-pushpin"></i> 5 Student Managers accounts requires Activation</a>
+			<a href="#" class="list-group-item" style="font-size: 14px;">
+			<i class="glyphicon glyphicon-pushpin"></i> 2 Student Athlete Registrations accounts Pending</a>
+			</div>
+			</div>
+			</div>
+			</div>
 
-                                </a>
-                        </div>
-
-                    </div>
-                    <div class="panel-footer text-right">
-
-                    </div>
-                </div>
-
-								<div class="row">
-									<div class="col-lg-12">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-						                <b>Academic Status Summary</b>
-						                </div>
-														<div class="panel-body">
-																<div class="list-group">
-																				<a class="list-group-item" style="font-size: 14px;">
-																						<b><font color="red">Super Critical</font> Athletes:</b><?php echo $superCritical; ?>
-
-																				</a>
-																				<a class="list-group-item" style="font-size: 14px;">
-																						<b><font color="orange">Critical</font> Athletes:</b><?php echo $critical; ?>
-
-																				</a>
-																				<a class="list-group-item" style="font-size: 14px;">
-																					<b><font color="green">Not Critical</font> Athletes:</b><?php echo $notCritical; ?>
-																				</a>
-
-																				<a  class="list-group-item" style="font-size: 14px;">
-																					<b>Projected Student's with Failures:</b><?php echo $midFStudents; ?>
-																				</a>
-																</div>
-
-														</div>
-									</div>
-									</div>
-								</div>
             </div>
 			<div class="row">
 			</div>
