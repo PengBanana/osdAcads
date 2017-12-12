@@ -47,7 +47,7 @@
                         <img src="Images/OSDLOZADA.png" height="100px" width='auto' />
                     </div>
 										<div class="form-group">
-											<h3>Step 3 out of 4: Educational Background & Athletic Achievements</h3>
+											<h3>Step 3 out of 5: Educational Background & Athletic Achievements</h3>
 										</div>
                     <div class="panel-body">
 						<form method="post">

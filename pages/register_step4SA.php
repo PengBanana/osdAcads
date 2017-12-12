@@ -52,10 +52,16 @@
 						<form method="post">
                             <fieldset>
 															<div class="dataTable_wrapper form-group">
-                                <label>2x2 picture</label>
+                                <h4 class="required">2x2 picture</h4>
+                                <p>This will be used for your Identification and Athlete's Profile</p>
                                 <input type="file">
                               </div>
-
+                              <div class="row">
+  																<div class="col-md-9"></div>
+  																<div class="col-md-3">
+  																	<button type="submit" class="btn btn-default" type="submit" name="registerManager">Cancel</button>
+  																	 <button type="submit" class="btn btn-success" type="submit" name="registerManager" id="registerBtn">Next Step<i class=" 	glyphicon glyphicon-chevron-right"></i></button>
+  														</div>
 
 
                         </form>

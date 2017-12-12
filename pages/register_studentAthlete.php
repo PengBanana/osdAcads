@@ -46,7 +46,7 @@
                         <img src="Images/OSDLOZADA.png" height="100px" width='auto' />
                     </div>
 										<div class="form-group">
-											<h3>Step 2 out of 4: Personal Information</h3>
+											<h3>Step 2 out of 5: Personal Information</h3>
 										</div>
                     <div class="panel-body">
 						<form method="post">

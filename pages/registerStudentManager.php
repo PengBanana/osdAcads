@@ -117,7 +117,7 @@ if(isset($_POST['registerManager'])){
 						<form action="registerStudentManager.php" method="post">
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="required">ID Number</label> <label
+                                    <label class="required">ID Number</label>
                                     <input class="form-control" placeholder="ID No" Name="idNumber" type="text" autofocus>
                                 </div>
                                  <div class="form-group">

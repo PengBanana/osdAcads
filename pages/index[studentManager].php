@@ -151,8 +151,7 @@ $selectAllAchievements = "SELECT accomplishmentDate, accomplishmentEvent, accomp
                 <!-- /.col-lg-12 -->
 							<div class="panel-body">
 			             <div class="row">
-										 	<div class="col-lg-1"></div>
-											<div class="col-lg-7">
+											<div class="col-lg-9">
 												<div class="panel-body">
 													<div class="panel panel-default">
 															<div class="panel-heading">
