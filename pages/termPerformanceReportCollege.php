@@ -40,34 +40,66 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
+  <script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+     var data = google.visualization.arrayToDataTable([
+        ["Classification", "Number of Athletes", { role: "style" } ],
+        ["Dean's Lister", 40, "#008744"],
+        ["Regular", 30, "0057e7"],
+        ["Critical", 20, "ffa700"],
+        ["Suspended", 10, "color: #d62d20"]
+      ]);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Term', 'Dean Liststers', 'Regular Athletes', 'Critical Athletes', 'Suspended Athletes'],
-          ['1', 200, 200, 190, 10],
-          ['2', 150, 250, 190, 10],
-          ['3', 200, 200, 170, 30]
-        ]);
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
 
-        var options = {
-          chart: {
-            title: 'Yearly Summary Report on Student Athletes',
-            subtitle: 'For School Year: 2017-2018',
-          },
-          bars: 'vertical' // Required for Material Bar Charts.
-        };
+      var options = {
+        title: "Team Academic Performance Summary Report",
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+		orientation: 'horizontal'
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("BBM"));
+      chart.draw(view, options);
+  }
+  </script>  
+  <script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+     var data = google.visualization.arrayToDataTable([
+        ["Classification", "Number of Athletes", { role: "style" } ],
+        ["Dean's Lister", 40, "#008744"],
+        ["Regular", 20, "0057e7"],
+        ["Critical", 10, "ffa700"],
+        ["Suspended", 30, "color: #d62d20"]
+      ]);
 
-        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
 
-        chart.draw(data, google.charts.Bar.convertOptions({
-			colors: ['#008744', '#0057e7', '#ffa700', '#d62d20'],
-			orientation: 'vertical'
-		}));
-      }
-    </script>
+      var options = {
+        title: "Team Academic Performance Summary Report",
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+		orientation: 'horizontal'
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("XASDR"));
+      chart.draw(view, options);
+  }
+  </script>
 
 </head>
 
@@ -160,12 +192,17 @@
 			</div>
 			<div class="row">
 			<div class="col-lg-12">
-			<label>For School Year: 2016-2017</label>
+			<label>For School Year: 2017-2018</label>
 			</div>
 			</div>
 			<div class="row">
 			<div class="col-lg-12">
-			<label>Overall</label>
+			<label>Term 1</label>
+			</div>
+			</div>
+			<div class="row">
+			<div class="col-lg-12">
+			<label>By College</label>
 			</div>
 			</div>
 			</center>
@@ -175,49 +212,34 @@
                 <div class="col-lg-8">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                        </div>
+						<h3 class="panel-title text-center">College of Computer Studies</h3>
+						</div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div>
-							<div id="barchart_material" style="width: 650px; height: 200px;"></div>
+							<div id="BBM"></div>
 							<table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th class="text-center"></th>
-                                            <th class="text-center">Term 1</th>
-                                            <th class="text-center">Term 2</th>
-                                            <th class="text-center">Term 3</th>
+                                            <th class="text-center">Number of Athletes</th>
                                         </tr>
                                     </thead>
 									<tr>
 									<td class="text-center"><b><span class="glyphicon glyphicon-asterisk" style="color:#008744"><b></span>Dean Listers</b></td>
-									<td class="text-center">200</td>
-									<td class="text-center">150</td>
-									<td class="text-center">200</td>
+									<td class="text-center">40</td>
 									</tr>
 									<tr>
 									<td class="text-center"><b><span class="glyphicon glyphicon-asterisk" style="color:#0057e7"><b></span>Regular Athletes</b></td>
-									<td class="text-center">200</td>
-									<td class="text-center">250</td>
-									<td class="text-center">200</td>
+									<td class="text-center">30</td>
 									</tr>
 									<tr>
 									<td class="text-center"><b><span class="glyphicon glyphicon-asterisk" style="color:#ffa700"><b></span>Critical Athletes</b></td>
-									<td class="text-center">190</td>
-									<td class="text-center">190</td>
-									<td class="text-center">170</td>
+									<td class="text-center">20</td>
 									</tr>
 									<tr>
 									<td class="text-center"><b><span class="glyphicon glyphicon-asterisk" style="color:#d62d20"><b></span>Suspended Athletes</b></td>
 									<td class="text-center">10</td>
-									<td class="text-center">10</td>
-									<td class="text-center">30</td>
-									</tr>
-									<tr>
-									<td class="text-center"><b>Total Athletes</b></td>
-									<td class="text-center">600</td>
-									<td class="text-center">600</td>
-									<td class="text-center">600</td>
 									</tr>
 									</tbody>
 									<table>
@@ -226,20 +248,60 @@
 							
 
                         </div>
-						<center>
-						
-						<hr><hr></br>
-						<label>Page 1 of 1</label></br>
-						<label>End of Report</label></br>
-						<label>Generated By: Ms. Grace Alhambra</label><br>
-						<label><?php echo "Date Generat: ".date("m/d/Y") . "<br>";?></label>
-						</center>
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
+					<div class="panel panel-default">
+                        <div class="panel-heading">
+						<h3 class="panel-title text-center">College of Business</h3>
+						</div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div>
+							<div id="XASDR"></div>
+							<table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center"></th>
+                                            <th class="text-center">Number of Athletes</th>
+                                        </tr>
+                                    </thead>
+									<tr>
+									<td class="text-center"><b><span class="glyphicon glyphicon-asterisk" style="color:#008744"><b></span>Dean Listers</b></td>
+									<td class="text-center">40</td>
+									</tr>
+									<tr>
+									<td class="text-center"><b><span class="glyphicon glyphicon-asterisk" style="color:#0057e7"><b></span>Regular Athletes</b></td>
+									<td class="text-center">20</td>
+									</tr>
+									<tr>
+									<td class="text-center"><b><span class="glyphicon glyphicon-asterisk" style="color:#ffa700"><b></span>Critical Athletes</b></td>
+									<td class="text-center">10</td>
+									</tr>
+									<tr>
+									<td class="text-center"><b><span class="glyphicon glyphicon-asterisk" style="color:#d62d20"><b></span>Suspended Athletes</b></td>
+									<td class="text-center">30</td>
+									</tr>
+									</tbody>
+									<table>
+									
+                            </div>
+							
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+					
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+			<center>
+						
+						<hr><hr></br>
+						<label>------------------------------------  End of Report  ------------------------------------</label></br>
+						<label>Generated By: Ms. Grace Alhambra</label><br>
+						<label><?php echo "Date Generated: ".date("m/d/Y") . "<br>";?></label>
+						</center>
         </div>
         <!-- /#page-wrapper -->
 
